@@ -2,7 +2,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
 namespace FarmGame {
-    internal class Camera
+    public class Camera
     {
         public int CameraWidth { get => (int)_cameraSize.X;}
         public int CameraHeight { get => (int)_cameraSize.Y;}
