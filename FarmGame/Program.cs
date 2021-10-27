@@ -14,10 +14,12 @@ Control control = new (model, view);
 
 window.UpdateFrame += Update;
 window.Resize += view.Resize;
-window.KeyDown += args => { if (args.Key == Keys.Escape)
+window.KeyDown += args =>
 {
-    window.Close();
-}
+    if (args.Key == Keys.Escape)
+    {
+        window.Close();
+    }
 };
 
 window.RenderFrame += _ => view.Draw(model); // called once each frame; callback should contain drawing code

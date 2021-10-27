@@ -2,8 +2,10 @@ namespace FarmGame
 {
     internal class Model
     {
-        public void Update(float elapsedTime) {
-            
+        public Player Player { get; } = new Player();
+        
+        public void Update(float elapsedTime)
+        {
         }
     }
 }

@@ -7,23 +7,28 @@ namespace FarmGame
 {
     internal class View
     {
-        internal Camera Camera { get; } = new Camera();
         public View()
         {
             GL.ClearColor(Color4.Black);
         }
+
+        internal Camera Camera { get; } = new Camera();
+
         internal void Draw(Model model)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
-            Camera.SetCameraFocus(5, 3);
+            Camera.SetCameraFocus(model.Player.Position.X, model.Player.Position.Y);
             DrawDemo();
+            model.Player.Draw();
         }
+
         internal void Resize(ResizeEventArgs args)
         {
             Camera.Resize(args.Width, args.Height);
         }
 
-        private void DrawDemo() {
+        private void DrawDemo()
+        {
             Camera.SetOverlayMatrix();
             GL.Color4(Color4.LightGray);
             GL.Begin(PrimitiveType.Quads);
