@@ -1,4 +1,4 @@
 public enum ItemType
 {
-    SEED, WHEET, WATER
+    EMPTY, SEED, WHEET, WATERBUCKET
 };

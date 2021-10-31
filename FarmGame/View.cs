@@ -26,11 +26,12 @@ namespace FarmGame
         {
             GL.Color4(Color4.Orange);
             GL.Begin(PrimitiveType.Triangles);
-            GL.Vertex2(player.Position.X - 0.5, player.Position.Y);
-            GL.Vertex2(player.Position.X + 0.5, player.Position.Y);
-            GL.Vertex2(player.Position.X, player.Position.Y - 1);
+            GL.Vertex2(player.Position.X - 0.4, player.Position.Y);
+            GL.Vertex2(player.Position.X + 0.4, player.Position.Y);
+            GL.Vertex2(player.Position.X, player.Position.Y - .8);
             GL.End();
-            Console.WriteLine(player.Position.X + " " + player.Position.Y);
+            Console.WriteLine("Position of Player x: " + player.Position.X + " y: " + player.Position.Y);
+
         }
 
         internal void Resize(ResizeEventArgs args)
@@ -38,6 +39,28 @@ namespace FarmGame
             Camera.Resize(args.Width, args.Height);
         }
 
+        private Color4 createColorFromCell(ItemType i, GridType gt)
+        {
+            switch (gt)
+            {
+                case GridType.EARTH:
+                    switch (i)
+                    {
+                        case ItemType.SEED:
+                            return Color4.DarkGreen;
+                        case ItemType.WHEET:
+                            return Color4.GreenYellow;
+                        default:
+                            return Color4.Green;
+                    }
+                case GridType.WATER:
+                    return Color4.DodgerBlue;
+                case GridType.SAND:
+                    return Color4.Orange;
+            }
+
+            return Color4.LightGray;
+        }
         private void DrawGrid(IReadOnlyGrid grid)
         {
             for (int column = 0; column < grid.Column; ++column)
@@ -45,18 +68,7 @@ namespace FarmGame
                 for (int row = 0; row < grid.Row; ++row)
                 {
                     GridCell cell = grid[column, row];
-                    switch (cell.GridType)
-                    {
-                        case GridType.EARTH: 
-                            GL.Color4(Color4.Green);
-                            break;
-                        case GridType.WATER: 
-                            GL.Color4(Color4.Blue);
-                            break;
-                        case GridType.SAND: 
-                            GL.Color4(Color4.Yellow);
-                            break;
-                    }
+                    GL.Color4(createColorFromCell(cell.PlacedItem.Type, cell.GridType));
                     Quad(grid, column, row);
                 }
             }
