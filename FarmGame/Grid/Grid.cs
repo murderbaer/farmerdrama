@@ -22,11 +22,12 @@ namespace FarmGame
             _grid[(Column * Row) / 2 + row / 2] = new GridCell(false, GridType.SAND);
             _grid[(Column * Row) / 2 + row / 2 + 1] = new GridCell(false, GridType.WATER);
             _grid[(Column * Row) / 2 + row / 2 + 2] = new GridCell(false, new Item(ItemType.SEED), GridType.EARTH);
+            _grid[(Column * Row) / 2 + row / 2 + 3] = new GridCell(false, new Item(ItemType.SEED), GridType.EARTH);
         }
 
         public GridCell this[int col, int row]
         {
-            get { return _grid[col + Column * row];}
+            get { return _grid[col + Column * row]; }
             set { _grid[col + Row * row] = value; }
         }
     }

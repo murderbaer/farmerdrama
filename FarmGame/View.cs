@@ -30,7 +30,7 @@ namespace FarmGame
             GL.Vertex2(player.Position.X + 0.4, player.Position.Y);
             GL.Vertex2(player.Position.X, player.Position.Y - .8);
             GL.End();
-            Console.WriteLine("Position of Player x: " + player.Position.X + " y: " + player.Position.Y);
+            //Console.WriteLine("Position of Player x: " + player.Position.X + " y: " + player.Position.Y);
 
         }
 
@@ -39,27 +39,6 @@ namespace FarmGame
             Camera.Resize(args.Width, args.Height);
         }
 
-        private Color4 createColorFromCell(ItemType i, GridType gt)
-        {
-            switch (gt)
-            {
-                case GridType.EARTH:
-                    switch (i)
-                    {
-                        case ItemType.SEED:
-                            return Color4.DarkGreen;
-                        case ItemType.WHEET:
-                            return Color4.GreenYellow;
-                        default:
-                            return Color4.Green;
-                    }
-                case GridType.WATER:
-                    return Color4.DodgerBlue;
-                case GridType.SAND:
-                    return Color4.Orange;
-            }
-            return Color4.LightGray;
-        }
         private void DrawGrid(IReadOnlyGrid grid)
         {
             for (int column = 0; column < grid.Column; ++column)
@@ -67,7 +46,7 @@ namespace FarmGame
                 for (int row = 0; row < grid.Row; ++row)
                 {
                     GridCell cell = grid[column, row];
-                    GL.Color4(createColorFromCell(cell.PlacedItem.Type, cell.GridType));
+                    GL.Color4(cell.CellColor);
                     Quad(grid, column, row);
                 }
             }
