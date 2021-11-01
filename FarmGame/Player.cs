@@ -1,23 +1,42 @@
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
+using System;
 
 namespace FarmGame
 {
     public class Player
     {
-        public Vector2 Position { get; set; } = new ();
+        private Item _itemInHand;
+        public Vector2 Position { get; set; }
+
+        public Item ItemInHand {get {return _itemInHand;} }
 
         // Movement speed in Tiles per second
         public float MovementSpeed { get; set; } = 3f;
 
-        internal void Draw()
+        public Player() {
+            // Set starting position
+            Position = new(12, 12);
+            _itemInHand = new();
+        }
+
+        public Item GiveItem()
         {
-            GL.Color4(Color4.Orange);
-            GL.Begin(PrimitiveType.Triangles);
-            GL.Vertex2(Position.X - 0.5, Position.Y);
-            GL.Vertex2(Position.X + 0.5, Position.Y);
-            GL.Vertex2(Position.X, Position.Y - 1);
-            GL.End();
+            if (_itemInHand.Type != ItemType.EMPTY)
+            {
+                Item temp = _itemInHand;
+                _itemInHand = new();
+                return temp;
+            }
+            return _itemInHand;
+        }
+
+        public void TakeItem(Item newItem)
+        {
+            if (_itemInHand.Type == ItemType.EMPTY)
+            {
+                _itemInHand = newItem;
+            }
         }
     }
 }
