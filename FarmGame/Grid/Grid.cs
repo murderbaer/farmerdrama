@@ -18,6 +18,7 @@ namespace FarmGame
             {
                 _grid[i] = new GridCell(false, GridType.EARTH);
             }
+            // DEBUG: later sprites
             _grid[(Column * Row) / 2 + row / 2] = new GridCell(false, GridType.SAND);
             _grid[(Column * Row) / 2 + row / 2 + 1] = new GridCell(false, GridType.WATER);
             _grid[(Column * Row) / 2 + row / 2 + 2] = new GridCell(false, new Item(ItemType.SEED), GridType.EARTH);

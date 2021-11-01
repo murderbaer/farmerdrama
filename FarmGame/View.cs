@@ -58,7 +58,6 @@ namespace FarmGame
                 case GridType.SAND:
                     return Color4.Orange;
             }
-
             return Color4.LightGray;
         }
         private void DrawGrid(IReadOnlyGrid grid)
@@ -102,7 +101,7 @@ namespace FarmGame
         private void Quad(IReadOnlyGrid grid, int column, int row)
         {
             var size = new Vector2(1, 1);
-            var min = new Vector2(-16, -9) + new Vector2(column, row) * size;
+            var min = new Vector2(0, 0) + new Vector2(column, row) * size;
             Quad(min, size);
         }
     }
