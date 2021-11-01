@@ -3,7 +3,7 @@ namespace FarmGame
     public class Item
     {
         private ItemType _type;
-        public ItemType Type{get {return _type;} }
+        public ItemType Type{get {return _type; } }
 
         public Item(ItemType type)
         {

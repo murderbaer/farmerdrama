@@ -11,6 +11,9 @@ namespace FarmGame
 
         public Item ItemInHand {get {return _itemInHand;} }
 
+        // Movement speed in Tiles per second
+        public float MovementSpeed { get; set; } = 3f;
+
         public Player() {
             // Set starting position
             Position = new(12, 12);
@@ -35,7 +38,5 @@ namespace FarmGame
                 _itemInHand = newItem;
             }
         }
-        // Movement speed in Tiles per second
-        public float MovementSpeed { get; set; } = 3f;
     }
 }

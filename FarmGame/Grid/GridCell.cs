@@ -1,11 +1,11 @@
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using System;
 namespace FarmGame
 {
     public class GridCell
     {
         private bool _isSolid;
+        private int _waterBucketCounter;
         private Item _placedItem;
         public Item PlacedItem { get { return _placedItem;} }
         public GridType TypeOfGrid{get; set;}
@@ -14,26 +14,38 @@ namespace FarmGame
         public GridCell(bool solid, GridType type)
         {
             _isSolid = solid;
-            _cellColor = getColorForCell(ItemType.EMPTY, type); // Default color
             TypeOfGrid = type;
+            if (type == GridType.WATER)
+            {
+                _placedItem = new Item(ItemType.WATERBUCKET);
+            } else {
             _placedItem = new Item();
+            }
+            _waterBucketCounter = 0;
+            _cellColor = getColorForCell(); // Default color
+            
         }
         public GridCell(bool solid, Item defaultItem, GridType type)
         {
             _isSolid = solid;
             _placedItem = defaultItem;
             TypeOfGrid = type;
-            _cellColor = getColorForCell(defaultItem.Type, type);
+            _cellColor = getColorForCell();
         }
 
         public Item TakeItem()
         {
+            if (TypeOfGrid == GridType.WATER)
+            {
+                return new Item(ItemType.WATERBUCKET);
+            }
             Item temp;
-            if (_placedItem.Type != ItemType.EMPTY)
+            if (_placedItem.Type == ItemType.SEED || _placedItem.Type == ItemType.WHEET)
             {
                 temp = _placedItem;
                 _placedItem = new();
-                _cellColor = getColorForCell(ItemType.EMPTY, TypeOfGrid);
+                _waterBucketCounter = 0;
+                _cellColor = getColorForCell();
                 return  temp;
             } else 
             {
@@ -41,37 +53,53 @@ namespace FarmGame
             }
         }
 
+        public void WaterTheCell()
+        {
+            _waterBucketCounter++;
+            _cellColor = getColorForCell();
+        }
+
         public void PlaceItem(Item itemToPlace)
         {
             if (_placedItem.Type == ItemType.EMPTY)
             {
                 _placedItem = itemToPlace;
-                _cellColor = getColorForCell(itemToPlace.Type, TypeOfGrid);
+                _cellColor = getColorForCell();
             }
         }
         public bool IsSolid
         {
             get {return _isSolid; }
         }
-        private static Color4 getColorForCell(ItemType item, GridType grid)
+        // TODO: refactor  
+        private Color4 getColorForCell()
         {
             Color4 ret = Color4.LightGray;
-            switch (grid)
+            switch (TypeOfGrid)
             {
                 case GridType.EARTH:
-                    switch(item)
+                    switch(_placedItem.Type)
                     {
-                        case ItemType.WATERBUCKET:
-                            ret = Color4.DarkGreen;
-                            break;
                         case ItemType.WHEET:
                             ret = Color4.GreenYellow;
                             break;
                         case ItemType.SEED:
-                            ret = Color4.Pink;
+                            if ( _waterBucketCounter == 0 )
+                            {
+                                ret = Color4.Magenta;
+                            } else 
+                            {
+                                ret = Color4.Cyan;
+                            }
                             break;
-                        case ItemType.EMPTY:
-                            ret = Color4.Green;
+                        default:
+                            if ( _waterBucketCounter == 0 )
+                            {
+                                ret = Color4.Green;
+                            } else 
+                            {
+                                ret = Color4.Brown;
+                            }
                             break;
                     } break;
                 case GridType.WATER:

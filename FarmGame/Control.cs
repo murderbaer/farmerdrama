@@ -39,16 +39,29 @@ namespace FarmGame {
             {
                 int xPos = (int)_model.Player.Position.X;
                 int yPos = (int)_model.Player.Position.Y;
+
                 bool isCellEmpty = _model.Grid[xPos, yPos].PlacedItem.Type == ItemType.EMPTY;
                 bool isHandEmpty = _model.Player.ItemInHand.Type == ItemType.EMPTY;
+
+                bool cellHasSeed = _model.Grid[xPos, yPos].PlacedItem.Type == ItemType.SEED;
+                bool cellisEmpty = _model.Grid[xPos, yPos].PlacedItem.Type == ItemType.EMPTY;
+                bool handHasWaterbucket = _model.Player.ItemInHand.Type == ItemType.WATERBUCKET;   
 
                 if (isHandEmpty && !isCellEmpty ) 
                 {
                     _model.Player.TakeItem(_model.Grid[xPos, yPos].TakeItem());
-                } else if (!isHandEmpty && isCellEmpty ) 
+                } 
+                else if (!isHandEmpty && isCellEmpty ) 
                 {
                     _model.Grid[xPos, yPos].PlaceItem(_model.Player.GiveItem()); 
+                } 
+                // water can be placed on seed, if seed is removed water will be preserved
+                else if ((cellHasSeed || cellisEmpty) && handHasWaterbucket) 
+                {
+                    _model.Player.GiveItem(); // bucket is taken from player, but not placed as an object
+                    _model.Grid[xPos, yPos].WaterTheCell(); // water counter goes up
                 }
+
                 _spaceDownLastFrame = true;
             }
             if (keyboard.IsKeyReleased(Keys.Space))
