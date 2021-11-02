@@ -1,16 +1,11 @@
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class Camera
+    public class Camera : ICamera
     {
-        public int CameraWidth { get => (int)_cameraSize.X; }
-
-        public int CameraHeight { get => (int)_cameraSize.Y; }
-
-        public Vector2 CameraSize { get => _cameraSize; }
-
         // Screen Ratio: 16:9 Screen Ratio is used on most computer screens. Static, black bars limit the view
         private static Vector2 _screenRatio = new Vector2(16, 9);
 
@@ -31,6 +26,25 @@ namespace FarmGame
 
         private Vector2 _cameraSize;
 
+        public int CameraWidth { get => (int)_cameraSize.X; }
+
+        public int CameraHeight { get => (int)_cameraSize.Y; }
+
+        public Vector2 CameraSize { get => _cameraSize; }
+
+        public Vector2 CameraFocus { get; set; }
+
+        public Vector2 CameraPosition { get; set; }
+
+        public void Update(float elapsedTime, ref KeyboardState keyboard)
+        {
+            Vector2 cameraOffset = CameraFocus - CameraPosition;
+            Vector2 cameraMovement = cameraOffset * 2f * elapsedTime;
+            CameraPosition += cameraMovement;
+            _cameraPositionTransformation = Matrix4.CreateTranslation(-CameraPosition.X, -CameraPosition.Y, 0);
+            UpdateCameraMatrix();
+        }
+
         public void Resize(int width, int height)
         {
             _windowSize = _cameraSize = new Vector2(width, height);
@@ -39,14 +53,14 @@ namespace FarmGame
             if (windowAspectRatio > screenRatio)
             {
                 // Black bars on the side
-                int bar_width = (int)(_windowSize.X - _windowSize.Y * screenRatio);
+                int bar_width = (int)(_windowSize.X - (_windowSize.Y * screenRatio));
                 GL.Viewport(bar_width / 2, 0, width - bar_width, height);
                 _cameraSize.X = width - bar_width;
             }
             else if (windowAspectRatio < screenRatio)
             {
                 // Black bars bottom and top
-                int bar_height = (int)(_windowSize.Y - _windowSize.X / screenRatio);
+                int bar_height = (int)(_windowSize.Y - (_windowSize.X / screenRatio));
                 GL.Viewport(0, bar_height / 2, width, height - bar_height);
                 _cameraSize.Y = height - bar_height;
             }
@@ -64,13 +78,6 @@ namespace FarmGame
             _windowSizeTransformation = scale * translate;
             UpdateCameraMatrix();
             UpdateOverlayMatrix();
-        }
-
-        public void SetCameraFocus(float x, float y)
-        {
-            // TODO: defined behaviour in border regions
-            _cameraPositionTransformation = Matrix4.CreateTranslation(-x, -y, 0);
-            UpdateCameraMatrix();
         }
 
         public void UpdateCameraMatrix()

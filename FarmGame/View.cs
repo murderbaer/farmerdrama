@@ -14,13 +14,13 @@ namespace FarmGame
 
         internal Camera Camera { get; } = new Camera();
 
-        internal void Draw(Model model)
-        {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-            Camera.SetCameraFocus(model.Player.Position.X, model.Player.Position.Y);
-            DrawBoard(model.Grid);
-            DrawPlayer(model.Player);
-        }
+        // internal void Draw(Model model)
+        // {
+        //     GL.Clear(ClearBufferMask.ColorBufferBit);
+        //     Camera.SetCameraFocus(model.Player.Position.X, model.Player.Position.Y);
+        //     DrawBoard(model.Grid);
+        //     DrawPlayer(model.Player);
+        // }
 
         private void DrawPlayer(Player player)
         {
@@ -45,7 +45,7 @@ namespace FarmGame
             {
                 for (int row = 0; row < grid.Row; ++row)
                 {
-                    GridCell cell = grid[column, row];
+                    IGridCell cell = grid[column, row];
                     GL.Color4(cell.CellColor);
                     Quad(grid, column, row);
                 }
