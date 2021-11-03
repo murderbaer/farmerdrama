@@ -11,5 +11,7 @@ namespace FarmGame
         public bool InteractWithItem(Item item);
 
         public Item TakeItem();
+
+        public void DrawGridCell(int positionX, int positionY);
     }
 }

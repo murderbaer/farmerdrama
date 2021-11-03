@@ -1,26 +1,16 @@
 using OpenTK.Mathematics;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class GridCellEarth : IGridCell
+    public class GridCellEarth : GridCell
     {
-        public bool HasCollision { get; } = false;
-
-        public Color4 CellColor { get; set; } = Color4.Green;
-
-        public void Update(float elapsedTime, IWorld world)
+        public GridCellEarth()
         {
+            CellColor = Color4.Green;
         }
 
-        public Item TakeItem()
+        public override void Update(float elapsedTime, IWorld world)
         {
-            return new Item(ItemType.WATERBUCKET);
-        }
-
-        public bool InteractWithItem(Item item)
-        {
-            return false;
         }
     }
 }

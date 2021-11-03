@@ -3,28 +3,16 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class GridCellWater : IGridCell
+    public class GridCellWater : GridCell
     {
-        public bool HasCollision { get; } = true;
-
-        public Color4 CellColor { get; set; } = Color4.DodgerBlue;
-
-        public void Update(float elapsedTime, IWorld world)
+        public GridCellWater()
         {
+            CellColor = Color4.DodgerBlue;
         }
 
-        public void Draw()
-        {
-        }
-
-        public Item TakeItem()
+        public override Item TakeItem()
         {
             return new Item(ItemType.WATERBUCKET);
-        }
-
-        public bool InteractWithItem(Item item)
-        {
-            return false;
         }
     }
 }

@@ -52,6 +52,7 @@ namespace FarmGame
                 var success = cell.InteractWithItem(ItemInHand);
                 if (success)
                 {
+                    ItemInHand = new Item();
                     return;
                 }
             }
@@ -61,27 +62,6 @@ namespace FarmGame
             {
                 ItemInHand = newItem;
                 return;
-            }
-            ItemInHand.Place(Position);
-        }
-
-        public Item GiveItem()
-        {
-            if (ItemInHand.Type != ItemType.EMPTY)
-            {
-                Item temp = ItemInHand;
-                ItemInHand = new Item();
-                return temp;
-            }
-
-            return ItemInHand;
-        }
-
-        public void TakeItem(Item newItem)
-        {
-            if (ItemInHand.Type == ItemType.EMPTY)
-            {
-                ItemInHand = newItem;
             }
         }
     }

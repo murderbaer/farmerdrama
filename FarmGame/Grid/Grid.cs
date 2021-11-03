@@ -1,5 +1,4 @@
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
@@ -22,6 +21,7 @@ namespace FarmGame
             _grid[(Column * Row / 2) + (row / 2) + 2] = new GridCellFarmLand(FarmLandState.EMPTY);
             _grid[(Column * Row / 2) + (row / 2) + 3] = new GridCellFarmLand(FarmLandState.SEED);
             _grid[(Column * Row / 2) + (row / 2) + 4] = new GridCellSeedStorage();
+            _grid[(Column * Row / 2) + (row / 2) + 6] = new GridCellTree();
         }
 
         public int Column { get; }
@@ -31,7 +31,7 @@ namespace FarmGame
         public IGridCell this[int col, int row]
         {
             get { return _grid[col + (Column * row)]; }
-            set { _grid[col + (Row * row)] = value; }
+            set { _grid[col + (Column * row)] = value; }
         }
 
         public void Update(float elapsedTime, IWorld world)
@@ -50,11 +50,7 @@ namespace FarmGame
                 for (int column = 0; column < Column; ++column)
                 {
                     IGridCell cell = this[column, row];
-                    GL.Color4(cell.CellColor);
-                    GL.Vertex2(column, row);
-                    GL.Vertex2(column + 1, row);
-                    GL.Vertex2(column + 1, row + 1);
-                    GL.Vertex2(column, row + 1);
+                    cell.DrawGridCell(column, row);
                 }
             }
 

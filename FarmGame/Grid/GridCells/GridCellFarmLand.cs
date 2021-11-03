@@ -1,9 +1,8 @@
 using OpenTK.Mathematics;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class GridCellFarmLand : IGridCell
+    public class GridCellFarmLand : GridCell
     {
         public GridCellFarmLand(FarmLandState state)
         {
@@ -14,9 +13,7 @@ namespace FarmGame
         {
         }
 
-        public bool HasCollision { get; } = false;
-
-        public Color4 CellColor
+        public override Color4 CellColor
         {
             get
             {
@@ -40,12 +37,7 @@ namespace FarmGame
 
         public FarmLandState State { get; set; }
 
-        public void Update(float elapsedTime, IWorld world)
-        {
-            // TODO: Grow
-        }
-
-        public Item TakeItem()
+        public override Item TakeItem()
         {
             switch (State)
             {
@@ -60,15 +52,17 @@ namespace FarmGame
             }
         }
 
-        public bool InteractWithItem(Item item)
+        public override bool InteractWithItem(Item item)
         {
             if (item.Type == ItemType.WATERBUCKET & !IsWatered)
             {
                 IsWatered = true;
+                return true;
             }
             else if (item.Type == ItemType.SEED & State == FarmLandState.EMPTY)
             {
                 State = FarmLandState.SEED;
+                return true;
             }
 
             return false;
