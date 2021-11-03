@@ -34,11 +34,11 @@ namespace FarmGame
             set { _grid[col + (Row * row)] = value; }
         }
 
-        public void Update(float elapsedTime, ref KeyboardState keyboard)
+        public void Update(float elapsedTime, IWorld world)
         {
             foreach (IGridCell cell in _grid)
             {
-                cell.Update(elapsedTime, ref keyboard);
+                cell.Update(elapsedTime, world);
             }
         }
 

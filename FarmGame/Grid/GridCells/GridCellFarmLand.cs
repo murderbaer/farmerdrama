@@ -40,7 +40,7 @@ namespace FarmGame
 
         public FarmLandState State { get; set; }
 
-        public void Update(float elapsedTime, ref KeyboardState keyboard)
+        public void Update(float elapsedTime, IWorld world)
         {
             // TODO: Grow
         }

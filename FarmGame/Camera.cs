@@ -36,7 +36,7 @@ namespace FarmGame
 
         public Vector2 CameraPosition { get; set; }
 
-        public void Update(float elapsedTime, ref KeyboardState keyboard)
+        public void Update(float elapsedTime, IWorld world)
         {
             Vector2 cameraOffset = CameraFocus - CameraPosition;
             Vector2 cameraMovement = cameraOffset * 2f * elapsedTime;

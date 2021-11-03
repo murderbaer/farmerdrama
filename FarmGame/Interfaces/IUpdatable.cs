@@ -4,6 +4,6 @@ namespace FarmGame
 {
     public interface IUpdatable
     {
-        void Update(float elapsedTime, ref KeyboardState keyboard);
+        void Update(float elapsedTime, IWorld world);
     }
 }
