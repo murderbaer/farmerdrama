@@ -9,7 +9,7 @@ namespace FarmGame
 
         public Color4 CellColor { get; set; } = Color4.DodgerBlue;
 
-        public void Update(float elapsedTime, ref KeyboardState keyboard)
+        public void Update(float elapsedTime, IWorld world)
         {
         }
 

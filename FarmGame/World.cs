@@ -1,16 +1,19 @@
-using OpenTK.Windowing.GraphicsLibraryFramework;
+using OpenTK.Windowing.Desktop;
 
 namespace FarmGame
 {
     public class World : IWorld
     {
-        public World()
+        public World(GameWindow window)
         {
+            Window = window;
             Camera = new Camera();
             Grid = new Grid(32, 18);
             Player = new Player();
             Camera.CameraPosition = Player.Position;
         }
+
+        public GameWindow Window { get; set; }
 
         public IReadOnlyGrid Grid { get; set; }
 
@@ -27,12 +30,12 @@ namespace FarmGame
             Player.Draw();
         }
 
-        public void Update(float elapsedTime, ref KeyboardState keyboard)
+        public void Update(float elapsedTime)
         {
-            Grid.Update(elapsedTime, ref keyboard);
-            Player.Update(elapsedTime, ref keyboard);
+            Grid.Update(elapsedTime, this);
+            Player.Update(elapsedTime, this);
             Camera.CameraFocus = Player.Position;
-            Camera.Update(elapsedTime, ref keyboard);
+            Camera.Update(elapsedTime, this);
         }
     }
 }
