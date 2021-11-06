@@ -1,34 +1,60 @@
-using System.Collections.Generic;
-using OpenTK.Mathematics;
+using OpenTK.Graphics.OpenGL;
 
 namespace FarmGame
 {
     public class Grid : IReadOnlyGrid
     {
+        private readonly IGridCell[] _grid;
 
-        public int Column {get;}
-        public int Row {get;}
-        private readonly GridCell[] _grid;
         public Grid(int col, int row)
         {
             Column = col;
             Row = row;
-            _grid = new GridCell[col * row];
+            _grid = new IGridCell[col * row];
             for (int i = 0; i < col * row; i++)
             {
-                _grid[i] = new GridCell(false, GridType.EARTH);
+                _grid[i] = new GridCellEarth();
             }
-            // DEBUG: later sprites
-            _grid[(Column * Row) / 2 + row / 2] = new GridCell(false, GridType.SAND);
-            _grid[(Column * Row) / 2 + row / 2 + 1] = new GridCell(false, GridType.WATER);
-            _grid[(Column * Row) / 2 + row / 2 + 2] = new GridCell(false, new Item(ItemType.SEED), GridType.EARTH);
-            _grid[(Column * Row) / 2 + row / 2 + 3] = new GridCell(false, new Item(ItemType.SEED), GridType.EARTH);
+
+            _grid[(Column * Row / 2) + (row / 2)] = new GridCellSand();
+            _grid[(Column * Row / 2) + (row / 2) + 1] = new GridCellWater();
+            _grid[(Column * Row / 2) + (row / 2) + 2] = new GridCellFarmLand(FarmLandState.EMPTY);
+            _grid[(Column * Row / 2) + (row / 2) + 3] = new GridCellFarmLand(FarmLandState.SEED);
+            _grid[(Column * Row / 2) + (row / 2) + 4] = new GridCellSeedStorage();
+            _grid[(Column * Row / 2) + (row / 2) + 6] = new GridCellTree();
         }
 
-        public GridCell this[int col, int row]
+        public int Column { get; }
+
+        public int Row { get; }
+
+        public IGridCell this[int col, int row]
         {
-            get { return _grid[col + Column * row]; }
-            set { _grid[col + Row * row] = value; }
+            get { return _grid[col + (Column * row)]; }
+            set { _grid[col + (Column * row)] = value; }
+        }
+
+        public void Update(float elapsedTime, IWorld world)
+        {
+            foreach (IGridCell cell in _grid)
+            {
+                cell.Update(elapsedTime, world);
+            }
+        }
+
+        public void Draw()
+        {
+            GL.Begin(PrimitiveType.Quads);
+            for (int row = 0; row < Row; ++row)
+            {
+                for (int column = 0; column < Column; ++column)
+                {
+                    IGridCell cell = this[column, row];
+                    cell.DrawGridCell(column, row);
+                }
+            }
+
+            GL.End();
         }
     }
 }

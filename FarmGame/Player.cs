@@ -1,41 +1,67 @@
-using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
-using System;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class Player
+    public class Player : IPlayer
     {
-        private Item _itemInHand;
+        public Player()
+        {
+            // Set starting position
+            Position = new Vector2(12, 12);
+            ItemInHand = new Item();
+        }
+
         public Vector2 Position { get; set; }
 
-        public Item ItemInHand {get {return _itemInHand;} }
+        public Item ItemInHand { get; set; }
 
         // Movement speed in Tiles per second
         public float MovementSpeed { get; set; } = 3f;
 
-        public Player() {
-            // Set starting position
-            Position = new(12, 12);
-            _itemInHand = new();
+        public void Draw()
+        {
+            GL.Color4(Color4.Orange);
+            GL.Begin(PrimitiveType.Triangles);
+            GL.Vertex2(Position.X - 0.4, Position.Y);
+            GL.Vertex2(Position.X + 0.4, Position.Y);
+            GL.Vertex2(Position.X, Position.Y - .8);
+            GL.End();
         }
 
-        public Item GiveItem()
+        public void Update(float elapsedTime, IWorld world)
         {
-            if (_itemInHand.Type != ItemType.EMPTY)
+            var keyboard = world.Window.KeyboardState;
+            Vector2 moveDirection = new ();
+            moveDirection.X = (keyboard.IsKeyDown(Keys.Right) ? 1 : 0) - (keyboard.IsKeyDown(Keys.Left) ? 1 : 0);
+            moveDirection.Y = (keyboard.IsKeyDown(Keys.Down) ? 1 : 0) - (keyboard.IsKeyDown(Keys.Up) ? 1 : 0);
+            if (moveDirection.X == 0 && moveDirection.Y == 0)
             {
-                Item temp = _itemInHand;
-                _itemInHand = new();
-                return temp;
+                return;
             }
-            return _itemInHand;
+
+            moveDirection.Normalize();
+            Position += moveDirection * elapsedTime * MovementSpeed;
         }
 
-        public void TakeItem(Item newItem)
+        public void Interact(IGridCell cell)
         {
-            if (_itemInHand.Type == ItemType.EMPTY)
+            if (ItemInHand.Type != ItemType.EMPTY)
             {
-                _itemInHand = newItem;
+                var success = cell.InteractWithItem(ItemInHand);
+                if (success)
+                {
+                    ItemInHand = new Item();
+                    return;
+                }
+            }
+
+            var newItem = cell.TakeItem();
+            if (newItem.Type != ItemType.EMPTY)
+            {
+                ItemInHand = newItem;
+                return;
             }
         }
     }
