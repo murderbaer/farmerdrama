@@ -22,6 +22,10 @@ namespace FarmGame
             _grid[(Column * Row / 2) + (row / 2) + 3] = new GridCellFarmLand(FarmLandState.SEED);
             _grid[(Column * Row / 2) + (row / 2) + 4] = new GridCellSeedStorage();
             _grid[(Column * Row / 2) + (row / 2) + 6] = new GridCellTree();
+            for (int i = 3; i < 10; i++)
+            {
+                _grid[i] = new GridCellFence();
+            }
         }
 
         public int Column { get; }
