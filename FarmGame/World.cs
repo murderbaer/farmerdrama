@@ -12,6 +12,7 @@ namespace FarmGame
             Camera = new Camera();
             Grid = new Grid(32, 18);
             Player = new Player();
+            Movable = new Movable();
             Camera.CameraPosition = Player.Position;
         }
 
@@ -23,6 +24,8 @@ namespace FarmGame
 
         public IPlayer Player { get; }
 
+        public IMovable Movable { get; }
+
         public ItemInteractionComponent ItemInteractionComponent { get; } = new ItemInteractionComponent();
 
         public void Draw()
@@ -31,6 +34,7 @@ namespace FarmGame
             Camera.SetCameraMatrix();
             Grid.Draw();
             Player.Draw();
+            Movable.Draw();
         }
 
         public void Update(float elapsedTime)
@@ -39,6 +43,12 @@ namespace FarmGame
             Player.Update(elapsedTime, this);
             Camera.CameraFocus = Player.Position;
             Camera.Update(elapsedTime, this);
+            Movable.Update(elapsedTime, this);
+
+            if (!Movable.IsMoving())
+            {
+                Movable.StartRandomPath();
+            }
         }
 
         private void DrawBackground()
