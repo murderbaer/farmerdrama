@@ -12,13 +12,20 @@ window.UpdateFrame += Update;
 window.Resize += args => world.Camera.Resize(args.Width, args.Height);
 window.KeyDown += args =>
 {
-    if (args.Key == Keys.Escape)
+    switch (args.Key)
     {
-        window.Close();
-    }
-    else if (args.Key == Keys.Space)
-    {
-        world.ItemInteractionComponent.OnKeyPress(args, ref world);
+        case Keys.Escape:
+            window.Close();
+            break;
+        case Keys.F:
+            window.WindowState = window.WindowState == WindowState.Fullscreen ? WindowState.Normal : WindowState.Fullscreen;
+            break;
+        case Keys.Space:
+            world.ItemInteractionComponent.OnKeyPress(args, ref world);
+            break;
+        case Keys.Q:
+            world.CorpseInteractionComponent.OnKeyPress(args, ref world);
+            break;
     }
 };
 
