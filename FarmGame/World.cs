@@ -14,6 +14,7 @@ namespace FarmGame
             Player = new Player();
             Corpse = new Corpse();
             Movable = new Movable();
+            Suspicion = new Suspicion(30);
             Camera.CameraPosition = Player.Position;
         }
 
@@ -29,6 +30,8 @@ namespace FarmGame
 
         public IMovable Movable { get; }
 
+        public Suspicion Suspicion { get; }
+
         public ItemInteractionComponent ItemInteractionComponent { get; } = new ItemInteractionComponent();
 
         public CorpseInteractionComponent CorpseInteractionComponent { get; } = new CorpseInteractionComponent();
@@ -41,6 +44,8 @@ namespace FarmGame
             Player.Draw();
             Corpse.Draw();
             Movable.Draw();
+            Camera.SetOverlayMatrix();
+            Suspicion.Draw();
         }
 
         public void Update(float elapsedTime)
