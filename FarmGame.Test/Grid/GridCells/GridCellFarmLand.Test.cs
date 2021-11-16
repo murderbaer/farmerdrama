@@ -56,5 +56,29 @@ namespace FarmGame.Test
             Assert.IsTrue(cell.InteractWithItem(new Item(ItemType.SEED)));
             Assert.AreEqual(cell.State, FarmLandState.SEED);
         }
+
+        [TestMethod]
+        public void TestProgressState()
+        {
+            cell.State = FarmLandState.EMPTY;
+            cell.ProgressState();
+            Assert.AreEqual(cell.State, FarmLandState.EMPTY);
+
+            cell.State = FarmLandState.SEED;
+            cell.ProgressState();
+            Assert.AreEqual(cell.State, FarmLandState.HALFGROWN);
+
+            cell.State = FarmLandState.HALFGROWN;
+            cell.ProgressState();
+            Assert.AreEqual(cell.State, FarmLandState.FULLGROWN);
+
+            cell.State = FarmLandState.FULLGROWN;
+            cell.ProgressState();
+            Assert.AreEqual(cell.State, FarmLandState.OVERGROWN);
+
+            cell.State = FarmLandState.OVERGROWN;
+            cell.ProgressState();
+            Assert.AreEqual(cell.State, FarmLandState.OVERGROWN);
+        }
     }
 }
