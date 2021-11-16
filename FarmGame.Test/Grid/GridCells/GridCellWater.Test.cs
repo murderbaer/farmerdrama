@@ -6,7 +6,7 @@ namespace FarmGame.Test
     [TestClass]
     public class GridCellWaterTest
     {
-        GridCellWater cell = new GridCellWater();
+        GridCellWater cell = new GridCellWater(1);
 
         [TestMethod]
         public void TestCollision()

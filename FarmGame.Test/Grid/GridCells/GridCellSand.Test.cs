@@ -6,7 +6,7 @@ namespace FarmGame.Test
     [TestClass]
     public class GridCellSandTest
     {
-        GridCellSand cell = new GridCellSand();
+        GridCellSand cell = new GridCellSand(1);
 
         [TestMethod]
         public void TestCollision()

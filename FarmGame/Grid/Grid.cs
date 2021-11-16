@@ -1,30 +1,68 @@
+using System.Xml;
+
 using OpenTK.Graphics.OpenGL;
 
 namespace FarmGame
 {
     public class Grid : IReadOnlyGrid
     {
+        private static TiledHandler _tileHandler = TiledHandler.Instance;
+
         private readonly IGridCell[] _grid;
 
-        public Grid(int col, int row)
+        public Grid()
         {
-            Column = col;
-            Row = row;
-            _grid = new IGridCell[col * row];
-            for (int i = 0; i < col * row; i++)
+            XmlNode data = _tileHandler.LevelOneTiles.SelectSingleNode("data");
+            XmlNodeList tiles = data.SelectNodes("tile");
+            _grid = new IGridCell[tiles.Count];
+            Column = _tileHandler.BoardX;
+            Row = _tileHandler.BoardY;
+            for (int i = 0; i < tiles.Count; i++)
             {
-                _grid[i] = new GridCellEarth();
+                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
+                switch ((SpriteType)gid)
+                {
+                    case SpriteType.FARM_LAND:
+                    _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, gid); break;
+                    case SpriteType.STONE_LEFT:
+                    case SpriteType.STONE:
+                    case SpriteType.STONE_RIGHT:
+                    _grid[i] = new GridCellStone(gid); break;
+                    case SpriteType.WATER_LU:
+                    case SpriteType.WATER_RU:
+                    case SpriteType.WATER_LD:
+                    case SpriteType.WATER_RD:
+                    _grid[i] = new GridCellWater(gid); break;
+                    case SpriteType.SEEDS:
+                    _grid[i] = new GridCellSeedStorage(gid); break;
+                    default:
+                    _grid[i] = new GridCellEarth(gid); break;
+                }
             }
 
-            _grid[(Column * Row / 2) + (row / 2)] = new GridCellSand();
-            _grid[(Column * Row / 2) + (row / 2) + 1] = new GridCellWater();
-            _grid[(Column * Row / 2) + (row / 2) + 2] = new GridCellFarmLand(FarmLandState.EMPTY);
-            _grid[(Column * Row / 2) + (row / 2) + 3] = new GridCellFarmLand(FarmLandState.SEED);
-            _grid[(Column * Row / 2) + (row / 2) + 4] = new GridCellSeedStorage();
-            _grid[(Column * Row / 2) + (row / 2) + 6] = new GridCellTree();
-            for (int i = 3; i < 10; i++)
-            {
-                _grid[i] = new GridCellFence();
+            data = _tileHandler.LevelTwoTiles.SelectSingleNode("data");
+            tiles = data.SelectNodes("tile");
+            for (int i = 0; i < tiles.Count; i++)
+            {  
+                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
+                switch ((SpriteType)gid)
+                {
+                    case SpriteType.AIR:
+                    break;
+                    case SpriteType.STONE_LEFT:
+                    case SpriteType.STONE:
+                    case SpriteType.STONE_RIGHT:
+                    _grid[i] = new GridCellStone(gid); break;
+                    case SpriteType.WATER_LU:
+                    case SpriteType.WATER_RU:
+                    case SpriteType.WATER_LD:
+                    case SpriteType.WATER_RD:
+                    _grid[i] = new GridCellWater(gid); break;
+                    case SpriteType.SEEDS:
+                    _grid[i] = new GridCellSeedStorage(gid); break;
+                    default:
+                    _grid[i] = new GridCellEarth(gid); break;
+                }
             }
         }
 

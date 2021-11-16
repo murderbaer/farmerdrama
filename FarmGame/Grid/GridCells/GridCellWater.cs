@@ -1,11 +1,12 @@
 using OpenTK.Mathematics;
-using OpenTK.Windowing.GraphicsLibraryFramework;
+using System;
 
 namespace FarmGame
 {
     public class GridCellWater : GridCell
     {
-        public GridCellWater()
+        public GridCellWater(int spriteId)
+        : base(spriteId)
         {
             CellColor = Color4.DodgerBlue;
         }

@@ -4,7 +4,8 @@ namespace FarmGame
 {
     public class GridCellEarth : GridCell
     {
-        public GridCellEarth()
+        public GridCellEarth(int spriteId)
+        : base(spriteId)
         {
             CellColor = Color4.Green;
         }

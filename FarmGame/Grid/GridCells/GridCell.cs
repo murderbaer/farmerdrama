@@ -5,9 +5,16 @@ namespace FarmGame
 {
     public class GridCell : IGridCell
     {
+        public GridCell(int spriteId)
+        {
+            SpriteId = spriteId;
+        }
+
         public virtual bool HasCollision { get; set; }
 
         public virtual Color4 CellColor { get; set; }
+
+        protected virtual int SpriteId { get; private set; }
 
         public virtual void Update(float elapsedTime, IWorld world)
         {

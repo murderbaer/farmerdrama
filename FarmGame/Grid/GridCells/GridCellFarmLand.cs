@@ -4,13 +4,16 @@ namespace FarmGame
 {
     public class GridCellFarmLand : GridCell
     {
-        public GridCellFarmLand(FarmLandState state)
+        public GridCellFarmLand(FarmLandState state, int spriteId)
+        : base(spriteId)
         {
             State = state;
         }
 
-        public GridCellFarmLand()
+        public GridCellFarmLand(int spriteId)
+        : base(spriteId)
         {
+            State = FarmLandState.EMPTY;
         }
 
         public override Color4 CellColor

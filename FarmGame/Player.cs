@@ -9,7 +9,7 @@ namespace FarmGame
         public Player()
         {
             // Set starting position
-            Position = new Vector2(12, 12);
+            Position = TiledHandler.Instance.TiledPlayerPos;
             ItemInHand = new Item();
         }
 
@@ -22,7 +22,7 @@ namespace FarmGame
 
         public void Draw()
         {
-            GL.Color4(Color4.Orange);
+            GL.Color4(Color4.Magenta);
             GL.Begin(PrimitiveType.Triangles);
             GL.Vertex2(Position.X - 0.4, Position.Y + 0.4);
             GL.Vertex2(Position.X + 0.4, Position.Y + 0.4);

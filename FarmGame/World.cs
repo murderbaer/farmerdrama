@@ -10,7 +10,7 @@ namespace FarmGame
         {
             Window = window;
             Camera = new Camera();
-            Grid = new Grid(32, 18);
+            Grid = new Grid();
             Player = new Player();
             Movable = new Movable();
             Camera.CameraPosition = Player.Position;

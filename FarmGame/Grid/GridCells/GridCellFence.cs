@@ -5,7 +5,8 @@ namespace FarmGame
 {
     public class GridCellFence : GridCell
     {
-        public GridCellFence()
+        public GridCellFence(int spriteId)
+        : base(spriteId)
         {
             CellColor = Color4.SlateGray;
             HasCollision = true;

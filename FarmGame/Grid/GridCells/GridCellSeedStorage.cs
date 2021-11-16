@@ -5,7 +5,8 @@ namespace FarmGame
 {
     public class GridCellSeedStorage : GridCell
     {
-        public GridCellSeedStorage()
+        public GridCellSeedStorage(int spriteId)
+        : base(spriteId)
         {
             CellColor = Color4.BlueViolet;
         }

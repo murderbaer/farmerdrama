@@ -34,13 +34,13 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestInteract()
         {
-            var farmland = new GridCellFarmLand();
+            var farmland = new GridCellFarmLand(534);
             player.ItemInHand = new Item(ItemType.WATERBUCKET);
             player.Interact(farmland);
             Assert.IsTrue(farmland.IsWatered);
             Assert.AreEqual(player.ItemInHand.Type, ItemType.EMPTY);
 
-            var water = new GridCellWater();
+            var water = new GridCellWater(1);
             player.Interact(water);
             Assert.AreEqual(player.ItemInHand.Type, ItemType.WATERBUCKET);
 
