@@ -35,7 +35,13 @@ namespace FarmGame
 
         public bool IsWatered { get; set; }
 
-        public FarmLandState State { get; set; }
+        public FarmLandState State { get; set; } = FarmLandState.EMPTY;
+
+        public double BaseGrowthRate { get; set; } = 30f;
+
+        public double GrowthRate { get => BaseGrowthRate / (IsWatered ? 1.2 : 1); }
+
+        private double GrowthTimer { get; set; } = 0;
 
         public override Item TakeItem()
         {
@@ -66,6 +72,37 @@ namespace FarmGame
             }
 
             return false;
+        }
+
+        public void ProgressState()
+        {
+            switch (State)
+            {
+                case FarmLandState.SEED:
+                    State = FarmLandState.HALFGROWN;
+                    break;
+                case FarmLandState.HALFGROWN:
+                    State = FarmLandState.FULLGROWN;
+                    break;
+                case FarmLandState.FULLGROWN:
+                    State = FarmLandState.OVERGROWN;
+                    break;
+            }
+        }
+
+        public override void Update(float elapsedTime, IWorld world)
+        {
+            if (State == FarmLandState.EMPTY || State == FarmLandState.OVERGROWN)
+            {
+                return;
+            }
+
+            GrowthTimer += elapsedTime;
+            if (GrowthTimer >= GrowthRate)
+            {
+                GrowthTimer = 0;
+                this.ProgressState();
+            }
         }
     }
 }
