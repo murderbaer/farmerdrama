@@ -11,13 +11,13 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestProperty()
         {
-            Assert.Equals(0, suspicion.Value);
+            Assert.AreEqual(0, suspicion.Value);
             suspicion.Value = 10;
-            Assert.Equals(10, suspicion.Value);
+            Assert.AreEqual(10, suspicion.Value);
             suspicion.Value = -10;
-            Assert.Equals(0, suspicion.Value);
+            Assert.AreEqual(0, suspicion.Value);
             suspicion.Value = 110;
-            Assert.Equals(100, suspicion.Value);
+            Assert.AreEqual(100, suspicion.Value);
         }
     }
 }
