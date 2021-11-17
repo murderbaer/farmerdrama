@@ -33,6 +33,26 @@ namespace FarmGame
             }
         }
 
+        public override float HiddenFactor
+        {
+            get
+            {
+                switch (State)
+                {
+                    case FarmLandState.SEED:
+                        return 1f;
+                    case FarmLandState.HALFGROWN:
+                        return 0.7f;
+                    case FarmLandState.FULLGROWN:
+                        return 0.5f;
+                    case FarmLandState.OVERGROWN:
+                        return 0.8f;
+                    default:
+                        return 1f;
+                }
+            }
+        }
+
         public bool IsWatered { get; set; }
 
         public FarmLandState State { get; set; } = FarmLandState.EMPTY;

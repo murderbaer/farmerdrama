@@ -8,6 +8,8 @@ namespace FarmGame
 
         public Color4 CellColor { get; }
 
+        public float HiddenFactor { get; }
+
         public bool InteractWithItem(Item item);
 
         public Item TakeItem();

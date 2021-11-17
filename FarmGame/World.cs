@@ -26,7 +26,7 @@ namespace FarmGame
 
         public IPlayer Player { get; }
 
-        public Corpse Corpse { get; }
+        public ICorpse Corpse { get; }
 
         public IMovable Movable { get; }
 
@@ -35,6 +35,8 @@ namespace FarmGame
         public ItemInteractionComponent ItemInteractionComponent { get; } = new ItemInteractionComponent();
 
         public CorpseInteractionComponent CorpseInteractionComponent { get; } = new CorpseInteractionComponent();
+
+        public CorpseSearchComponent CorpseSearchComponent { get; } = new CorpseSearchComponent();
 
         public void Draw()
         {
@@ -56,8 +58,9 @@ namespace FarmGame
             Camera.Update(elapsedTime, this);
             Corpse.Update(elapsedTime, this);
             Movable.Update(elapsedTime, this);
+            CorpseSearchComponent.Update(elapsedTime, this);
 
-            if (!Movable.IsMoving())
+            if (!Movable.IsMoving() && !CorpseSearchComponent.IsFound)
             {
                 Movable.StartRandomPath();
             }
