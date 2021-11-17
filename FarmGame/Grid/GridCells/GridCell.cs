@@ -9,6 +9,8 @@ namespace FarmGame
 
         public virtual Color4 CellColor { get; set; }
 
+        public virtual float HiddenFactor { get; } = 1f;
+
         public virtual void Update(float elapsedTime, IWorld world)
         {
         }

@@ -3,11 +3,11 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class Corpse : IUpdatable, IDrawable
+    public class Corpse : ICorpse
     {
         public Corpse()
         {
-            Position = new Vector2(6, 6);
+            Position = new Vector2(18, 6);
         }
 
         public bool IsPlaced { get; set; } = true;

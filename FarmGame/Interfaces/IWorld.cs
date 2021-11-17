@@ -11,5 +11,11 @@ namespace FarmGame
         public ICamera Camera { get; }
 
         public IPlayer Player { get; }
+
+        public ICorpse Corpse { get; }
+
+        public IMovable Movable { get; }
+
+        public Suspicion Suspicion { get; }
     }
 }
