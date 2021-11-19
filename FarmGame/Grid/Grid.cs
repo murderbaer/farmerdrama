@@ -23,45 +23,45 @@ namespace FarmGame
                 switch ((SpriteType)gid)
                 {
                     case SpriteType.FARM_LAND:
-                    _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, gid); break;
+                        _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, gid); break;
                     case SpriteType.STONE_LEFT:
                     case SpriteType.STONE:
                     case SpriteType.STONE_RIGHT:
-                    _grid[i] = new GridCellStone(gid); break;
+                        _grid[i] = new GridCellStone(gid); break;
                     case SpriteType.WATER_LU:
                     case SpriteType.WATER_RU:
                     case SpriteType.WATER_LD:
                     case SpriteType.WATER_RD:
-                    _grid[i] = new GridCellWater(gid); break;
+                        _grid[i] = new GridCellWater(gid); break;
                     case SpriteType.SEEDS:
-                    _grid[i] = new GridCellSeedStorage(gid); break;
+                        _grid[i] = new GridCellSeedStorage(gid); break;
                     default:
-                    _grid[i] = new GridCellEarth(gid); break;
+                        _grid[i] = new GridCellEarth(gid); break;
                 }
             }
 
             data = _tileHandler.LevelTwoTiles.SelectSingleNode("data");
             tiles = data.SelectNodes("tile");
             for (int i = 0; i < tiles.Count; i++)
-            {  
+            {
                 int gid = int.Parse(tiles[i].Attributes["gid"].Value);
                 switch ((SpriteType)gid)
                 {
                     case SpriteType.AIR:
-                    break;
+                        break;
                     case SpriteType.STONE_LEFT:
                     case SpriteType.STONE:
                     case SpriteType.STONE_RIGHT:
-                    _grid[i] = new GridCellStone(gid); break;
+                        _grid[i] = new GridCellStone(gid); break;
                     case SpriteType.WATER_LU:
                     case SpriteType.WATER_RU:
                     case SpriteType.WATER_LD:
                     case SpriteType.WATER_RD:
-                    _grid[i] = new GridCellWater(gid); break;
+                        _grid[i] = new GridCellWater(gid); break;
                     case SpriteType.SEEDS:
-                    _grid[i] = new GridCellSeedStorage(gid); break;
+                        _grid[i] = new GridCellSeedStorage(gid); break;
                     default:
-                    _grid[i] = new GridCellEarth(gid); break;
+                        _grid[i] = new GridCellEarth(gid); break;
                 }
             }
         }
@@ -86,13 +86,15 @@ namespace FarmGame
 
         public void Draw()
         {
+            GL.BindTexture(TextureTarget.Texture2D, World.GlobalSprite);
             GL.Begin(PrimitiveType.Quads);
+
             for (int row = 0; row < Row; ++row)
             {
                 for (int column = 0; column < Column; ++column)
                 {
                     IGridCell cell = this[column, row];
-                    cell.DrawGridCell(column, row);
+                    cell.DrawGridCellTextured(column, row, SpriteHelper.getTexCordFromId(cell.SpriteId));
                 }
             }
 

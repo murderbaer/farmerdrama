@@ -16,6 +16,8 @@ namespace FarmGame
             Camera.CameraPosition = Player.Position;
         }
 
+        public static int GlobalSprite { get; private set; }
+
         public GameWindow Window { get; set; }
 
         public IReadOnlyGrid Grid { get; set; }
@@ -27,6 +29,13 @@ namespace FarmGame
         public IMovable Movable { get; }
 
         public ItemInteractionComponent ItemInteractionComponent { get; } = new ItemInteractionComponent();
+
+        public World()
+        {
+            GlobalSprite = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
+            GL.Enable(EnableCap.Texture2D);            // GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+        }
 
         public void Draw()
         {

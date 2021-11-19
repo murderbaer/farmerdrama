@@ -12,13 +12,6 @@ namespace FarmGame
             HasCollision = true;
         }
 
-        public override void DrawGridCell(int positionX, int positionY)
-        {
-            GL.Color4(CellColor);
-            GL.Vertex2(positionX, positionY - 1);
-            GL.Vertex2(positionX + 1, positionY - 1);
-            GL.Vertex2(positionX + 1, positionY + 1.5);
-            GL.Vertex2(positionX, positionY + 1.5);
-        }
+
     }
 }

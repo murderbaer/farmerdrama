@@ -12,6 +12,6 @@ namespace FarmGame
         WATER_LD = 1236,
         WATER_RD = 1237,
         SEEDS = 5707,
-        AIR = 7392
+        AIR = 7392,
     }
 }

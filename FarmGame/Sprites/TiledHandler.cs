@@ -1,7 +1,7 @@
+using System;
 using System.IO;
 using System.Reflection;
 using System.Xml;
-using System;
 using OpenTK.Mathematics;
 
 namespace FarmGame
@@ -14,7 +14,7 @@ namespace FarmGame
         {
             if (_instance != null)
             {
-                throw new UnauthorizedAccessException ("No second object is allowed to be created!");
+                throw new UnauthorizedAccessException("No second object is allowed to be created!");
             }
 
             var assembly = Assembly.GetExecutingAssembly();
@@ -34,7 +34,7 @@ namespace FarmGame
 
                 XmlNode objectsLayer = doc.DocumentElement.SelectSingleNode("objectgroup[@name='movement']");
                 XmlNodeList objects = objectsLayer.SelectNodes("object");
-                
+
                 float posX = float.Parse(objects[0].Attributes["x"].Value);
                 float posY = float.Parse(objects[0].Attributes["y"].Value);
 
@@ -55,7 +55,7 @@ namespace FarmGame
             }
         }
 
-        public int TilePixelSize {get; private set;}
+        public int TilePixelSize { get; private set; }
 
         public Vector2 TiledPlayerPos { get; private set; }
 
