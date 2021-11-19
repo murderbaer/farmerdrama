@@ -18,7 +18,7 @@ namespace FarmGame
             }
 
             var assembly = Assembly.GetExecutingAssembly();
-            using (Stream stream = assembly.GetManifestResourceStream("FarmGame.Resources.Graphics.TiledMap.tmx"))
+            using (Stream stream = assembly.GetManifestResourceStream("FarmGame.Resources.Graphics.Map.tmx"))
             using (StreamReader reader = new StreamReader(stream))
             {
                 XmlDocument doc = new XmlDocument();

@@ -8,6 +8,7 @@ namespace FarmGame
     {
         public World(GameWindow window)
         {
+            GlobalSprite = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
             Window = window;
             Camera = new Camera();
             Grid = new Grid();
@@ -30,20 +31,15 @@ namespace FarmGame
 
         public ItemInteractionComponent ItemInteractionComponent { get; } = new ItemInteractionComponent();
 
-        public World()
-        {
-            GlobalSprite = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
-            GL.Enable(EnableCap.Texture2D);            // GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-        }
-
         public void Draw()
         {
             DrawBackground();
             Camera.SetCameraMatrix();
+            GL.BindTexture(TextureTarget.Texture2D, GlobalSprite);
             Grid.Draw();
             Player.Draw();
             Movable.Draw();
+            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         public void Update(float elapsedTime)

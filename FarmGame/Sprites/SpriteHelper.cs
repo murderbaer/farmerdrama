@@ -2,21 +2,21 @@ using System.IO;
 using System.Reflection;
 
 using ImageMagick;
-using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 
 namespace FarmGame
 {
     public class SpriteHelper
     {
-        public static int LoadTexture(string eEmbeddedResourcePath)
+        public static int LoadTexture(string embeddedResourcePath)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            Stream stream = assembly.GetManifestResourceStream(eEmbeddedResourcePath);
+            Stream stream = assembly.GetManifestResourceStream(embeddedResourcePath);
             var image = new MagickImage(stream);
             image.Flip();
-
             var pixels = image.GetPixelsUnsafe().ToArray();
+
             int handle = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, handle);
 
@@ -29,30 +29,26 @@ namespace FarmGame
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.GenerateMipmap, 1);
             GL.BindTexture(TextureTarget.Texture2D, 0);
+
+            GL.Enable(EnableCap.Texture2D);
             return handle;
         }
 
-
-        public static Vector2 getTexCordFromId(int id, MagickImage image)
-        {
-            int width = image.Width;
-            int height = image.Height;
-
-            int xKarth = width % (16 * id);
-            int yKarth = height - height / (16 * id);
-
-            return new Vector2(1 / xKarth, 1 / yKarth);
-        }
         // Assumed that sprite size is 16x16
-        public static Vector2 getTexCordFromId(int id)
+        public static Box2 GetTexCoordFromId(int id)
         {
-            int width = 1456;
-            int height = 1344;
+            int totalCol = 1456 / 16;
+            int totalRow = 1344 / 16;
 
-            int xKarth = width % (16 * id);
-            int yKarth = height / (16 * id);
+            int row = (id - 1) / totalCol;
+            int col = (id - 1) % totalCol;
 
-            return new Vector2(1f / xKarth, 1f / yKarth);
+            float x = col / (float)totalCol;
+            float y = 1f - (row + 1f) / totalRow;
+            float width = 1f / totalCol;
+            float height = 1f / totalRow;
+
+            return new Box2(x, y, x + width, y + height);  // return new Box2(x, y, x + width, y + height);
         }
     }
 }

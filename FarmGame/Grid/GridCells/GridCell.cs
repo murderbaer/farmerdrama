@@ -29,26 +29,23 @@ namespace FarmGame
         {
             return false;
         }
-        public void DrawGridCellTextured(int positionX, int positionY, Vector2 texCord)
+        public void DrawGridCellTextured(int positionX, int positionY, Box2 sprite)
         {
-            float xSize = 16f / 1456f;
-            float ySize = 16f / 1344f;
-
-            GL.TexCoord2(texCord);
+            GL.Begin(PrimitiveType.Quads);
+            GL.TexCoord2(sprite.Min);
             GL.Vertex2(positionX, positionY);
-
-            GL.TexCoord2(texCord.X + xSize, texCord.Y);
+            GL.TexCoord2(sprite.Max.X, sprite.Min.Y);
             GL.Vertex2(positionX + 1, positionY);
-
-            GL.TexCoord2(texCord.X + xSize, texCord.Y + ySize);
+            GL.TexCoord2(sprite.Max);
             GL.Vertex2(positionX + 1, positionY + 1);
-
-            GL.TexCoord2(texCord.X, texCord.Y + ySize);
+            GL.TexCoord2(sprite.Min.X, sprite.Max.Y);
             GL.Vertex2(positionX, positionY + 1);
+            GL.End();
         }
 
         public virtual void DrawGridCell(int positionX, int positionY)
         {
+
             GL.Color4(CellColor);
             GL.Vertex2(positionX, positionY);
             GL.Vertex2(positionX, positionY + 1);

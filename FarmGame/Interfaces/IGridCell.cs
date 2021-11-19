@@ -14,7 +14,7 @@ namespace FarmGame
 
         public Item TakeItem();
 
-        public void DrawGridCellTextured(int positionX, int positionY, Vector2 texCord);
+        public void DrawGridCellTextured(int positionX, int positionY, Box2 sprite);
         public void DrawGridCell(int positionX, int positionY);
     }
 }
