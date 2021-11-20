@@ -28,6 +28,7 @@ namespace FarmGame
             GL.Vertex2(Position.X + 0.4, Position.Y + 0.4);
             GL.Vertex2(Position.X, Position.Y - .4);
             GL.End();
+
         }
 
         public void Update(float elapsedTime, IWorld world)

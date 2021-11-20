@@ -37,8 +37,12 @@ namespace FarmGame
             //TODO: Bind texture files when needed
             DrawBackground();
             Camera.SetCameraMatrix();
-            Grid.Draw();
+            Grid.DrawLayer(0);
+            Grid.DrawLayer(1);
+            Grid.DrawLayer(2);
             Player.Draw();
+
+            Grid.DrawLayer(3);
             Movable.Draw();
         }
 

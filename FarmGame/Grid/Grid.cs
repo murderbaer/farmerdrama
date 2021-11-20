@@ -25,9 +25,13 @@ namespace FarmGame
 
             _spriteGrid[0] = new SpriteGrid(tiles.Count, Column, Row);
             _spriteGrid[1] = new SpriteGrid(tiles.Count, Column, Row);
+            _spriteGrid[2] = new SpriteGrid(tiles.Count, Column, Row);
+            _spriteGrid[3] = new SpriteGrid(tiles.Count, Column, Row);
 
             intializeLayerOne();
             intializeLayerTwo();
+            intializeLayerThree();
+            intializeLayerFour();
         }
 
         private void intializeLayerOne()
@@ -68,24 +72,40 @@ namespace FarmGame
             for (int i = 0; i < tiles.Count; i++)
             {
                 int gid = int.Parse(tiles[i].Attributes["gid"].Value);
+                if (gid == (int)SpriteType.SEEDS)
+                {
+                    _grid[i] = new GridCellSeedStorage();
+                }
+
                 _spriteGrid[1][i] = new SpriteObject(World.GlobalSprite, gid);
             }
         }
 
         private void intializeLayerThree()
         {
-            XmlNode data = _tileHandler.LevelTwoTiles.SelectSingleNode("data");
+            XmlNode data = _tileHandler.LevelThreeTiles.SelectSingleNode("data");
             XmlNodeList tiles = data.SelectNodes("tile");
-
 
             for (int i = 0; i < tiles.Count; i++)
             {
                 int gid = int.Parse(tiles[i].Attributes["gid"].Value);
-                if (gid == (int)SpriteType.SEEDS)
+                if (gid != (int)SpriteType.AIR)
                 {
-                    _grid[i] = new GridCellSeedStorage();
+                    _grid[i] = new GridCellCollision();
                 }
-                _spriteGrid[1][i] = new SpriteObject(World.GlobalSprite, gid);
+                _spriteGrid[2][i] = new SpriteObject(World.GlobalSprite, gid);
+            }
+        }
+
+        private void intializeLayerFour()
+        {
+            XmlNode data = _tileHandler.LevelFourTiles.SelectSingleNode("data");
+            XmlNodeList tiles = data.SelectNodes("tile");
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
+                _spriteGrid[3][i] = new SpriteObject(World.GlobalSprite, gid);
             }
         }
 
@@ -111,12 +131,15 @@ namespace FarmGame
         {
             DrawLayer(0);
             DrawLayer(1);
+            DrawLayer(2);
         }
 
-        private void DrawLayer(int layer)
+        public void DrawLayer(int layer)
         {
+
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Blend);
+            GL.Color4(Color4.White);
             for (int row = 0; row < Row; ++row)
             {
                 for (int column = 0; column < Column; ++column)
