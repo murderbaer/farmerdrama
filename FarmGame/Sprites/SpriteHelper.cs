@@ -16,8 +16,6 @@ namespace FarmGame
             Stream stream = assembly.GetManifestResourceStream(embeddedResourcePath);
             var image = new MagickImage(stream);
             var pixels = image.GetPixelsUnsafe().ToArray();
-
-
             return image;
         }
 

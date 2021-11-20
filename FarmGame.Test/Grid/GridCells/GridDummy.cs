@@ -3,10 +3,11 @@ using System.Xml;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using ImageMagick;
+using FarmGame;
 
-namespace FarmGame
+namespace FarmGame.Test
 {
-    public class Grid : IReadOnlyGrid
+    public class GridDummy : IReadOnlyGrid
     {
         private static TiledHandler _tileHandler = TiledHandler.Instance;
 
@@ -18,7 +19,7 @@ namespace FarmGame
 
         private int _spriteHandle;
 
-        public Grid()
+        public GridDummy()
         {
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
             // _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);

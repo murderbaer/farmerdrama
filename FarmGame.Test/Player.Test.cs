@@ -1,12 +1,14 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FarmGame.Test
 {
+    [ExcludeFromCodeCoverageAttribute]
     [TestClass]
     public class PlayerTest
     {
-        Player player = new Player();
+        PlayerDummy player = new PlayerDummy();
 
         [TestMethod]
         public void TestPosition()
@@ -34,13 +36,13 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestInteract()
         {
-            var farmland = new GridCellFarmLand();
+            var farmland = new GridCellFarmLand(FarmLandState.EMPTY);
             player.ItemInHand = new Item(ItemType.WATERBUCKET);
             player.Interact(farmland);
             Assert.IsTrue(farmland.IsWatered);
             Assert.AreEqual(player.ItemInHand.Type, ItemType.EMPTY);
 
-            var water = new GridCellWater(1);
+            var water = new GridCellWater();
             player.Interact(water);
             Assert.AreEqual(player.ItemInHand.Type, ItemType.WATERBUCKET);
 

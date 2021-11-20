@@ -1,12 +1,14 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FarmGame.Test
 {
+    [ExcludeFromCodeCoverageAttribute]
     [TestClass]
     public class GridCellWaterTest
     {
-        GridCellWater cell = new GridCellWater(1);
+        GridCellWater cell = new GridCellWater();
 
         [TestMethod]
         public void TestCollision()
@@ -14,18 +16,18 @@ namespace FarmGame.Test
             Assert.IsFalse(cell.HasCollision);
         }
 
-        [TestMethod]
-        public void TestColor()
-        {
-            Assert.AreEqual(cell.CellColor, Color4.DodgerBlue);
-        }
+        // [TestMethod]
+        // public void TestColor()
+        // {
+        //     Assert.AreEqual(cell.CellColor, Color4.DodgerBlue);
+        // }
 
         [TestMethod]
         public void TestTakeItem()
         {
             Assert.AreEqual(cell.TakeItem().Type, ItemType.WATERBUCKET);
         }
-        
+
         [TestMethod]
         public void TestInteractWithItem()
         {

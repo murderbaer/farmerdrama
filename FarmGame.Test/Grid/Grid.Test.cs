@@ -1,12 +1,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenTK.Mathematics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FarmGame.Test
 {
+    [ExcludeFromCodeCoverageAttribute]
     [TestClass]
     public class GridTest
     {
-        Grid grid = new Grid();
+        GridDummy grid = new GridDummy();
 
         [TestMethod]
         public void TestSize()
@@ -14,7 +15,5 @@ namespace FarmGame.Test
             Assert.AreEqual(grid.Column, TiledHandler.Instance.BoardX);
             Assert.AreEqual(grid.Row, TiledHandler.Instance.BoardY);
         }
-
-
     }
 }

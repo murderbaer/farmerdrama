@@ -5,18 +5,18 @@ using ImageMagick;
 
 namespace FarmGame
 {
-    public class Player : IPlayer
+    public class PlayerDummy : IPlayer
     {
         private int _spriteHandle;
         private MagickImage _spriteSheet;
         private SpriteObject _playerSprite;
-        public Player()
+        public PlayerDummy()
         {
             // Set starting position
             Position = TiledHandler.Instance.TiledPlayerPos;
             ItemInHand = new Item();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            //_spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
             _playerSprite = new SpriteObject(_spriteSheet, 1);
         }
 

@@ -1,12 +1,14 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FarmGame.Test
 {
+    [ExcludeFromCodeCoverageAttribute]
     [TestClass]
     public class GridCellSeedStorageTest
     {
-        GridCellSeedStorage cell = new GridCellSeedStorage(12);
+        GridCellSeedStorage cell = new GridCellSeedStorage();
 
         [TestMethod]
         public void TestCollision()
@@ -14,18 +16,18 @@ namespace FarmGame.Test
             Assert.IsFalse(cell.HasCollision);
         }
 
-        [TestMethod]
-        public void TestColor()
-        {
-            Assert.AreEqual(cell.CellColor, Color4.BlueViolet);
-        }
+        // [TestMethod]
+        // public void TestColor()
+        // {
+        //     Assert.AreEqual(cell.CellColor, Color4.BlueViolet);
+        // }
 
         [TestMethod]
         public void TestTakeItem()
         {
             Assert.AreEqual(cell.TakeItem().Type, ItemType.SEED);
         }
-        
+
         [TestMethod]
         public void TestInteractWithItem()
         {

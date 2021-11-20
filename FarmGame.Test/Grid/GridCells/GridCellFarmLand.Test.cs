@@ -1,12 +1,14 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FarmGame.Test
 {
+    [ExcludeFromCodeCoverageAttribute]
     [TestClass]
     public class GridCellFarmLandTest
     {
-        GridCellFarmLand cell = new GridCellFarmLand(534);
+        GridCellFarmLand cell = new GridCellFarmLand(FarmLandState.EMPTY);
 
         [TestMethod]
         public void TestCollision()
@@ -14,20 +16,20 @@ namespace FarmGame.Test
             Assert.IsFalse(cell.HasCollision);
         }
 
-        [TestMethod]
-        public void TestColor()
-        {
-            cell.State = FarmLandState.EMPTY;
-            Assert.AreEqual(cell.CellColor, Color4.Brown);
-            cell.State = FarmLandState.SEED;
-            Assert.AreEqual(cell.CellColor, Color4.GreenYellow);
-            cell.State = FarmLandState.HALFGROWN;
-            Assert.AreEqual(cell.CellColor, Color4.LimeGreen);
-            cell.State = FarmLandState.FULLGROWN;
-            Assert.AreEqual(cell.CellColor, Color4.SeaGreen);
-            cell.State = FarmLandState.OVERGROWN;
-            Assert.AreEqual(cell.CellColor, Color4.DarkGreen);
-        }
+        // [TestMethod] // test for sprite
+        // public void TestColor()
+        // {
+        //     cell.State = FarmLandState.EMPTY;
+        //     Assert.AreEqual(cell.CellColor, Color4.Brown);
+        //     cell.State = FarmLandState.SEED;
+        //     Assert.AreEqual(cell.CellColor, Color4.GreenYellow);
+        //     cell.State = FarmLandState.HALFGROWN;
+        //     Assert.AreEqual(cell.CellColor, Color4.LimeGreen);
+        //     cell.State = FarmLandState.FULLGROWN;
+        //     Assert.AreEqual(cell.CellColor, Color4.SeaGreen);
+        //     cell.State = FarmLandState.OVERGROWN;
+        //     Assert.AreEqual(cell.CellColor, Color4.DarkGreen);
+        // }
 
         [TestMethod]
         public void TestTakeItem()
@@ -44,7 +46,7 @@ namespace FarmGame.Test
             Assert.AreEqual(cell.TakeItem().Type, ItemType.EMPTY);
             Assert.AreEqual(cell.State, FarmLandState.SEED);
         }
-        
+
         [TestMethod]
         public void TestInteractWithItem()
         {
