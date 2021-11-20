@@ -1,3 +1,4 @@
+using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
@@ -17,7 +18,7 @@ namespace FarmGame
             Camera.CameraPosition = Player.Position;
         }
 
-        public static int GlobalSprite { get; private set; }
+        public static MagickImage GlobalSprite { get; private set; }
 
         public GameWindow Window { get; set; }
 
@@ -33,13 +34,12 @@ namespace FarmGame
 
         public void Draw()
         {
+            //TODO: Bind texture files when needed
             DrawBackground();
             Camera.SetCameraMatrix();
-            GL.BindTexture(TextureTarget.Texture2D, GlobalSprite);
             Grid.Draw();
             Player.Draw();
             Movable.Draw();
-            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         public void Update(float elapsedTime)

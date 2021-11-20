@@ -10,61 +10,83 @@ namespace FarmGame
         private static TiledHandler _tileHandler = TiledHandler.Instance;
 
         private readonly IGridCell[] _grid;
+        private SpriteGrid[] _spriteGrid;
 
         public Grid()
         {
             XmlNode data = _tileHandler.LevelOneTiles.SelectSingleNode("data");
             XmlNodeList tiles = data.SelectNodes("tile");
+
             _grid = new IGridCell[tiles.Count];
             Column = _tileHandler.BoardX;
             Row = _tileHandler.BoardY;
+
+            _spriteGrid = new SpriteGrid[4];
+
+            _spriteGrid[0] = new SpriteGrid(tiles.Count, Column, Row);
+            _spriteGrid[1] = new SpriteGrid(tiles.Count, Column, Row);
+
+            intializeLayerOne();
+            intializeLayerTwo();
+        }
+
+        private void intializeLayerOne()
+        {
+            XmlNode data = _tileHandler.LevelOneTiles.SelectSingleNode("data");
+            XmlNodeList tiles = data.SelectNodes("tile");
+
             for (int i = 0; i < tiles.Count; i++)
             {
                 int gid = int.Parse(tiles[i].Attributes["gid"].Value);
                 switch ((SpriteType)gid)
                 {
                     case SpriteType.FARM_LAND:
-                        _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, gid); break;
-                    case SpriteType.STONE_LEFT:
-                    case SpriteType.STONE:
-                    case SpriteType.STONE_RIGHT:
-                        _grid[i] = new GridCellStone(gid); break;
+                        _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY); break;
                     case SpriteType.WATER_LU:
                     case SpriteType.WATER_RU:
                     case SpriteType.WATER_LD:
                     case SpriteType.WATER_RD:
-                        _grid[i] = new GridCellWater(gid); break;
+                        _grid[i] = new GridCellWater(); break;
+                    case SpriteType.AIR:
+                        break;
                     case SpriteType.SEEDS:
-                        _grid[i] = new GridCellSeedStorage(gid); break;
+                        _grid[i] = new GridCellSeedStorage(); break;
                     default:
-                        _grid[i] = new GridCellEarth(gid); break;
+                        _grid[i] = new GridCell(); break;
                 }
-            }
 
-            // data = _tileHandler.LevelTwoTiles.SelectSingleNode("data");
-            // tiles = data.SelectNodes("tile");
-            // for (int i = 0; i < tiles.Count; i++)
-            // {
-            //     int gid = int.Parse(tiles[i].Attributes["gid"].Value);
-            //     switch ((SpriteType)gid)
-            //     {
-            //         case SpriteType.AIR:
-            //             break;
-            //         case SpriteType.STONE_LEFT:
-            //         case SpriteType.STONE:
-            //         case SpriteType.STONE_RIGHT:
-            //             _grid[i] = new GridCellStone(gid); break;
-            //         case SpriteType.WATER_LU:
-            //         case SpriteType.WATER_RU:
-            //         case SpriteType.WATER_LD:
-            //         case SpriteType.WATER_RD:
-            //             _grid[i] = new GridCellWater(gid); break;
-            //         case SpriteType.SEEDS:
-            //             _grid[i] = new GridCellSeedStorage(gid); break;
-            //         default:
-            //             _grid[i] = new GridCellEarth(gid); break;
-            //     }
-            // }
+                _spriteGrid[0][i] = new SpriteObject(World.GlobalSprite, gid);
+            }
+        }
+
+        private void intializeLayerTwo()
+        {
+            XmlNode data = _tileHandler.LevelTwoTiles.SelectSingleNode("data");
+            XmlNodeList tiles = data.SelectNodes("tile");
+
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
+                _spriteGrid[1][i] = new SpriteObject(World.GlobalSprite, gid);
+            }
+        }
+
+        private void intializeLayerThree()
+        {
+            XmlNode data = _tileHandler.LevelTwoTiles.SelectSingleNode("data");
+            XmlNodeList tiles = data.SelectNodes("tile");
+
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
+                if (gid == (int)SpriteType.SEEDS)
+                {
+                    _grid[i] = new GridCellSeedStorage();
+                }
+                _spriteGrid[1][i] = new SpriteObject(World.GlobalSprite, gid);
+            }
         }
 
         public int Column { get; }
@@ -87,6 +109,12 @@ namespace FarmGame
 
         public void Draw()
         {
+            DrawLayer(0);
+            DrawLayer(1);
+        }
+
+        private void DrawLayer(int layer)
+        {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Blend);
             for (int row = 0; row < Row; ++row)
@@ -94,7 +122,12 @@ namespace FarmGame
                 for (int column = 0; column < Column; ++column)
                 {
                     IGridCell cell = this[column, row];
-                    cell.DrawGridCellTextured(column, row, SpriteHelper.GetTexCoordFromId(cell.SpriteId));
+                    SpriteObject toDraw = _spriteGrid[layer][column, row];
+                    if (toDraw.Gid != (int)SpriteType.AIR)
+                    {
+                        cell.DrawGridCellTextured(column, row,
+                            SpriteHelper.GetTexCoordFromSprite(toDraw));
+                    }
                 }
             }
         }

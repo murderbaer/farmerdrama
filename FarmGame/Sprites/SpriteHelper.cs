@@ -9,12 +9,11 @@ namespace FarmGame
 {
     public class SpriteHelper
     {
-        public static int LoadTexture(string embeddedResourcePath)
+        public static MagickImage LoadTexture(string embeddedResourcePath)
         {
             var assembly = Assembly.GetExecutingAssembly();
             Stream stream = assembly.GetManifestResourceStream(embeddedResourcePath);
             var image = new MagickImage(stream);
-            image.Flip();
             var pixels = image.GetPixelsUnsafe().ToArray();
 
             int handle = GL.GenTexture();
@@ -28,23 +27,21 @@ namespace FarmGame
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, image.Width, image.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pixels);
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.GenerateMipmap, 1);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-
             GL.Enable(EnableCap.Texture2D);
-            return handle;
+            return image;
         }
 
         // Assumed that sprite size is 16x16
-        public static Box2 GetTexCoordFromId(int id)
+        public static Box2 GetTexCoordFromSprite(SpriteObject sprite)
         {
-            int totalCol = 1456 / 16;
-            int totalRow = 1344 / 16;
-
-            int row = (id - 1) / totalCol;
-            int col = (id - 1) % totalCol;
+            int totalCol = sprite.SpriteSheet.Width / 16;
+            int totalRow = sprite.SpriteSheet.Height / 16;
+            int id = sprite.Gid - 1;
+            int row = id / totalCol;
+            int col = id % totalCol;
 
             float x = col / (float)totalCol;
-            float y = 1f - (row + 1f) / totalRow;
+            float y = (row) / (float)totalRow;
             float width = 1f / totalCol;
             float height = 1f / totalRow;
 

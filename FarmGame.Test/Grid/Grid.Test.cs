@@ -15,11 +15,6 @@ namespace FarmGame.Test
             Assert.AreEqual(grid.Row, TiledHandler.Instance.BoardY);
         }
 
-        [TestMethod]
-        public void TestAccess()
-        {
-            grid[3, 2] = new GridCellSand(1);
-            Assert.AreEqual(grid[3, 2].CellColor, Color4.Orange);
-        }
+
     }
 }

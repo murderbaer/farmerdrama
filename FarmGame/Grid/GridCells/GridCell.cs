@@ -5,16 +5,13 @@ namespace FarmGame
 {
     public class GridCell : IGridCell
     {
-        public GridCell(int spriteId)
+        public GridCell()
         {
-            SpriteId = spriteId;
         }
 
         public virtual bool HasCollision { get; set; }
 
-        public virtual Color4 CellColor { get; set; }
-
-        public virtual int SpriteId { get; private set; }
+        public virtual SpriteObject Sprite { get; private set; }
 
         public virtual void Update(float elapsedTime, IWorld world)
         {
@@ -41,16 +38,6 @@ namespace FarmGame
             GL.TexCoord2(sprite.Min.X, sprite.Max.Y);
             GL.Vertex2(positionX, positionY + 1);
             GL.End();
-        }
-
-        public virtual void DrawGridCell(int positionX, int positionY)
-        {
-
-            GL.Color4(CellColor);
-            GL.Vertex2(positionX, positionY);
-            GL.Vertex2(positionX, positionY + 1);
-            GL.Vertex2(positionX + 1, positionY + 1);
-            GL.Vertex2(positionX + 1, positionY);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestInteract()
         {
-            var farmland = new GridCellFarmLand(534);
+            var farmland = new GridCellFarmLand();
             player.ItemInHand = new Item(ItemType.WATERBUCKET);
             player.Interact(farmland);
             Assert.IsTrue(farmland.IsWatered);
@@ -50,7 +50,7 @@ namespace FarmGame.Test
 
             Assert.AreEqual(player.ItemInHand.Type, ItemType.WHEET);
             Assert.AreEqual(farmland.State, FarmLandState.EMPTY);
-            
+
         }
     }
 }

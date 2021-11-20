@@ -9,7 +9,7 @@ namespace FarmGame
     public class TiledHandler
     {
         private static TiledHandler _instance = null;
-
+        // TODO: Refactor this in more methods/classes
         private TiledHandler()
         {
             if (_instance != null)
@@ -28,8 +28,8 @@ namespace FarmGame
                 BoardY = int.Parse(doc.DocumentElement.GetAttribute("height"));
                 TilePixelSize = int.Parse(doc.DocumentElement.GetAttribute("tilewidth"));
                 LevelOneTiles = doc.DocumentElement.SelectSingleNode("layer[@name='groundLayer']");
-                LevelTwoTiles = doc.DocumentElement.SelectSingleNode("layer[@name='decorationLayer']");
-                LevelThreeTiles = doc.DocumentElement.SelectSingleNode("layer[@name='walkLayer']");
+                LevelTwoTiles = doc.DocumentElement.SelectSingleNode("layer[@name='smallObjectLayer']");
+                LevelThreeTiles = doc.DocumentElement.SelectSingleNode("layer[@name='collisionLayer']");
                 LevelFourTiles = doc.DocumentElement.SelectSingleNode("layer[@name='aboveLayer']");
 
                 XmlNode objectsLayer = doc.DocumentElement.SelectSingleNode("objectgroup[@name='movement']");
@@ -50,7 +50,6 @@ namespace FarmGame
                 {
                     _instance = new TiledHandler();
                 }
-
                 return _instance;
             }
         }
