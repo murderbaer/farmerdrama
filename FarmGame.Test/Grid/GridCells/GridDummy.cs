@@ -17,7 +17,6 @@ namespace FarmGame.Test
 
         private MagickImage _spriteSheet;
 
-        private int _spriteHandle;
 
         public GridDummy()
         {
@@ -138,32 +137,11 @@ namespace FarmGame.Test
 
         public void Draw()
         {
-            DrawLayer(0);
-            DrawLayer(1);
-            DrawLayer(2);
         }
 
         public void DrawLayer(int layer)
         {
 
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            GL.Enable(EnableCap.Blend);
-            GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
-            GL.Color4(Color4.White);
-            for (int row = 0; row < Row; ++row)
-            {
-                for (int column = 0; column < Column; ++column)
-                {
-                    IGridCell cell = this[column, row];
-                    SpriteObject toDraw = _spriteGrid[layer][column, row];
-                    if (toDraw.Gid != (int)SpriteType.AIR)
-                    {
-                        cell.DrawGridCellTextured(column, row,
-                            SpriteHelper.GetTexCoordFromSprite(toDraw));
-                    }
-                }
-            }
-            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
     }
 }

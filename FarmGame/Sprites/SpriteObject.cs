@@ -11,6 +11,7 @@ namespace FarmGame
         }
 
         public MagickImage SpriteSheet { get; set; }
+
         public int Gid { get; set; }
     }
 }

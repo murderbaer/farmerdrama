@@ -9,27 +9,26 @@ namespace FarmGame
             State = state;
         }
 
-
-
-        // public override Color4 CellColor
-        // {
-        //     get
-        //     {
-        //         switch (State)
-        //         {
-        //             case FarmLandState.SEED:
-        //                 return Color4.GreenYellow;
-        //             case FarmLandState.HALFGROWN:
-        //                 return Color4.LimeGreen;
-        //             case FarmLandState.FULLGROWN:
-        //                 return Color4.SeaGreen;
-        //             case FarmLandState.OVERGROWN:
-        //                 return Color4.DarkGreen;
-        //             default:
-        //                 return Color4.Brown;
-        //         }
-        //     }
-        // }
+        /*  public override Color4 CellColor
+            {
+                get
+                {
+                    switch (State)
+                    {
+                        case FarmLandState.SEED:
+                            return Color4.GreenYellow;
+                        case FarmLandState.HALFGROWN:
+                            return Color4.LimeGreen;
+                        case FarmLandState.FULLGROWN:
+                            return Color4.SeaGreen;
+                        case FarmLandState.OVERGROWN:
+                            return Color4.DarkGreen;
+                        default:
+                            return Color4.Brown;
+                    }
+                }
+            }
+        */
 
         public bool IsWatered { get; set; }
 

@@ -9,6 +9,7 @@ namespace FarmGame
     public class TiledHandler
     {
         private static TiledHandler _instance = null;
+
         // TODO: Refactor this in more methods/classes
         private TiledHandler()
         {
@@ -50,6 +51,7 @@ namespace FarmGame
                 {
                     _instance = new TiledHandler();
                 }
+
                 return _instance;
             }
         }

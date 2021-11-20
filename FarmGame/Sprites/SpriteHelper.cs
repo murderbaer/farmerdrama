@@ -9,7 +9,6 @@ namespace FarmGame
 {
     public class SpriteHelper
     {
-        public static MagickImage GlobalSprite;
         public static MagickImage LoadTexture(string embeddedResourcePath)
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -49,7 +48,7 @@ namespace FarmGame
             int col = id % totalCol;
 
             float x = col / (float)totalCol;
-            float y = (row) / (float)totalRow;
+            float y = row / (float)totalRow;
             float width = 1f / totalCol;
             float height = 1f / totalRow;
 

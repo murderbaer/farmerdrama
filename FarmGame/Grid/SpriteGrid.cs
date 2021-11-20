@@ -3,8 +3,6 @@ namespace FarmGame
     public class SpriteGrid
     {
         private SpriteObject[] _spriteGrid;
-        public int Column { get; private set; }
-        public int Row { get; private set; }
 
         public SpriteGrid(int size, int col, int row)
         {
@@ -12,6 +10,10 @@ namespace FarmGame
             Column = col;
             Row = row;
         }
+
+        public int Column { get; private set; }
+
+        public int Row { get; private set; }
 
         public SpriteObject this[int col, int row]
         {

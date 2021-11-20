@@ -1,15 +1,18 @@
+using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using ImageMagick;
 
 namespace FarmGame
 {
     public class Player : IPlayer
     {
         private int _spriteHandle;
+
         private MagickImage _spriteSheet;
+
         private SpriteObject _playerSprite;
+
         public Player()
         {
             // Set starting position
@@ -33,14 +36,19 @@ namespace FarmGame
 
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
             GL.Begin(PrimitiveType.Quads);
+
             GL.TexCoord2(spritePos.Min);
             GL.Vertex2(Position.X, Position.Y);
+
             GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
             GL.Vertex2(Position.X + 1, Position.Y);
+
             GL.TexCoord2(spritePos.Max);
             GL.Vertex2(Position.X + 1, Position.Y + 1);
+
             GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
             GL.Vertex2(Position.X, Position.Y + 1);
+
             GL.End();
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
@@ -74,7 +82,7 @@ namespace FarmGame
         {
             Vector2 newPosition = new Vector2(Position.X, Position.Y);
             var keyboard = world.Window.KeyboardState;
-            Vector2 moveDirection = new();
+            Vector2 moveDirection = new ();
             moveDirection.X = (keyboard.IsKeyDown(Keys.Right) ? 1 : 0) - (keyboard.IsKeyDown(Keys.Left) ? 1 : 0);
             moveDirection.Y = (keyboard.IsKeyDown(Keys.Down) ? 1 : 0) - (keyboard.IsKeyDown(Keys.Up) ? 1 : 0);
             if (moveDirection.X == 0 && moveDirection.Y == 0)

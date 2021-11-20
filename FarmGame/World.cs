@@ -31,7 +31,7 @@ namespace FarmGame
 
         public void Draw()
         {
-            //TODO: Bind texture files when needed
+            // TODO: Draw calls in interface
             DrawBackground();
             Camera.SetCameraMatrix();
             Grid.DrawLayer(0);

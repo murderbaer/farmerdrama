@@ -7,7 +7,6 @@ namespace FarmGame
 {
     public class PlayerDummy : IPlayer
     {
-        private int _spriteHandle;
         private MagickImage _spriteSheet;
         private SpriteObject _playerSprite;
         public PlayerDummy()
@@ -16,7 +15,6 @@ namespace FarmGame
             Position = TiledHandler.Instance.TiledPlayerPos;
             ItemInHand = new Item();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
-            //_spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
             _playerSprite = new SpriteObject(_spriteSheet, 1);
         }
 
@@ -29,20 +27,6 @@ namespace FarmGame
 
         public void Draw()
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(_playerSprite);
-
-            GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
-            GL.Begin(PrimitiveType.Quads);
-            GL.TexCoord2(spritePos.Min);
-            GL.Vertex2(Position.X, Position.Y);
-            GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
-            GL.Vertex2(Position.X + 1, Position.Y);
-            GL.TexCoord2(spritePos.Max);
-            GL.Vertex2(Position.X + 1, Position.Y + 1);
-            GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
-            GL.Vertex2(Position.X, Position.Y + 1);
-            GL.End();
-            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         public void Update(float elapsedTime, IWorld world)
