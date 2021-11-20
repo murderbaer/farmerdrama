@@ -18,6 +18,7 @@ namespace FarmGame
             get { return _spriteGrid[col + (Column * row)]; }
             set { _spriteGrid[col + (Column * row)] = value; }
         }
+
         public SpriteObject this[int id]
         {
             get { return _spriteGrid[id]; }

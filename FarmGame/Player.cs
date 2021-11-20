@@ -1,16 +1,23 @@
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using ImageMagick;
 
 namespace FarmGame
 {
     public class Player : IPlayer
     {
+        private int _spriteHandle;
+        private MagickImage _spriteSheet;
+        private SpriteObject _playerSprite;
         public Player()
         {
             // Set starting position
             Position = TiledHandler.Instance.TiledPlayerPos;
             ItemInHand = new Item();
+            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
+            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            _playerSprite = new SpriteObject(_spriteSheet, 1);
         }
 
         public Vector2 Position { get; set; }
@@ -22,13 +29,19 @@ namespace FarmGame
 
         public void Draw()
         {
-            GL.Color4(Color4.Magenta);
-            GL.Begin(PrimitiveType.Triangles);
-            GL.Vertex2(Position.X - 0.4, Position.Y + 0.4);
-            GL.Vertex2(Position.X + 0.4, Position.Y + 0.4);
-            GL.Vertex2(Position.X, Position.Y - .4);
-            GL.End();
+            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(_playerSprite);
 
+            GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
+            GL.Begin(PrimitiveType.Quads);
+            GL.TexCoord2(spritePos.Min);
+            GL.Vertex2(Position.X, Position.Y);
+            GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
+            GL.Vertex2(Position.X + 1, Position.Y);
+            GL.TexCoord2(spritePos.Max);
+            GL.Vertex2(Position.X + 1, Position.Y + 1);
+            GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
+            GL.Vertex2(Position.X, Position.Y + 1);
+            GL.End();
         }
 
         public void Update(float elapsedTime, IWorld world)

@@ -2,6 +2,7 @@ using System.Xml;
 
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using ImageMagick;
 
 namespace FarmGame
 {
@@ -10,10 +11,16 @@ namespace FarmGame
         private static TiledHandler _tileHandler = TiledHandler.Instance;
 
         private readonly IGridCell[] _grid;
+
         private SpriteGrid[] _spriteGrid;
+        private MagickImage _spriteSheet;
+        private int _spriteHandle;
 
         public Grid()
         {
+
+            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
+            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
             XmlNode data = _tileHandler.LevelOneTiles.SelectSingleNode("data");
             XmlNodeList tiles = data.SelectNodes("tile");
 
@@ -59,7 +66,7 @@ namespace FarmGame
                         _grid[i] = new GridCell(); break;
                 }
 
-                _spriteGrid[0][i] = new SpriteObject(World.GlobalSprite, gid);
+                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, gid);
             }
         }
 
@@ -77,7 +84,7 @@ namespace FarmGame
                     _grid[i] = new GridCellSeedStorage();
                 }
 
-                _spriteGrid[1][i] = new SpriteObject(World.GlobalSprite, gid);
+                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, gid);
             }
         }
 
@@ -93,7 +100,7 @@ namespace FarmGame
                 {
                     _grid[i] = new GridCellCollision();
                 }
-                _spriteGrid[2][i] = new SpriteObject(World.GlobalSprite, gid);
+                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, gid);
             }
         }
 
@@ -105,7 +112,7 @@ namespace FarmGame
             for (int i = 0; i < tiles.Count; i++)
             {
                 int gid = int.Parse(tiles[i].Attributes["gid"].Value);
-                _spriteGrid[3][i] = new SpriteObject(World.GlobalSprite, gid);
+                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, gid);
             }
         }
 
@@ -139,6 +146,7 @@ namespace FarmGame
 
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Blend);
+            GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
             GL.Color4(Color4.White);
             for (int row = 0; row < Row; ++row)
             {
@@ -153,6 +161,7 @@ namespace FarmGame
                     }
                 }
             }
+            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
     }
 }

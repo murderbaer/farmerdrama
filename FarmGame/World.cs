@@ -9,7 +9,6 @@ namespace FarmGame
     {
         public World(GameWindow window)
         {
-            GlobalSprite = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
             Window = window;
             Camera = new Camera();
             Grid = new Grid();
@@ -17,8 +16,6 @@ namespace FarmGame
             Movable = new Movable();
             Camera.CameraPosition = Player.Position;
         }
-
-        public static MagickImage GlobalSprite { get; private set; }
 
         public GameWindow Window { get; set; }
 
@@ -41,7 +38,6 @@ namespace FarmGame
             Grid.DrawLayer(1);
             Grid.DrawLayer(2);
             Player.Draw();
-
             Grid.DrawLayer(3);
             Movable.Draw();
         }
