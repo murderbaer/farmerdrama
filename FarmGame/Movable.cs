@@ -25,6 +25,10 @@ namespace FarmGame
 
         public Movable()
         {
+
+            // sets position to be a bit outside of the fence
+            Position = new Vector2(935f / 16f, 360f / 16f);
+
             // read all paths in
             Paths = new List<List<Vector2>>();
             var policePathsTiled = _tiledHandler.TiledPolicePaths.SelectNodes("object");
@@ -32,7 +36,6 @@ namespace FarmGame
             {
                 string polPath = policePathsTiled[i].SelectNodes("polygon")[0].Attributes["points"].Value;
                 List<Vector2> singelPath = new List<Vector2>();
-
                 string[] cords = polPath.Split(' ');
 
                 for (int j = 0; j < cords.Length; j++)
@@ -43,11 +46,9 @@ namespace FarmGame
                     singelPath.Add(new Vector2(x, y));
                 }
 
+                singelPath.Add(Position);
                 Paths.Add(singelPath);
             }
-
-            // sets position to be a bit outside of the fence
-            Position = new Vector2(935f / 16f, 360f / 16f);
 
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
