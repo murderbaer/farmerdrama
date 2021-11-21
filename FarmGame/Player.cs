@@ -89,7 +89,7 @@ namespace FarmGame
         {
             Vector2 newPosition = new Vector2(Position.X, Position.Y);
             var keyboard = world.Window.KeyboardState;
-            Vector2 moveDirection = new();
+            Vector2 moveDirection = new ();
             moveDirection.X = (keyboard.IsKeyDown(Keys.Right) ? 1 : 0) - (keyboard.IsKeyDown(Keys.Left) ? 1 : 0);
             moveDirection.Y = (keyboard.IsKeyDown(Keys.Down) ? 1 : 0) - (keyboard.IsKeyDown(Keys.Up) ? 1 : 0);
             if (moveDirection.X == 0 && moveDirection.Y == 0)

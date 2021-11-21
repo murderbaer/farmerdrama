@@ -25,7 +25,6 @@ namespace FarmGame
 
         public Movable()
         {
-
             // sets position to be a bit outside of the fence
             Position = new Vector2(935f / 16f, 360f / 16f);
 

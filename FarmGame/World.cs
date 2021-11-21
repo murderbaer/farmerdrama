@@ -41,7 +41,6 @@ namespace FarmGame
 
         public void Draw()
         {
-            // TODO: Draw calls in interface
             DrawBackground();
             Camera.SetCameraMatrix();
             Grid.DrawLayer(0);
