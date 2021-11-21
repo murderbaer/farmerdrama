@@ -7,7 +7,6 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings { Profile = ContextProfile.Compatability }); // window with immediate mode rendering enabled
 
 World world = new World(window);
-
 window.UpdateFrame += Update;
 window.Resize += args => world.Camera.Resize(args.Width, args.Height);
 window.KeyDown += args =>

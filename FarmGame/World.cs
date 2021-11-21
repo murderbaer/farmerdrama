@@ -1,3 +1,4 @@
+using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
@@ -10,7 +11,7 @@ namespace FarmGame
         {
             Window = window;
             Camera = new Camera();
-            Grid = new Grid(32, 18);
+            Grid = new Grid();
             Player = new Player();
             Corpse = new Corpse();
             Movable = new Movable();
@@ -40,12 +41,16 @@ namespace FarmGame
 
         public void Draw()
         {
+            // TODO: Draw calls in interface
             DrawBackground();
             Camera.SetCameraMatrix();
-            Grid.Draw();
+            Grid.DrawLayer(0);
+            Grid.DrawLayer(1);
+            Grid.DrawLayer(2);
             Player.Draw();
             Corpse.Draw();
             Movable.Draw();
+            Grid.DrawLayer(3);
             Camera.SetOverlayMatrix();
             Suspicion.Draw();
         }

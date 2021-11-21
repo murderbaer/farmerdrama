@@ -7,5 +7,7 @@ namespace FarmGame
         int Row { get; }
 
         IGridCell this[int column, int row] { get; }
+
+        public void DrawLayer(int layer);
     }
 }

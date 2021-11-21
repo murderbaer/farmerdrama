@@ -1,25 +1,19 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenTK.Mathematics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FarmGame.Test
 {
+    [ExcludeFromCodeCoverageAttribute]
     [TestClass]
     public class GridTest
     {
-        Grid grid = new Grid(32, 18);
+        GridDummy grid = new GridDummy();
 
         [TestMethod]
         public void TestSize()
         {
-            Assert.AreEqual(grid.Column, 32);
-            Assert.AreEqual(grid.Row, 18);
-        }
-
-        [TestMethod]
-        public void TestAccess()
-        {
-            grid[3, 2] = new GridCellSand();
-            Assert.AreEqual(grid[3, 2].CellColor, Color4.Orange);
+            Assert.AreEqual(grid.Column, TiledHandler.Instance.BoardX);
+            Assert.AreEqual(grid.Row, TiledHandler.Instance.BoardY);
         }
     }
 }

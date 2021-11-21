@@ -1,32 +1,26 @@
-using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using ImageMagick;
 
 namespace FarmGame
 {
-    public class Player : IPlayer
+    public class PlayerDummy : IPlayer
     {
-        private int _spriteHandle;
-
         private MagickImage _spriteSheet;
-
         private SpriteObject _playerSprite;
-
         private TiledHandler _tiledHandler = TiledHandler.Instance;
-
-        public Player()
+        public PlayerDummy()
         {
             // Set starting position
-            var playerPos = _tiledHandler.TiledPlayerPos.SelectNodes("object");
-            float posX = float.Parse(playerPos[0].Attributes["x"].Value);
-            float posY = float.Parse(playerPos[0].Attributes["y"].Value);
+            var objects = _tiledHandler.TiledPlayerPos.SelectNodes("object");
+            float posX = float.Parse(objects[0].Attributes["x"].Value);
+            float posY = float.Parse(objects[0].Attributes["y"].Value);
             int pixelSize = _tiledHandler.TilePixelSize;
             Position = new Vector2(posX / pixelSize, posY / pixelSize);
 
             ItemInHand = new Item();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
             _playerSprite = new SpriteObject(_spriteSheet, 1);
         }
 
@@ -39,25 +33,6 @@ namespace FarmGame
 
         public void Draw()
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(_playerSprite);
-
-            GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(spritePos.Min);
-            GL.Vertex2(Position.X - 0.5f, Position.Y - 0.5f);
-
-            GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
-            GL.Vertex2(Position.X + 0.5f, Position.Y - 0.5f);
-
-            GL.TexCoord2(spritePos.Max);
-            GL.Vertex2(Position.X + 0.5f, Position.Y + 0.5f);
-
-            GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
-            GL.Vertex2(Position.X - 0.5f, Position.Y + 0.5f);
-
-            GL.End();
-            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         public void Update(float elapsedTime, IWorld world)

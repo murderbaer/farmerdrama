@@ -5,9 +5,13 @@ namespace FarmGame
 {
     public class GridCell : IGridCell
     {
+        public GridCell()
+        {
+        }
+
         public virtual bool HasCollision { get; set; }
 
-        public virtual Color4 CellColor { get; set; }
+        public virtual SpriteObject Sprite { get; private set; }
 
         public virtual float HiddenFactor { get; } = 1f;
 
@@ -25,13 +29,18 @@ namespace FarmGame
             return false;
         }
 
-        public virtual void DrawGridCell(int positionX, int positionY)
+        public void DrawGridCellTextured(int positionX, int positionY, Box2 sprite)
         {
-            GL.Color4(CellColor);
+            GL.Begin(PrimitiveType.Quads);
+            GL.TexCoord2(sprite.Min);
             GL.Vertex2(positionX, positionY);
-            GL.Vertex2(positionX, positionY + 1);
-            GL.Vertex2(positionX + 1, positionY + 1);
+            GL.TexCoord2(sprite.Max.X, sprite.Min.Y);
             GL.Vertex2(positionX + 1, positionY);
+            GL.TexCoord2(sprite.Max);
+            GL.Vertex2(positionX + 1, positionY + 1);
+            GL.TexCoord2(sprite.Min.X, sprite.Max.Y);
+            GL.Vertex2(positionX, positionY + 1);
+            GL.End();
         }
     }
 }

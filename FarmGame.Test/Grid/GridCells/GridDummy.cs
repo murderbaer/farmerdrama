@@ -1,12 +1,13 @@
 using System.Xml;
 
-using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using ImageMagick;
+using FarmGame;
 
-namespace FarmGame
+namespace FarmGame.Test
 {
-    public class Grid : IReadOnlyGrid
+    public class GridDummy : IReadOnlyGrid
     {
         private static TiledHandler _tileHandler = TiledHandler.Instance;
 
@@ -16,12 +17,11 @@ namespace FarmGame
 
         private MagickImage _spriteSheet;
 
-        private int _spriteHandle;
 
-        public Grid()
+        public GridDummy()
         {
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            // _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
             XmlNode data = _tileHandler.LevelOneTiles.SelectSingleNode("data");
             XmlNodeList tiles = data.SelectNodes("tile");
 
@@ -36,57 +36,13 @@ namespace FarmGame
             _spriteGrid[2] = new SpriteGrid(tiles.Count, Column, Row);
             _spriteGrid[3] = new SpriteGrid(tiles.Count, Column, Row);
 
-            IntializeLayerOne();
-            IntializeLayerTwo();
-            IntializeLayerThree();
-            IntializeLayerFour();
+            intializeLayerOne();
+            intializeLayerTwo();
+            intializeLayerThree();
+            intializeLayerFour();
         }
 
-        public int Column { get; }
-
-        public int Row { get; }
-
-        public IGridCell this[int col, int row]
-        {
-            get { return _grid[col + (Column * row)]; }
-            set { _grid[col + (Column * row)] = value; }
-        }
-
-        public void Update(float elapsedTime, IWorld world)
-        {
-            foreach (IGridCell cell in _grid)
-            {
-                cell.Update(elapsedTime, world);
-            }
-        }
-
-        public void Draw()
-        {
-        }
-
-        public void DrawLayer(int layer)
-        {
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            GL.Enable(EnableCap.Blend);
-            GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
-            GL.Color4(Color4.White);
-            for (int row = 0; row < Row; ++row)
-            {
-                for (int column = 0; column < Column; ++column)
-                {
-                    IGridCell cell = this[column, row];
-                    SpriteObject toDraw = _spriteGrid[layer][column, row];
-                    if (toDraw.Gid != (int)SpriteType.AIR)
-                    {
-                        cell.DrawGridCellTextured(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw));
-                    }
-                }
-            }
-
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-        }
-
-        private void IntializeLayerOne()
+        private void intializeLayerOne()
         {
             XmlNode data = _tileHandler.LevelOneTiles.SelectSingleNode("data");
             XmlNodeList tiles = data.SelectNodes("tile");
@@ -115,10 +71,11 @@ namespace FarmGame
             }
         }
 
-        private void IntializeLayerTwo()
+        private void intializeLayerTwo()
         {
             XmlNode data = _tileHandler.LevelTwoTiles.SelectSingleNode("data");
             XmlNodeList tiles = data.SelectNodes("tile");
+
 
             for (int i = 0; i < tiles.Count; i++)
             {
@@ -132,7 +89,7 @@ namespace FarmGame
             }
         }
 
-        private void IntializeLayerThree()
+        private void intializeLayerThree()
         {
             XmlNode data = _tileHandler.LevelThreeTiles.SelectSingleNode("data");
             XmlNodeList tiles = data.SelectNodes("tile");
@@ -144,12 +101,11 @@ namespace FarmGame
                 {
                     _grid[i] = new GridCellCollision();
                 }
-
                 _spriteGrid[2][i] = new SpriteObject(_spriteSheet, gid);
             }
         }
 
-        private void IntializeLayerFour()
+        private void intializeLayerFour()
         {
             XmlNode data = _tileHandler.LevelFourTiles.SelectSingleNode("data");
             XmlNodeList tiles = data.SelectNodes("tile");
@@ -159,6 +115,33 @@ namespace FarmGame
                 int gid = int.Parse(tiles[i].Attributes["gid"].Value);
                 _spriteGrid[3][i] = new SpriteObject(_spriteSheet, gid);
             }
+        }
+
+        public int Column { get; }
+
+        public int Row { get; }
+
+        public IGridCell this[int col, int row]
+        {
+            get { return _grid[col + (Column * row)]; }
+            set { _grid[col + (Column * row)] = value; }
+        }
+
+        public void Update(float elapsedTime, IWorld world)
+        {
+            foreach (IGridCell cell in _grid)
+            {
+                cell.Update(elapsedTime, world);
+            }
+        }
+
+        public void Draw()
+        {
+        }
+
+        public void DrawLayer(int layer)
+        {
+
         }
     }
 }

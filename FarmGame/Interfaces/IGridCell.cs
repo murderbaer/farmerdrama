@@ -6,14 +6,12 @@ namespace FarmGame
     {
         public bool HasCollision { get; }
 
-        public Color4 CellColor { get; }
-
         public float HiddenFactor { get; }
 
         public bool InteractWithItem(Item item);
 
         public Item TakeItem();
 
-        public void DrawGridCell(int positionX, int positionY);
+        public void DrawGridCellTextured(int positionX, int positionY, Box2 spriteBox);
     }
 }

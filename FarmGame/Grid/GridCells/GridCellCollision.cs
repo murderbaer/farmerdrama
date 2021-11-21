@@ -3,11 +3,10 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class GridCellFence : GridCell
+    public class GridCellCollision : GridCell
     {
-        public GridCellFence()
+        public GridCellCollision()
         {
-            CellColor = Color4.SlateGray;
             HasCollision = true;
         }
     }

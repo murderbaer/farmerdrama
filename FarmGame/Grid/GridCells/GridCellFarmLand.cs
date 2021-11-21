@@ -9,29 +9,26 @@ namespace FarmGame
             State = state;
         }
 
-        public GridCellFarmLand()
-        {
-        }
-
-        public override Color4 CellColor
-        {
-            get
+        /*  public override Color4 CellColor
             {
-                switch (State)
+                get
                 {
-                    case FarmLandState.SEED:
-                        return Color4.GreenYellow;
-                    case FarmLandState.HALFGROWN:
-                        return Color4.LimeGreen;
-                    case FarmLandState.FULLGROWN:
-                        return Color4.SeaGreen;
-                    case FarmLandState.OVERGROWN:
-                        return Color4.DarkGreen;
-                    default:
-                        return Color4.Brown;
+                    switch (State)
+                    {
+                        case FarmLandState.SEED:
+                            return Color4.GreenYellow;
+                        case FarmLandState.HALFGROWN:
+                            return Color4.LimeGreen;
+                        case FarmLandState.FULLGROWN:
+                            return Color4.SeaGreen;
+                        case FarmLandState.OVERGROWN:
+                            return Color4.DarkGreen;
+                        default:
+                            return Color4.Brown;
+                    }
                 }
             }
-        }
+        */
 
         public override float HiddenFactor
         {

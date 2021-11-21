@@ -16,5 +16,9 @@
   <ItemGroup>
     <ProjectReference Include="..\FarmGame\FarmGame.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Graphics\SpriteSheets\global.png" />
+    <EmbeddedResource Include="Resources\Graphics\SpriteSheets\FarmPerson.png" />
+    <EmbeddedResource Include="Resources\Graphics\Map.tmx" />
+  </ItemGroup>
 </Project>
