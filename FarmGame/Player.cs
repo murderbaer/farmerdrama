@@ -38,16 +38,16 @@ namespace FarmGame
             GL.Begin(PrimitiveType.Quads);
 
             GL.TexCoord2(spritePos.Min);
-            GL.Vertex2(Position.X, Position.Y);
+            GL.Vertex2(Position.X - 0.5f, Position.Y - 0.5f);
 
             GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
-            GL.Vertex2(Position.X + 1, Position.Y);
+            GL.Vertex2(Position.X + 0.5f, Position.Y - 0.5f);
 
             GL.TexCoord2(spritePos.Max);
-            GL.Vertex2(Position.X + 1, Position.Y + 1);
+            GL.Vertex2(Position.X + 0.5f, Position.Y + 0.5f);
 
             GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
-            GL.Vertex2(Position.X, Position.Y + 1);
+            GL.Vertex2(Position.X - 0.5f, Position.Y + 0.5f);
 
             GL.End();
             GL.BindTexture(TextureTarget.Texture2D, 0);
@@ -82,7 +82,7 @@ namespace FarmGame
         {
             Vector2 newPosition = new Vector2(Position.X, Position.Y);
             var keyboard = world.Window.KeyboardState;
-            Vector2 moveDirection = new ();
+            Vector2 moveDirection = new();
             moveDirection.X = (keyboard.IsKeyDown(Keys.Right) ? 1 : 0) - (keyboard.IsKeyDown(Keys.Left) ? 1 : 0);
             moveDirection.Y = (keyboard.IsKeyDown(Keys.Down) ? 1 : 0) - (keyboard.IsKeyDown(Keys.Up) ? 1 : 0);
             if (moveDirection.X == 0 && moveDirection.Y == 0)

@@ -52,7 +52,6 @@ namespace FarmGame.Test
 
             Assert.AreEqual(player.ItemInHand.Type, ItemType.WHEET);
             Assert.AreEqual(farmland.State, FarmLandState.EMPTY);
-
         }
     }
 }

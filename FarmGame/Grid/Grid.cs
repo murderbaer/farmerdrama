@@ -18,6 +18,8 @@ namespace FarmGame
 
         private int _spriteHandle;
 
+        private int _layerDrawCounter;
+
         public Grid()
         {
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
@@ -40,6 +42,7 @@ namespace FarmGame
             IntializeLayerTwo();
             IntializeLayerThree();
             IntializeLayerFour();
+            _layerDrawCounter = 0;
         }
 
         public int Column { get; }
@@ -62,9 +65,6 @@ namespace FarmGame
 
         public void Draw()
         {
-            DrawLayer(0);
-            DrawLayer(1);
-            DrawLayer(2);
         }
 
         public void DrawLayer(int layer)
@@ -79,10 +79,9 @@ namespace FarmGame
                 {
                     IGridCell cell = this[column, row];
                     SpriteObject toDraw = _spriteGrid[layer][column, row];
-                    if (toDraw.Gid != (int)SpriteType.AIR)
-                    {
+                    
                         cell.DrawGridCellTextured(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw));
-                    }
+                    
                 }
             }
 
