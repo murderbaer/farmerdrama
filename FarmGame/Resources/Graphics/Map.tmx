@@ -9349,8 +9349,8 @@
    <tile gid="7643"/>
   </data>
  </layer>
- <objectgroup id="6" name="movement">
-  <object id="4" name="player" x="471.455" y="328.106">
+ <objectgroup id="6" name="playerPos">
+  <object id="4" name="player" x="824.33" y="359.273">
    <point/>
   </object>
  </objectgroup>
@@ -9360,9 +9360,6 @@
   </object>
   <object id="8" name="pathTwo" x="854.667" y="361.333" visible="0">
    <polygon points="73.125,-0.75 -383.333,-0.666667 -382.917,213.917 -382.917,-0.833333"/>
-  </object>
-  <object id="10" name="path3" x="927.5" y="360.75">
-   <polygon points="0,0 -456,-0.5 -456.045,-56.75 -455.75,-0.75 -600,-0.375 -455.875,-0.375 -455.875,207.5 -455.875,-0.25"/>
   </object>
  </objectgroup>
  <layer id="3" name="aboveLayer" width="61" height="51">

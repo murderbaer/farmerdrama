@@ -9,10 +9,16 @@ namespace FarmGame
     {
         private MagickImage _spriteSheet;
         private SpriteObject _playerSprite;
+        private TiledHandler _tiledHandler = TiledHandler.Instance;
         public PlayerDummy()
         {
             // Set starting position
-            Position = TiledHandler.Instance.TiledPlayerPos;
+            var objects = _tiledHandler.TiledPlayerPos.SelectNodes("object");
+            float posX = float.Parse(objects[0].Attributes["x"].Value);
+            float posY = float.Parse(objects[0].Attributes["y"].Value);
+            int pixelSize = _tiledHandler.TilePixelSize;
+            Position = new Vector2(posX / pixelSize, posY / pixelSize);
+
             ItemInHand = new Item();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
             _playerSprite = new SpriteObject(_spriteSheet, 1);

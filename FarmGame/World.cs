@@ -38,8 +38,8 @@ namespace FarmGame
             Grid.DrawLayer(1);
             Grid.DrawLayer(2);
             Player.Draw();
-            Grid.DrawLayer(3);
             Movable.Draw();
+            Grid.DrawLayer(3);
         }
 
         public void Update(float elapsedTime)

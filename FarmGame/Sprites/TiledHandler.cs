@@ -33,13 +33,8 @@ namespace FarmGame
                 LevelThreeTiles = doc.DocumentElement.SelectSingleNode("layer[@name='collisionLayer']");
                 LevelFourTiles = doc.DocumentElement.SelectSingleNode("layer[@name='aboveLayer']");
 
-                XmlNode objectsLayer = doc.DocumentElement.SelectSingleNode("objectgroup[@name='movement']");
-                XmlNodeList objects = objectsLayer.SelectNodes("object");
-
-                float posX = float.Parse(objects[0].Attributes["x"].Value);
-                float posY = float.Parse(objects[0].Attributes["y"].Value);
-
-                TiledPlayerPos = new Vector2(posX / TilePixelSize, posY / TilePixelSize);
+                TiledPlayerPos = doc.DocumentElement.SelectSingleNode("objectgroup[@name='playerPos']");
+                TiledPolicePaths = doc.DocumentElement.SelectSingleNode("objectgroup[@name='policePaths']");
             }
         }
 
@@ -58,7 +53,9 @@ namespace FarmGame
 
         public int TilePixelSize { get; private set; }
 
-        public Vector2 TiledPlayerPos { get; private set; }
+        public XmlNode TiledPlayerPos { get; private set; }
+
+        public XmlNode TiledPolicePaths { get; private set; }
 
         public XmlNode LevelOneTiles { get; private set; }
 
