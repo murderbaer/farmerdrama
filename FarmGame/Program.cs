@@ -25,6 +25,11 @@ window.KeyDown += args =>
         case Keys.Q:
             world.CorpseInteractionComponent.OnKeyPress(args, ref world);
             break;
+        #if DEBUG
+        case Keys.P:
+            world.FreeCamComponent.OnKeyDown(world);
+            break;
+        #endif
     }
 };
 

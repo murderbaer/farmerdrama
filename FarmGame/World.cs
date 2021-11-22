@@ -39,6 +39,10 @@ namespace FarmGame
 
         public CorpseSearchComponent CorpseSearchComponent { get; } = new CorpseSearchComponent();
 
+        #if DEBUG
+        public FreeCamComponent FreeCamComponent { get; } = new FreeCamComponent();
+        #endif
+
         public void Draw()
         {
             DrawBackground();
@@ -59,6 +63,13 @@ namespace FarmGame
             Grid.Update(elapsedTime, this);
             Player.Update(elapsedTime, this);
             Camera.CameraFocus = Player.Position;
+            #if DEBUG
+            if (FreeCamComponent.IsActive)
+            {
+                FreeCamComponent.Update(elapsedTime, this);
+            }
+            #endif
+
             Camera.Update(elapsedTime, this);
             Corpse.Update(elapsedTime, this);
             Movable.Update(elapsedTime, this);

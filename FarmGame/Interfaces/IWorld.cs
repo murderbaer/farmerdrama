@@ -17,5 +17,9 @@ namespace FarmGame
         public IMovable Movable { get; }
 
         public Suspicion Suspicion { get; }
+
+        #if DEBUG
+        public FreeCamComponent FreeCamComponent { get; }
+        #endif
     }
 }
