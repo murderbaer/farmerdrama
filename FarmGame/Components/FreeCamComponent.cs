@@ -23,8 +23,8 @@ namespace FarmGame
 
                 Focus += cameraMovement * deltaTime * Speed;
             }
-            world.Camera.CameraFocus = Focus;
 
+            world.Camera.CameraFocus = Focus;
         }
 
         public void OnKeyDown(IWorld world)
