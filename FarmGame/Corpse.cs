@@ -7,7 +7,7 @@ namespace FarmGame
     {
         public Corpse()
         {
-            Position = new Vector2(18, 6);
+            Position = new Vector2(18, 25);
         }
 
         public bool IsPlaced { get; set; } = true;
