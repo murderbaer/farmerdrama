@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class Camera : ICamera
+    public class Camera : IResizable
     {
         // Screen Ratio: 16:9 Screen Ratio is used on most computer screens. Static, black bars limit the view
         private static Vector2 _screenRatio = new Vector2(16, 9);
@@ -25,23 +25,23 @@ namespace FarmGame
 
         private Vector2 _cameraSize;
 
+        private Vector2 _cameraPosition;
+
         public int CameraWidth { get => (int)_cameraSize.X; }
 
         public int CameraHeight { get => (int)_cameraSize.Y; }
 
         public Vector2 CameraSize { get => _cameraSize; }
 
-        public Vector2 CameraFocus { get; set; }
-
-        public Vector2 CameraPosition { get; set; }
-
-        public void Update(float elapsedTime, IWorld world)
+        public Vector2 CameraPosition
         {
-            Vector2 cameraOffset = CameraFocus - CameraPosition;
-            Vector2 cameraMovement = cameraOffset * 2f * elapsedTime;
-            CameraPosition += cameraMovement;
-            _cameraPositionTransformation = Matrix4.CreateTranslation(-CameraPosition.X, -CameraPosition.Y, 0);
-            UpdateCameraMatrix();
+            get { return _cameraPosition; }
+            set
+            {
+                _cameraPositionTransformation = Matrix4.CreateTranslation(-value.X, -value.Y, 0f);
+                _cameraPosition = value;
+                UpdateCameraMatrix();
+            }
         }
 
         public void Resize(int width, int height)

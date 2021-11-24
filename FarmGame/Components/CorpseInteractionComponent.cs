@@ -1,3 +1,4 @@
+#if false // to be removed
 using OpenTK.Windowing.Common;
 
 namespace FarmGame
@@ -22,3 +23,4 @@ namespace FarmGame
         }
     }
 }
+#endif

@@ -3,12 +3,19 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using OpenTK.Mathematics;
 
 var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings { Profile = ContextProfile.Compatability }); // window with immediate mode rendering enabled
 
-World world = new World(window);
+GL.Enable(EnableCap.Texture2D);
+GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+GL.Enable(EnableCap.Blend);
+GL.ClearColor(Color4.Black);
+
+
+var scene = Game.LoadScene(window);
 window.UpdateFrame += Update;
-window.Resize += args => world.Camera.Resize(args.Width, args.Height);
+window.Resize += args => scene.Resize(args.Width, args.Height);
 window.KeyDown += args =>
 {
     switch (args.Key)
@@ -19,22 +26,14 @@ window.KeyDown += args =>
         case Keys.F:
             window.WindowState = window.WindowState == WindowState.Fullscreen ? WindowState.Normal : WindowState.Fullscreen;
             break;
-        case Keys.Space:
-            world.ItemInteractionComponent.OnKeyPress(args, ref world);
-            break;
-        case Keys.Q:
-            world.CorpseInteractionComponent.OnKeyPress(args, ref world);
-            break;
-        #if DEBUG
-        case Keys.P:
-            world.FreeCamComponent.OnKeyDown(world);
-            break;
-        #endif
     }
 };
 
+window.KeyDown += scene.KeyDown;
+window.KeyUp += scene.KeyUp;
+
 window.RenderFrame += _ => GL.Clear(ClearBufferMask.ColorBufferBit); // Clear frame
-window.RenderFrame += _ => world.Draw(); // called once each frame; callback should contain drawing code
+window.RenderFrame += _ => scene.Draw(); // called once each frame; callback should contain drawing code
 window.RenderFrame += _ => window.SwapBuffers(); // buffer swap needed for double buffering
 
 window.Run();
@@ -42,5 +41,5 @@ window.Run();
 void Update(FrameEventArgs args)
 {
     var elapsedTime = (float)args.Time;
-    world.Update(elapsedTime);
+    scene.Update(elapsedTime);
 }

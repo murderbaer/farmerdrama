@@ -7,7 +7,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class Movable : IMovable
+    public class Police: IUpdatable, IPosition
     {
         private int currentPath = -1;
 
@@ -17,13 +17,7 @@ namespace FarmGame
 
         private TiledHandler _tiledHandler = TiledHandler.Instance;
 
-        private MagickImage _spriteSheet;
-
-        private SpriteObject _policeSprite;
-
-        private int _spriteHandle;
-
-        public Movable()
+        public Police()
         {
             // sets position to be a bit outside of the fence
             Position = new Vector2(935f / 16f, 360f / 16f);
@@ -52,10 +46,6 @@ namespace FarmGame
                 singelPath.Add(Position);
                 Paths.Add(singelPath);
             }
-
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            _policeSprite = new SpriteObject(_spriteSheet, 14);
         }
 
         public Vector2 Position { get; set; }
@@ -65,32 +55,9 @@ namespace FarmGame
         // Movement speed in Tiles per second
         public float MovementSpeed { get; set; } = 1.5f;
 
-        public void Draw()
+        public void Update(float elapsedTime)
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(_policeSprite);
-
-            GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(spritePos.Min);
-            GL.Vertex2(Position.X - 0.5f, Position.Y - 0.5f);
-
-            GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
-            GL.Vertex2(Position.X + 0.5f, Position.Y - 0.5f);
-
-            GL.TexCoord2(spritePos.Max);
-            GL.Vertex2(Position.X + 0.5f, Position.Y + 0.5f);
-
-            GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
-            GL.Vertex2(Position.X - 0.5f, Position.Y + 0.5f);
-
-            GL.End();
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-        }
-
-        public void Update(float elapsedTime, IWorld world)
-        {
-            Move(elapsedTime, world);
+            Move(elapsedTime);
         }
 
         public void StartPath(int pathID)
@@ -116,7 +83,7 @@ namespace FarmGame
             return currentPath != -1;
         }
 
-        private void Move(float elapsedTime, IWorld world)
+        private void Move(float elapsedTime)
         {
             if (currentPath < 0 || currentPath >= Paths.Count)
             {

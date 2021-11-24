@@ -1,3 +1,4 @@
+#if false // to be deleted
 using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -94,3 +95,4 @@ namespace FarmGame
         }
     }
 }
+#endif

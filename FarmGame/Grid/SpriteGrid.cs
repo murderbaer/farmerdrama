@@ -11,6 +11,14 @@ namespace FarmGame
             Row = row;
         }
 
+        public SpriteGrid()
+        {
+            var tiledHandler = TiledHandler.Instance;
+            _spriteGrid = new SpriteObject[tiledHandler.BoardX * tiledHandler.BoardY];
+            Column = tiledHandler.BoardX;
+            Row = tiledHandler.BoardY;
+        }
+
         public int Column { get; private set; }
 
         public int Row { get; private set; }

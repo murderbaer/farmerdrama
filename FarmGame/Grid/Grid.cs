@@ -6,7 +6,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class Grid : IReadOnlyGrid
+    public class Grid : IUpdatable
     {
         private static TiledHandler _tileHandler = TiledHandler.Instance;
 
@@ -52,16 +52,12 @@ namespace FarmGame
             set { _grid[col + (Column * row)] = value; }
         }
 
-        public void Update(float elapsedTime, IWorld world)
+        public void Update(float elapsedTime)
         {
             foreach (IGridCell cell in _grid)
             {
-                cell.Update(elapsedTime, world);
+                cell.Update(elapsedTime);
             }
-        }
-
-        public void Draw()
-        {
         }
 
         public void DrawLayer(int layer)

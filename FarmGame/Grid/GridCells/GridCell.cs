@@ -15,7 +15,7 @@ namespace FarmGame
 
         public virtual float HiddenFactor { get; } = 1f;
 
-        public virtual void Update(float elapsedTime, IWorld world)
+        public virtual void Update(float elapsedTime)
         {
         }
 

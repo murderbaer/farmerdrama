@@ -107,7 +107,7 @@ namespace FarmGame
             }
         }
 
-        public override void Update(float elapsedTime, IWorld world)
+        public override void Update(float elapsedTime)
         {
             if (State == FarmLandState.EMPTY || State == FarmLandState.OVERGROWN)
             {
