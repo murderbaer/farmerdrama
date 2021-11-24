@@ -35,7 +35,11 @@ namespace FarmGame
 
         public Vector2 CameraPosition
         {
-            get { return _cameraPosition; }
+            get
+            {
+                return _cameraPosition;
+            }
+
             set
             {
                 _cameraPositionTransformation = Matrix4.CreateTranslation(-value.X, -value.Y, 0f);

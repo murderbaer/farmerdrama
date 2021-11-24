@@ -6,32 +6,13 @@ namespace FarmGame
 {
     public class Scene
     {
-        public GameObject CreateGameObject(string name)
-        {
-            GameObject gameObject = new GameObject(name);
-            if (isIterating)
-            {
-                _toAdd.Add(gameObject);
-            }
-            else
-            {
-                _gameObjects.Add(gameObject);
-            }
-            
-            return gameObject;
-        }
+        private readonly HashSet<GameObject> _gameObjects = new HashSet<GameObject>();
 
-        public void DestroyGameObject(GameObject gameObject)
-        {
-            if (isIterating)
-            {
-                _toRemove.Add(gameObject);
-            }
-            else
-            {
-                _gameObjects.Remove(gameObject);
-            }
-        }
+        private readonly HashSet<GameObject> _toAdd = new HashSet<GameObject>();
+
+        private readonly HashSet<GameObject> _toRemove = new HashSet<GameObject>();
+
+        private int _iterationCount = 0;
 
         public IEnumerable<GameObject> GameObjects
         {
@@ -44,6 +25,35 @@ namespace FarmGame
                 }
 
                 --_iterationCount;
+            }
+        }
+
+        private bool IsIterating => _iterationCount > 0;
+
+        public GameObject CreateGameObject(string name)
+        {
+            GameObject gameObject = new GameObject(name);
+            if (IsIterating)
+            {
+                _toAdd.Add(gameObject);
+            }
+            else
+            {
+                _gameObjects.Add(gameObject);
+            }
+
+            return gameObject;
+        }
+
+        public void DestroyGameObject(GameObject gameObject)
+        {
+            if (IsIterating)
+            {
+                _toRemove.Add(gameObject);
+            }
+            else
+            {
+                _gameObjects.Remove(gameObject);
             }
         }
 
@@ -85,19 +95,23 @@ namespace FarmGame
             {
                 gameObject.DrawBackground();
             }
+
             camera.SetCameraMatrix();
             foreach (var gameObject in GetAllComponents<IDrawGround>())
             {
                 gameObject.DrawGround();
             }
+
             foreach (var gameObject in GetAllComponents<IDrawable>())
             {
                 gameObject.Draw();
             }
+
             foreach (var gameObject in GetAllComponents<IDrawAbove>())
             {
                 gameObject.DrawAbove();
             }
+
             camera.SetOverlayMatrix();
             foreach (var gameObject in GetAllComponents<IDrawOverlay>())
             {
@@ -128,15 +142,5 @@ namespace FarmGame
                 gameObject.KeyUp(args);
             }
         }
-
-        private bool isIterating => _iterationCount > 0;
-
-        private readonly HashSet<GameObject> _gameObjects = new HashSet<GameObject>();
-
-        private readonly HashSet<GameObject> _toAdd = new HashSet<GameObject>();
-
-        private readonly HashSet<GameObject> _toRemove = new HashSet<GameObject>();
-
-        private int _iterationCount = 0;
     }
 }

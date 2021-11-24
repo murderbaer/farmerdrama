@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FarmGame
 {
@@ -22,6 +22,7 @@ namespace FarmGame
             {
                 throw new ArgumentException($"Component of type {typeof(TYPE).Name} not found");
             }
+
             return (TYPE)component;
         }
 

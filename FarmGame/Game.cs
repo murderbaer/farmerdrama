@@ -1,5 +1,5 @@
-using OpenTK.Windowing.Desktop;
 using System.Linq;
+using OpenTK.Windowing.Desktop;
 
 namespace FarmGame
 {
@@ -20,8 +20,6 @@ namespace FarmGame
 
             var goPlayer = scene.CreateGameObject("Player");
             LoadPlayer(goPlayer);
-
-
 
             var goCorpse = scene.CreateGameObject("Corpse");
             LoadCorpse(goCorpse, window, scene);

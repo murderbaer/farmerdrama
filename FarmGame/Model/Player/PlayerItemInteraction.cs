@@ -5,11 +5,15 @@ namespace FarmGame
 {
     public class PlayerItemInteraction : IKeyDownListener
     {
+        private IPosition _position;
+
         public PlayerItemInteraction(GameObject goPlayer)
         {
             _position = goPlayer.GetComponent<IPosition>();
             ItemInHand = new Item();
         }
+
+        public Item ItemInHand { get; set; }
 
         public void KeyDown(KeyboardKeyEventArgs args)
         {
@@ -17,13 +21,10 @@ namespace FarmGame
             {
                 var playerX = (int)_position.Position.X;
                 var playerY = (int)_position.Position.Y;
+
                 // Interact();
             }
         }
-
-        public Item ItemInHand { get; set; }
-
-        private IPosition _position;
 
         public void Interact(IGridCell cell)
         {

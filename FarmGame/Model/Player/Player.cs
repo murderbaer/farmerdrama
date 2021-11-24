@@ -1,16 +1,15 @@
-using ImageMagick;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.Desktop;
 using System.Collections.Generic;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
     public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener
     {
         private TiledHandler _tiledHandler = TiledHandler.Instance;
+
+        private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
 
         public Player()
         {
@@ -21,13 +20,9 @@ namespace FarmGame
             int pixelSize = _tiledHandler.TilePixelSize;
             Position = new Vector2(posX / pixelSize, posY / pixelSize);
             Position = new Vector2(0, 0);
-
         }
 
-        private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
-
         public Vector2 Position { get; set; }
-
 
         // Movement speed in Tiles per second
         public float MovementSpeed { get; set; } = 3f;
@@ -37,6 +32,15 @@ namespace FarmGame
             Move(elapsedTime);
         }
 
+        public void KeyDown(KeyboardKeyEventArgs e)
+        {
+            _pressedKeys.Add(e.Key);
+        }
+
+        public void KeyUp(KeyboardKeyEventArgs e)
+        {
+            _pressedKeys.Remove(e.Key);
+        }
 
         private void Move(float elapsedTime)
         {
@@ -57,6 +61,8 @@ namespace FarmGame
             {
                 newPosition[direction] = Position[direction] + movementVector[direction];
                 var playerBox = CollisionHelper.GetCollisionBox(newPosition, size: 0.8f, centered: true);
+
+                // Collision - Disabled for now
                 // var gridCollision = CollisionHelper.GetTileCollisionBoxesAround(newPosition, world.Grid);
                 // if (CollisionHelper.BoxCollide(playerBox, gridCollision))
                 // {
@@ -65,16 +71,6 @@ namespace FarmGame
             }
 
             Position = newPosition;
-        }
-
-        public void KeyDown(KeyboardKeyEventArgs e)
-        {
-            _pressedKeys.Add(e.Key);
-        }
-
-        public void KeyUp(KeyboardKeyEventArgs e)
-        {
-            _pressedKeys.Remove(e.Key);
         }
     }
 }

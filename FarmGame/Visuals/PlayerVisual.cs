@@ -1,11 +1,19 @@
-using OpenTK.Mathematics;
-using OpenTK.Graphics.OpenGL;
 using ImageMagick;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 
 namespace FarmGame
 {
     public class PlayerVisual : IDrawable
     {
+        private IPosition _position;
+
+        private MagickImage _spriteSheet;
+
+        private int _spriteHandle;
+
+        private SpriteObject _playerSprite;
+
         public PlayerVisual(GameObject goPlayer)
         {
             _position = goPlayer.GetComponent<IPosition>();
@@ -13,10 +21,11 @@ namespace FarmGame
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
             _playerSprite = new SpriteObject(_spriteSheet, 1);
         }
-        
+
         public void Draw()
         {
             Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(_playerSprite);
+            GL.Color4(Color4.White);
 
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
             GL.Begin(PrimitiveType.Quads);
@@ -36,13 +45,5 @@ namespace FarmGame
             GL.End();
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
-
-        private IPosition _position;
-
-        private MagickImage _spriteSheet;
-
-        private int _spriteHandle;
-
-        private SpriteObject _playerSprite;
     }
 }

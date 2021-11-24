@@ -1,10 +1,12 @@
-using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 
 namespace FarmGame
 {
     public class SuspicionBar : IDrawOverlay
     {
+        private Suspicion _suspicion;
+
         public SuspicionBar(GameObject goSuspicion)
         {
             _suspicion = goSuspicion.GetComponent<Suspicion>();
@@ -31,7 +33,5 @@ namespace FarmGame
         {
             return _suspicion.Value / 100 * 2.6f;
         }
-
-        private Suspicion _suspicion;
     }
 }

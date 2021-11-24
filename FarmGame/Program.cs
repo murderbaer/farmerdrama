@@ -1,9 +1,9 @@
 ﻿using FarmGame;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using OpenTK.Mathematics;
 
 var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings { Profile = ContextProfile.Compatability }); // window with immediate mode rendering enabled
 
@@ -11,7 +11,6 @@ GL.Enable(EnableCap.Texture2D);
 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 GL.Enable(EnableCap.Blend);
 GL.ClearColor(Color4.Black);
-
 
 var scene = Game.LoadScene(window);
 window.UpdateFrame += Update;

@@ -1,21 +1,31 @@
-using OpenTK.Mathematics;
-using OpenTK.Graphics.OpenGL;
 using ImageMagick;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 
 namespace FarmGame
 {
     public class PoliceVisual : IDrawable
     {
+        private IPosition _position;
+
+        private MagickImage _spriteSheet;
+
+        private int _spriteHandle;
+
+        private SpriteObject _playerSprite;
+
         public PoliceVisual(GameObject goPolice)
         {
             _position = goPolice.GetComponent<IPosition>();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            _playerSprite = new SpriteObject(_spriteSheet, 1);
+            _playerSprite = new SpriteObject(_spriteSheet, 14);
         }
+
         public void Draw()
         {
             Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(_playerSprite);
+            GL.Color4(Color4.White);
 
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
             GL.Begin(PrimitiveType.Quads);
@@ -35,13 +45,5 @@ namespace FarmGame
             GL.End();
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
-
-        private IPosition _position;
-
-        private MagickImage _spriteSheet;
-
-        private int _spriteHandle;
-
-        private SpriteObject _playerSprite;
     }
 }

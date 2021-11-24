@@ -7,7 +7,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class Police: IUpdatable, IPosition
+    public class Police : IUpdatable, IPosition
     {
         private int currentPath = -1;
 
@@ -20,7 +20,8 @@ namespace FarmGame
         public Police()
         {
             // sets position to be a bit outside of the fence
-            Position = new Vector2(935f / 16f, 360f / 16f);
+            // Position = new Vector2(935f / 16f, 360f / 16f);
+            Position = new Vector2(3, 3);
 
             // read all paths in
             Paths = new List<List<Vector2>>();
