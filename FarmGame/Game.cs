@@ -27,13 +27,16 @@ namespace FarmGame
             var goPolice = scene.CreateGameObject("Police");
             LoadPolice(goPolice);
 
+            var goGrid = scene.CreateGameObject("Grid");
+            LoadGrid(goGrid);
+
             var cameraController = goCamera.GetComponent<CameraController>();
             cameraController.FollowGameObject(goPlayer);
 
             return scene;
         }
 
-        public static void LoadCamera(GameObject goCamera)
+        private static void LoadCamera(GameObject goCamera)
         {
             var camera = new Camera();
             goCamera.Components.Add(camera);
@@ -43,7 +46,7 @@ namespace FarmGame
             goCamera.Components.Add(freeCamComponent);
         }
 
-        public static void LoadSuspicion(GameObject goSuspicion)
+        private static void LoadSuspicion(GameObject goSuspicion)
         {
             var suspicion = new Suspicion(30);
             goSuspicion.Components.Add(suspicion);
@@ -51,7 +54,7 @@ namespace FarmGame
             goSuspicion.Components.Add(suspicionBar);
         }
 
-        public static void LoadPlayer(GameObject goPlayer)
+        private static void LoadPlayer(GameObject goPlayer)
         {
             var player = new Player();
             goPlayer.Components.Add(player);
@@ -59,7 +62,22 @@ namespace FarmGame
             goPlayer.Components.Add(playerVisual);
         }
 
-        public static void LoadCorpse(GameObject goCorpse, GameWindow window, Scene scene)
+        private static void LoadGrid(GameObject goGrid)
+        {
+            var gridVisuals = new LayeredSpriteGrid();
+            goGrid.Components.Add(gridVisuals);
+
+            SpriteGrid l1 = gridVisuals.GetWholeLayer(0);
+            SpriteGrid l2 = gridVisuals.GetWholeLayer(1);
+            SpriteGrid l3 = gridVisuals.GetWholeLayer(2);
+            SpriteGrid temp = SpriteGrid.SquashGrids(l1, l2);
+            temp = SpriteGrid.SquashGrids(temp, l3);
+
+            var grid = new GridData(temp);
+            goGrid.Components.Add(grid);
+        }
+
+        private static void LoadCorpse(GameObject goCorpse, GameWindow window, Scene scene)
         {
             var player = scene.GetGameObjects("Player").First();
             var corpse = new Corpse(player);
@@ -68,7 +86,7 @@ namespace FarmGame
             goCorpse.Components.Add(corpseVisual);
         }
 
-        public static void LoadPolice(GameObject goPolice)
+        private static void LoadPolice(GameObject goPolice)
         {
             var police = new Police();
             goPolice.Components.Add(police);

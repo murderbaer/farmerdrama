@@ -102,10 +102,17 @@ namespace FarmGame
                 gameObject.DrawGround();
             }
 
+            IDrawGridLayer gridDraw = GetAllComponents<IDrawGridLayer>().First<IDrawGridLayer>();
+            gridDraw.DrawLayer(0);
+            gridDraw.DrawLayer(1);
+            gridDraw.DrawLayer(2);
+
             foreach (var gameObject in GetAllComponents<IDrawable>())
             {
                 gameObject.Draw();
             }
+
+            gridDraw.DrawLayer(3);
 
             foreach (var gameObject in GetAllComponents<IDrawAbove>())
             {

@@ -6,7 +6,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class Grid : IUpdatable
+    public class LayeredSpriteGrid : IDrawGridLayer
     {
         private static TiledHandler _tileHandler = TiledHandler.Instance;
 
@@ -18,7 +18,7 @@ namespace FarmGame
 
         private int _spriteHandle;
 
-        public Grid()
+        public LayeredSpriteGrid()
         {
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
@@ -46,18 +46,9 @@ namespace FarmGame
 
         public int Row { get; }
 
-        public IGridCell this[int col, int row]
+        public SpriteGrid GetWholeLayer(int i)
         {
-            get { return _grid[col + (Column * row)]; }
-            set { _grid[col + (Column * row)] = value; }
-        }
-
-        public void Update(float elapsedTime)
-        {
-            foreach (IGridCell cell in _grid)
-            {
-                cell.Update(elapsedTime);
-            }
+            return _spriteGrid[i];
         }
 
         public void DrawLayer(int layer)
@@ -70,16 +61,29 @@ namespace FarmGame
             {
                 for (int column = 0; column < Column; ++column)
                 {
-                    IGridCell cell = this[column, row];
                     SpriteObject toDraw = _spriteGrid[layer][column, row];
                     if (toDraw.Gid != (int)SpriteType.AIR)
                     {
-                        cell.DrawGridCellTextured(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw));
+                        DrawSingleSprite(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw));
                     }
                 }
             }
 
             GL.BindTexture(TextureTarget.Texture2D, 0);
+        }
+
+        public void DrawSingleSprite(int positionX, int positionY, Box2 sprite)
+        {
+            GL.Begin(PrimitiveType.Quads);
+            GL.TexCoord2(sprite.Min);
+            GL.Vertex2(positionX, positionY);
+            GL.TexCoord2(sprite.Max.X, sprite.Min.Y);
+            GL.Vertex2(positionX + 1, positionY);
+            GL.TexCoord2(sprite.Max);
+            GL.Vertex2(positionX + 1, positionY + 1);
+            GL.TexCoord2(sprite.Min.X, sprite.Max.Y);
+            GL.Vertex2(positionX, positionY + 1);
+            GL.End();
         }
 
         private void IntializeLayerOne()
@@ -90,23 +94,6 @@ namespace FarmGame
             for (int i = 0; i < tiles.Count; i++)
             {
                 int gid = int.Parse(tiles[i].Attributes["gid"].Value);
-                switch ((SpriteType)gid)
-                {
-                    case SpriteType.FARM_LAND:
-                        _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY); break;
-                    case SpriteType.WATER_LU:
-                    case SpriteType.WATER_RU:
-                    case SpriteType.WATER_LD:
-                    case SpriteType.WATER_RD:
-                        _grid[i] = new GridCellWater(); break;
-                    case SpriteType.AIR:
-                        break;
-                    case SpriteType.SEEDS:
-                        _grid[i] = new GridCellSeedStorage(); break;
-                    default:
-                        _grid[i] = new GridCell(); break;
-                }
-
                 _spriteGrid[0][i] = new SpriteObject(_spriteSheet, gid);
             }
         }
