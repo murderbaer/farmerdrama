@@ -17,6 +17,17 @@ namespace FarmGame
         public Player(CollisionGrid colGrid)
         {
             collidableGridCells = colGrid;
+
+            // Set starting position
+            var playerPos = _tiledHandler.TiledPlayerPos.SelectNodes("object");
+            float posX = float.Parse(playerPos[0].Attributes["x"].Value);
+            float posY = float.Parse(playerPos[0].Attributes["y"].Value);
+            int pixelSize = _tiledHandler.TilePixelSize;
+            Position = new Vector2(posX / pixelSize, posY / pixelSize);
+        }
+
+        public Player()
+        {
             // Set starting position
             var playerPos = _tiledHandler.TiledPlayerPos.SelectNodes("object");
             float posX = float.Parse(playerPos[0].Attributes["x"].Value);
