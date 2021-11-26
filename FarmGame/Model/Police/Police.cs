@@ -57,11 +57,6 @@ namespace FarmGame
 
         public void Update(float elapsedTime)
         {
-            if (currentPath == -1)
-            {
-                StartRandomPath();
-            }
-
             Move(elapsedTime);
         }
 
