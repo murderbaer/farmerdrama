@@ -1,8 +1,10 @@
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class Corpse : IPosition
+    public class Corpse : IPosition, IUpdatable, IKeyDownListener
     {
         private Player _player;
 
@@ -21,6 +23,26 @@ namespace FarmGame
             if (!IsPlaced)
             {
                 Position = _player.Position;
+            }
+        }
+
+        public void KeyDown(KeyboardKeyEventArgs args)
+        {
+            System.Console.WriteLine("KeyDown");
+            if (args.Key == Keys.Q)
+            {
+                if (!IsPlaced)
+                {
+                    IsPlaced = true;
+                    return;
+                }
+
+                var playerPos = _player.Position;
+                var distance = Vector2.Distance(playerPos, Position);
+                if (distance < 1)
+                {
+                    IsPlaced = false;
+                }
             }
         }
     }

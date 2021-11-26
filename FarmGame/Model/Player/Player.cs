@@ -32,14 +32,14 @@ namespace FarmGame
             Move(elapsedTime);
         }
 
-        public void KeyDown(KeyboardKeyEventArgs e)
+        public void KeyDown(KeyboardKeyEventArgs args)
         {
-            _pressedKeys.Add(e.Key);
+            _pressedKeys.Add(args.Key);
         }
 
-        public void KeyUp(KeyboardKeyEventArgs e)
+        public void KeyUp(KeyboardKeyEventArgs args)
         {
-            _pressedKeys.Remove(e.Key);
+            _pressedKeys.Remove(args.Key);
         }
 
         private void Move(float elapsedTime)

@@ -7,7 +7,7 @@ namespace FarmGame.Test
     [TestClass]
     public class GridTest
     {
-        GridDummy grid = new GridDummy();
+        Grid grid = new Grid();
 
         [TestMethod]
         public void TestSize()
