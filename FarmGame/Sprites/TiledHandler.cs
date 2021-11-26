@@ -34,6 +34,7 @@ namespace FarmGame
                 LevelFourTiles = doc.DocumentElement.SelectSingleNode("layer[@name='aboveLayer']");
 
                 TiledPlayerPos = doc.DocumentElement.SelectSingleNode("objectgroup[@name='playerPos']");
+                TiledCorpsePos = doc.DocumentElement.SelectSingleNode("objectgroup[@name='corpsePos']");
                 TiledPolicePaths = doc.DocumentElement.SelectSingleNode("objectgroup[@name='policePaths']");
             }
         }
@@ -54,6 +55,8 @@ namespace FarmGame
         public int TilePixelSize { get; private set; }
 
         public XmlNode TiledPlayerPos { get; private set; }
+
+        public XmlNode TiledCorpsePos { get; private set; }
 
         public XmlNode TiledPolicePaths { get; private set; }
 

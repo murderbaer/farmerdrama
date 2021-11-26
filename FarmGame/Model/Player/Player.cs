@@ -23,7 +23,6 @@ namespace FarmGame
             float posY = float.Parse(playerPos[0].Attributes["y"].Value);
             int pixelSize = _tiledHandler.TilePixelSize;
             Position = new Vector2(posX / pixelSize, posY / pixelSize);
-            Position = new Vector2(0, 0);
         }
 
         public Vector2 Position { get; set; }
@@ -36,14 +35,14 @@ namespace FarmGame
             Move(elapsedTime);
         }
 
-        public void KeyDown(KeyboardKeyEventArgs e)
+        public void KeyDown(KeyboardKeyEventArgs args)
         {
-            _pressedKeys.Add(e.Key);
+            _pressedKeys.Add(args.Key);
         }
 
-        public void KeyUp(KeyboardKeyEventArgs e)
+        public void KeyUp(KeyboardKeyEventArgs args)
         {
-            _pressedKeys.Remove(e.Key);
+            _pressedKeys.Remove(args.Key);
         }
 
         private void Move(float elapsedTime)

@@ -1,14 +1,23 @@
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class Corpse : IPosition
+    public class Corpse : IPosition, IUpdatable, IKeyDownListener
     {
         private Player _player;
 
+        private TiledHandler _tiledHandler = TiledHandler.Instance;
+
         public Corpse(GameObject goPlayer)
         {
-            Position = new Vector2(0, 0);
+            var corpsePos = _tiledHandler.TiledCorpsePos.SelectNodes("object");
+            float posX = float.Parse(corpsePos[0].Attributes["x"].Value);
+            float posY = float.Parse(corpsePos[0].Attributes["y"].Value);
+            int pixelSize = _tiledHandler.TilePixelSize;
+            Position = new Vector2(posX / pixelSize, posY / pixelSize);
+
             _player = goPlayer.GetComponent<Player>();
         }
 
@@ -21,6 +30,25 @@ namespace FarmGame
             if (!IsPlaced)
             {
                 Position = _player.Position;
+            }
+        }
+
+        public void KeyDown(KeyboardKeyEventArgs args)
+        {
+            if (args.Key == Keys.Q)
+            {
+                if (!IsPlaced)
+                {
+                    IsPlaced = true;
+                    return;
+                }
+
+                var playerPos = _player.Position;
+                var distance = Vector2.Distance(playerPos, Position);
+                if (distance < 1)
+                {
+                    IsPlaced = false;
+                }
             }
         }
     }
