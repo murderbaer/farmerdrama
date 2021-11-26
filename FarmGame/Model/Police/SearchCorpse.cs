@@ -10,14 +10,14 @@ namespace FarmGame
 
         private Corpse _corpse;
 
-        private GridData _grid;
+        private DataGrid _grid;
 
         public SearchCorpse(GameObject goPolice, GameObject goSuspicion, GameObject goCorpse, GameObject goGrid)
         {
             _police = goPolice.GetComponent<Police>();
             _suspicion = goSuspicion.GetComponent<Suspicion>();
             _corpse = goCorpse.GetComponent<Corpse>();
-            _grid = goGrid.GetComponent<GridData>();
+            _grid = goGrid.GetComponent<DataGrid>();
         }
 
         public bool IsFound { get; set; }
@@ -65,6 +65,7 @@ namespace FarmGame
             {
                 _police.StartRandomPath();
             }
+
             Search();
         }
     }

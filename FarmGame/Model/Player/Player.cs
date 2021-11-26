@@ -17,6 +17,7 @@ namespace FarmGame
         public Player(CollisionGrid colGrid)
         {
             collidableGridCells = colGrid;
+
             // Set starting position
             var playerPos = _tiledHandler.TiledPlayerPos.SelectNodes("object");
             float posX = float.Parse(playerPos[0].Attributes["x"].Value);
