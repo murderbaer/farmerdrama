@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -11,8 +12,11 @@ namespace FarmGame
 
         private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
 
-        public Player()
+        private CollisionGrid collidableGridCells;
+
+        public Player(CollisionGrid colGrid)
         {
+            collidableGridCells = colGrid;
             // Set starting position
             var playerPos = _tiledHandler.TiledPlayerPos.SelectNodes("object");
             float posX = float.Parse(playerPos[0].Attributes["x"].Value);
@@ -62,11 +66,11 @@ namespace FarmGame
                 var playerBox = CollisionHelper.GetCollisionBox(newPosition, size: 0.8f, centered: true);
 
                 // Collision - Disabled for now
-                // var gridCollision = CollisionHelper.GetTileCollisionBoxesAround(newPosition, world.Grid);
-                // if (CollisionHelper.BoxCollide(playerBox, gridCollision))
-                // {
-                //     newPosition[direction] = Position[direction];
-                // }
+                var gridCollision = CollisionHelper.GetTileCollisionBoxesAround(newPosition, collidableGridCells);
+                if (CollisionHelper.BoxCollide(playerBox, gridCollision))
+                {
+                    newPosition[direction] = Position[direction];
+                }
             }
 
             Position = newPosition;
