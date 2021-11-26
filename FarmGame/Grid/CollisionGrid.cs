@@ -4,6 +4,10 @@ namespace FarmGame
     {
         public CollisionGrid(SpriteGrid collisionGrid)
         {
+            if (collisionGrid == null)
+            {
+                return;
+            }
             int gridSize = collisionGrid.Column * collisionGrid.Row;
             Column = collisionGrid.Column;
             Row = collisionGrid.Row;

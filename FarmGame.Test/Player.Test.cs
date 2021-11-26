@@ -9,7 +9,7 @@ namespace FarmGame.Test
     public class PlayerTest
     {
         GameObject goPlayer = new GameObject();
-        Player player = new Player();
+        Player player = new Player(new CollisionGrid(null));
         PlayerItemInteraction playerItemInteraction;
 
         public PlayerTest()
