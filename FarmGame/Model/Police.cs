@@ -20,8 +20,7 @@ namespace FarmGame
         public Police()
         {
             // sets position to be a bit outside of the fence
-            // Position = new Vector2(935f / 16f, 360f / 16f);
-            Position = new Vector2(3, 3);
+            Position = new Vector2(935f / 16f, 360f / 16f);
 
             // read all paths in
             Paths = new List<List<Vector2>>();
@@ -58,6 +57,11 @@ namespace FarmGame
 
         public void Update(float elapsedTime)
         {
+            if (currentPath == -1)
+            {
+                StartRandomPath();
+            }
+
             Move(elapsedTime);
         }
 

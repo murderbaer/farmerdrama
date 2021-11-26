@@ -19,7 +19,6 @@ namespace FarmGame
             float posY = float.Parse(playerPos[0].Attributes["y"].Value);
             int pixelSize = _tiledHandler.TilePixelSize;
             Position = new Vector2(posX / pixelSize, posY / pixelSize);
-            Position = new Vector2(0, 0);
         }
 
         public Vector2 Position { get; set; }

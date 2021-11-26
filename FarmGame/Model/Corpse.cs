@@ -8,9 +8,16 @@ namespace FarmGame
     {
         private Player _player;
 
+        private TiledHandler _tiledHandler = TiledHandler.Instance;
+
         public Corpse(GameObject goPlayer)
         {
-            Position = new Vector2(0, 0);
+            var corpsePos = _tiledHandler.TiledCorpsePos.SelectNodes("object");
+            float posX = float.Parse(corpsePos[0].Attributes["x"].Value);
+            float posY = float.Parse(corpsePos[0].Attributes["y"].Value);
+            int pixelSize = _tiledHandler.TilePixelSize;
+            Position = new Vector2(posX / pixelSize, posY / pixelSize);
+
             _player = goPlayer.GetComponent<Player>();
         }
 
@@ -28,7 +35,6 @@ namespace FarmGame
 
         public void KeyDown(KeyboardKeyEventArgs args)
         {
-            System.Console.WriteLine("KeyDown");
             if (args.Key == Keys.Q)
             {
                 if (!IsPlaced)

@@ -31,7 +31,7 @@ namespace FarmGame
             LoadGrid(goGrid);
 
             var cameraController = goCamera.GetComponent<CameraController>();
-            cameraController.FollowGameObject(goPlayer);
+            cameraController.FollowGameObject(goPlayer, setPosition: true);
 
             return scene;
         }

@@ -11,11 +11,14 @@ namespace FarmGame
 
         private SmoothCamera _smoothCamera;
 
+        private Camera _camera;
+
         private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
 
         public CameraController(GameObject goCamera)
         {
             _smoothCamera = goCamera.GetComponent<SmoothCamera>();
+            _camera = goCamera.GetComponent<Camera>();
         }
 
         public bool FreeCamActive { get; set; }
@@ -41,10 +44,15 @@ namespace FarmGame
             }
         }
 
-        public void FollowGameObject(GameObject go)
+        public void FollowGameObject(GameObject go, bool setPosition = false)
         {
             _followPosition = go.GetComponent<IPosition>();
             FreeCamActive = false;
+            if (setPosition)
+            {
+                _smoothCamera.CameraFocus = _followPosition.Position;
+                _camera.CameraPosition = _followPosition.Position;
+            }
         }
 
         public void KeyDown(KeyboardKeyEventArgs args)
