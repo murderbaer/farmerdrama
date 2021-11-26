@@ -1,10 +1,10 @@
 namespace FarmGame
 {
-    public class GridData : IUpdatable
+    public class DataGrid : IUpdatable
     {
         private readonly IGridCell[] _grid;
 
-        public GridData(SpriteGrid functionalSprites)
+        public DataGrid(SpriteGrid functionalSprites)
         {
             int gridSize = functionalSprites.Column * functionalSprites.Row;
             _grid = new IGridCell[gridSize];

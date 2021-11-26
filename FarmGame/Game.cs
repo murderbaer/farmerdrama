@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Runtime.CompilerServices;
 using OpenTK.Windowing.Desktop;
 
 namespace FarmGame
@@ -15,20 +16,19 @@ namespace FarmGame
             var goBackground = scene.CreateGameObject("Background");
             goBackground.Components.Add(new Background());
 
+            var goGrid = scene.CreateGameObject("Grid");
+            var colGrid = LoadGrid(goGrid);
+
             var goSuspicion = scene.CreateGameObject("Suspicion");
             LoadSuspicion(goSuspicion);
-
             var goPlayer = scene.CreateGameObject("Player");
-            LoadPlayer(goPlayer);
+            LoadPlayer(goPlayer, colGrid);
 
             var goCorpse = scene.CreateGameObject("Corpse");
             LoadCorpse(goCorpse, window, scene);
 
             var goPolice = scene.CreateGameObject("Police");
             LoadPolice(goPolice);
-
-            var goGrid = scene.CreateGameObject("Grid");
-            LoadGrid(goGrid);
 
             var cameraController = goCamera.GetComponent<CameraController>();
             cameraController.FollowGameObject(goPlayer);
@@ -54,15 +54,15 @@ namespace FarmGame
             goSuspicion.Components.Add(suspicionBar);
         }
 
-        private static void LoadPlayer(GameObject goPlayer)
+        private static void LoadPlayer(GameObject goPlayer, CollisionGrid colGrid)
         {
-            var player = new Player();
+            var player = new Player(colGrid);
             goPlayer.Components.Add(player);
             var playerVisual = new PlayerVisual(goPlayer);
             goPlayer.Components.Add(playerVisual);
         }
 
-        private static void LoadGrid(GameObject goGrid)
+        private static CollisionGrid LoadGrid(GameObject goGrid)
         {
             var gridVisuals = new LayeredSpriteGrid();
             goGrid.Components.Add(gridVisuals);
@@ -73,8 +73,10 @@ namespace FarmGame
             SpriteGrid temp = SpriteGrid.SquashGrids(l1, l2);
             temp = SpriteGrid.SquashGrids(temp, l3);
 
-            var grid = new GridData(temp);
+            var grid = new DataGrid(temp);
             goGrid.Components.Add(grid);
+
+            return new CollisionGrid(l3);
         }
 
         private static void LoadCorpse(GameObject goCorpse, GameWindow window, Scene scene)
