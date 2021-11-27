@@ -21,6 +21,7 @@ namespace FarmGame
 
             var goSuspicion = scene.CreateGameObject("Suspicion");
             LoadSuspicion(goSuspicion);
+            
             var goPlayer = scene.CreateGameObject("Player");
             LoadPlayer(goPlayer, colGrid);
 
@@ -29,6 +30,9 @@ namespace FarmGame
 
             var goPolice = scene.CreateGameObject("Police");
             LoadPolice(goPolice);
+
+            SearchCorpse seachCorpse = new SearchCorpse(goPolice, goSuspicion, goCorpse, goGrid);
+            goPolice.Components.Add(seachCorpse);
 
             var cameraController = goCamera.GetComponent<CameraController>();
             cameraController.FollowGameObject(goPlayer, setPosition: true);
