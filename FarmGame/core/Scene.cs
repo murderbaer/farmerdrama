@@ -97,10 +97,6 @@ namespace FarmGame
             }
 
             camera.SetCameraMatrix();
-            foreach (var gameObject in GetAllComponents<IDrawGround>())
-            {
-                gameObject.DrawGround();
-            }
 
             IDrawGridLayer gridDraw = GetAllComponents<IDrawGridLayer>().First<IDrawGridLayer>();
             gridDraw.DrawLayer(0);
@@ -113,11 +109,6 @@ namespace FarmGame
             }
 
             gridDraw.DrawLayer(3);
-
-            foreach (var gameObject in GetAllComponents<IDrawAbove>())
-            {
-                gameObject.DrawAbove();
-            }
 
             camera.SetOverlayMatrix();
             foreach (var gameObject in GetAllComponents<IDrawOverlay>())
