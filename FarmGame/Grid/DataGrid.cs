@@ -1,6 +1,6 @@
 namespace FarmGame
 {
-    public class DataGrid : IUpdatable
+    public class DataGrid : IReadOnlyGrid
     {
         private readonly IGridCell[] _grid;
 
@@ -34,6 +34,19 @@ namespace FarmGame
                 }
             }
         }
+
+        #if DEBUG
+        public DataGrid()
+        {
+            int gridSize = 100;
+            _grid = new IGridCell[gridSize];
+
+            for (int i = 0; i < _grid.Length; i++)
+            {
+                _grid[i] = new GridCell();
+            }
+        }
+        #endif
 
         public int Column { get; }
 

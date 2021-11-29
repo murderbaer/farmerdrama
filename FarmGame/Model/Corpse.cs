@@ -21,6 +21,13 @@ namespace FarmGame
             _player = goPlayer.GetComponent<Player>();
         }
 
+        #if DEBUG
+        public Corpse(Vector2 pos)
+        {
+            Position = pos;
+        }
+        #endif
+
         public bool IsPlaced { get; set; } = true;
 
         public Vector2 Position { get; set; }

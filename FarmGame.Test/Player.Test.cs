@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
 using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 
 namespace FarmGame.Test
 {
@@ -61,6 +62,32 @@ namespace FarmGame.Test
 
             Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.WHEET);
             Assert.AreEqual(farmland.State, FarmLandState.EMPTY);
+        }
+
+        [TestMethod]
+        public void TestPickUpCorpse()
+        {
+            Corpse testCorpse = new Corpse(goPlayer);
+            player.Position = testCorpse.Position;
+            playerItemInteraction.ItemInHand = new Item();
+            testCorpse.IsPlaced = false;
+
+            Assert.AreEqual(testCorpse.IsPlaced, false);
+
+            player.Position = new Vector2(testCorpse.Position.X + 10,testCorpse.Position.Y + 10);
+            testCorpse.Update(1f);
+
+            Assert.AreEqual(player.Position.X, testCorpse.Position.X);
+            Assert.AreEqual(player.Position.Y, testCorpse.Position.Y);
+            
+            testCorpse.IsPlaced = true;
+            Assert.AreEqual(testCorpse.IsPlaced, true);
+            
+            player.Position = new Vector2(testCorpse.Position.X + 10,testCorpse.Position.Y + 10);
+            testCorpse.Update(1f);
+            
+            Assert.AreNotEqual(player.Position.X, testCorpse.Position.X);
+            Assert.AreNotEqual(player.Position.Y, testCorpse.Position.Y);
         }
     }
 }

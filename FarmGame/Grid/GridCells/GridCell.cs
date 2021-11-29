@@ -1,14 +1,7 @@
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
-
 namespace FarmGame
 {
     public class GridCell : IGridCell
     {
-        public GridCell()
-        {
-        }
-
         public virtual bool HasCollision { get; set; }
 
         public virtual SpriteObject Sprite { get; private set; }

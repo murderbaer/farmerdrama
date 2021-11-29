@@ -18,13 +18,6 @@ namespace FarmGame.Test
             Assert.IsTrue(cell.HasCollision);
         }
 
-        // [TestMethod]
-        // public void TestColor()
-        // {
-        //     cell.CellColor = Color4.White;
-        //     Assert.AreEqual(cell.CellColor, Color4.White);
-        // }
-
         [TestMethod]
         public void TestTakeItem()
         {
