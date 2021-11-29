@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
 using System.Diagnostics.CodeAnalysis;
-using System.Windows;
 
 namespace FarmGame.Test
 {

@@ -1,5 +1,3 @@
-using OpenTK.Mathematics;
-
 namespace FarmGame
 {
     public interface IGridCell : IUpdatable

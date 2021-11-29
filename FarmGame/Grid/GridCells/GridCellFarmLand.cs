@@ -1,5 +1,3 @@
-using OpenTK.Mathematics;
-
 namespace FarmGame
 {
     public class GridCellFarmLand : GridCell
