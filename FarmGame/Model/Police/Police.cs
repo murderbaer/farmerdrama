@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-using ImageMagick;
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
 namespace FarmGame

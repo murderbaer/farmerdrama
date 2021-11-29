@@ -12,9 +12,9 @@ namespace FarmGame
 
         private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
 
-        private CollisionGrid collidableGridCells;
+        private IReadOnlyGrid collidableGridCells;
 
-        public Player(CollisionGrid colGrid)
+        public Player(IReadOnlyGrid colGrid)
         {
             collidableGridCells = colGrid;
 

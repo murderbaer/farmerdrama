@@ -11,7 +11,5 @@ namespace FarmGame
         public bool InteractWithItem(Item item);
 
         public Item TakeItem();
-
-        public void DrawGridCellTextured(int positionX, int positionY, Box2 spriteBox);
     }
 }

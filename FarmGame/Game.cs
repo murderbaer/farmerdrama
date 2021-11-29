@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Runtime.CompilerServices;
 using OpenTK.Windowing.Desktop;
 
 namespace FarmGame
@@ -21,7 +20,7 @@ namespace FarmGame
 
             var goSuspicion = scene.CreateGameObject("Suspicion");
             LoadSuspicion(goSuspicion);
-            
+
             var goPlayer = scene.CreateGameObject("Player");
             LoadPlayer(goPlayer, colGrid);
 
@@ -58,7 +57,7 @@ namespace FarmGame
             goSuspicion.Components.Add(suspicionBar);
         }
 
-        private static void LoadPlayer(GameObject goPlayer, CollisionGrid colGrid)
+        private static void LoadPlayer(GameObject goPlayer, IReadOnlyGrid colGrid)
         {
             var player = new Player(colGrid);
             goPlayer.Components.Add(player);
@@ -66,7 +65,7 @@ namespace FarmGame
             goPlayer.Components.Add(playerVisual);
         }
 
-        private static CollisionGrid LoadGrid(GameObject goGrid)
+        private static IReadOnlyGrid LoadGrid(GameObject goGrid)
         {
             var gridVisuals = new LayeredSpriteGrid();
             goGrid.Components.Add(gridVisuals);

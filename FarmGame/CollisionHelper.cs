@@ -28,7 +28,7 @@ namespace FarmGame
             return GetCollisionBox(position.X, position.Y, size: size, centered: centered);
         }
 
-        public static List<Box2> GetTileCollisionBoxesAround(Vector2 position, CollisionGrid colGrid)
+        public static List<Box2> GetTileCollisionBoxesAround(Vector2 position, IReadOnlyGrid colGrid)
         {
             int positionXFloor = (int)MathHelper.Floor(position.X) - 1;
             int positionYFloor = (int)MathHelper.Floor(position.Y) - 1;

@@ -1,6 +1,6 @@
 namespace FarmGame
 {
-    public class CollisionGrid : IComponent
+    public class CollisionGrid : IComponent, IReadOnlyGrid
     {
         public CollisionGrid(SpriteGrid collisionGrid)
         {
@@ -33,6 +33,10 @@ namespace FarmGame
         {
             get { return CollidableGrid[col + (Column * row)]; }
             set { CollidableGrid[col + (Column * row)] = value; }
+        }
+
+        public void Update(float elapsedTime)
+        {
         }
     }
 }
