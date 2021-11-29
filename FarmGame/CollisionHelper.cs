@@ -28,7 +28,7 @@ namespace FarmGame
             return GetCollisionBox(position.X, position.Y, size: size, centered: centered);
         }
 
-        public static List<Box2> GetTileCollisionBoxesAround(Vector2 position, IReadOnlyGrid grid)
+        public static List<Box2> GetTileCollisionBoxesAround(Vector2 position, IReadOnlyGrid colGrid)
         {
             int positionXFloor = (int)MathHelper.Floor(position.X) - 1;
             int positionYFloor = (int)MathHelper.Floor(position.Y) - 1;
@@ -37,8 +37,8 @@ namespace FarmGame
             List<Box2> collisionBoxes = new List<Box2>();
 
             // Optional performance boost
-            if (positionXFloor > grid.Column ||
-                positionYFloor > grid.Row ||
+            if (positionXFloor > colGrid.Column ||
+                positionYFloor > colGrid.Row ||
                 positionXCeil < 0 ||
                 positionYCeil < 0)
             {
@@ -50,10 +50,10 @@ namespace FarmGame
                 for (int cellPosY = positionYFloor; cellPosY <= positionYCeil; cellPosY++)
                 {
                     if (cellPosX >= 0 &&
-                        cellPosX < grid.Column &&
+                        cellPosX < colGrid.Column &&
                         cellPosY >= 0 &&
-                        cellPosY < grid.Row &&
-                        grid[cellPosX, cellPosY].HasCollision)
+                        cellPosY < colGrid.Row &&
+                        colGrid[cellPosX, cellPosY].HasCollision)
                     {
                         collisionBoxes.Add(GetCollisionBox(cellPosX, cellPosY));
                     }

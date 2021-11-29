@@ -1,5 +1,3 @@
-using OpenTK.Mathematics;
-
 namespace FarmGame
 {
     public class GridCellFarmLand : GridCell
@@ -107,7 +105,7 @@ namespace FarmGame
             }
         }
 
-        public override void Update(float elapsedTime, IWorld world)
+        public override void Update(float elapsedTime)
         {
             if (State == FarmLandState.EMPTY || State == FarmLandState.OVERGROWN)
             {

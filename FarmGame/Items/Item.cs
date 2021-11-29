@@ -1,9 +1,6 @@
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
-
 namespace FarmGame
 {
-    public class Item
+    public class Item : IComponent
     {
         public Item(ItemType type)
         {

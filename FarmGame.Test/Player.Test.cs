@@ -8,7 +8,16 @@ namespace FarmGame.Test
     [TestClass]
     public class PlayerTest
     {
-        PlayerDummy player = new PlayerDummy();
+        GameObject goPlayer = new GameObject();
+        Player player = new Player();
+        PlayerItemInteraction playerItemInteraction;
+
+        public PlayerTest()
+        {
+            goPlayer.Components.Add(player);
+            goPlayer.Components.Add(playerItemInteraction);
+            playerItemInteraction = new PlayerItemInteraction(goPlayer);
+        }
 
         [TestMethod]
         public void TestPosition()
@@ -28,30 +37,56 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestItemInHand()
         {
-            Assert.AreEqual(player.ItemInHand.Type, ItemType.EMPTY);
-            player.ItemInHand = new Item(ItemType.WATERBUCKET);
-            Assert.AreEqual(player.ItemInHand.Type, ItemType.WATERBUCKET);
+            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.EMPTY);
+            playerItemInteraction.ItemInHand = new Item(ItemType.WATERBUCKET);
+            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.WATERBUCKET);
         }
 
         [TestMethod]
         public void TestInteract()
         {
             var farmland = new GridCellFarmLand(FarmLandState.EMPTY);
-            player.ItemInHand = new Item(ItemType.WATERBUCKET);
-            player.Interact(farmland);
+            playerItemInteraction.ItemInHand = new Item(ItemType.WATERBUCKET);
+            playerItemInteraction.Interact(farmland);
             Assert.IsTrue(farmland.IsWatered);
-            Assert.AreEqual(player.ItemInHand.Type, ItemType.EMPTY);
+            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.EMPTY);
 
             var water = new GridCellWater();
-            player.Interact(water);
-            Assert.AreEqual(player.ItemInHand.Type, ItemType.WATERBUCKET);
+            playerItemInteraction.Interact(water);
+            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.WATERBUCKET);
 
             farmland.State = FarmLandState.FULLGROWN;
-            player.ItemInHand = new Item();
-            player.Interact(farmland);
+            playerItemInteraction.ItemInHand = new Item();
+            playerItemInteraction.Interact(farmland);
 
-            Assert.AreEqual(player.ItemInHand.Type, ItemType.WHEET);
+            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.WHEET);
             Assert.AreEqual(farmland.State, FarmLandState.EMPTY);
+        }
+
+        [TestMethod]
+        public void TestPickUpCorpse()
+        {
+            Corpse testCorpse = new Corpse(goPlayer);
+            player.Position = testCorpse.Position;
+            playerItemInteraction.ItemInHand = new Item();
+            testCorpse.IsPlaced = false;
+
+            Assert.AreEqual(testCorpse.IsPlaced, false);
+
+            player.Position = new Vector2(testCorpse.Position.X + 10,testCorpse.Position.Y + 10);
+            testCorpse.Update(1f);
+
+            Assert.AreEqual(player.Position.X, testCorpse.Position.X);
+            Assert.AreEqual(player.Position.Y, testCorpse.Position.Y);
+            
+            testCorpse.IsPlaced = true;
+            Assert.AreEqual(testCorpse.IsPlaced, true);
+            
+            player.Position = new Vector2(testCorpse.Position.X + 10,testCorpse.Position.Y + 10);
+            testCorpse.Update(1f);
+            
+            Assert.AreNotEqual(player.Position.X, testCorpse.Position.X);
+            Assert.AreNotEqual(player.Position.Y, testCorpse.Position.Y);
         }
     }
 }
