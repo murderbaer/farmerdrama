@@ -53,6 +53,7 @@ namespace FarmGame
             var playerY = (int)Math.Floor(_position.Position.Y);
             IGridCell cell = _grid[playerX, playerY];
 
+            _spacePressedLastFrame = true;
             if (ItemInHand.Type != ItemType.EMPTY)
             {
                 var success = cell.InteractWithItem(ItemInHand);

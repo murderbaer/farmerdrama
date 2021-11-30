@@ -115,8 +115,6 @@ namespace FarmGame
             {
                 _spriteGrid[0][args.Position].Gid = (int)SpriteType.FARM_LAND;
             }
-
-            Console.WriteLine(args.CurrentState);
         }
 
         private void IntializeLayerOne()
