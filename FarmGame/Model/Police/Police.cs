@@ -5,7 +5,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class Police : IUpdatable, IPosition
+    public class Police : IUpdatable, IPosition, IMoving
     {
         private int _currentPath = -1;
 

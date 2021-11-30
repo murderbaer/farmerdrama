@@ -9,7 +9,7 @@ namespace FarmGame
         Moving,
     }
 
-    public class MoveRandomComponent : IPosition, IUpdatable
+    public class MoveRandomComponent : IPosition, IUpdatable, IMoving
     {
         private Box2 _bounds;
         private Random _random = new Random();
@@ -85,7 +85,7 @@ namespace FarmGame
                 if (!MoveToGoal(elapsedTime))
                 {
                     _state = MoveRandomComponentState.Idle;
-                    _timeToWait = 1 + (float)(_random.NextDouble() * 4); // random time between 1-5 seconds
+                    _timeToWait = 1 + (float)(_random.NextDouble() * 10 / MovementSpeed);
                     _timeTicker = 0;
                 }
             }

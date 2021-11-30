@@ -113,6 +113,8 @@ namespace FarmGame
             goPig.Components.Add(moveRandom);
             var pigVisual = new PigVisual(goPig);
             goPig.Components.Add(pigVisual);
+            var hunger = new Hunger(goPig);
+            goPig.Components.Add(hunger);
         }
     }
 }
