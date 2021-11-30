@@ -4,8 +4,6 @@ namespace FarmGame
     {
         public virtual bool HasCollision { get; set; }
 
-        public virtual SpriteObject Sprite { get; private set; }
-
         public virtual float HiddenFactor { get; } = 1f;
 
         public virtual void Update(float elapsedTime)

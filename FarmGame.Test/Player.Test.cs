@@ -10,13 +10,15 @@ namespace FarmGame.Test
     {
         GameObject goPlayer = new GameObject();
         Player player = new Player();
+
+        IReadOnlyGrid grid = new DataGrid();
         PlayerItemInteraction playerItemInteraction;
 
         public PlayerTest()
         {
             goPlayer.Components.Add(player);
             goPlayer.Components.Add(playerItemInteraction);
-            playerItemInteraction = new PlayerItemInteraction(goPlayer);
+            playerItemInteraction = new PlayerItemInteraction(goPlayer, grid);
         }
 
         [TestMethod]
@@ -45,7 +47,7 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestInteract()
         {
-            var farmland = new GridCellFarmLand(FarmLandState.EMPTY);
+            var farmland = new GridCellFarmLand(FarmLandState.EMPTY, 0);
             playerItemInteraction.ItemInHand = new Item(ItemType.WATERBUCKET);
             playerItemInteraction.Interact(farmland);
             Assert.IsTrue(farmland.IsWatered);

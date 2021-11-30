@@ -1,36 +1,42 @@
+using System;
+
 namespace FarmGame
 {
-    public class DataGrid : IReadOnlyGrid
+    public class DataGrid : IComponent, IReadOnlyGrid
     {
-        private readonly IGridCell[] _grid;
+        private IGridCell[] _grid;
 
-        public DataGrid(SpriteGrid functionalSprites)
+        public DataGrid(SpriteGrid functionalSprites, LayeredSpriteGrid layerdGrid)
         {
             int gridSize = functionalSprites.Column * functionalSprites.Row;
             _grid = new IGridCell[gridSize];
+            Column = functionalSprites.Column;
+            Row = functionalSprites.Row;
 
             for (int i = 0; i < gridSize; i++)
             {
                 switch ((SpriteType)functionalSprites[i].Gid)
                 {
                     case SpriteType.FARM_LAND:
-                    _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY);
-                    break;
+                        _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, i);
+                        GridCellFarmLand temp = (GridCellFarmLand)_grid[i];
+                        temp.OnStateChange += layerdGrid.ReactOnStateChange;
+                        break;
                     case SpriteType.WATER_LD:
                     case SpriteType.WATER_LU:
                     case SpriteType.WATER_RD:
                     case SpriteType.WATER_RU:
-                    _grid[i] = new GridCellWater();
-                    break;
+                        _grid[i] = new GridCellWater();
+                        break;
                     case SpriteType.COLLISION:
-                    _grid[i] = new GridCellCollision();
-                    break;
+                        _grid[i] = new GridCellCollision();
+                        break;
                     case SpriteType.SEEDS:
-                    _grid[i] = new GridCellSeedStorage();
-                    break;
+                        _grid[i] = new GridCellSeedStorage();
+                        break;
                     default:
-                    _grid[i] = new GridCell();
-                    break;
+                        _grid[i] = new GridCell();
+                        break;
                 }
             }
         }
