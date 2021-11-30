@@ -1,13 +1,17 @@
+using System;
+
 namespace FarmGame
 {
-    public class DataGrid : IReadOnlyGrid
+    public class DataGrid : IComponent, IReadOnlyGrid
     {
-        private readonly IGridCell[] _grid;
+        private IGridCell[] _grid;
 
         public DataGrid(SpriteGrid functionalSprites)
         {
             int gridSize = functionalSprites.Column * functionalSprites.Row;
             _grid = new IGridCell[gridSize];
+            Column = functionalSprites.Column;
+            Row = functionalSprites.Row;
 
             for (int i = 0; i < gridSize; i++)
             {
@@ -15,6 +19,8 @@ namespace FarmGame
                 {
                     case SpriteType.FARM_LAND:
                     _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY);
+                    GridCellFarmLand temp = (GridCellFarmLand)_grid[i];
+                    temp.OnStateChange += test;
                     break;
                     case SpriteType.WATER_LD:
                     case SpriteType.WATER_LU:
@@ -33,6 +39,11 @@ namespace FarmGame
                     break;
                 }
             }
+        }
+
+        private void test(object sender, EventArgs e)
+        {
+            Console.WriteLine("Testing");
         }
 
         #if DEBUG

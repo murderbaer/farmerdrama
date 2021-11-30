@@ -1,3 +1,5 @@
+using System;
+
 namespace FarmGame
 {
     public class GridCellFarmLand : GridCell
@@ -6,7 +8,7 @@ namespace FarmGame
         {
             State = state;
         }
-
+        public event EventHandler OnStateChange;
         /*  public override Color4 CellColor
             {
                 get
@@ -78,6 +80,7 @@ namespace FarmGame
             if (item.Type == ItemType.WATERBUCKET & !IsWatered)
             {
                 IsWatered = true;
+                OnStateChange?.Invoke(this, EventArgs.Empty);
                 return true;
             }
             else if (item.Type == ItemType.SEED & State == FarmLandState.EMPTY)
