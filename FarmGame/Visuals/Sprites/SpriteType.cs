@@ -8,6 +8,7 @@ namespace FarmGame
         WATER_LD = 2916,
         WATER_RD = 2917,
         SEEDS = 5051,
+        FEEDER = 5179,
         COLLISION = -1,
         AIR = 7643,
     }
