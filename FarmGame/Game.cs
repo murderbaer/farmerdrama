@@ -82,10 +82,10 @@ namespace FarmGame
             SpriteGrid temp = SpriteGrid.SquashGrids(l1, l2);
             temp = SpriteGrid.SquashGrids(temp, l3);
 
-            _dataGrid= new DataGrid(temp);
+            _dataGrid = new DataGrid(temp, gridVisuals);
             goGrid.Components.Add(_dataGrid);
 
-            _colGrid =  new CollisionGrid(l3);
+            _colGrid = new CollisionGrid(l3);
         }
 
         private static void LoadCorpse(GameObject goCorpse, GameWindow window, Scene scene)

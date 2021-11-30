@@ -1,3 +1,4 @@
+using System;
 using System.Xml;
 
 using ImageMagick;
@@ -56,7 +57,6 @@ namespace FarmGame
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Blend);
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
-            GL.Color4(Color4.White);
             for (int row = 0; row < Row; ++row)
             {
                 for (int column = 0; column < Column; ++column)
@@ -84,6 +84,39 @@ namespace FarmGame
             GL.TexCoord2(sprite.Min.X, sprite.Max.Y);
             GL.Vertex2(positionX, positionY + 1);
             GL.End();
+        }
+
+        public void ReactOnStateChange(object source, OnStateChangeArgs args)
+        {
+            switch (args.CurrentState)
+            {
+                case FarmLandState.EMPTY:
+                    _spriteGrid[1][args.Position].Gid = (int)SpriteType.AIR;
+                    break;
+                case FarmLandState.FULLGROWN:
+                    _spriteGrid[1][args.Position].Gid = 5903;
+                    break;
+                case FarmLandState.HALFGROWN:
+                    _spriteGrid[1][args.Position].Gid = 5902;
+                    break;
+                case FarmLandState.OVERGROWN:
+                    _spriteGrid[1][args.Position].Gid = 5905;
+                    break;
+                case FarmLandState.SEED:
+                    _spriteGrid[1][args.Position].Gid = 5900;
+                    break;
+            }
+
+            if (args.IsWatered)
+            {
+                _spriteGrid[0][args.Position].Gid = 825;
+            }
+            else
+            {
+                _spriteGrid[0][args.Position].Gid = (int)SpriteType.FARM_LAND;
+            }
+
+            Console.WriteLine(args.CurrentState);
         }
 
         private void IntializeLayerOne()

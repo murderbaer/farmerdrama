@@ -6,7 +6,7 @@ namespace FarmGame
     {
         private IGridCell[] _grid;
 
-        public DataGrid(SpriteGrid functionalSprites)
+        public DataGrid(SpriteGrid functionalSprites, LayeredSpriteGrid layerdGrid)
         {
             int gridSize = functionalSprites.Column * functionalSprites.Row;
             _grid = new IGridCell[gridSize];
@@ -18,32 +18,27 @@ namespace FarmGame
                 switch ((SpriteType)functionalSprites[i].Gid)
                 {
                     case SpriteType.FARM_LAND:
-                    _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, i);
-                    GridCellFarmLand temp = (GridCellFarmLand)_grid[i];
-                    temp.OnStateChange += test;
-                    break;
+                        _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, i);
+                        GridCellFarmLand temp = (GridCellFarmLand)_grid[i];
+                        temp.OnStateChange += layerdGrid.ReactOnStateChange;
+                        break;
                     case SpriteType.WATER_LD:
                     case SpriteType.WATER_LU:
                     case SpriteType.WATER_RD:
                     case SpriteType.WATER_RU:
-                    _grid[i] = new GridCellWater();
-                    break;
+                        _grid[i] = new GridCellWater();
+                        break;
                     case SpriteType.COLLISION:
-                    _grid[i] = new GridCellCollision();
-                    break;
+                        _grid[i] = new GridCellCollision();
+                        break;
                     case SpriteType.SEEDS:
-                    _grid[i] = new GridCellSeedStorage();
-                    break;
+                        _grid[i] = new GridCellSeedStorage();
+                        break;
                     default:
-                    _grid[i] = new GridCell();
-                    break;
+                        _grid[i] = new GridCell();
+                        break;
                 }
             }
-        }
-
-        private void test(object sender, OnStateChangeArgs e)
-        {
-            Console.WriteLine(e.CurrentState + " " + e.IsWatered + " " + e.Position);
         }
 
         #if DEBUG

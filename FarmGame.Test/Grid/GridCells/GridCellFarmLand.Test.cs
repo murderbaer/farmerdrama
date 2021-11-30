@@ -8,7 +8,7 @@ namespace FarmGame.Test
     [TestClass]
     public class GridCellFarmLandTest
     {
-        GridCellFarmLand cell = new GridCellFarmLand(FarmLandState.EMPTY);
+        GridCellFarmLand cell = new GridCellFarmLand(FarmLandState.EMPTY, 0);
 
         [TestMethod]
         public void TestCollision()

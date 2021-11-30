@@ -37,7 +37,7 @@ namespace FarmGame
 
         public void Update(float elapsedTime)
         {
-            if (_pressedKeys.Contains(Keys.Space) && !_spacePressedLastFrame )
+            if (_pressedKeys.Contains(Keys.Space) && !_spacePressedLastFrame)
             {
                 Interact();
             }
@@ -49,8 +49,6 @@ namespace FarmGame
 
         public void Interact()
         {
-            _spacePressedLastFrame = true;
-            
             var playerX = (int)Math.Floor(_position.Position.X);
             var playerY = (int)Math.Floor(_position.Position.Y);
             IGridCell cell = _grid[playerX, playerY];
@@ -72,5 +70,27 @@ namespace FarmGame
                 return;
             }
         }
+
+        #if DEBUG
+        public void Interact(IGridCell cell)
+        {
+            if (ItemInHand.Type != ItemType.EMPTY)
+            {
+                var success = cell.InteractWithItem(ItemInHand);
+                if (success)
+                {
+                    ItemInHand = new Item();
+                    return;
+                }
+            }
+
+            var newItem = cell.TakeItem();
+            if (newItem.Type != ItemType.EMPTY)
+            {
+                ItemInHand = newItem;
+                return;
+            }
+        }
+        #endif
     }
 }

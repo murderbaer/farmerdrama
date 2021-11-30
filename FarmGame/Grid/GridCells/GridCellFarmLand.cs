@@ -79,7 +79,7 @@ namespace FarmGame
                     returnItem = new Item(ItemType.EMPTY); break;
             }
 
-            OnStateChange?.Invoke(null, CreateStateEventArgs());
+            OnStateChange?.Invoke(this, CreateStateEventArgs());
             return returnItem;
         }
 
@@ -97,7 +97,7 @@ namespace FarmGame
                 sucess = true;
             }
 
-            OnStateChange?.Invoke(null, CreateStateEventArgs());
+            OnStateChange?.Invoke(this, CreateStateEventArgs());
             return sucess;
         }
 
@@ -110,13 +110,14 @@ namespace FarmGame
                     break;
                 case FarmLandState.HALFGROWN:
                     State = FarmLandState.FULLGROWN;
+                    IsWatered = false;
                     break;
                 case FarmLandState.FULLGROWN:
                     State = FarmLandState.OVERGROWN;
                     break;
             }
 
-            OnStateChange?.Invoke(null, CreateStateEventArgs());
+            OnStateChange?.Invoke(this, CreateStateEventArgs());
         }
 
         public override void Update(float elapsedTime)

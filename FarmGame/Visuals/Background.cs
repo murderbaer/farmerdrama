@@ -8,7 +8,7 @@ namespace FarmGame
         public void DrawBackground()
         {
             GL.Begin(PrimitiveType.Quads);
-            GL.Color4(Color4.Cyan);
+            GL.Color4(Color4.White);
             GL.Vertex2(0, 0);
             GL.Vertex2(16, 0);
             GL.Vertex2(16, 9);
