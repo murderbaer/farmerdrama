@@ -41,7 +41,7 @@ namespace FarmGame
             }
         }
 
-        #if DEBUG
+        // for testing
         public DataGrid()
         {
             int gridSize = 100;
@@ -52,7 +52,6 @@ namespace FarmGame
                 _grid[i] = new GridCell();
             }
         }
-        #endif
 
         public int Column { get; }
 

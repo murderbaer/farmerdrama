@@ -72,7 +72,7 @@ namespace FarmGame
             }
         }
 
-        #if DEBUG
+        // for testing
         public void Interact(IGridCell cell)
         {
             if (ItemInHand.Type != ItemType.EMPTY)
@@ -92,6 +92,5 @@ namespace FarmGame
                 return;
             }
         }
-        #endif
     }
 }
