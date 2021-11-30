@@ -7,11 +7,11 @@ namespace FarmGame
 {
     public class Police : IUpdatable, IPosition
     {
-        private int currentPath = -1;
+        private int _currentPath = -1;
 
-        private int currentPathPosition = -1;
+        private int _currentPathPosition = -1;
 
-        private Random random = new Random();
+        private Random _random = new Random();
 
         private TiledHandler _tiledHandler = TiledHandler.Instance;
 
@@ -60,43 +60,43 @@ namespace FarmGame
 
         public void StartPath(int pathID)
         {
-            currentPath = pathID;
-            currentPathPosition = 0;
+            _currentPath = pathID;
+            _currentPathPosition = 0;
         }
 
         public void StartRandomPath()
         {
-            currentPath = random.Next(0, Paths.Count);
-            currentPathPosition = 0;
+            _currentPath = _random.Next(0, Paths.Count);
+            _currentPathPosition = 0;
         }
 
         public void EndPath()
         {
-            currentPath = -1;
-            currentPathPosition = -1;
+            _currentPath = -1;
+            _currentPathPosition = -1;
         }
 
         public bool IsMoving()
         {
-            return currentPath != -1;
+            return _currentPath != -1;
         }
 
         private void Move(float elapsedTime)
         {
-            if (currentPath < 0 || currentPath >= Paths.Count)
+            if (_currentPath < 0 || _currentPath >= Paths.Count)
             {
                 EndPath();
                 return;
             }
 
-            var path = Paths[currentPath];
-            if (currentPathPosition < 0 || currentPathPosition >= path.Count)
+            var path = Paths[_currentPath];
+            if (_currentPathPosition < 0 || _currentPathPosition >= path.Count)
             {
                 EndPath();
                 return;
             }
 
-            var goal = path[currentPathPosition];
+            var goal = path[_currentPathPosition];
             var offset = goal - Position;
             var movement = offset.Normalized() * elapsedTime * MovementSpeed;
             if (movement.Length < offset.Length)
@@ -107,7 +107,7 @@ namespace FarmGame
 
             // Eckpunkt erreicht
             Position = goal;
-            currentPathPosition += 1;
+            _currentPathPosition += 1;
         }
     }
 }
