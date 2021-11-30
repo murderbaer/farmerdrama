@@ -18,7 +18,7 @@ namespace FarmGame
                 switch ((SpriteType)functionalSprites[i].Gid)
                 {
                     case SpriteType.FARM_LAND:
-                    _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY);
+                    _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, i);
                     GridCellFarmLand temp = (GridCellFarmLand)_grid[i];
                     temp.OnStateChange += test;
                     break;
@@ -41,9 +41,9 @@ namespace FarmGame
             }
         }
 
-        private void test(object sender, EventArgs e)
+        private void test(object sender, OnStateChangeArgs e)
         {
-            Console.WriteLine("Testing");
+            Console.WriteLine(e.CurrentState + " " + e.IsWatered + " " + e.Position);
         }
 
         #if DEBUG

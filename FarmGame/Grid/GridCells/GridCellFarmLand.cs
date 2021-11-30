@@ -4,11 +4,15 @@ namespace FarmGame
 {
     public class GridCellFarmLand : GridCell
     {
-        public GridCellFarmLand(FarmLandState state)
+        private readonly int _postition;
+
+        public GridCellFarmLand(FarmLandState state, int position)
         {
             State = state;
+            _postition = position;
         }
-        public event EventHandler OnStateChange;
+
+        public event EventHandler<OnStateChangeArgs> OnStateChange;
         /*  public override Color4 CellColor
             {
                 get
@@ -62,34 +66,39 @@ namespace FarmGame
 
         public override Item TakeItem()
         {
+            Item returnItem;
             switch (State)
             {
                 case FarmLandState.FULLGROWN:
                     State = FarmLandState.EMPTY;
-                    return new Item(ItemType.WHEET);
+                    returnItem = new Item(ItemType.WHEET); break;
                 case FarmLandState.OVERGROWN:
                     State = FarmLandState.EMPTY;
-                    return new Item(ItemType.EMPTY);
+                    returnItem = new Item(ItemType.EMPTY); break;
                 default:
-                    return new Item(ItemType.EMPTY);
+                    returnItem = new Item(ItemType.EMPTY); break;
             }
+
+            OnStateChange?.Invoke(null, CreateStateEventArgs());
+            return returnItem;
         }
 
         public override bool InteractWithItem(Item item)
         {
+            bool sucess = false;
             if (item.Type == ItemType.WATERBUCKET & !IsWatered)
             {
                 IsWatered = true;
-                OnStateChange?.Invoke(this, EventArgs.Empty);
-                return true;
+                sucess = true;
             }
             else if (item.Type == ItemType.SEED & State == FarmLandState.EMPTY)
             {
                 State = FarmLandState.SEED;
-                return true;
+                sucess = true;
             }
 
-            return false;
+            OnStateChange?.Invoke(null, CreateStateEventArgs());
+            return sucess;
         }
 
         public void ProgressState()
@@ -106,6 +115,8 @@ namespace FarmGame
                     State = FarmLandState.OVERGROWN;
                     break;
             }
+
+            OnStateChange?.Invoke(null, CreateStateEventArgs());
         }
 
         public override void Update(float elapsedTime)
@@ -121,6 +132,11 @@ namespace FarmGame
                 GrowthTimer = 0;
                 this.ProgressState();
             }
+        }
+
+        private OnStateChangeArgs CreateStateEventArgs()
+        {
+            return new OnStateChangeArgs(IsWatered, State, _postition);
         }
     }
 }
