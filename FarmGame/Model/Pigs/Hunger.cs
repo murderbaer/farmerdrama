@@ -36,7 +36,7 @@ namespace FarmGame
 
         public float GetMovementSpeed()
         {
-            return _initialMovementSpeed * (1 + (_hungerCounter / 50));
+            return _initialMovementSpeed * (1 + (_hungerCounter / 10));
         }
 
         public void Update(float elapsedTime)

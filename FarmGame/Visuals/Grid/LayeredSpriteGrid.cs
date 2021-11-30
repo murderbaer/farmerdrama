@@ -141,6 +141,10 @@ namespace FarmGame
                 {
                     _grid[i] = new GridCellSeedStorage();
                 }
+                else if (gid == (int)SpriteType.FEEDER)
+                {
+                    _grid[i] = new GridCellFeeder();
+                }
 
                 _spriteGrid[1][i] = new SpriteObject(_spriteSheet, gid);
             }

@@ -44,7 +44,7 @@ namespace FarmGame
             for (int n = 0; n < 1; n++)
             {
                 goPig = scene.CreateGameObject("Pig");
-                LoadPig(goPig);
+                LoadPig(goPig, goGrid);
             }
 
             return scene;
@@ -112,7 +112,7 @@ namespace FarmGame
             goPolice.Components.Add(policeVisual);
         }
 
-        private static void LoadPig(GameObject goPig)
+        private static void LoadPig(GameObject goPig, GameObject goGrid)
         {
             var pigPen = TiledHandler.Instance.PigPen;
             var moveRandom = new MoveRandomComponent(pigPen);
@@ -121,6 +121,8 @@ namespace FarmGame
             goPig.Components.Add(pigVisual);
             var hunger = new Hunger(goPig);
             goPig.Components.Add(hunger);
+            var eating = new Eating(goPig, goGrid);
+            goPig.Components.Add(eating);
         }
     }
 }

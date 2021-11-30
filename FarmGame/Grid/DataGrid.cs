@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using OpenTK.Mathematics;
 
 namespace FarmGame
 {
@@ -8,6 +10,8 @@ namespace FarmGame
 
         public DataGrid(SpriteGrid functionalSprites, LayeredSpriteGrid layerdGrid)
         {
+            Column = functionalSprites.Column;
+            Row = functionalSprites.Row;
             int gridSize = functionalSprites.Column * functionalSprites.Row;
             _grid = new IGridCell[gridSize];
             Column = functionalSprites.Column;
@@ -33,6 +37,9 @@ namespace FarmGame
                         break;
                     case SpriteType.SEEDS:
                         _grid[i] = new GridCellSeedStorage();
+                        break;
+                    case SpriteType.FEEDER:
+                        _grid[i] = new GridCellFeeder();
                         break;
                     default:
                         _grid[i] = new GridCell();
@@ -68,6 +75,24 @@ namespace FarmGame
             foreach (IGridCell cell in _grid)
             {
                 cell.Update(elapsedTime);
+            }
+        }
+
+        public IEnumerable<IGridCell> GetCellsNearby(Vector2 position, float radius)
+        {
+            var invRadius = 1 / radius;
+            var limX = MathHelper.Ceiling(position.X + radius);
+            var limY = MathHelper.Ceiling(position.Y + radius);
+            for (int x = (int)MathHelper.Floor(position.X - radius); x < limX; x++)
+            {
+                for (int y = (int)MathHelper.Floor(position.Y - radius); y < limY; y++)
+                {
+                    var dist = MathHelper.InverseSqrtFast(MathHelper.Pow(x - position.X, 2) + MathHelper.Pow(y - position.Y, 2));
+                    if (x >= 0 && x < Column && y >= 0 && y < Row && dist > invRadius)
+                    {
+                        yield return this[x, y];
+                    }
+                }
             }
         }
     }
