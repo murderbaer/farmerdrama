@@ -36,6 +36,13 @@ namespace FarmGame
             var cameraController = goCamera.GetComponent<CameraController>();
             cameraController.FollowGameObject(goPlayer, setPosition: true);
 
+            GameObject goPig;
+            for (int n = 0; n < 1; n++)
+            {
+                goPig = scene.CreateGameObject("Pig");
+                LoadPig(goPig);
+            }
+
             return scene;
         }
 
@@ -97,6 +104,17 @@ namespace FarmGame
             goPolice.Components.Add(police);
             var policeVisual = new PoliceVisual(goPolice);
             goPolice.Components.Add(policeVisual);
+        }
+
+        private static void LoadPig(GameObject goPig)
+        {
+            var pigPen = TiledHandler.Instance.PigPen;
+            var moveRandom = new MoveRandomComponent(pigPen);
+            goPig.Components.Add(moveRandom);
+            var pigVisual = new PigVisual(goPig);
+            goPig.Components.Add(pigVisual);
+            var hunger = new Hunger(goPig);
+            goPig.Components.Add(hunger);
         }
     }
 }

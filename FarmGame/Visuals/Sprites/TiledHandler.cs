@@ -10,6 +10,8 @@ namespace FarmGame
     {
         private static TiledHandler _instance = null;
 
+        private XmlDocument _doc;
+
         // TODO: Refactor this in more methods/classes
         private TiledHandler()
         {
@@ -21,20 +23,20 @@ namespace FarmGame
             var assembly = Assembly.GetExecutingAssembly();
             using (Stream stream = assembly.GetManifestResourceStream("FarmGame.Resources.Graphics.Map.tmx"))
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(stream);
+                _doc = new XmlDocument();
+                _doc.Load(stream);
 
-                BoardX = int.Parse(doc.DocumentElement.GetAttribute("width"));
-                BoardY = int.Parse(doc.DocumentElement.GetAttribute("height"));
-                TilePixelSize = int.Parse(doc.DocumentElement.GetAttribute("tilewidth"));
-                LevelOneTiles = doc.DocumentElement.SelectSingleNode("layer[@name='groundLayer']");
-                LevelTwoTiles = doc.DocumentElement.SelectSingleNode("layer[@name='smallObjectLayer']");
-                LevelThreeTiles = doc.DocumentElement.SelectSingleNode("layer[@name='collisionLayer']");
-                LevelFourTiles = doc.DocumentElement.SelectSingleNode("layer[@name='aboveLayer']");
+                BoardX = int.Parse(_doc.DocumentElement.GetAttribute("width"));
+                BoardY = int.Parse(_doc.DocumentElement.GetAttribute("height"));
+                TilePixelSize = int.Parse(_doc.DocumentElement.GetAttribute("tilewidth"));
+                LevelOneTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='groundLayer']");
+                LevelTwoTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='smallObjectLayer']");
+                LevelThreeTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='collisionLayer']");
+                LevelFourTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='aboveLayer']");
 
-                TiledPlayerPos = doc.DocumentElement.SelectSingleNode("objectgroup[@name='playerPos']");
-                TiledCorpsePos = doc.DocumentElement.SelectSingleNode("objectgroup[@name='corpsePos']");
-                TiledPolicePaths = doc.DocumentElement.SelectSingleNode("objectgroup[@name='policePaths']");
+                TiledPlayerPos = _doc.DocumentElement.SelectSingleNode("objectgroup[@name='playerPos']");
+                TiledCorpsePos = _doc.DocumentElement.SelectSingleNode("objectgroup[@name='corpsePos']");
+                TiledPolicePaths = _doc.DocumentElement.SelectSingleNode("objectgroup[@name='policePaths']");
             }
         }
 
@@ -70,5 +72,18 @@ namespace FarmGame
         public int BoardX { get; private set; }
 
         public int BoardY { get; private set; }
+
+        public Box2 PigPen
+        {
+            get
+            {
+                var pigPen = _doc.DocumentElement.SelectSingleNode("objectgroup[@name='PigPen']").SelectNodes("object");
+                float posX = float.Parse(pigPen[0].Attributes["x"].Value) / 16;
+                float posY = float.Parse(pigPen[0].Attributes["y"].Value) / 16;
+                float width = float.Parse(pigPen[0].Attributes["width"].Value) / 16;
+                float height = float.Parse(pigPen[0].Attributes["height"].Value) / 16;
+                return new Box2(posX, posY, posX + width, posY + height);
+            }
+        }
     }
 }

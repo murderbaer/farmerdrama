@@ -6,7 +6,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener
+    public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener, IMoving
     {
         private TiledHandler _tiledHandler = TiledHandler.Instance;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="61" height="51" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="17">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="61" height="51" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="18">
  <editorsettings>
   <export target="TiledMap.tmx" format="tmx"/>
  </editorsettings>
@@ -9366,6 +9366,9 @@
   <object id="8" name="pathTwo" x="854.667" y="361.333" visible="0">
    <polygon points="73.125,-0.75 -383.333,-0.666667 -382.917,213.917 -382.917,-0.833333"/>
   </object>
+ </objectgroup>
+ <objectgroup id="10" name="PigPen">
+  <object id="17" name="PigPen" x="192.000" y="272.000" width="128.000" height="176.000"/>
  </objectgroup>
  <layer id="3" name="aboveLayer" width="61" height="51">
   <data>
