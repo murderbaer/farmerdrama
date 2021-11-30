@@ -41,7 +41,7 @@ namespace FarmGame
             cameraController.FollowGameObject(goPlayer, setPosition: true);
 
             GameObject goPig;
-            for (int n = 0; n < 1; n++)
+            for (int n = 0; n < 4; n++)
             {
                 goPig = scene.CreateGameObject("Pig");
                 LoadPig(goPig, goGrid);
