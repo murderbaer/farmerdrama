@@ -12,19 +12,19 @@ namespace FarmGame
 
         private int _spriteHandle;
 
-        private SpriteObject _playerSprite;
-
         public PoliceVisual(GameObject goPolice)
         {
             _position = goPolice.GetComponent<IPosition>();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            _playerSprite = new SpriteObject(_spriteSheet, 14);
+            Sprite = new SpriteObject(_spriteSheet, 14);
         }
+
+        public SpriteObject Sprite { get; private set; }
 
         public void Draw()
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(_playerSprite);
+            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(Sprite);
             GL.Color4(Color4.White);
 
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);

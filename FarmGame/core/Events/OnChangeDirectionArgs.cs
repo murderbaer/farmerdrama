@@ -10,7 +10,7 @@ namespace FarmGame
         {
             Direction = direction;
         }
-        
+
         public Vector2 Direction { get; private set; }
     }
 }

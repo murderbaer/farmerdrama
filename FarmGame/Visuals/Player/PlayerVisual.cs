@@ -4,7 +4,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class PigVisual : IDrawable
+    public class PlayerVisual : IDrawable
     {
         private IPosition _position;
 
@@ -12,12 +12,12 @@ namespace FarmGame
 
         private int _spriteHandle;
 
-        public PigVisual(GameObject goPig)
+        public PlayerVisual(GameObject goPlayer)
         {
-            _position = goPig.GetComponent<IPosition>();
+            _position = goPlayer.GetComponent<IPosition>();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            Sprite = new SpriteObject(_spriteSheet, 45); // TODO: Get correct Texture
+            Sprite = new SpriteObject(_spriteSheet, 1);
         }
 
         public SpriteObject Sprite { get; private set; }

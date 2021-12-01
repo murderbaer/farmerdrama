@@ -37,9 +37,9 @@ namespace FarmGame
             Position = new Vector2(posX / pixelSize, posY / pixelSize);
         }
 
-        public Vector2 Position { get; set; }
-
         public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
+
+        public Vector2 Position { get; set; }
 
         // Movement speed in Tiles per second
         public float MovementSpeed { get; set; } = 3f;
@@ -69,6 +69,7 @@ namespace FarmGame
             {
                 return;
             }
+
             OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(moveDirection));
             moveDirection.Normalize();
             var movementVector = moveDirection * elapsedTime * MovementSpeed;

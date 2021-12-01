@@ -72,8 +72,16 @@ namespace FarmGame
         {
             var player = new Player(_colGrid);
             goPlayer.Components.Add(player);
+
             var playerVisual = new PlayerVisual(goPlayer);
             goPlayer.Components.Add(playerVisual);
+            var playerAnimation = new PlayerAnimation(goPlayer);
+            goPlayer.Components.Add(playerAnimation);
+
+            // add listener
+            goPlayer.GetComponent<IChangeDirection>().OnChangeDirection +=
+                goPlayer.GetComponent<IAnimate>().Animate;
+
             var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);
             goPlayer.Components.Add(playerItemInteraction);
         }
@@ -110,6 +118,13 @@ namespace FarmGame
             goPolice.Components.Add(police);
             var policeVisual = new PoliceVisual(goPolice);
             goPolice.Components.Add(policeVisual);
+
+            var policeAnimation = new PoliceAnimation(goPolice);
+            goPolice.Components.Add(policeAnimation);
+
+            // add listener
+            goPolice.GetComponent<IChangeDirection>().OnChangeDirection +=
+                goPolice.GetComponent<IAnimate>().Animate;
         }
 
         private static void LoadPig(GameObject goPig, GameObject goGrid)
