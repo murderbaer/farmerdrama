@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using OpenTK.Mathematics;
@@ -6,7 +7,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener, IMoving
+    public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener, IMoving, IChangeDirection
     {
         private TiledHandler _tiledHandler = TiledHandler.Instance;
 
@@ -38,6 +39,8 @@ namespace FarmGame
 
         public Vector2 Position { get; set; }
 
+        public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
+
         // Movement speed in Tiles per second
         public float MovementSpeed { get; set; } = 3f;
 
@@ -66,7 +69,7 @@ namespace FarmGame
             {
                 return;
             }
-
+            OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(moveDirection));
             moveDirection.Normalize();
             var movementVector = moveDirection * elapsedTime * MovementSpeed;
 

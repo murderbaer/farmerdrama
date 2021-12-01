@@ -33,6 +33,7 @@ namespace FarmGame
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, img.Width, img.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pixels);
             GL.Enable(EnableCap.Texture2D);
 
+            GL.BindTexture(TextureTarget.Texture2D, 0);
             return handle;
         }
 
