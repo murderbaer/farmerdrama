@@ -10,12 +10,14 @@ namespace FarmGame
 
         private bool _animationSwitchSprite = true;
 
-        private bool looksUp;
-
         private int _moveUp = 4;
+
         private int _moveDown = 2;
+
         private int _moveLeft = 7;
+
         private int _moveRight = 10;
+
         private int _noMove = 1;
 
         public PlayerAnimation(GameObject goPlayer)
