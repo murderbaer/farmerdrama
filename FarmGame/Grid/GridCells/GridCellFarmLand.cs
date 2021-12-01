@@ -9,8 +9,6 @@ namespace FarmGame
         private float _farmStateProgress = 0f;
         private float _farmStateNextPhase = 20f;
 
-        public float FarmLandGrowthRate { get; set; } = 1f;
-
         private float _secondsIntervallProgress = 0f;
 
         public GridCellFarmLand(FarmLandState state, int position)
@@ -20,6 +18,8 @@ namespace FarmGame
         }
 
         public event EventHandler<OnStateChangeArgs> OnStateChange;
+
+        public float FarmLandGrowthRate { get; set; } = 1f;
 
         public override float HiddenFactor
         {

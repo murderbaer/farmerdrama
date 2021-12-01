@@ -9,9 +9,10 @@ namespace FarmGame.Test
     public class PlayerTest
     {
         GameObject goPlayer = new GameObject();
+        GameObject goCorpse = new GameObject();
         Player player = new Player();
 
-        IReadOnlyGrid grid = new DataGrid();
+        DataGrid grid = new DataGrid();
         PlayerItemInteraction playerItemInteraction;
 
         public PlayerTest()
@@ -19,6 +20,7 @@ namespace FarmGame.Test
             goPlayer.Components.Add(player);
             goPlayer.Components.Add(playerItemInteraction);
             playerItemInteraction = new PlayerItemInteraction(goPlayer, grid);
+            goCorpse.Components.Add(grid);
         }
 
         [TestMethod]
@@ -68,7 +70,7 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestPickUpCorpse()
         {
-            Corpse testCorpse = new Corpse(goPlayer);
+            Corpse testCorpse = new Corpse(goPlayer,goCorpse);
             player.Position = testCorpse.Position;
             playerItemInteraction.ItemInHand = new Item();
             testCorpse.IsPlaced = false;
@@ -80,13 +82,13 @@ namespace FarmGame.Test
 
             Assert.AreEqual(player.Position.X, testCorpse.Position.X);
             Assert.AreEqual(player.Position.Y, testCorpse.Position.Y);
-            
+
             testCorpse.IsPlaced = true;
             Assert.AreEqual(testCorpse.IsPlaced, true);
-            
+
             player.Position = new Vector2(testCorpse.Position.X + 10,testCorpse.Position.Y + 10);
             testCorpse.Update(1f);
-            
+
             Assert.AreNotEqual(player.Position.X, testCorpse.Position.X);
             Assert.AreNotEqual(player.Position.Y, testCorpse.Position.Y);
         }

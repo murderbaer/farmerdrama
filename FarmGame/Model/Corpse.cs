@@ -1,8 +1,8 @@
+using System;
+
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-
-using System;
 
 namespace FarmGame
 {
@@ -64,9 +64,9 @@ namespace FarmGame
             int x = (int)Math.Floor(_player.Position.X);
             int y = (int)Math.Floor(_player.Position.Y);
 
-            if (_grid[x,y].GetType() == typeof(GridCellFarmLand))
+            if (_grid[x, y].GetType() == typeof(GridCellFarmLand))
             {
-                var temp = (GridCellFarmLand)_grid[x,y];
+                var temp = (GridCellFarmLand)_grid[x, y];
                 temp.FarmLandGrowthRate += 0.3f;
             }
         }
@@ -76,9 +76,9 @@ namespace FarmGame
             int x = (int)Math.Floor(_player.Position.X);
             int y = (int)Math.Floor(_player.Position.Y);
 
-            if (_grid[x,y].GetType() == typeof(GridCellFarmLand))
+            if (_grid[x, y].GetType() == typeof(GridCellFarmLand))
             {
-                var temp = (GridCellFarmLand)_grid[x,y];
+                var temp = (GridCellFarmLand)_grid[x, y];
                 temp.FarmLandGrowthRate -= 0.3f;
             }
         }
