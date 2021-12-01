@@ -6,6 +6,13 @@ namespace FarmGame
     {
         private readonly int _postition;
 
+        private float _farmStateProgress = 0f;
+        private float _farmStateNextPhase = 20f;
+
+        private float _farmStateGrowthRate = 1f;
+
+        private float _secondsIntervallProgress = 0f;
+
         public GridCellFarmLand(FarmLandState state, int position)
         {
             State = state;
@@ -13,26 +20,6 @@ namespace FarmGame
         }
 
         public event EventHandler<OnStateChangeArgs> OnStateChange;
-        /*  public override Color4 CellColor
-            {
-                get
-                {
-                    switch (State)
-                    {
-                        case FarmLandState.SEED:
-                            return Color4.GreenYellow;
-                        case FarmLandState.HALFGROWN:
-                            return Color4.LimeGreen;
-                        case FarmLandState.FULLGROWN:
-                            return Color4.SeaGreen;
-                        case FarmLandState.OVERGROWN:
-                            return Color4.DarkGreen;
-                        default:
-                            return Color4.Brown;
-                    }
-                }
-            }
-        */
 
         public override float HiddenFactor
         {
@@ -58,9 +45,6 @@ namespace FarmGame
 
         public FarmLandState State { get; set; } = FarmLandState.EMPTY;
 
-        public double BaseGrowthRate { get; set; } = 30f;
-
-        public double GrowthRate { get => BaseGrowthRate / (IsWatered ? 1.2 : 1); }
 
         private double GrowthTimer { get; set; } = 0;
 
@@ -85,20 +69,21 @@ namespace FarmGame
 
         public override bool InteractWithItem(Item item)
         {
-            bool sucess = false;
+            bool success = false;
             if (item.Type == ItemType.WATERBUCKET & !IsWatered)
             {
                 IsWatered = true;
-                sucess = true;
+                _farmStateGrowthRate += 0.3f;
+                success = true;
             }
             else if (item.Type == ItemType.SEED & State == FarmLandState.EMPTY)
             {
                 State = FarmLandState.SEED;
-                sucess = true;
+                success = true;
             }
 
             OnStateChange?.Invoke(this, CreateStateEventArgs());
-            return sucess;
+            return success;
         }
 
         public void ProgressState()
@@ -111,6 +96,7 @@ namespace FarmGame
                 case FarmLandState.HALFGROWN:
                     State = FarmLandState.FULLGROWN;
                     IsWatered = false;
+                    _farmStateGrowthRate -= 0.3f;
                     break;
                 case FarmLandState.FULLGROWN:
                     State = FarmLandState.OVERGROWN;
@@ -127,11 +113,16 @@ namespace FarmGame
                 return;
             }
 
-            GrowthTimer += elapsedTime;
-            if (GrowthTimer >= GrowthRate)
+            _secondsIntervallProgress += elapsedTime;
+            if (_secondsIntervallProgress > 1f)
             {
-                GrowthTimer = 0;
-                this.ProgressState();
+                _secondsIntervallProgress = 0f;
+                _farmStateProgress += _farmStateGrowthRate;
+            }
+            if (_farmStateProgress > _farmStateNextPhase)
+            {
+                ProgressState();
+                _farmStateProgress = 0;
             }
         }
 
