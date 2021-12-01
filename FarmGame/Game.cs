@@ -106,7 +106,8 @@ namespace FarmGame
         private static void LoadCorpse(GameObject goCorpse, GameWindow window, Scene scene)
         {
             var player = scene.GetGameObjects("Player").First();
-            var corpse = new Corpse(player);
+            goCorpse.Components.Add(_dataGrid);
+            var corpse = new Corpse(player, goCorpse);
             goCorpse.Components.Add(corpse);
             var corpseVisual = new CorpseVisual(goCorpse);
             goCorpse.Components.Add(corpseVisual);

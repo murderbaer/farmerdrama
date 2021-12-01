@@ -9,7 +9,7 @@ namespace FarmGame
         private float _farmStateProgress = 0f;
         private float _farmStateNextPhase = 20f;
 
-        private float _farmStateGrowthRate = 1f;
+        public float FarmLandGrowthRate { get; set; } = 1f;
 
         private float _secondsIntervallProgress = 0f;
 
@@ -45,9 +45,6 @@ namespace FarmGame
 
         public FarmLandState State { get; set; } = FarmLandState.EMPTY;
 
-
-        private double GrowthTimer { get; set; } = 0;
-
         public override Item TakeItem()
         {
             Item returnItem;
@@ -63,7 +60,7 @@ namespace FarmGame
                     returnItem = new Item(ItemType.EMPTY); break;
             }
 
-            OnStateChange?.Invoke(this, CreateStateEventArgs());
+            OnStateChange?.Invoke(null, CreateStateEventArgs());
             return returnItem;
         }
 
@@ -73,7 +70,7 @@ namespace FarmGame
             if (item.Type == ItemType.WATERBUCKET & !IsWatered)
             {
                 IsWatered = true;
-                _farmStateGrowthRate += 0.3f;
+                FarmLandGrowthRate += 0.2f;
                 success = true;
             }
             else if (item.Type == ItemType.SEED & State == FarmLandState.EMPTY)
@@ -82,7 +79,7 @@ namespace FarmGame
                 success = true;
             }
 
-            OnStateChange?.Invoke(this, CreateStateEventArgs());
+            OnStateChange?.Invoke(null, CreateStateEventArgs());
             return success;
         }
 
@@ -96,14 +93,14 @@ namespace FarmGame
                 case FarmLandState.HALFGROWN:
                     State = FarmLandState.FULLGROWN;
                     IsWatered = false;
-                    _farmStateGrowthRate -= 0.3f;
+                    FarmLandGrowthRate -= 0.2f;
                     break;
                 case FarmLandState.FULLGROWN:
                     State = FarmLandState.OVERGROWN;
                     break;
             }
 
-            OnStateChange?.Invoke(this, CreateStateEventArgs());
+            OnStateChange?.Invoke(null, CreateStateEventArgs());
         }
 
         public override void Update(float elapsedTime)
@@ -117,8 +114,9 @@ namespace FarmGame
             if (_secondsIntervallProgress > 1f)
             {
                 _secondsIntervallProgress = 0f;
-                _farmStateProgress += _farmStateGrowthRate;
+                _farmStateProgress += FarmLandGrowthRate;
             }
+
             if (_farmStateProgress > _farmStateNextPhase)
             {
                 ProgressState();
