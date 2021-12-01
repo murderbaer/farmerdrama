@@ -10,10 +10,13 @@ namespace FarmGame
 
         private bool _animationSwitchSprite = true;
 
+        private bool looksUp;
+
         private int _moveUp = 4;
         private int _moveDown = 2;
         private int _moveLeft = 7;
         private int _moveRight = 10;
+        private int _noMove = 1;
 
         public PlayerAnimation(GameObject goPlayer)
         {
@@ -50,22 +53,26 @@ namespace FarmGame
             if (e.Direction.X == 1)
             {
                 _playerSprite.Gid = _moveRight;
+                _noMove = 1;
             }
             else if (e.Direction.X == -1)
             {
                 _playerSprite.Gid = _moveLeft;
+                _noMove = 7;
             }
             else if (e.Direction.Y == 1)
             {
                 _playerSprite.Gid = _moveDown;
+                _noMove = 1;
             }
             else if (e.Direction.Y == -1)
             {
                 _playerSprite.Gid = _moveUp;
+                _noMove = 5;
             }
             else
             {
-                _playerSprite.Gid = 1;
+                _playerSprite.Gid = _noMove;
             }
         }
     }

@@ -65,13 +65,14 @@ namespace FarmGame
             Vector2 moveDirection = new ();
             moveDirection.X = (_pressedKeys.Contains(Keys.Right) ? 1 : 0) - (_pressedKeys.Contains(Keys.Left) ? 1 : 0);
             moveDirection.Y = (_pressedKeys.Contains(Keys.Down) ? 1 : 0) - (_pressedKeys.Contains(Keys.Up) ? 1 : 0);
+
+            OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(moveDirection));
+
             if (moveDirection.X == 0 && moveDirection.Y == 0)
             {
                 return;
             }
 
-            OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(moveDirection));
-            moveDirection.Normalize();
             var movementVector = moveDirection * elapsedTime * MovementSpeed;
 
             // check x direction first, then y direction
