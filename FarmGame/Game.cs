@@ -13,6 +13,9 @@ namespace FarmGame
         {
             var scene = new Scene();
 
+            var collisionService = new CollisionService();
+            scene.AddService(collisionService);
+
             var goCamera = scene.CreateGameObject("Camera");
             LoadCamera(goCamera);
 
@@ -47,6 +50,15 @@ namespace FarmGame
                 LoadPig(goPig, goGrid);
             }
 
+            foreach (var go in scene.GameObjects)
+            {
+                foreach (var component in go.Components.OfType<ICollidable>())
+                {
+                    collisionService.AddCollidable(component);
+                }
+            }
+
+            collisionService.SetCollisionGrid(_colGrid);
             return scene;
         }
 

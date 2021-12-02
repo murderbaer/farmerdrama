@@ -4,57 +4,55 @@ using OpenTK.Windowing.Common;
 
 namespace FarmGame
 {
-    public class Scene
+    public class Scene : IScene
     {
         private readonly HashSet<GameObject> _gameObjects = new HashSet<GameObject>();
 
-        private readonly HashSet<GameObject> _toAdd = new HashSet<GameObject>();
-
-        private readonly HashSet<GameObject> _toRemove = new HashSet<GameObject>();
-
-        private int _iterationCount = 0;
+        private readonly HashSet<IService> _services = new HashSet<IService>();
 
         public IEnumerable<GameObject> GameObjects
         {
             get
             {
-                ++_iterationCount;
                 foreach (var gameObject in _gameObjects)
                 {
                     yield return gameObject;
                 }
-
-                --_iterationCount;
             }
         }
 
-        private bool IsIterating => _iterationCount > 0;
+        public IEnumerable<IService> Services
+        {
+            get
+            {
+                foreach (var service in _services)
+                {
+                    yield return service;
+                }
+            }
+        }
+
+        public void AddService(IService service)
+        {
+            _services.Add(service);
+        }
+
+        public T GetService<T>()
+        {
+            return Services.OfType<T>().First();
+        }
 
         public GameObject CreateGameObject(string name)
         {
-            GameObject gameObject = new GameObject(name);
-            if (IsIterating)
-            {
-                _toAdd.Add(gameObject);
-            }
-            else
-            {
-                _gameObjects.Add(gameObject);
-            }
+            GameObject gameObject = new GameObject(this, name);
+            _gameObjects.Add(gameObject);
 
             return gameObject;
         }
 
         public void DestroyGameObject(GameObject gameObject)
         {
-            if (IsIterating)
-            {
-                _toRemove.Add(gameObject);
-            }
-            else
-            {
-                _gameObjects.Remove(gameObject);
-            }
+            _gameObjects.Remove(gameObject);
         }
 
         public IEnumerable<GameObject> GetGameObjects(string name)
@@ -69,18 +67,11 @@ namespace FarmGame
 
         public void Update(float elapsedTime)
         {
-            foreach (var gameObject in _toAdd)
+            foreach (var service in Services.OfType<IUpdatable>())
             {
-                _gameObjects.Add(gameObject);
+                service.Update(elapsedTime);
             }
 
-            _toAdd.Clear();
-            foreach (var gameObject in _toRemove)
-            {
-                _gameObjects.Remove(gameObject);
-            }
-
-            _toRemove.Clear();
             foreach (var gameObject in GetAllComponents<IUpdatable>())
             {
                 gameObject.Update(elapsedTime);

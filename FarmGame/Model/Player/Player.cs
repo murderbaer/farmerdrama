@@ -7,7 +7,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener, IMoving, IChangeDirection
+    public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener, IMoving, IChangeDirection, ICollidable
     {
         private TiledHandler _tiledHandler = TiledHandler.Instance;
 
@@ -44,6 +44,8 @@ namespace FarmGame
         // Movement speed in Tiles per second
         public float MovementSpeed { get; set; } = 3f;
 
+        public float CollisionRadius { get; set; } = 0.4f;
+
         public void Update(float elapsedTime)
         {
             Move(elapsedTime);
@@ -73,7 +75,7 @@ namespace FarmGame
                 return;
             }
 
-            var movementVector = moveDirection * elapsedTime * MovementSpeed;
+            var movementVector = moveDirection.Normalized() * elapsedTime * MovementSpeed;
 
             // check x direction first, then y direction
             for (int direction = 0; direction < 2; direction++)

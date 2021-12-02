@@ -6,12 +6,15 @@ namespace FarmGame
 {
     public class GameObject
     {
-        public GameObject(string name = "")
+        public GameObject(IScene scene, string name = "")
         {
             Name = name;
+            Scene = scene;
         }
 
         public string Name { get; set; }
+
+        public IScene Scene { get; }
 
         public List<IComponent> Components { get; } = new List<IComponent>();
 

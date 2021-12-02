@@ -6,7 +6,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class Corpse : IPosition, IUpdatable, IKeyDownListener
+    public class Corpse : IPosition, IUpdatable, IKeyDownListener, ICollidable
     {
         private Player _player;
 
@@ -29,6 +29,8 @@ namespace FarmGame
         public bool IsPlaced { get; set; } = true;
 
         public Vector2 Position { get; set; }
+
+        public float CollisionRadius { get; } = 0.4f;
 
         public void Update(float elapsedTime)
         {

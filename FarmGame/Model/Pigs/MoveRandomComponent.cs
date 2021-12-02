@@ -9,7 +9,7 @@ namespace FarmGame
         Moving,
     }
 
-    public class MoveRandomComponent : IPosition, IUpdatable, IMoving
+    public class MoveRandomComponent : IPosition, IUpdatable, IMoving, ICollidable
     {
         private Box2 _bounds;
         private Random _random = new Random();
@@ -31,6 +31,8 @@ namespace FarmGame
         public Vector2 Position { get; set; }
 
         public float MovementSpeed { get; set; } = 1f;
+
+        public float CollisionRadius { get; set; } = 0.5f;
 
         public Vector2 GetRandomPosition()
         {

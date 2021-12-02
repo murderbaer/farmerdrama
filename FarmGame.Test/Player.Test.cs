@@ -8,8 +8,9 @@ namespace FarmGame.Test
     [TestClass]
     public class PlayerTest
     {
-        GameObject goPlayer = new GameObject();
-        GameObject goCorpse = new GameObject();
+        Scene scene;
+        GameObject goPlayer;
+        GameObject goCorpse;
         Player player = new Player();
 
         DataGrid grid = new DataGrid();
@@ -17,6 +18,8 @@ namespace FarmGame.Test
 
         public PlayerTest()
         {
+            goPlayer = new GameObject(scene);
+            goCorpse = new GameObject(scene);
             goPlayer.Components.Add(player);
             goPlayer.Components.Add(playerItemInteraction);
             playerItemInteraction = new PlayerItemInteraction(goPlayer, grid);

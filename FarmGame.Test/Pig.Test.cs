@@ -8,13 +8,15 @@ namespace FarmGame.Test
     [TestClass]
     public class PigTest
     {
-        GameObject goPig = new GameObject();
+        Scene scene;
+        GameObject goPig;
         MoveRandomComponent moveRandom;
 
         Hunger hunger;
 
         public PigTest()
         {
+            goPig = new GameObject(scene);
             moveRandom = new MoveRandomComponent(new Box2(3, 3, 10, 10));
             goPig.Components.Add(moveRandom);
             hunger = new Hunger(goPig);

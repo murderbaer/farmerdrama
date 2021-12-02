@@ -75,5 +75,25 @@ namespace FarmGame
 
             return false;
         }
+
+        public static bool Collides(ICollidable a, ICollidable b)
+        {
+            return (a.Position - b.Position).LengthSquared < (a.CollisionRadius + b.CollisionRadius) * (a.CollisionRadius + b.CollisionRadius);
+        }
+
+        public static Vector2 GetCollisionResponse(ICollidable a, ICollidable b)
+        {
+            Vector2 aToB = b.Position - a.Position;
+            float distance = aToB.Length;
+            float overlap = a.CollisionRadius + b.CollisionRadius - distance;
+            if (overlap > 0 && distance > 0)
+            {
+                return aToB * (overlap / distance);
+            }
+            else
+            {
+                return Vector2.Zero;
+            }
+        }
     }
 }
