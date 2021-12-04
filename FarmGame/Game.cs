@@ -123,6 +123,9 @@ namespace FarmGame
             var policeAnimation = new PoliceAnimation(goPolice);
             goPolice.Components.Add(policeAnimation);
 
+            var policeQuestionVisual = new DrawFont(goPolice);
+            goPolice.Components.Add(policeQuestionVisual);
+
             // add listener
             goPolice.GetComponent<IChangeDirection>().OnChangeDirection +=
                 goPolice.GetComponent<IAnimate>().Animate;
