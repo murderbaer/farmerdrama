@@ -24,7 +24,7 @@ namespace FarmGame
 
         public void Draw()
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(Sprite);
+            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(Sprite, 16);
             GL.Color4(Color4.White);
 
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);

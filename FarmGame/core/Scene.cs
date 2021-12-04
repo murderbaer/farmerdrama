@@ -82,6 +82,7 @@ namespace FarmGame
         {
             var camera = GetAllComponents<Camera>().FirstOrDefault();
             camera.SetOverlayMatrix();
+
             foreach (var gameObject in GetAllComponents<IDrawBackground>())
             {
                 gameObject.DrawBackground();
@@ -105,6 +106,11 @@ namespace FarmGame
             foreach (var gameObject in GetAllComponents<IDrawOverlay>())
             {
                 gameObject.DrawOverlay();
+            }
+
+            foreach (var gameObject in GetAllComponents<IDrawFont>())
+            {
+                gameObject.Draw();
             }
         }
 

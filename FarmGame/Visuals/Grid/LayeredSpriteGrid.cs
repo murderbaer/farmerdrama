@@ -64,7 +64,7 @@ namespace FarmGame
                     SpriteObject toDraw = _spriteGrid[layer][column, row];
                     if (toDraw.Gid != (int)SpriteType.AIR)
                     {
-                        DrawSingleSprite(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw));
+                        DrawSingleSprite(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw, 16));
                     }
                 }
             }
