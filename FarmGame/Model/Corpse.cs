@@ -30,6 +30,10 @@ namespace FarmGame
 
         public Vector2 Position { get; set; }
 
+        public Vector2 MovementVector { get; set; } = Vector2.Zero;
+
+        public float MovementSpeed { get; set; } = 0f;
+
         public float CollisionRadius { get; } = 0.6f;
 
         public void Update(float elapsedTime)

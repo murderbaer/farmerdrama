@@ -5,7 +5,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame
 {
-    public class Police : IUpdatable, IPosition, IMoving, IChangeDirection
+    public class Police : IUpdatable, IPosition, IChangeDirection, IMoving
     {
         private int _currentPath = -1;
 
@@ -49,6 +49,10 @@ namespace FarmGame
         public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
 
         public Vector2 Position { get; set; }
+
+        public Vector2 MovementVector { get; set; }
+
+        public float CollisionRadius { get; set; } = 0.5f;
 
         public List<List<Vector2>> Paths { get; set; }
 
@@ -104,12 +108,11 @@ namespace FarmGame
             OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(movement));
             if (movement.Length < offset.Length)
             {
-                Position += movement;
+                MovementVector = movement;
                 return;
             }
 
             // Eckpunkt erreicht
-            Position = goal;
             _currentPathPosition += 1;
         }
     }

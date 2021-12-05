@@ -1,6 +1,6 @@
 namespace FarmGame
 {
-    public interface ICollidable : IPosition
+    public interface ICollidable : IMoving
     {
         float CollisionRadius { get; }
     }

@@ -13,8 +13,11 @@ namespace FarmGame
         {
             var scene = new Scene();
 
-            var collisionService = new CollisionService();
+            var collisionService = new NudgingService();
             scene.AddService(collisionService);
+
+            var movementService = new MovementService();
+            scene.AddService(movementService);
 
             var goCamera = scene.CreateGameObject("Camera");
             LoadCamera(goCamera);
@@ -56,9 +59,14 @@ namespace FarmGame
                 {
                     collisionService.AddCollidable(component);
                 }
+
+                foreach (var component in go.Components.OfType<IMoving>())
+                {
+                    movementService.AddMovable(component);
+                }
             }
 
-            collisionService.SetCollisionGrid(_colGrid);
+            movementService.SetCollisionGrid(_colGrid);
             return scene;
         }
 

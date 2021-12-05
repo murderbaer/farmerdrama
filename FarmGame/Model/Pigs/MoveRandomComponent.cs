@@ -30,6 +30,8 @@ namespace FarmGame
 
         public Vector2 Position { get; set; }
 
+        public Vector2 MovementVector { get; set; }
+
         public float MovementSpeed { get; set; } = 1f;
 
         public float CollisionRadius { get; set; } = 0.5f;
@@ -67,12 +69,13 @@ namespace FarmGame
                 moveAmount = distance;
             }
 
-            Position += direction * elapsedTime * MovementSpeed;
+            MovementVector = direction * moveAmount;
             return true;
         }
 
         public void Update(float elapsedTime)
         {
+            MovementVector = Vector2.Zero;
             if (_state == MoveRandomComponentState.Idle)
             {
                 _timeTicker += elapsedTime;

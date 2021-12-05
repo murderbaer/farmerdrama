@@ -41,6 +41,8 @@ namespace FarmGame
 
         public Vector2 Position { get; set; }
 
+        public Vector2 MovementVector { get; set; }
+
         // Movement speed in Tiles per second
         public float MovementSpeed { get; set; } = 3f;
 
@@ -75,23 +77,7 @@ namespace FarmGame
                 return;
             }
 
-            var movementVector = moveDirection.Normalized() * elapsedTime * MovementSpeed;
-
-            // check x direction first, then y direction
-            for (int direction = 0; direction < 2; direction++)
-            {
-                newPosition[direction] = Position[direction] + movementVector[direction];
-                var playerBox = CollisionHelper.GetCollisionBox(newPosition, size: 0.8f, centered: true);
-
-                // Collision - Disabled for now
-                var gridCollision = CollisionHelper.GetTileCollisionBoxesAround(newPosition, collidableGridCells);
-                if (CollisionHelper.BoxCollide(playerBox, gridCollision))
-                {
-                    newPosition[direction] = Position[direction];
-                }
-            }
-
-            Position = newPosition;
+            MovementVector = moveDirection.Normalized() * elapsedTime * MovementSpeed;
         }
     }
 }
