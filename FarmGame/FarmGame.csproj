@@ -16,6 +16,8 @@
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\global.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\FarmPerson.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Font.png" />
+    <EmbeddedResource Include="Resources\Graphics\SpriteSheets\QuestionBackground.png" />
     <EmbeddedResource Include="Resources\Graphics\Map.tmx" />
+    <EmbeddedResource Include="Resources\Questions.xml" />
   </ItemGroup>
 </Project>

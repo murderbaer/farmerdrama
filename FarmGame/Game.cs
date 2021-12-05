@@ -32,10 +32,10 @@ namespace FarmGame
             LoadPlayer(goPlayer);
 
             var goCorpse = scene.CreateGameObject("Corpse");
-            LoadCorpse(goCorpse, window, scene);
+            LoadCorpse(goCorpse, scene);
 
             var goPolice = scene.CreateGameObject("Police");
-            LoadPolice(goPolice);
+            LoadPolice(goPolice, scene);
 
             SearchCorpse seachCorpse = new SearchCorpse(goPolice, goSuspicion, goCorpse, goGrid);
             goPolice.Components.Add(seachCorpse);
@@ -115,7 +115,7 @@ namespace FarmGame
             _colGrid = new CollisionGrid(l3);
         }
 
-        private static void LoadCorpse(GameObject goCorpse, GameWindow window, Scene scene)
+        private static void LoadCorpse(GameObject goCorpse, Scene scene)
         {
             var player = scene.GetGameObjects("Player").First();
             goCorpse.Components.Add(_dataGrid);
@@ -125,7 +125,7 @@ namespace FarmGame
             goCorpse.Components.Add(corpseVisual);
         }
 
-        private static void LoadPolice(GameObject goPolice)
+        private static void LoadPolice(GameObject goPolice, Scene scene)
         {
             var police = new Police();
             goPolice.Components.Add(police);
@@ -135,8 +135,13 @@ namespace FarmGame
             var policeAnimation = new PoliceAnimation(goPolice);
             goPolice.Components.Add(policeAnimation);
 
-            var policeQuestionVisual = new DrawFont(goPolice);
-            goPolice.Components.Add(policeQuestionVisual);
+            var goPlayer = scene.GetGameObjects("Player").First();
+            var goSuspicion = scene.GetGameObjects("Suspicion").First();
+            var policeQuestion = new QuestionComponent(goPolice, goPlayer, goSuspicion);
+            goPolice.Components.Add(policeQuestion);
+
+            var questionVisual = new QuestionVisual(goPolice);
+            goPolice.Components.Add(questionVisual);
 
             // add listener
             goPolice.GetComponent<IChangeDirection>().OnChangeDirection +=

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questions version="1.0">
+    <question id="1" text="Ich kann Ihre Frau hier nirgends sehen.\nWissen Sie, wo sie sich aufhaelt?" minSuspicion="0" maxSuspicion="50">
+        <answer id="1" text="Ich kann sie nicht sehen.\nSie ist irgendwo auf dem Bauernhof">
+            <answerResult text="Dann schaue ich mal, ob ich sie finde.\nVielen Dank" changeSuspicion="-5"/>
+        </answer>
+        <answer id="2" text="Aehm, keine Ahnung.\nIst schon ein paar Tage weg">
+            <answerResult text="Das ist sehr merkwuerdig.\nIch suche nach ihr" changeSuspicion="10"/>
+        </answer>
+    </question>
+    <question id="2" text="Der Bauernhof wirkt verlassen.\nSind Sie alleine hier?" minSuspicion="20" maxSuspicion="70">
+        <answer id="1" text="Meine Frau sollte hier noch irgendwo sein.\nIch rufe sie an ... Hm, niemand geht ans Handy">
+            <answerResult text="Dann schaue ich mal, ob ich sie finde.\nVielen Dank" changeSuspicion="-5"/>
+        </answer>
+        <answer id="2" text="Ja, meine Frau ist letztes Jahr ausgezogen">
+            <answerResult text="Der Nachbar hat sie vor 2 Wochen aber noch gesehen.\nHaben sie etwas zu verbergen?" changeSuspicion="20"/>
+        </answer>
+    </question>
+</questions>
