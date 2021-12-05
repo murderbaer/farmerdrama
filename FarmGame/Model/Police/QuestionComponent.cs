@@ -11,6 +11,8 @@ namespace FarmGame
 {
     public class QuestionComponent : IUpdatable, IKeyDownListener
     {
+        private GameObject _police;
+
         private IPosition _positionPolice;
 
         private IPosition _positionPlayer;
@@ -29,6 +31,7 @@ namespace FarmGame
 
         public QuestionComponent(GameObject goPolice, GameObject goPlayer, GameObject goSuspicion)
         {
+            _police = goPolice;
             _positionPolice = goPolice.GetComponent<IPosition>();
             _positionPlayer = goPlayer.GetComponent<IPosition>();
             _suspicion = goSuspicion.GetComponent<Suspicion>();
@@ -42,6 +45,7 @@ namespace FarmGame
 
         public void ResetQuestion()
         {
+            _police.Scene.GetService<MovementService>().FrozenCounter--;
             IsQuestioning = false;
             _currentQuestion = null;
             _selectedAnswer = -1;
@@ -89,6 +93,7 @@ namespace FarmGame
                 _timeSinceLastQuestion += elapsedTime;
                 if (_timeSinceLastQuestion > _timeBetweenQuestions && (_positionPolice.Position - _positionPlayer.Position).LengthFast < 3)
                 {
+                    _police.Scene.GetService<MovementService>().FrozenCounter++;
                     IsQuestioning = true;
                     GetRandomQuestion();
                 }

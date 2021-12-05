@@ -11,6 +11,8 @@ namespace FarmGame
 
         private IReadOnlyGrid _collisionGrid;
 
+        public int FrozenCounter { get; set; } = 0;
+
         public void AddMovable(IMoving movable)
         {
             _movables.Add(movable);
@@ -23,6 +25,11 @@ namespace FarmGame
 
         public void Update(float elapsedTime)
         {
+            if (FrozenCounter != 0)
+            {
+                return;
+            }
+
             foreach (var movable in _movables)
             {
                 if (movable is ICollidable collidable)
