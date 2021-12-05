@@ -6,20 +6,16 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame
 {
-    public class PlayerItemInteraction : IKeyDownListener, IKeyUpListener, IUpdatable
+    public class PlayerItemInteraction : IKeyDownListener
     {
         private IPosition _position;
+
         private IReadOnlyGrid _grid;
-
-        private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
-
-        private bool _spacePressedLastFrame;
 
         public PlayerItemInteraction(GameObject goPlayer, IReadOnlyGrid grid)
         {
             _position = goPlayer.GetComponent<IPosition>();
             _grid = grid;
-            _spacePressedLastFrame = false;
             ItemInHand = new Item();
         }
 
@@ -27,23 +23,9 @@ namespace FarmGame
 
         public void KeyDown(KeyboardKeyEventArgs args)
         {
-            _pressedKeys.Add(args.Key);
-        }
-
-        public void KeyUp(KeyboardKeyEventArgs args)
-        {
-            _pressedKeys.Remove(args.Key);
-        }
-
-        public void Update(float elapsedTime)
-        {
-            if (_pressedKeys.Contains(Keys.Space) && !_spacePressedLastFrame)
+            if (args.Key == Keys.Space)
             {
                 Interact();
-            }
-            else if (!_pressedKeys.Contains(Keys.Space))
-            {
-                _spacePressedLastFrame = false;
             }
         }
 
@@ -53,7 +35,6 @@ namespace FarmGame
             var playerY = (int)Math.Floor(_position.Position.Y);
             IGridCell cell = _grid[playerX, playerY];
 
-            _spacePressedLastFrame = true;
             if (ItemInHand.Type != ItemType.EMPTY)
             {
                 var success = cell.InteractWithItem(ItemInHand);
