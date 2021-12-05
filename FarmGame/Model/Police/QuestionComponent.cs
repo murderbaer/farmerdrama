@@ -105,7 +105,7 @@ namespace FarmGame
             if (IsQuestioning && _selectedAnswer == -1)
             {
                 // Keyboard Layout issues: Z and Y are flipped on german keyboard
-                if (args.Key == Keys.Z)
+                if (GLFW.GetKeyName(args.Key, args.ScanCode) == "y")
                 {
                     _selectedAnswer = 0;
                     ApplySuspicion();
