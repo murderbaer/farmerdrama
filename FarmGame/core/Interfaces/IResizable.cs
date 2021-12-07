@@ -1,4 +1,4 @@
-namespace FarmGame
+namespace FarmGame.Core
 {
     public interface IResizable : IComponent
     {

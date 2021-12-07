@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 
+using FarmGame.Core;
+using FarmGame.Helpers;
+
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Model
 {
     public class Police : IUpdatable, IPosition, IChangeDirection, IMoving
     {

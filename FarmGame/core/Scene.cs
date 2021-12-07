@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using FarmGame.Visuals;
 using OpenTK.Windowing.Common;
 
-namespace FarmGame
+namespace FarmGame.Core
 {
     public class Scene : IScene
     {
@@ -95,7 +96,7 @@ namespace FarmGame
             gridDraw.DrawLayer(1);
             gridDraw.DrawLayer(2);
 
-            foreach (var gameObject in GetAllComponents<IDrawable>())
+            foreach (var gameObject in GetAllComponents<IDraw>())
             {
                 gameObject.Draw();
             }
@@ -106,11 +107,6 @@ namespace FarmGame
             foreach (var gameObject in GetAllComponents<IDrawOverlay>())
             {
                 gameObject.DrawOverlay();
-            }
-
-            foreach (var gameObject in GetAllComponents<IDrawFont>())
-            {
-                gameObject.Draw();
             }
         }
 

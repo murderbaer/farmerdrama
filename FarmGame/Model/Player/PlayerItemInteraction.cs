@@ -1,10 +1,11 @@
 using System;
-using System.Collections.Generic;
+
+using FarmGame.Core;
 
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace FarmGame
+namespace FarmGame.Model
 {
     public class PlayerItemInteraction : IKeyDownListener
     {

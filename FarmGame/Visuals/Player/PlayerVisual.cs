@@ -1,10 +1,14 @@
+using FarmGame.Core;
+using FarmGame.Helpers;
+
 using ImageMagick;
+
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Visuals
 {
-    public class PlayerVisual : IDrawable
+    public class PlayerVisual : IDraw
     {
         private IPosition _position;
 

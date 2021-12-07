@@ -1,4 +1,6 @@
-namespace FarmGame
+using FarmGame.Helpers;
+
+namespace FarmGame.Visuals
 {
     public class SpriteGrid
     {

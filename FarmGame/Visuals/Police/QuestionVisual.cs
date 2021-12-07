@@ -1,8 +1,13 @@
+using FarmGame.Core;
+using FarmGame.Helpers;
+using FarmGame.Model;
+
 using ImageMagick;
+
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Visuals
 {
     public class QuestionVisual : IDrawOverlay
     {

@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+
+using FarmGame.Core;
+
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace FarmGame
+namespace FarmGame.Visuals
 {
     public class CameraController : IUpdatable, IKeyDownListener, IKeyUpListener
     {

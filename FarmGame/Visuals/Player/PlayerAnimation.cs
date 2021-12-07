@@ -1,4 +1,6 @@
-namespace FarmGame
+using FarmGame.Core;
+
+namespace FarmGame.Visuals
 {
     public class PlayerAnimation : IAnimate
     {
@@ -22,7 +24,7 @@ namespace FarmGame
 
         public PlayerAnimation(GameObject goPlayer)
         {
-            _playerSprite = goPlayer.GetComponent<IDrawable>().Sprite;
+            _playerSprite = goPlayer.GetComponent<IDraw>().Sprite;
         }
 
         public void Update(float elapsedTime)

@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Xml;
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Helpers
 {
     public class TiledHandler
     {

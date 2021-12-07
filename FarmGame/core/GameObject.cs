@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FarmGame
+namespace FarmGame.Core
 {
     public class GameObject
     {

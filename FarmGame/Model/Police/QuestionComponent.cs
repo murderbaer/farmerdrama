@@ -4,10 +4,13 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 
+using FarmGame.Core;
+using FarmGame.Services;
+
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace FarmGame
+namespace FarmGame.Model
 {
     public class QuestionComponent : IUpdatable, IKeyDownListener
     {

@@ -1,6 +1,6 @@
 using OpenTK.Windowing.Common;
 
-namespace FarmGame
+namespace FarmGame.Core
 {
     public interface IKeyDownListener : IComponent
     {

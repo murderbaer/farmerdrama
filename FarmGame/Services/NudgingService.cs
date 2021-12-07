@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
-namespace FarmGame
+using FarmGame.Core;
+
+namespace FarmGame.Services
 {
     public class NudgingService : IService, IUpdatable
     {

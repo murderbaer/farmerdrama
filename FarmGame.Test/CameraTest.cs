@@ -4,6 +4,8 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using System.Diagnostics.CodeAnalysis;
 
+using FarmGame.Visuals;
+
 namespace FarmGame.Test
 {
     [ExcludeFromCodeCoverageAttribute]

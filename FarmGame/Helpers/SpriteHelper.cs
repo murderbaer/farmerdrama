@@ -5,7 +5,7 @@ using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Helpers
 {
     public class SpriteHelper
     {

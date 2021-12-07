@@ -1,4 +1,6 @@
-namespace FarmGame
+using FarmGame.Core;
+
+namespace FarmGame.Model.GridCells
 {
     public class GridCell : IGridCell
     {

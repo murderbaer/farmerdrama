@@ -1,10 +1,14 @@
 using System;
 
+using FarmGame.Core;
+using FarmGame.Helpers;
+using FarmGame.Model.GridCells;
+
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace FarmGame
+namespace FarmGame.Model
 {
     public class Corpse : IPosition, IUpdatable, IKeyDownListener, ICollidable
     {

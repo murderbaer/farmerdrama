@@ -1,6 +1,6 @@
 using System;
 
-namespace FarmGame
+namespace FarmGame.Core
 {
     public interface IChangeDirection : IComponent
     {

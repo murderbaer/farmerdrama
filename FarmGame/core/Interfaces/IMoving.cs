@@ -1,6 +1,6 @@
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Core
 {
     public interface IMoving : IPosition
     {

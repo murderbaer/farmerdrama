@@ -1,6 +1,9 @@
 using System.Linq;
 
-namespace FarmGame
+using FarmGame.Core;
+using FarmGame.Model.GridCells;
+
+namespace FarmGame.Model
 {
     public class Eating : IUpdatable
     {

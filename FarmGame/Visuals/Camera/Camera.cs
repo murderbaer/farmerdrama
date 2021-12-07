@@ -1,7 +1,9 @@
+using FarmGame.Core;
+
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Visuals
 {
     public class Camera : IResizable
     {

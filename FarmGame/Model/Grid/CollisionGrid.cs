@@ -1,4 +1,8 @@
-namespace FarmGame
+using FarmGame.Core;
+using FarmGame.Model.GridCells;
+using FarmGame.Visuals;
+
+namespace FarmGame.Model
 {
     public class CollisionGrid : IComponent, IReadOnlyGrid
     {

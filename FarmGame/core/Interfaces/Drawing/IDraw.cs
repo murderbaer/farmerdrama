@@ -1,6 +1,6 @@
-namespace FarmGame
+namespace FarmGame.Core
 {
-    public interface IDrawable : IComponent
+    public interface IDraw : IComponent
     {
         SpriteObject Sprite { get;  }
 

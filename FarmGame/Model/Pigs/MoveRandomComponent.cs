@@ -1,7 +1,10 @@
 using System;
+
+using FarmGame.Core;
+
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Model
 {
     public enum MoveRandomComponentState
     {

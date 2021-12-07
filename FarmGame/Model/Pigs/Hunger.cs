@@ -1,6 +1,8 @@
 using System;
 
-namespace FarmGame
+using FarmGame.Core;
+
+namespace FarmGame.Model
 {
     public class Hunger : IUpdatable
     {

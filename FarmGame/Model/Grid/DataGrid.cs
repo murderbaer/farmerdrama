@@ -1,8 +1,12 @@
-using System;
 using System.Collections.Generic;
+
+using FarmGame.Core;
+using FarmGame.Model.GridCells;
+using FarmGame.Visuals;
+
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Model
 {
     public class DataGrid : IComponent, IReadOnlyGrid
     {

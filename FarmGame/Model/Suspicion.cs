@@ -1,4 +1,6 @@
-namespace FarmGame
+using FarmGame.Core;
+
+namespace FarmGame.Model
 {
     public class Suspicion : IComponent
     {

@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 
+using FarmGame.Core;
+using FarmGame.Helpers;
+
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace FarmGame
+namespace FarmGame.Model
 {
     public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener, IMoving, IChangeDirection, ICollidable
     {

@@ -1,11 +1,14 @@
-using System;
 using System.Xml;
+
+using FarmGame.Core;
+using FarmGame.Helpers;
+using FarmGame.Model.GridCells;
 
 using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Visuals
 {
     public class LayeredSpriteGrid : IDrawGridLayer
     {

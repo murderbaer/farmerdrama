@@ -1,4 +1,11 @@
 using System.Linq;
+
+using FarmGame.Core;
+using FarmGame.Helpers;
+using FarmGame.Model;
+using FarmGame.Services;
+using FarmGame.Visuals;
+
 using OpenTK.Windowing.Desktop;
 
 namespace FarmGame

@@ -1,6 +1,8 @@
+using FarmGame.Core;
+
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Visuals
 {
     public class SmoothCamera : IUpdatable
     {

@@ -1,4 +1,6 @@
-namespace FarmGame
+using FarmGame.Core;
+
+namespace FarmGame.Visuals
 {
     public class PoliceAnimation : IAnimate
     {
@@ -17,7 +19,7 @@ namespace FarmGame
 
         public PoliceAnimation(GameObject goPlayer)
         {
-            _playerSprite = goPlayer.GetComponent<IDrawable>().Sprite;
+            _playerSprite = goPlayer.GetComponent<IDraw>().Sprite;
         }
 
         public void Update(float elapsedTime)

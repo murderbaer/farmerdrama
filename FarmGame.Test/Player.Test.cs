@@ -2,6 +2,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenTK.Mathematics;
 using System.Diagnostics.CodeAnalysis;
 
+using FarmGame.Core;
+using FarmGame.Model;
+using FarmGame.Model.GridCells;
+
 namespace FarmGame.Test
 {
     [ExcludeFromCodeCoverageAttribute]

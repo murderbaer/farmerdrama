@@ -1,7 +1,10 @@
+using FarmGame.Core;
+using FarmGame.Model;
+
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Visuals
 {
     public class SuspicionBar : IDrawOverlay
     {
