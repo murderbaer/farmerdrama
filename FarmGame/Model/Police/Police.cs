@@ -21,32 +21,9 @@ namespace FarmGame.Model
         public Police()
         {
             // sets position to be a bit outside of the fence
-            Position = new Vector2(935f / 16f, 360f / 16f);
+            Position = _tiledHandler.TiledPolicePos;
 
-            // read all paths in
-            Paths = new List<List<Vector2>>();
-            var policePathsTiled = _tiledHandler.TiledPolicePaths.SelectNodes("object");
-            float offset_x = 0f;
-            float offset_y = 0f;
-            for (int i = 0; i < policePathsTiled.Count; i++)
-            {
-                offset_x = float.Parse(policePathsTiled[i].Attributes["x"].Value);
-                offset_y = float.Parse(policePathsTiled[i].Attributes["y"].Value);
-                string polPath = policePathsTiled[i].SelectNodes("polygon")[0].Attributes["points"].Value;
-                List<Vector2> singelPath = new List<Vector2>();
-                string[] cords = polPath.Split(' ');
-
-                for (int j = 0; j < cords.Length; j++)
-                {
-                    string[] singleCoord = cords[j].Split(',');
-                    float x = (float.Parse(singleCoord[0]) + offset_x) / 16f;
-                    float y = (float.Parse(singleCoord[1]) + offset_y) / 16f;
-                    singelPath.Add(new Vector2(x, y));
-                }
-
-                singelPath.Add(Position);
-                Paths.Add(singelPath);
-            }
+            Paths = _tiledHandler.TiledPolicePaths;
         }
 
         public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;

@@ -97,7 +97,7 @@ namespace FarmGame
 
         private static void LoadPlayer(GameObject goPlayer)
         {
-            var player = new Player(_colGrid);
+            var player = new Player();
             goPlayer.Components.Add(player);
 
             var playerVisual = new PlayerVisual(goPlayer);

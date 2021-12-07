@@ -20,11 +20,7 @@ namespace FarmGame.Model
 
         public Corpse(GameObject goPlayer, GameObject goCorpse)
         {
-            var corpsePos = _tiledHandler.TiledCorpsePos.SelectNodes("object");
-            float posX = float.Parse(corpsePos[0].Attributes["x"].Value);
-            float posY = float.Parse(corpsePos[0].Attributes["y"].Value);
-            int pixelSize = _tiledHandler.TilePixelSize;
-            Position = new Vector2(posX / pixelSize, posY / pixelSize);
+            Position = _tiledHandler.TiledCorpsePos;
 
             _player = goPlayer.GetComponent<Player>();
             _grid = goCorpse.GetComponent<DataGrid>();
