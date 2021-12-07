@@ -46,6 +46,7 @@ namespace FarmGame
         private void ApplyMovement(IMoving movable)
         {
             movable.Position += movable.MovementVector;
+            movable.MovementVector = Vector2.Zero;
         }
 
         private void ApplyMovement(ICollidable collidable)
