@@ -124,7 +124,7 @@ namespace FarmGame
             SpriteGrid temp = SpriteGrid.SquashGrids(l1, l2);
             temp = SpriteGrid.SquashGrids(temp, l3);
 
-            _dataGrid = new DataGrid(temp, gridVisuals);
+            _dataGrid = new DataGrid(gridVisuals.ReactOnStateChange);
             goGrid.Components.Add(_dataGrid);
 
             _colGrid = new CollisionGrid(l3);

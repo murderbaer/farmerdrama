@@ -28,10 +28,8 @@ namespace FarmGame.Helpers
                 _doc = new XmlDocument();
                 _doc.Load(stream);
 
-                LevelOneTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='groundLayer']");
-                LevelTwoTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='smallObjectLayer']");
-                LevelThreeTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='collisionLayer']");
-                LevelFourTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='aboveLayer']");
+                InitLayers();
+                SquashedLayers = SquashGrids(LayerOne, LayerTwo);
             }
         }
 
@@ -123,6 +121,16 @@ namespace FarmGame.Helpers
             }
         }
 
+        public int[] LayerOne { get; private set; }
+
+        public int[] LayerTwo { get; private set; }
+
+        public int[] LayerThree { get; private set; }
+
+        public int[] LayerFour { get; private set; }
+
+        public int[] SquashedLayers { get; private set; }
+
         public XmlNode LevelOneTiles { get; private set; }
 
         public XmlNode LevelTwoTiles { get; private set; }
@@ -157,6 +165,67 @@ namespace FarmGame.Helpers
                 float width = float.Parse(pigPen[0].Attributes["width"].Value) / 16;
                 float height = float.Parse(pigPen[0].Attributes["height"].Value) / 16;
                 return new Box2(posX, posY, posX + width, posY + height);
+            }
+        }
+
+        private int[] SquashGrids(int[] board1, int[] board2)
+        {
+            int gridSize = board1.Length;
+            int[] ret = new int[gridSize];
+
+            for (int i = 0; i < gridSize; i++)
+            {
+                if (board2[i] == (int)SpriteType.AIR)
+                {
+                    ret[i] = board1[i];
+                }
+                else
+                {
+                    ret[i] = board2[i];
+                }
+            }
+
+            return ret;
+        }
+
+        private void InitLayers()
+        {
+            var tiledLevelOneTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='groundLayer']");
+            XmlNode data = tiledLevelOneTiles.SelectSingleNode("data");
+            XmlNodeList tiles = data.SelectNodes("tile");
+            int gridSize = tiles.Count;
+
+            LayerOne = new int[gridSize];
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                LayerOne[i] = int.Parse(tiles[i].Attributes["gid"].Value);
+            }
+
+            var tiledLevelTwoTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='smallObjectLayer']");
+            LayerTwo = new int[gridSize];
+            data = tiledLevelTwoTiles.SelectSingleNode("data");
+            tiles = data.SelectNodes("tile");
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                LayerTwo[i] = int.Parse(tiles[i].Attributes["gid"].Value);
+            }
+
+            var tiledLevelThreeTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='collisionLayer']");
+            LayerThree = new int[gridSize];
+            data = tiledLevelThreeTiles.SelectSingleNode("data");
+            tiles = data.SelectNodes("tile");
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                LayerThree[i] = int.Parse(tiles[i].Attributes["gid"].Value);
+            }
+
+            var tiledLevelFourTiles = _doc.DocumentElement.SelectSingleNode("layer[@name='aboveLayer']");
+            LayerFour = new int[gridSize];
+            data = tiledLevelFourTiles.SelectSingleNode("data");
+            tiles = data.SelectNodes("tile");
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                LayerFour[i] = int.Parse(tiles[i].Attributes["gid"].Value);
             }
         }
     }

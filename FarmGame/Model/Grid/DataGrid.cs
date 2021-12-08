@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 using FarmGame.Core;
+using FarmGame.Helpers;
 using FarmGame.Model.GridCells;
-using FarmGame.Visuals;
 
 using OpenTK.Mathematics;
 
@@ -12,23 +13,21 @@ namespace FarmGame.Model
     {
         private IGridCell[] _grid;
 
-        public DataGrid(SpriteGrid functionalSprites, LayeredSpriteGrid layerdGrid)
+        public DataGrid(EventHandler<OnStateChangeArgs> stateChange)
         {
-            Column = functionalSprites.Column;
-            Row = functionalSprites.Row;
-            int gridSize = functionalSprites.Column * functionalSprites.Row;
-            _grid = new IGridCell[gridSize];
-            Column = functionalSprites.Column;
-            Row = functionalSprites.Row;
+            Column = TiledHandler.Instance.BoardX;
+            Row = TiledHandler.Instance.BoardY;
+            int gridSize = Column * Row;
 
+            _grid = new IGridCell[gridSize];
             for (int i = 0; i < gridSize; i++)
             {
-                switch ((SpriteType)functionalSprites[i].Gid)
+                switch ((SpriteType)TiledHandler.Instance.SquashedLayers[i])
                 {
                     case SpriteType.FARM_LAND:
                         _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, i);
                         GridCellFarmLand temp = (GridCellFarmLand)_grid[i];
-                        temp.OnStateChange += layerdGrid.ReactOnStateChange;
+                        temp.OnStateChange += stateChange;
                         break;
                     case SpriteType.WATER_LD:
                     case SpriteType.WATER_LU:

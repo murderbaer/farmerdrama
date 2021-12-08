@@ -11,7 +11,7 @@ namespace FarmGame.Test
     [TestClass]
     public class PigTest
     {
-        Scene scene;
+        Scene scene = null;
         GameObject goPig;
         MoveRandomComponent moveRandom;
 

@@ -14,8 +14,6 @@ namespace FarmGame.Visuals
     {
         private static TiledHandler _tileHandler = TiledHandler.Instance;
 
-        private readonly IGridCell[] _grid;
-
         private SpriteGrid[] _spriteGrid;
 
         private MagickImage _spriteSheet;
@@ -26,24 +24,18 @@ namespace FarmGame.Visuals
         {
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            XmlNode data = _tileHandler.LevelOneTiles.SelectSingleNode("data");
-            XmlNodeList tiles = data.SelectNodes("tile");
 
-            _grid = new IGridCell[tiles.Count];
             Column = _tileHandler.BoardX;
             Row = _tileHandler.BoardY;
 
             _spriteGrid = new SpriteGrid[4];
+            int boardSize = Column * Row;
+            _spriteGrid[0] = new SpriteGrid(boardSize, Column, Row);
+            _spriteGrid[1] = new SpriteGrid(boardSize, Column, Row);
+            _spriteGrid[2] = new SpriteGrid(boardSize, Column, Row);
+            _spriteGrid[3] = new SpriteGrid(boardSize, Column, Row);
 
-            _spriteGrid[0] = new SpriteGrid(tiles.Count, Column, Row);
-            _spriteGrid[1] = new SpriteGrid(tiles.Count, Column, Row);
-            _spriteGrid[2] = new SpriteGrid(tiles.Count, Column, Row);
-            _spriteGrid[3] = new SpriteGrid(tiles.Count, Column, Row);
-
-            IntializeLayerOne();
-            IntializeLayerTwo();
-            IntializeLayerThree();
-            IntializeLayerFour();
+            IntializeLayers();
         }
 
         public int Column { get; }
@@ -120,65 +112,26 @@ namespace FarmGame.Visuals
             }
         }
 
-        private void IntializeLayerOne()
+        private void IntializeLayers()
         {
-            XmlNode data = _tileHandler.LevelOneTiles.SelectSingleNode("data");
-            XmlNodeList tiles = data.SelectNodes("tile");
-
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < _tileHandler.LayerOne.Length; i++)
             {
-                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
-                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, gid);
+                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerOne[i]);
             }
-        }
 
-        private void IntializeLayerTwo()
-        {
-            XmlNode data = _tileHandler.LevelTwoTiles.SelectSingleNode("data");
-            XmlNodeList tiles = data.SelectNodes("tile");
-
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < _tileHandler.LayerTwo.Length; i++)
             {
-                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
-                if (gid == (int)SpriteType.SEEDS)
-                {
-                    _grid[i] = new GridCellSeedStorage();
-                }
-                else if (gid == (int)SpriteType.FEEDER)
-                {
-                    _grid[i] = new GridCellFeeder();
-                }
-
-                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, gid);
+                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerTwo[i]);
             }
-        }
 
-        private void IntializeLayerThree()
-        {
-            XmlNode data = _tileHandler.LevelThreeTiles.SelectSingleNode("data");
-            XmlNodeList tiles = data.SelectNodes("tile");
-
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < _tileHandler.LayerThree.Length; i++)
             {
-                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
-                if (gid != (int)SpriteType.AIR)
-                {
-                    _grid[i] = new GridCellCollision();
-                }
-
-                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, gid);
+                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerThree[i]);
             }
-        }
 
-        private void IntializeLayerFour()
-        {
-            XmlNode data = _tileHandler.LevelFourTiles.SelectSingleNode("data");
-            XmlNodeList tiles = data.SelectNodes("tile");
-
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < _tileHandler.LayerFour.Length; i++)
             {
-                int gid = int.Parse(tiles[i].Attributes["gid"].Value);
-                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, gid);
+                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerFour[i]);
             }
         }
     }

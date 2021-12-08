@@ -12,7 +12,7 @@ namespace FarmGame.Test
     [TestClass]
     public class PlayerTest
     {
-        Scene scene;
+        Scene scene = null;
         GameObject goPlayer;
         GameObject goCorpse;
         Player player = new Player();
