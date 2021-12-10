@@ -72,11 +72,6 @@ namespace FarmGame.Core
             {
                 service.Update(elapsedTime);
             }
-
-            foreach (var gameObject in GetAllComponents<IUpdatable>())
-            {
-                gameObject.Update(elapsedTime);
-            }
         }
 
         public void Draw()

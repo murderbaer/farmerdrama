@@ -9,14 +9,6 @@ namespace FarmGame.Helpers
     {
         private const int CHAROFFSET = 31;
 
-        private const float CHARWIDTH = 0.35f;
-
-        private const float CHARHEIGHT = 0.35f;
-
-        private const float CHARSPACE = 0.27f;
-
-        private const float LINESPACING = 0.2f;
-
         private static TextHelper _instance;
 
         private MagickImage _spriteSheet;
@@ -48,7 +40,7 @@ namespace FarmGame.Helpers
             }
         }
 
-        public void DrawChar(char c, float x, float y, Color4 color)
+        public void DrawChar(char c, float x, float y, Color4 color, float size = 0.35f)
         {
             Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(new SpriteObject(_spriteSheet, c - CHAROFFSET), 20);
 
@@ -60,19 +52,19 @@ namespace FarmGame.Helpers
             GL.Vertex2(x, y);
 
             GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
-            GL.Vertex2(x + CHARWIDTH, y);
+            GL.Vertex2(x + size, y);
 
             GL.TexCoord2(spritePos.Max);
-            GL.Vertex2(x + CHARWIDTH, y + CHARHEIGHT);
+            GL.Vertex2(x + size, y + size);
 
             GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
-            GL.Vertex2(x, y + CHARHEIGHT);
+            GL.Vertex2(x, y + size);
 
             GL.End();
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
-        public void DrawText(string text, float x, float y, Color4 color)
+        public void DrawText(string text, float x, float y, Color4 color, float size = 0.35f)
         {
             ParseText(ref text);
             float xOffset = x;
@@ -82,12 +74,12 @@ namespace FarmGame.Helpers
                 if (text[i] == '\n')
                 {
                     xOffset = x;
-                    yOffset += CHARHEIGHT + LINESPACING;
+                    yOffset += size * 1.5f;
                 }
                 else
                 {
-                    DrawChar(text[i], xOffset, yOffset, color);
-                    xOffset += CHARSPACE;
+                    DrawChar(text[i], xOffset, yOffset, color, size: size);
+                    xOffset += size * 0.75f;
                 }
             }
         }

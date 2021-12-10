@@ -20,6 +20,9 @@ namespace FarmGame
         {
             var scene = new Scene();
 
+            var updateService = new UpdateService();
+            scene.AddService(updateService);
+
             var collisionService = new NudgingService();
             scene.AddService(collisionService);
 
@@ -47,6 +50,9 @@ namespace FarmGame
             var goPolice = scene.CreateGameObject("Police");
             LoadPolice(goPolice, scene);
 
+            var goPause = scene.CreateGameObject("Pause");
+            LoadPause(goPause);
+
             SearchCorpse seachCorpse = new SearchCorpse(goPolice, goSuspicion, goCorpse, goGrid);
             goPolice.Components.Add(seachCorpse);
 
@@ -62,6 +68,11 @@ namespace FarmGame
 
             foreach (var go in scene.GameObjects)
             {
+                foreach (var component in go.Components.OfType<IUpdatable>())
+                {
+                    updateService.AddUpdatable(component);
+                }
+
                 foreach (var component in go.Components.OfType<ICollidable>())
                 {
                     collisionService.AddCollidable(component);
@@ -174,6 +185,14 @@ namespace FarmGame
             goPig.Components.Add(hunger);
             var eating = new Eating(goPig, goGrid);
             goPig.Components.Add(eating);
+        }
+
+        private static void LoadPause(GameObject goPause)
+        {
+            var pause = new Pause(goPause);
+            goPause.Components.Add(pause);
+            var pauseVisual = new PauseVisual(goPause);
+            goPause.Components.Add(pauseVisual);
         }
     }
 }

@@ -1,4 +1,5 @@
 using FarmGame.Core;
+using FarmGame.Helpers;
 using FarmGame.Model;
 
 using OpenTK.Graphics.OpenGL;
@@ -9,32 +10,37 @@ namespace FarmGame.Visuals
     public class SuspicionBar : IDrawOverlay
     {
         private Suspicion _suspicion;
+        private string _spriteName;
 
         public SuspicionBar(GameObject goSuspicion)
         {
             _suspicion = goSuspicion.GetComponent<Suspicion>();
+            _spriteName = "FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png";
         }
 
         public void DrawOverlay()
         {
+            var texCoords = SpriteRenderer.GetTexCoord(_spriteName, 16, 155);
+            SpriteRenderer.DrawSprite(_spriteName, new Vector2(12, 7), 1, texCoords);
+            texCoords = SpriteRenderer.GetTexCoord(_spriteName, 16, 156);
+            SpriteRenderer.DrawSprite(_spriteName, new Vector2(13, 7), 1, texCoords);
             var barLength = GetBarLength();
-            GL.Begin(PrimitiveType.Quads);
-            GL.Color4(new Color4(28 / 255f, 22 / 255f, 11 / 255f, 1f));
-            GL.Vertex2(12, 7);
-            GL.Vertex2(12, 8);
-            GL.Vertex2(15, 8);
-            GL.Vertex2(15, 7);
             GL.Color4(Color4.Red);
-            GL.Vertex2(12.2, 7.2);
-            GL.Vertex2(12.2, 7.8);
-            GL.Vertex2(12.2 + barLength, 7.8);
-            GL.Vertex2(12.2 + barLength, 7.2);
+            GL.Begin(PrimitiveType.Quads);
+            GL.Vertex2(12.188, 7.25);
+            GL.Vertex2(12.188, 7.8125);
+            GL.Vertex2(12.188 + barLength, 7.8125);
+            GL.Vertex2(12.188 + barLength, 7.25);
             GL.End();
+            texCoords = SpriteRenderer.GetTexCoord(_spriteName, 16, 168);
+            SpriteRenderer.DrawSprite(_spriteName, new Vector2(12, 7), 1, texCoords);
+            texCoords = SpriteRenderer.GetTexCoord(_spriteName, 16, 169);
+            SpriteRenderer.DrawSprite(_spriteName, new Vector2(13, 7), 1, texCoords);
         }
 
         private float GetBarLength()
         {
-            return _suspicion.Value / 100 * 2.6f;
+            return _suspicion.Value / 100 * 1.615f;
         }
     }
 }

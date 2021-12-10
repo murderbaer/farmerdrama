@@ -9373,7 +9373,7 @@
   </object>
  </objectgroup>
  <objectgroup id="10" name="PigPen" visible="0">
-  <object id="17" name="PigPen" x="192" y="272" width="128" height="176"/>
+  <object id="17" name="PigPen" x="200" y="280" width="112" height="160"/>
  </objectgroup>
  <layer id="3" name="aboveLayer" width="61" height="51">
   <data>
