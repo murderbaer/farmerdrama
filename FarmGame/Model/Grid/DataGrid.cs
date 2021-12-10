@@ -20,12 +20,13 @@ namespace FarmGame.Model
             int gridSize = Column * Row;
 
             _grid = new IGridCell[gridSize];
+            float[] hiddenFactorHeatmap = TiledHandler.Instance.HiddenFactorGrid;
             for (int i = 0; i < gridSize; i++)
             {
                 switch ((SpriteType)TiledHandler.Instance.SquashedLayers[i])
                 {
                     case SpriteType.FARM_LAND:
-                        _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, i);
+                        _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, i, hiddenFactorHeatmap[i]);
                         GridCellFarmLand temp = (GridCellFarmLand)_grid[i];
                         temp.OnStateChange += stateChange;
                         break;
@@ -33,19 +34,19 @@ namespace FarmGame.Model
                     case SpriteType.WATER_LU:
                     case SpriteType.WATER_RD:
                     case SpriteType.WATER_RU:
-                        _grid[i] = new GridCellWater();
+                        _grid[i] = new GridCellWater(hiddenFactorHeatmap[i]);
                         break;
                     case SpriteType.COLLISION:
-                        _grid[i] = new GridCellCollision();
+                        _grid[i] = new GridCellCollision(hiddenFactorHeatmap[i]);
                         break;
                     case SpriteType.SEEDS:
-                        _grid[i] = new GridCellSeedStorage();
+                        _grid[i] = new GridCellSeedStorage(hiddenFactorHeatmap[i]);
                         break;
                     case SpriteType.FEEDER:
-                        _grid[i] = new GridCellFeeder();
+                        _grid[i] = new GridCellFeeder(hiddenFactorHeatmap[i]);
                         break;
                     default:
-                        _grid[i] = new GridCell();
+                        _grid[i] = new GridCell(hiddenFactorHeatmap[i]);
                         break;
                 }
             }
@@ -59,7 +60,7 @@ namespace FarmGame.Model
 
             for (int i = 0; i < _grid.Length; i++)
             {
-                _grid[i] = new GridCell();
+                _grid[i] = new GridCell(1f);
             }
         }
 
@@ -71,6 +72,12 @@ namespace FarmGame.Model
         {
             get { return _grid[col + (Column * row)]; }
             set { _grid[col + (Column * row)] = value; }
+        }
+
+        public IGridCell this[int id]
+        {
+            get { return _grid[id]; }
+            set { _grid[id] = value; }
         }
 
         public void Update(float elapsedTime)

@@ -129,16 +129,10 @@ namespace FarmGame
             var gridVisuals = new LayeredSpriteGrid();
             goGrid.Components.Add(gridVisuals);
 
-            SpriteGrid l1 = gridVisuals.GetWholeLayer(0);
-            SpriteGrid l2 = gridVisuals.GetWholeLayer(1);
-            SpriteGrid l3 = gridVisuals.GetWholeLayer(2);
-            SpriteGrid temp = SpriteGrid.SquashGrids(l1, l2);
-            temp = SpriteGrid.SquashGrids(temp, l3);
-
             _dataGrid = new DataGrid(gridVisuals.ReactOnStateChange);
             goGrid.Components.Add(_dataGrid);
 
-            _colGrid = new CollisionGrid(l3);
+            _colGrid = new CollisionGrid(TiledHandler.Instance.LayerThree);
         }
 
         private static void LoadCorpse(GameObject goCorpse, Scene scene)

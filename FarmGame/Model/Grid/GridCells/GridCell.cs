@@ -4,6 +4,11 @@ namespace FarmGame.Model.GridCells
 {
     public class GridCell : IGridCell
     {
+        public GridCell(float hiddenFactor)
+        {
+            HiddenFactor = hiddenFactor;
+        }
+
         public virtual bool HasCollision { get; set; }
 
         public virtual float HiddenFactor { get; } = 1f;

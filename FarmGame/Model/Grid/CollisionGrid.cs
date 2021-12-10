@@ -1,27 +1,28 @@
 using FarmGame.Core;
+using FarmGame.Helpers;
 using FarmGame.Model.GridCells;
-using FarmGame.Visuals;
 
 namespace FarmGame.Model
 {
     public class CollisionGrid : IComponent, IReadOnlyGrid
     {
-        public CollisionGrid(SpriteGrid collisionGrid)
+        public CollisionGrid(int[] collisionGrid)
         {
-            int gridSize = collisionGrid.Column * collisionGrid.Row;
-            Column = collisionGrid.Column;
-            Row = collisionGrid.Row;
+            int gridSize = TiledHandler.Instance.BoardX * TiledHandler.Instance.BoardY;
+            Column = TiledHandler.Instance.BoardX;
+            Row = TiledHandler.Instance.BoardY;
             CollidableGrid = new IGridCell[gridSize];
 
+            float[] hiddenFactorHeatmap = TiledHandler.Instance.HiddenFactorGrid;
             for (int i = 0; i < gridSize; i++)
             {
-                switch ((SpriteType)collisionGrid[i].Gid)
+                switch ((SpriteType)collisionGrid[i])
                 {
                     case SpriteType.AIR:
-                        CollidableGrid[i] = new GridCell();
+                        CollidableGrid[i] = new GridCell(hiddenFactorHeatmap[i]);
                         break;
                     default:
-                        CollidableGrid[i] = new GridCellCollision();
+                        CollidableGrid[i] = new GridCellCollision(hiddenFactorHeatmap[i]);
                         break;
                 }
             }

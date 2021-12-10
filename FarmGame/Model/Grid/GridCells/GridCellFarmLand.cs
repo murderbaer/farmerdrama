@@ -9,12 +9,16 @@ namespace FarmGame.Model.GridCells
         private float _farmStateProgress = 0f;
         private float _farmStateNextPhase = 20f;
 
+        private float _baseHiddenFactor;
+
         private float _secondsIntervallProgress = 0f;
 
-        public GridCellFarmLand(FarmLandState state, int position)
+        public GridCellFarmLand(FarmLandState state, int position, float hiddenFactor)
+        : base(hiddenFactor)
         {
             State = state;
             _postition = position;
+            _baseHiddenFactor = hiddenFactor;
         }
 
         public event EventHandler<OnStateChangeArgs> OnStateChange;
@@ -28,15 +32,15 @@ namespace FarmGame.Model.GridCells
                 switch (State)
                 {
                     case FarmLandState.SEED:
-                        return 1f;
+                        return _baseHiddenFactor * 1f;
                     case FarmLandState.HALFGROWN:
-                        return 0.7f;
+                        return _baseHiddenFactor * 0.7f;
                     case FarmLandState.FULLGROWN:
-                        return 0.5f;
+                        return _baseHiddenFactor * 0.5f;
                     case FarmLandState.OVERGROWN:
-                        return 0.8f;
+                        return _baseHiddenFactor * 0.8f;
                     default:
-                        return 1f;
+                        return _baseHiddenFactor * 1f;
                 }
             }
         }

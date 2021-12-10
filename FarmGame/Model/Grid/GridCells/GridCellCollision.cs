@@ -2,7 +2,8 @@ namespace FarmGame.Model.GridCells
 {
     public class GridCellCollision : GridCell
     {
-        public GridCellCollision()
+        public GridCellCollision(float hiddenFactor)
+        : base(hiddenFactor)
         {
             HasCollision = true;
         }

@@ -9,7 +9,7 @@ namespace FarmGame.Test
     [TestClass]
     public class GridCellTest
     {
-        GridCell cell = new GridCell();
+        GridCell cell = new GridCell(1f);
 
         [TestMethod]
         public void TestCollision()

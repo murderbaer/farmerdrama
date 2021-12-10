@@ -9,7 +9,7 @@ namespace FarmGame.Test
     [TestClass]
     public class GridCellSeedStorageTest
     {
-        GridCellSeedStorage cell = new GridCellSeedStorage();
+        GridCellSeedStorage cell = new GridCellSeedStorage(1f);
 
         [TestMethod]
         public void TestCollision()

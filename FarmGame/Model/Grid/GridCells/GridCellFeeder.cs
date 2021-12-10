@@ -10,6 +10,11 @@ namespace FarmGame.Model.GridCells
 
         private float _fillState = 1000;
 
+        public GridCellFeeder(float hiddenFactor)
+        : base(hiddenFactor)
+        {
+        }
+
         public float FillState
         {
             get

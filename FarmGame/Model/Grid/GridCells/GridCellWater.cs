@@ -4,6 +4,11 @@ namespace FarmGame.Model.GridCells
 {
     public class GridCellWater : GridCell
     {
+        public GridCellWater(float hiddenFactor)
+        : base(hiddenFactor)
+        {
+        }
+
         public float PoisenCounter { get; set; }
 
         public override Item TakeItem()
