@@ -30,6 +30,7 @@ namespace FarmGame.Helpers
 
                 InitLayers();
                 SquashedLayers = SquashGrids(LayerOne, LayerTwo);
+                GenerateHiddenFactorGrid();
             }
         }
 
@@ -131,13 +132,7 @@ namespace FarmGame.Helpers
 
         public int[] SquashedLayers { get; private set; }
 
-        public XmlNode LevelOneTiles { get; private set; }
-
-        public XmlNode LevelTwoTiles { get; private set; }
-
-        public XmlNode LevelThreeTiles { get; private set; }
-
-        public XmlNode LevelFourTiles { get; private set; }
+        public float[] HiddenFactorGrid { get; private set; }
 
         public int BoardX
         {
@@ -186,6 +181,20 @@ namespace FarmGame.Helpers
             }
 
             return ret;
+        }
+
+        private void GenerateHiddenFactorGrid()
+        {
+            var tiledSuspicionHeatMap = _doc.DocumentElement.SelectSingleNode("layer[@name='suspicionHeatmap']");
+            XmlNode data = tiledSuspicionHeatMap.SelectSingleNode("data");
+            XmlNodeList tiles = data.SelectNodes("tile");
+            int gridSize = tiles.Count;
+
+            HiddenFactorGrid = new float[gridSize];
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                HiddenFactorGrid[i] = 1f / int.Parse(tiles[i].Attributes["gid"].Value);
+            }
         }
 
         private void InitLayers()
