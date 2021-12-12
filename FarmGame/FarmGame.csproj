@@ -15,10 +15,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\global.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\FarmPerson.png" />
+    <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Police.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Font.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\QuestionBackground.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Heatmap.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Pigs.png" />
+    <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Gui.png" />
     <EmbeddedResource Include="Resources\Graphics\Map.tmx" />
     <EmbeddedResource Include="Resources\Questions.xml" />
   </ItemGroup>

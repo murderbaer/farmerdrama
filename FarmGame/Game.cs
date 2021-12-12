@@ -185,7 +185,6 @@ namespace FarmGame
             goPig.Components.Add(pigAnimation);
 
             moveRandom.OnChangeDirection += pigAnimation.Animate;
-
         }
 
         private static void LoadPause(GameObject goPause)

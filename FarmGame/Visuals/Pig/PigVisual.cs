@@ -16,8 +16,7 @@ namespace FarmGame.Visuals
 
         private int _spriteHandle;
 
-        private Box2 _texCoords;
-
+        // private Box2 _texCoords;
         public PigVisual(GameObject goPig)
         {
             _position = goPig.GetComponent<IPosition>();
@@ -28,7 +27,7 @@ namespace FarmGame.Visuals
 
         public SpriteObject Sprite { get; private set; }
 
-        //TODO: use generic sprite draw method
+        // TODO: use generic sprite draw method
         public void Draw()
         {
             Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(Sprite, 20);

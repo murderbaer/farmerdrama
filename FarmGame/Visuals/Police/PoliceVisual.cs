@@ -19,9 +19,9 @@ namespace FarmGame.Visuals
         public PoliceVisual(GameObject goPolice)
         {
             _position = goPolice.GetComponent<IPosition>();
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
+            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.Police.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            Sprite = new SpriteObject(_spriteSheet, 14);
+            Sprite = new SpriteObject(_spriteSheet, 1);
         }
 
         public SpriteObject Sprite { get; private set; }

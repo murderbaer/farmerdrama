@@ -25,13 +25,13 @@ namespace FarmGame.Model
 
         private MoveRandomComponentState _state = MoveRandomComponentState.Idle;
 
-        public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
-
         public MoveRandomComponent(Box2 bounds)
         {
             _bounds = bounds;
             Position = GetRandomPosition();
         }
+
+        public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
 
         public Vector2 Position { get; set; }
 
