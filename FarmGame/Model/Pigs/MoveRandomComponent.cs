@@ -25,6 +25,8 @@ namespace FarmGame.Model
 
         private MoveRandomComponentState _state = MoveRandomComponentState.Idle;
 
+        public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
+
         public MoveRandomComponent(Box2 bounds)
         {
             _bounds = bounds;
@@ -67,12 +69,15 @@ namespace FarmGame.Model
 
             var direction = Vector2.Normalize(_moveGoal - Position);
             var moveAmount = MovementSpeed * elapsedTime;
+
             if (moveAmount > distance)
             {
                 moveAmount = distance;
             }
 
             MovementVector = direction * moveAmount;
+            OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(MovementVector));
+
             return true;
         }
 

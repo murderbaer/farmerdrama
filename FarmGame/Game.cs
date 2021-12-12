@@ -117,8 +117,7 @@ namespace FarmGame
             goPlayer.Components.Add(playerAnimation);
 
             // add listener
-            goPlayer.GetComponent<IChangeDirection>().OnChangeDirection +=
-                goPlayer.GetComponent<IAnimate>().Animate;
+            player.OnChangeDirection += playerAnimation.Animate;
 
             var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);
             goPlayer.Components.Add(playerItemInteraction);
@@ -182,6 +181,11 @@ namespace FarmGame
             goPig.Components.Add(hunger);
             var eating = new Eating(goPig, goGrid);
             goPig.Components.Add(eating);
+            var pigAnimation = new PigAnimation(goPig);
+            goPig.Components.Add(pigAnimation);
+
+            moveRandom.OnChangeDirection += pigAnimation.Animate;
+
         }
 
         private static void LoadPause(GameObject goPause)
