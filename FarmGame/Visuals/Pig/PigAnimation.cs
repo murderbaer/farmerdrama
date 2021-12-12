@@ -58,22 +58,26 @@ namespace FarmGame.Visuals
             if (e.Direction.X > tolerance)
             {
                 _pigSprite.Gid = _moveRight;
+                _noMove = 9;
             }
             else if (e.Direction.X < -tolerance)
             {
                 _pigSprite.Gid = _moveLeft;
+                _noMove = 13;
             }
             else if (e.Direction.Y < -tolerance)
             {
                 _pigSprite.Gid = _moveUp;
+                _noMove = 5;
             }
             else if (e.Direction.Y > tolerance)
             {
                 _pigSprite.Gid = _moveDown;
+                _noMove = 1;
             }
             else
             {
-                _pigSprite.Gid = 1;
+                _pigSprite.Gid = _noMove;
             }
         }
     }

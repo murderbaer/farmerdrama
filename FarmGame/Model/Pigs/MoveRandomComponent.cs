@@ -64,6 +64,8 @@ namespace FarmGame.Model
             if (distance < 0.05f)
             {
                 _moveGoal = new Vector2(0, 0);
+
+                OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(_moveGoal));
                 return false;
             }
 
