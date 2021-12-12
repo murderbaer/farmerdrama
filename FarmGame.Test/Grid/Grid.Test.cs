@@ -23,7 +23,7 @@ namespace FarmGame.Test
         public void TestSuspicionFactor()
         {
             int gridSize = grid.Column * grid.Row;
-            for (int i = 0; i < gridSize; i += 1) // somehow an overlow exception is thrown when les
+            for (int i = 0; i < gridSize; i++ )
             {
                 int x = i % grid.Column;
                 int y = i / grid.Row;

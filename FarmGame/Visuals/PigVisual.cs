@@ -19,8 +19,8 @@ namespace FarmGame.Visuals
         public PigVisual(GameObject goPig)
         {
             _position = goPig.GetComponent<IPosition>();
-            _spriteName = "FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png";
-            _texCoords = SpriteRenderer.GetTexCoord(_spriteName, 16, 45);
+            _spriteName = "FarmGame.Resources.Graphics.SpriteSheets.Pigs.png";
+            _texCoords = SpriteRenderer.GetTexCoord(_spriteName, 20, 1);
         }
 
         public SpriteObject Sprite { get; private set; }
