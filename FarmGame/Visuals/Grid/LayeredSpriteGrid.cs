@@ -55,26 +55,11 @@ namespace FarmGame.Visuals
                     if (toDraw.Gid != (int)SpriteType.AIR)
                     {
                         SpriteRenderer.DrawSprite(toDraw, new Vector2(column, row));
-                        //  DrawSingleSprite(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw));
                     }
                 }
             }
 
             GL.BindTexture(TextureTarget.Texture2D, 0);
-        }
-
-        public void DrawSingleSprite(int positionX, int positionY, Box2 sprite)
-        {
-            GL.Begin(PrimitiveType.Quads);
-            GL.TexCoord2(sprite.Min);
-            GL.Vertex2(positionX, positionY);
-            GL.TexCoord2(sprite.Max.X, sprite.Min.Y);
-            GL.Vertex2(positionX + 1, positionY);
-            GL.TexCoord2(sprite.Max);
-            GL.Vertex2(positionX + 1, positionY + 1);
-            GL.TexCoord2(sprite.Min.X, sprite.Max.Y);
-            GL.Vertex2(positionX, positionY + 1);
-            GL.End();
         }
 
         public void ReactOnStateChange(object source, OnStateChangeArgs args)

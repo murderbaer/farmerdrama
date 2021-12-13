@@ -27,7 +27,6 @@ namespace FarmGame.Visuals
 
         public void Draw()
         {
-
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
             SpriteRenderer.DrawSprite(Sprite, _position.Position);
             GL.BindTexture(TextureTarget.Texture2D, 0);
