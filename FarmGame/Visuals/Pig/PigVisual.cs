@@ -21,7 +21,7 @@ namespace FarmGame.Visuals
         {
             _position = goPig.GetComponent<IPosition>();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.Pigs.png");
-            Sprite = new SpriteObject(_spriteSheet, 1, 20, isPlayer: true);
+            Sprite = new SpriteObject(_spriteSheet, 1, 20, isCentered: true);
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
         }
 

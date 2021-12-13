@@ -83,7 +83,7 @@ namespace FarmGame.Helpers
         public static void DrawSprite(SpriteObject sprite, Vector2 position)
         {
             Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(sprite);
-            if (sprite.IsPlayer)
+            if (sprite.IsCentered)
             {
                 DrawPlayer(sprite, position);
             }

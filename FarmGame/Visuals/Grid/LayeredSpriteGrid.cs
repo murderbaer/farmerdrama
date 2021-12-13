@@ -2,7 +2,6 @@ using System.Xml;
 
 using FarmGame.Core;
 using FarmGame.Helpers;
-using FarmGame.Model.GridCells;
 
 using ImageMagick;
 using OpenTK.Graphics.OpenGL;
@@ -97,22 +96,22 @@ namespace FarmGame.Visuals
         {
             for (int i = 0; i < _tileHandler.LayerOne.Length; i++)
             {
-                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerOne[i], 16, isPlayer: false);
+                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerOne[i], 16, isCentered: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerTwo.Length; i++)
             {
-                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerTwo[i], 16, isPlayer: false);
+                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerTwo[i], 16, isCentered: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerThree.Length; i++)
             {
-                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerThree[i], 16, isPlayer: false);
+                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerThree[i], 16, isCentered: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerFour.Length; i++)
             {
-                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerFour[i], 16, isPlayer: false);
+                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerFour[i], 16, isCentered: false);
             }
         }
     }

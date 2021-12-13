@@ -4,12 +4,12 @@ namespace FarmGame
 {
     public class SpriteObject
     {
-        public SpriteObject(MagickImage image, int gid, int size, bool isPlayer)
+        public SpriteObject(MagickImage image, int gid, int size, bool isCentered)
         {
             SpriteSheet = image;
             Gid = gid;
             Size = size;
-            IsPlayer = isPlayer;
+            IsCentered = isCentered;
         }
 
         public MagickImage SpriteSheet { get; private set; }
@@ -18,6 +18,6 @@ namespace FarmGame
 
         public int Size { get; private set; }
 
-        public bool IsPlayer { get; private set; }
+        public bool IsCentered { get; private set; }
     }
 }

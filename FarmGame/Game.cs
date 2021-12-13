@@ -121,6 +121,9 @@ namespace FarmGame
 
             var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);
             goPlayer.Components.Add(playerItemInteraction);
+
+            var palyerItemVisual = new CarryItemVisual(playerItemInteraction, goPlayer);
+            goPlayer.Components.Add(palyerItemVisual);
         }
 
         private static void LoadGrid(GameObject goGrid)

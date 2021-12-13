@@ -21,7 +21,7 @@ namespace FarmGame.Visuals
             _position = goPlayer.GetComponent<IPosition>();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            Sprite = new SpriteObject(_spriteSheet, 1, 16, isPlayer: true);
+            Sprite = new SpriteObject(_spriteSheet, 1, 16, isCentered: true);
         }
 
         public SpriteObject Sprite { get; private set; }
