@@ -24,7 +24,7 @@ namespace FarmGame.Visuals
             _question = goPolice.GetComponent<QuestionComponent>();
             _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.QuestionBackground.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            Sprite = new SpriteObject(_spriteSheet, 14);
+            Sprite = new SpriteObject(_spriteSheet, 14, 16, isPlayer: false);
         }
 
         public SpriteObject Sprite { get; }

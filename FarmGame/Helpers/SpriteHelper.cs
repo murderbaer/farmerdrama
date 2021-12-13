@@ -38,10 +38,10 @@ namespace FarmGame.Helpers
         }
 
         // Assumed that sprite size is 16x16
-        public static Box2 GetTexCoordFromSprite(SpriteObject sprite, int size)
+        public static Box2 GetTexCoordFromSprite(SpriteObject sprite)
         {
-            int totalCol = sprite.SpriteSheet.Width / size;
-            int totalRow = sprite.SpriteSheet.Height / size;
+            int totalCol = sprite.SpriteSheet.Width / sprite.Size;
+            int totalRow = sprite.SpriteSheet.Height / sprite.Size;
             int id = sprite.Gid - 1;
             int row = id / totalCol;
             int col = id % totalCol;

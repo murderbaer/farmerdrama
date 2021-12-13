@@ -80,6 +80,19 @@ namespace FarmGame.Helpers
             return new Box2(x, y, x + width, y + height);
         }
 
+        public static void DrawSprite(SpriteObject sprite, Vector2 position)
+        {
+            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(sprite);
+            if (sprite.IsPlayer)
+            {
+                DrawPlayer(sprite, position);
+            }
+            else
+            {
+                DrawRightDown(sprite, position);
+            }
+        }
+
         public static void DrawSprite(string spriteName, Box2 bounds, Box2 texCoords, Color4 color = default(Color4))
         {
             if (color == default(Color4))
@@ -115,6 +128,50 @@ namespace FarmGame.Helpers
             }
 
             DrawSprite(spriteName, bounds, texCoords, color);
+        }
+
+        private static void DrawPlayer(SpriteObject sprite, Vector2 position)
+        {
+            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(sprite);
+            GL.Color4(Color4.White);
+
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(spritePos.Min);
+            GL.Vertex2(position.X - 0.5f, position.Y - 0.5f);
+
+            GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
+            GL.Vertex2(position.X + 0.5f, position.Y - 0.5f);
+
+            GL.TexCoord2(spritePos.Max);
+            GL.Vertex2(position.X + 0.5f, position.Y + 0.5f);
+
+            GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
+            GL.Vertex2(position.X - 0.5f, position.Y + 0.5f);
+
+            GL.End();
+        }
+
+        private static void DrawRightDown(SpriteObject sprite, Vector2 position)
+        {
+            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(sprite);
+            GL.Color4(Color4.White);
+
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(spritePos.Min);
+            GL.Vertex2(position.X, position.Y);
+
+            GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
+            GL.Vertex2(position.X + 1f, position.Y);
+
+            GL.TexCoord2(spritePos.Max);
+            GL.Vertex2(position.X + 1f, position.Y + 1f);
+
+            GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
+            GL.Vertex2(position.X, position.Y + 1f);
+
+            GL.End();
         }
     }
 }

@@ -42,11 +42,6 @@ namespace FarmGame.Visuals
 
         public int Row { get; }
 
-        public SpriteGrid GetWholeLayer(int i)
-        {
-            return _spriteGrid[i];
-        }
-
         public void DrawLayer(int layer)
         {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -59,7 +54,8 @@ namespace FarmGame.Visuals
                     SpriteObject toDraw = _spriteGrid[layer][column, row];
                     if (toDraw.Gid != (int)SpriteType.AIR)
                     {
-                        DrawSingleSprite(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw, 16));
+                        SpriteRenderer.DrawSprite(toDraw, new Vector2(column, row));
+                        //  DrawSingleSprite(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw));
                     }
                 }
             }
@@ -116,22 +112,22 @@ namespace FarmGame.Visuals
         {
             for (int i = 0; i < _tileHandler.LayerOne.Length; i++)
             {
-                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerOne[i]);
+                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerOne[i], 16, isPlayer: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerTwo.Length; i++)
             {
-                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerTwo[i]);
+                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerTwo[i], 16, isPlayer: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerThree.Length; i++)
             {
-                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerThree[i]);
+                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerThree[i], 16, isPlayer: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerFour.Length; i++)
             {
-                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerFour[i]);
+                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerFour[i], 16, isPlayer: false);
             }
         }
     }
