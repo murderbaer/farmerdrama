@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using FarmGame.Model;
 using FarmGame.Helpers;
+using FarmGame.Core;
 
 namespace FarmGame.Test
 {
