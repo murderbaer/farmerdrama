@@ -76,7 +76,7 @@ namespace FarmGame.Core
 
         public void Draw()
         {
-            var camera = GetAllComponents<Camera>().FirstOrDefault();
+            var camera = GetAllComponents<ICamera>().FirstOrDefault();
             camera.SetOverlayMatrix();
 
             foreach (var gameObject in GetAllComponents<IDrawBackground>())

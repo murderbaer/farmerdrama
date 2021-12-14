@@ -5,7 +5,7 @@ using OpenTK.Mathematics;
 
 namespace FarmGame.Visuals
 {
-    public class Camera : IResizable
+    public class Camera : IResizable, ICamera
     {
         // Screen Ratio: 16:9 Screen Ratio is used on most computer screens. Static, black bars limit the view
         private static Vector2 _screenRatio = new Vector2(16, 9);
