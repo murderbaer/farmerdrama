@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
-using FarmGame.Model;
+using FarmGame.Model.Grid;
 using FarmGame.Helpers;
 using FarmGame.Core;
 

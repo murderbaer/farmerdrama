@@ -1,7 +1,7 @@
 using System.Linq;
 
 using FarmGame.Core;
-using FarmGame.Model.GridCells;
+using FarmGame.Model.Grid;
 
 namespace FarmGame.Model
 {

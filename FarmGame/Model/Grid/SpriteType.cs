@@ -1,4 +1,4 @@
-namespace FarmGame.Model
+namespace FarmGame.Model.Grid
 {
     public enum SpriteType
     {

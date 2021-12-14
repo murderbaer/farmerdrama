@@ -1,4 +1,4 @@
-namespace FarmGame.Model.GridCells
+namespace FarmGame.Model.Grid
 {
     public class GridCellCollision : GridCell
     {

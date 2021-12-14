@@ -2,7 +2,7 @@ using System;
 
 using FarmGame.Core;
 using FarmGame.Helpers;
-using FarmGame.Model.GridCells;
+using FarmGame.Model.Grid;
 
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;

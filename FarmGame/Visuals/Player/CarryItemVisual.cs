@@ -1,6 +1,7 @@
 using FarmGame.Core;
 using FarmGame.Helpers;
 using FarmGame.Model;
+using FarmGame.Model.Grid;
 
 using ImageMagick;
 using OpenTK.Graphics.OpenGL;

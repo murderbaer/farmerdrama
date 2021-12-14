@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using FarmGame.Core;
 using FarmGame.Helpers;
 using FarmGame.Model;
+using FarmGame.Model.Grid;
 
 namespace FarmGame.Test
 {

@@ -3,6 +3,7 @@ using System.Linq;
 using FarmGame.Core;
 using FarmGame.Helpers;
 using FarmGame.Model;
+using FarmGame.Model.Grid;
 using FarmGame.Services;
 using FarmGame.Visuals;
 

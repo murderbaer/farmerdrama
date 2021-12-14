@@ -1,6 +1,6 @@
 using FarmGame.Core;
 
-namespace FarmGame.Model.GridCells
+namespace FarmGame.Model.Grid
 {
     public class GridCell : IGridCell
     {

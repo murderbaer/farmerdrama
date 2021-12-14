@@ -2,7 +2,7 @@ using System;
 
 using FarmGame.Core;
 
-namespace FarmGame.Model.GridCells
+namespace FarmGame.Model.Grid
 {
     public class GridCellFeeder : GridCell
     {

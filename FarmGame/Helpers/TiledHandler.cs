@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 
-using FarmGame.Model;
+using FarmGame.Model.Grid;
 using OpenTK.Mathematics;
 
 namespace FarmGame.Helpers

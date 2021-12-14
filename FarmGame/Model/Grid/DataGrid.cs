@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 using FarmGame.Core;
 using FarmGame.Helpers;
-using FarmGame.Model.GridCells;
 
 using OpenTK.Mathematics;
 
-namespace FarmGame.Model
+namespace FarmGame.Model.Grid
 {
     public class DataGrid : IComponent, IReadOnlyGrid
     {
