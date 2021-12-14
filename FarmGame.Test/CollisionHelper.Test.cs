@@ -3,7 +3,9 @@ using OpenTK.Mathematics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
+using FarmGame.Core;
 using FarmGame.Helpers;
+using FarmGame.Model;
 
 namespace FarmGame.Test
 {
@@ -11,6 +13,8 @@ namespace FarmGame.Test
     [TestClass]
     public class CollisionHelperTest
     {
+        Scene scene = null;
+
         Box2 boxA = new Box2(0, 0, 1, 1);
         Box2 boxB = new Box2(1.5f, 1.5f, 3, 3);
         Box2 boxC = new Box2(0.5f, 0.5f, 2, 2);
@@ -32,11 +36,31 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestGetCollisionBox()
         {
-            Box2 box = CollisionHelper.GetCollisionBox(0, 0, size: 2, centered: true);
+            Box2 box = CollisionHelper.GetCollisionBox(new Vector2(0, 0), size: 2, centered: true);
             Assert.AreEqual(box.Min.X, -1);
             Assert.AreEqual(box.Min.Y, -1);
             Assert.AreEqual(box.Max.X, 1);
             Assert.AreEqual(box.Max.Y, 1);
+        }
+
+        [TestMethod]
+        public void TestGetTileCollisionBoxesAround()
+        {
+            IReadOnlyGrid grid = new DataGrid();
+            Assert.IsTrue(CollisionHelper.GetTileCollisionBoxesAround(new Vector2(-10, -10), grid).Count == 0);
+        }
+
+        [TestMethod]
+        public void TestCollisionResponse()
+        {
+            var player = new Player();
+
+            var player2 = new Player();
+            player2.Position += new Vector2(0.25f, 0);
+
+            Assert.IsTrue(CollisionHelper.Collides(player, player2));
+            Assert.AreEqual(CollisionHelper.GetCollisionResponse(player, player), Vector2.Zero);
+            Assert.AreNotEqual(CollisionHelper.GetCollisionResponse(player, player2), Vector2.Zero);
         }
     }
 }
