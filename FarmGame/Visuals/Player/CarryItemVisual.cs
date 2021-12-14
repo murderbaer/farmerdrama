@@ -1,6 +1,5 @@
 using FarmGame.Core;
 using FarmGame.Helpers;
-using FarmGame.Items;
 using FarmGame.Model;
 
 using ImageMagick;
@@ -32,7 +31,7 @@ namespace FarmGame.Visuals
 
         public void Draw()
         {
-            switch (_playerItem.ItemInHand.Type)
+            switch (_playerItem.ItemInHand)
             {
                 case ItemType.EMPTY:
                     Sprite.Gid = (int)SpriteType.AIR;

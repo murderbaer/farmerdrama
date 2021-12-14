@@ -1,4 +1,4 @@
-namespace FarmGame.Items
+namespace FarmGame.Core
 {
     public enum ItemType
     {

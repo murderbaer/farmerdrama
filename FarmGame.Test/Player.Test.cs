@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 using FarmGame.Core;
 using FarmGame.Model;
 using FarmGame.Model.GridCells;
-using FarmGame.Items;
 
 namespace FarmGame.Test
 {
@@ -49,29 +48,29 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestItemInHand()
         {
-            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.EMPTY);
-            playerItemInteraction.ItemInHand = new Item(ItemType.WATERBUCKET);
-            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.WATERBUCKET);
+            Assert.AreEqual(playerItemInteraction.ItemInHand, ItemType.EMPTY);
+            playerItemInteraction.ItemInHand = ItemType.WATERBUCKET;
+            Assert.AreEqual(playerItemInteraction.ItemInHand, ItemType.WATERBUCKET);
         }
 
         [TestMethod]
         public void TestInteract()
         {
             var farmland = new GridCellFarmLand(FarmLandState.EMPTY, 0, 1f);
-            playerItemInteraction.ItemInHand = new Item(ItemType.WATERBUCKET);
+            playerItemInteraction.ItemInHand = ItemType.WATERBUCKET;
             playerItemInteraction.Interact(farmland);
             Assert.IsTrue(farmland.IsWatered);
-            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.EMPTY);
+            Assert.AreEqual(playerItemInteraction.ItemInHand, ItemType.EMPTY);
 
             var water = new GridCellWater(1f);
             playerItemInteraction.Interact(water);
-            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.WATERBUCKET);
+            Assert.AreEqual(playerItemInteraction.ItemInHand, ItemType.WATERBUCKET);
 
             farmland.State = FarmLandState.FULLGROWN;
-            playerItemInteraction.ItemInHand = new Item();
+            playerItemInteraction.ItemInHand = ItemType.EMPTY;
             playerItemInteraction.Interact(farmland);
 
-            Assert.AreEqual(playerItemInteraction.ItemInHand.Type, ItemType.WHEET);
+            Assert.AreEqual(playerItemInteraction.ItemInHand, ItemType.WHEET);
             Assert.AreEqual(farmland.State, FarmLandState.EMPTY);
         }
 
@@ -80,7 +79,7 @@ namespace FarmGame.Test
         {
             Corpse testCorpse = new Corpse(goPlayer,goCorpse);
             player.Position = testCorpse.Position;
-            playerItemInteraction.ItemInHand = new Item();
+            playerItemInteraction.ItemInHand = ItemType.EMPTY;
             testCorpse.IsPlaced = false;
 
             Assert.AreEqual(testCorpse.IsPlaced, false);

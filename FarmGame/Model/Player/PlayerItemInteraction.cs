@@ -1,7 +1,6 @@
 using System;
 
 using FarmGame.Core;
-using FarmGame.Items;
 
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -18,10 +17,10 @@ namespace FarmGame.Model
         {
             _position = goPlayer.GetComponent<IPosition>();
             _grid = grid;
-            ItemInHand = new Item();
+            ItemInHand = ItemType.EMPTY;
         }
 
-        public Item ItemInHand { get; set; }
+        public ItemType ItemInHand { get; set; }
 
         public void KeyDown(KeyboardKeyEventArgs args)
         {
@@ -37,18 +36,18 @@ namespace FarmGame.Model
             var playerY = (int)Math.Floor(_position.Position.Y);
             IGridCell cell = _grid[playerX, playerY];
 
-            if (ItemInHand.Type != ItemType.EMPTY)
+            if (ItemInHand != ItemType.EMPTY)
             {
                 var success = cell.InteractWithItem(ItemInHand);
                 if (success)
                 {
-                    ItemInHand = new Item();
+                    ItemInHand = ItemType.EMPTY;
                     return;
                 }
             }
 
             var newItem = cell.TakeItem();
-            if (newItem.Type != ItemType.EMPTY)
+            if (newItem != ItemType.EMPTY)
             {
                 ItemInHand = newItem;
                 return;
@@ -58,18 +57,18 @@ namespace FarmGame.Model
         // for testing
         public void Interact(IGridCell cell)
         {
-            if (ItemInHand.Type != ItemType.EMPTY)
+            if (ItemInHand != ItemType.EMPTY)
             {
                 var success = cell.InteractWithItem(ItemInHand);
                 if (success)
                 {
-                    ItemInHand = new Item();
+                    ItemInHand = ItemType.EMPTY;
                     return;
                 }
             }
 
             var newItem = cell.TakeItem();
-            if (newItem.Type != ItemType.EMPTY)
+            if (newItem != ItemType.EMPTY)
             {
                 ItemInHand = newItem;
                 return;

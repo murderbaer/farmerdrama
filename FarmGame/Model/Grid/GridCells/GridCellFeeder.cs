@@ -1,6 +1,6 @@
 using System;
 
-using FarmGame.Items;
+using FarmGame.Core;
 
 namespace FarmGame.Model.GridCells
 {
@@ -30,9 +30,9 @@ namespace FarmGame.Model.GridCells
             }
         }
 
-        public override bool InteractWithItem(Item item)
+        public override bool InteractWithItem(ItemType item)
         {
-            if (item.Type == ItemType.WHEET)
+            if (item == ItemType.WHEET)
             {
                 _fillState = Math.Min(_maxCapacity, _fillState + _fillPerItem);
                 return true;

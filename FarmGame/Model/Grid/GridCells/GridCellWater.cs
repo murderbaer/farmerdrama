@@ -1,4 +1,4 @@
-using FarmGame.Items;
+using FarmGame.Core;
 
 namespace FarmGame.Model.GridCells
 {
@@ -11,15 +11,15 @@ namespace FarmGame.Model.GridCells
 
         public float PoisenCounter { get; set; }
 
-        public override Item TakeItem()
+        public override ItemType TakeItem()
         {
             if (PoisenCounter > 0)
             {
-                return new Item(ItemType.EMPTY);
+                return ItemType.EMPTY;
             }
             else
             {
-                return new Item(ItemType.WATERBUCKET);
+                return ItemType.WATERBUCKET;
             }
         }
 

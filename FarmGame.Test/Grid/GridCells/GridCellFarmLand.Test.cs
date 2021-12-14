@@ -1,8 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
+using FarmGame.Core;
 using FarmGame.Model.GridCells;
-using FarmGame.Items;
 
 namespace FarmGame.Test
 {
@@ -37,15 +37,15 @@ namespace FarmGame.Test
         public void TestTakeItem()
         {
             cell.State = FarmLandState.FULLGROWN;
-            Assert.AreEqual(cell.TakeItem().Type, ItemType.WHEET);
+            Assert.AreEqual(cell.TakeItem(), ItemType.WHEET);
             Assert.AreEqual(cell.State, FarmLandState.EMPTY);
 
             cell.State = FarmLandState.OVERGROWN;
-            Assert.AreEqual(cell.TakeItem().Type, ItemType.EMPTY);
+            Assert.AreEqual(cell.TakeItem(), ItemType.EMPTY);
             Assert.AreEqual(cell.State, FarmLandState.EMPTY);
 
             cell.State = FarmLandState.SEED;
-            Assert.AreEqual(cell.TakeItem().Type, ItemType.EMPTY);
+            Assert.AreEqual(cell.TakeItem(), ItemType.EMPTY);
             Assert.AreEqual(cell.State, FarmLandState.SEED);
         }
 
@@ -54,10 +54,10 @@ namespace FarmGame.Test
         {
             cell.State = FarmLandState.EMPTY;
             Assert.IsFalse(cell.IsWatered);
-            Assert.IsTrue(cell.InteractWithItem(new Item(ItemType.WATERBUCKET)));
+            Assert.IsTrue(cell.InteractWithItem(ItemType.WATERBUCKET));
             Assert.IsTrue(cell.IsWatered);
 
-            Assert.IsTrue(cell.InteractWithItem(new Item(ItemType.SEED)));
+            Assert.IsTrue(cell.InteractWithItem(ItemType.SEED));
             Assert.AreEqual(cell.State, FarmLandState.SEED);
         }
 

@@ -1,5 +1,4 @@
 using FarmGame.Core;
-using FarmGame.Items;
 
 namespace FarmGame.Model.GridCells
 {
@@ -18,12 +17,12 @@ namespace FarmGame.Model.GridCells
         {
         }
 
-        public virtual Item TakeItem()
+        public virtual ItemType TakeItem()
         {
-            return new Item(ItemType.EMPTY);
+            return ItemType.EMPTY;
         }
 
-        public virtual bool InteractWithItem(Item item)
+        public virtual bool InteractWithItem(ItemType item)
         {
             return false;
         }

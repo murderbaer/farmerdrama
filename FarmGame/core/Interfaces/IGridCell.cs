@@ -1,5 +1,3 @@
-using FarmGame.Items;
-
 namespace FarmGame.Core
 {
     public interface IGridCell : IUpdatable
@@ -8,8 +6,8 @@ namespace FarmGame.Core
 
         public float HiddenFactor { get; }
 
-        public bool InteractWithItem(Item item);
+        public bool InteractWithItem(ItemType item);
 
-        public Item TakeItem();
+        public ItemType TakeItem();
     }
 }

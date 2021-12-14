@@ -1,4 +1,4 @@
-using FarmGame.Items;
+using FarmGame.Core;
 
 namespace FarmGame.Model.GridCells
 {
@@ -9,9 +9,9 @@ namespace FarmGame.Model.GridCells
         {
         }
 
-        public override Item TakeItem()
+        public override ItemType TakeItem()
         {
-            return new Item(ItemType.SEED);
+            return ItemType.SEED;
         }
     }
 }

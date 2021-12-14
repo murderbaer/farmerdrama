@@ -1,7 +1,6 @@
 using System;
 
 using FarmGame.Core;
-using FarmGame.Items;
 
 namespace FarmGame.Model.GridCells
 {
@@ -52,35 +51,35 @@ namespace FarmGame.Model.GridCells
 
         public FarmLandState State { get; set; } = FarmLandState.EMPTY;
 
-        public override Item TakeItem()
+        public override ItemType TakeItem()
         {
-            Item returnItem;
+            ItemType returnItem;
             switch (State)
             {
                 case FarmLandState.FULLGROWN:
                     State = FarmLandState.EMPTY;
-                    returnItem = new Item(ItemType.WHEET); break;
+                    returnItem = ItemType.WHEET; break;
                 case FarmLandState.OVERGROWN:
                     State = FarmLandState.EMPTY;
-                    returnItem = new Item(ItemType.EMPTY); break;
+                    returnItem = ItemType.EMPTY; break;
                 default:
-                    returnItem = new Item(ItemType.EMPTY); break;
+                    returnItem = ItemType.EMPTY; break;
             }
 
             OnStateChange?.Invoke(null, CreateStateEventArgs());
             return returnItem;
         }
 
-        public override bool InteractWithItem(Item item)
+        public override bool InteractWithItem(ItemType item)
         {
             bool success = false;
-            if (item.Type == ItemType.WATERBUCKET & !IsWatered)
+            if (item == ItemType.WATERBUCKET & !IsWatered)
             {
                 IsWatered = true;
                 FarmLandGrowthRate += 0.2f;
                 success = true;
             }
-            else if (item.Type == ItemType.SEED & State == FarmLandState.EMPTY)
+            else if (item == ItemType.SEED & State == FarmLandState.EMPTY)
             {
                 State = FarmLandState.SEED;
                 success = true;

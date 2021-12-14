@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
-using FarmGame.Items;
+using FarmGame.Core;
 using FarmGame.Model.GridCells;
 
 namespace FarmGame.Test
@@ -23,13 +23,13 @@ namespace FarmGame.Test
         [TestMethod]
         public void TestTakeItem()
         {
-            Assert.AreEqual(cell.TakeItem().Type, ItemType.EMPTY);
+            Assert.AreEqual(cell.TakeItem(), ItemType.EMPTY);
         }
 
         [TestMethod]
         public void TestInteractWithItem()
         {
-            Assert.IsFalse(cell.InteractWithItem(new Item(ItemType.EMPTY)));
+            Assert.IsFalse(cell.InteractWithItem(ItemType.EMPTY));
         }
     }
 }
