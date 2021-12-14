@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using FarmGame.Visuals;
 using OpenTK.Windowing.Common;
 
 namespace FarmGame.Core
