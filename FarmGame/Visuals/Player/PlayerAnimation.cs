@@ -38,14 +38,14 @@ namespace FarmGame.Visuals
                     _moveUp = 4;
                     _moveDown = 2;
                     _moveLeft = 7;
-                    _moveRight = 10;
+                    _moveRight = 14;
                 }
                 else
                 {
                     _moveUp = 6;
                     _moveDown = 3;
                     _moveLeft = 9;
-                    _moveRight = 12;
+                    _moveRight = 16;
                 }
 
                 _animationSwitchSprite = !_animationSwitchSprite;
@@ -57,7 +57,7 @@ namespace FarmGame.Visuals
             if (e.Direction.X == 1)
             {
                 _playerSprite.Gid = _moveRight;
-                _noMove = 1;
+                _noMove = 16;
             }
             else if (e.Direction.X == -1)
             {

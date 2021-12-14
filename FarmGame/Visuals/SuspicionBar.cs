@@ -15,7 +15,7 @@ namespace FarmGame.Visuals
         public SuspicionBar(GameObject goSuspicion)
         {
             _suspicion = goSuspicion.GetComponent<Suspicion>();
-            _spriteName = "FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png";
+            _spriteName = "FarmGame.Resources.Graphics.SpriteSheets.Gui.png";
         }
 
         public void DrawOverlay()

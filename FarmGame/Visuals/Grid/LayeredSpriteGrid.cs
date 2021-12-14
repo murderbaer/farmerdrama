@@ -42,11 +42,6 @@ namespace FarmGame.Visuals
 
         public int Row { get; }
 
-        public SpriteGrid GetWholeLayer(int i)
-        {
-            return _spriteGrid[i];
-        }
-
         public void DrawLayer(int layer)
         {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -59,26 +54,12 @@ namespace FarmGame.Visuals
                     SpriteObject toDraw = _spriteGrid[layer][column, row];
                     if (toDraw.Gid != (int)SpriteType.AIR)
                     {
-                        DrawSingleSprite(column, row, SpriteHelper.GetTexCoordFromSprite(toDraw, 16));
+                        SpriteRenderer.DrawSprite(toDraw, new Vector2(column, row));
                     }
                 }
             }
 
             GL.BindTexture(TextureTarget.Texture2D, 0);
-        }
-
-        public void DrawSingleSprite(int positionX, int positionY, Box2 sprite)
-        {
-            GL.Begin(PrimitiveType.Quads);
-            GL.TexCoord2(sprite.Min);
-            GL.Vertex2(positionX, positionY);
-            GL.TexCoord2(sprite.Max.X, sprite.Min.Y);
-            GL.Vertex2(positionX + 1, positionY);
-            GL.TexCoord2(sprite.Max);
-            GL.Vertex2(positionX + 1, positionY + 1);
-            GL.TexCoord2(sprite.Min.X, sprite.Max.Y);
-            GL.Vertex2(positionX, positionY + 1);
-            GL.End();
         }
 
         public void ReactOnStateChange(object source, OnStateChangeArgs args)
@@ -116,22 +97,22 @@ namespace FarmGame.Visuals
         {
             for (int i = 0; i < _tileHandler.LayerOne.Length; i++)
             {
-                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerOne[i]);
+                _spriteGrid[0][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerOne[i], 16, isCentered: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerTwo.Length; i++)
             {
-                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerTwo[i]);
+                _spriteGrid[1][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerTwo[i], 16, isCentered: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerThree.Length; i++)
             {
-                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerThree[i]);
+                _spriteGrid[2][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerThree[i], 16, isCentered: false);
             }
 
             for (int i = 0; i < _tileHandler.LayerFour.Length; i++)
             {
-                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerFour[i]);
+                _spriteGrid[3][i] = new SpriteObject(_spriteSheet, _tileHandler.LayerFour[i], 16, isCentered: false);
             }
         }
     }

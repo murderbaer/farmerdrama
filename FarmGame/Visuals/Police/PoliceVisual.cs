@@ -19,34 +19,17 @@ namespace FarmGame.Visuals
         public PoliceVisual(GameObject goPolice)
         {
             _position = goPolice.GetComponent<IPosition>();
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
+            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.Police.png");
             _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
-            Sprite = new SpriteObject(_spriteSheet, 14);
+            Sprite = new SpriteObject(_spriteSheet, 1, 16, isCentered: true);
         }
 
         public SpriteObject Sprite { get; private set; }
 
         public void Draw()
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(Sprite, 16);
-            GL.Color4(Color4.White);
-
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(spritePos.Min);
-            GL.Vertex2(_position.Position.X - 0.5f, _position.Position.Y - 0.5f);
-
-            GL.TexCoord2(spritePos.Max.X, spritePos.Min.Y);
-            GL.Vertex2(_position.Position.X + 0.5f, _position.Position.Y - 0.5f);
-
-            GL.TexCoord2(spritePos.Max);
-            GL.Vertex2(_position.Position.X + 0.5f, _position.Position.Y + 0.5f);
-
-            GL.TexCoord2(spritePos.Min.X, spritePos.Max.Y);
-            GL.Vertex2(_position.Position.X - 0.5f, _position.Position.Y + 0.5f);
-
-            GL.End();
+            SpriteRenderer.DrawSprite(Sprite, _position.Position);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
     }

@@ -31,6 +31,8 @@ namespace FarmGame.Model
             Position = GetRandomPosition();
         }
 
+        public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
+
         public Vector2 Position { get; set; }
 
         public Vector2 MovementVector { get; set; }
@@ -62,17 +64,22 @@ namespace FarmGame.Model
             if (distance < 0.05f)
             {
                 _moveGoal = new Vector2(0, 0);
+
+                OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(_moveGoal));
                 return false;
             }
 
             var direction = Vector2.Normalize(_moveGoal - Position);
             var moveAmount = MovementSpeed * elapsedTime;
+
             if (moveAmount > distance)
             {
                 moveAmount = distance;
             }
 
             MovementVector = direction * moveAmount;
+            OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(MovementVector));
+
             return true;
         }
 

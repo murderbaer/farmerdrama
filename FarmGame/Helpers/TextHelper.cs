@@ -1,9 +1,10 @@
 using System;
-using ImageMagick;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 
 using FarmGame.Visuals;
+using ImageMagick;
+
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 
 namespace FarmGame.Helpers
 {
@@ -44,7 +45,7 @@ namespace FarmGame.Helpers
 
         public void DrawChar(char c, float x, float y, Color4 color, float size = 0.35f)
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(new SpriteObject(_spriteSheet, c - CHAROFFSET), 20);
+            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(new SpriteObject(_spriteSheet, c - CHAROFFSET, 20, isCentered: false));
 
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
             GL.Begin(PrimitiveType.Quads);
