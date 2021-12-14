@@ -2,7 +2,7 @@ using System;
 
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Core
 {
     public class OnChangeDirectionArgs : EventArgs
     {
