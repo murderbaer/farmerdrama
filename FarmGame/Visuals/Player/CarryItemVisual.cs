@@ -44,7 +44,7 @@ namespace FarmGame.Visuals
                     Sprite.Gid = 1038;
                     break;
                 case ItemType.WHEET:
-                    Sprite.Gid = 5903;
+                    Sprite.Gid = 5997;
                     break;
                 default:
                     return;
