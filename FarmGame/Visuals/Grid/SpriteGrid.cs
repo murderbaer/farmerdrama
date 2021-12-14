@@ -1,4 +1,5 @@
 using FarmGame.Helpers;
+using FarmGame.Model;
 
 namespace FarmGame.Visuals
 {

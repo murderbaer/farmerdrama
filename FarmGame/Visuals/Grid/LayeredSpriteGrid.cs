@@ -2,7 +2,7 @@ using System.Xml;
 
 using FarmGame.Core;
 using FarmGame.Helpers;
-using FarmGame.Model.GridCells;
+using FarmGame.Model;
 
 using ImageMagick;
 using OpenTK.Graphics.OpenGL;

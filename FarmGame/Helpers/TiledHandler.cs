@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Xml;
 
 using OpenTK.Mathematics;
+using FarmGame.Model;
 
 namespace FarmGame.Helpers
 {
