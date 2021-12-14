@@ -1,4 +1,5 @@
 using FarmGame.Core;
+using FarmGame.Items;
 
 namespace FarmGame.Model.GridCells
 {

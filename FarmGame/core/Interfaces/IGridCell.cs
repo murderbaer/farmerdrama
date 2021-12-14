@@ -1,3 +1,5 @@
+using FarmGame.Items;
+
 namespace FarmGame.Core
 {
     public interface IGridCell : IUpdatable

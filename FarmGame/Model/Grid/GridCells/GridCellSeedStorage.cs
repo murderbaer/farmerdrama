@@ -1,3 +1,5 @@
+using FarmGame.Items;
+
 namespace FarmGame.Model.GridCells
 {
     public class GridCellSeedStorage : GridCell

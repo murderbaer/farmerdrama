@@ -1,7 +1,10 @@
-public enum ItemType
+namespace FarmGame.Items
 {
-    EMPTY,
-    SEED,
-    WHEET,
-    WATERBUCKET,
+    public enum ItemType
+    {
+        EMPTY,
+        SEED,
+        WHEET,
+        WATERBUCKET,
+    }
 }

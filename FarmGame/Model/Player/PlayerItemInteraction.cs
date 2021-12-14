@@ -1,6 +1,7 @@
 using System;
 
 using FarmGame.Core;
+using FarmGame.Items;
 
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;

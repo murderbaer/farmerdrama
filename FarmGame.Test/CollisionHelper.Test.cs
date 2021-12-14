@@ -3,6 +3,8 @@ using OpenTK.Mathematics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
+using FarmGame.Helpers;
+
 namespace FarmGame.Test
 {
     [ExcludeFromCodeCoverageAttribute]

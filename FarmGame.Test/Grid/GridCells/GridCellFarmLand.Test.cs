@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
 using FarmGame.Model.GridCells;
+using FarmGame.Items;
 
 namespace FarmGame.Test
 {

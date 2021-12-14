@@ -1,9 +1,6 @@
 using FarmGame.Core;
 using FarmGame.Helpers;
 
-using ImageMagick;
-
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
 namespace FarmGame.Visuals

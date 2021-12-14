@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using FarmGame.Core;
 using FarmGame.Model;
 using FarmGame.Model.GridCells;
+using FarmGame.Items;
 
 namespace FarmGame.Test
 {

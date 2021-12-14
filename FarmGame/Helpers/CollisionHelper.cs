@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using FarmGame.Core;
 using OpenTK.Mathematics;
 
-namespace FarmGame
+namespace FarmGame.Helpers
 {
     public static class CollisionHelper
     {

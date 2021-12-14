@@ -1,6 +1,6 @@
 using ImageMagick;
 
-namespace FarmGame
+namespace FarmGame.Visuals
 {
     public class SpriteObject
     {

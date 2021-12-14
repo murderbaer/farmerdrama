@@ -4,6 +4,7 @@ using System.Reflection;
 using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using FarmGame.Visuals;
 
 namespace FarmGame.Helpers
 {

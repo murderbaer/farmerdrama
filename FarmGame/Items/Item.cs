@@ -1,6 +1,6 @@
 using FarmGame.Core;
 
-namespace FarmGame
+namespace FarmGame.Items
 {
     public class Item : IComponent
     {
