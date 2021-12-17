@@ -54,22 +54,22 @@ namespace FarmGame.Visuals
 
         public void Animate(object sender, OnChangeDirectionArgs e)
         {
-            if (e.Direction.X == 1)
+            if (e.Direction.X > 0)
             {
                 _playerSprite.Gid = _moveRight;
                 _noMove = 16;
             }
-            else if (e.Direction.X == -1)
+            else if (e.Direction.X < 0)
             {
                 _playerSprite.Gid = _moveLeft;
                 _noMove = 7;
             }
-            else if (e.Direction.Y == 1)
+            else if (e.Direction.Y > 0)
             {
                 _playerSprite.Gid = _moveDown;
                 _noMove = 1;
             }
-            else if (e.Direction.Y == -1)
+            else if (e.Direction.Y < 0)
             {
                 _playerSprite.Gid = _moveUp;
                 _noMove = 5;
