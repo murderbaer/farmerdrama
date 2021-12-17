@@ -6,6 +6,7 @@
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="8.4.0" />
     <PackageReference Include="OpenTK" Version="4.6.7" />
+    <PackageReference Include="OpenTK.OpenAL" Version="4.6.7" />
     <PackageReference Include="tiledcs" Version="2.4.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
