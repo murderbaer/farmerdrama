@@ -6,6 +6,7 @@ using FarmGame.Model;
 using FarmGame.Model.Grid;
 using FarmGame.Services;
 using FarmGame.Visuals;
+using FarmGame.Audio;
 
 using OpenTK.Windowing.Desktop;
 
@@ -20,7 +21,7 @@ namespace FarmGame
         public static Scene LoadScene(GameWindow window)
         {
             var scene = new Scene();
-
+            AudioHelper.InitAudio();
             var updateService = new UpdateService();
             scene.AddService(updateService);
 
@@ -117,7 +118,9 @@ namespace FarmGame
             var playerAnimation = new PlayerAnimation(goPlayer);
             goPlayer.Components.Add(playerAnimation);
 
-            // add listener
+            var playerSound = new AudioSource(AudioHelper.GetStepsHanlde());
+
+            player.OnPlaySound += playerSound.Play;
             player.OnChangeDirection += playerAnimation.Animate;
 
             var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);

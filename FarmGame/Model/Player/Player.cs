@@ -24,6 +24,8 @@ namespace FarmGame.Model
 
         public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
 
+        public event EventHandler<OnPlaySoundArgs> OnPlaySound;
+
         public Vector2 Position { get; set; }
 
         public Vector2 MovementVector { get; set; }
@@ -62,6 +64,7 @@ namespace FarmGame.Model
                 return;
             }
 
+            OnPlaySound?.Invoke(null, new OnPlaySoundArgs(newPosition, moveDirection));
             MovementVector = moveDirection.Normalized() * elapsedTime * MovementSpeed;
         }
     }

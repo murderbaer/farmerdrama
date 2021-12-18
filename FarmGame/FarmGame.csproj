@@ -2,16 +2,21 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="8.4.0" />
+    <PackageReference Include="ManagedBass" Version="3.1.0" />
     <PackageReference Include="OpenTK" Version="4.6.7" />
-    <PackageReference Include="OpenTK.OpenAL" Version="4.6.7" />
-    <PackageReference Include="tiledcs" Version="2.4.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libbass.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\global.png" />
@@ -22,6 +27,7 @@
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Heatmap.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Pigs.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Gui.png" />
+    <EmbeddedResource Include="Resources\Sounds\step.wav" />
     <EmbeddedResource Include="Resources\Graphics\Map.tmx" />
     <EmbeddedResource Include="Resources\Questions.xml" />
   </ItemGroup>
