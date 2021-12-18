@@ -28,6 +28,8 @@ namespace FarmGame.Model
 
         public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
 
+        public event EventHandler<OnPlaySoundArgs> OnPlaySound;
+
         public Vector2 Position { get; set; }
 
         public Vector2 MovementVector { get; set; }
@@ -89,6 +91,8 @@ namespace FarmGame.Model
             if (movement.Length < offset.Length)
             {
                 MovementVector = movement;
+
+                OnPlaySound?.Invoke(null, new OnPlaySoundArgs(goal, movement));
                 return;
             }
 

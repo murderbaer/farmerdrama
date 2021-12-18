@@ -119,8 +119,10 @@ namespace FarmGame
             goPlayer.Components.Add(playerAnimation);
 
             var playerSound = new AudioSource(AudioHelper.GetStepsHanlde());
+            goPlayer.Components.Add(playerSound);
 
             player.OnPlaySound += playerSound.Play;
+
             player.OnChangeDirection += playerAnimation.Animate;
 
             var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);
@@ -171,6 +173,12 @@ namespace FarmGame
 
             var questionVisual = new QuestionVisual(goPolice);
             goPolice.Components.Add(questionVisual);
+
+
+            var playerSound = new AudioSource(AudioHelper.GetStepsHanlde());
+            goPlayer.Components.Add(playerSound);
+
+            police.OnPlaySound += playerSound.Play;
 
             // add listener
             goPolice.GetComponent<IChangeDirection>().OnChangeDirection +=
