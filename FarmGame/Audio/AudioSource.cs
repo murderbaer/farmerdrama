@@ -14,7 +14,6 @@ namespace FarmGame.Audio
 
         private bool _playing;
 
-
         public AudioSource(int handle, float duration)
         {
             Handle = handle;
