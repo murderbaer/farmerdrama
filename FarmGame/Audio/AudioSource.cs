@@ -6,7 +6,6 @@ using OpenTK.Mathematics;
 
 namespace FarmGame.Audio
 {
-    // TODO find out whz sometime two footseps are being played
     public class AudioSource : IComponent, IUpdatable, IAudioSource
     {
         private float _length;
@@ -14,6 +13,8 @@ namespace FarmGame.Audio
         private float _pos = 0f;
 
         private bool _playing;
+
+        private bool _active;
 
         public AudioSource(int handle, float duration)
         {
@@ -34,16 +35,23 @@ namespace FarmGame.Audio
                 _pos = 0f;
                 _playing = false;
             }
+
+            _active = true;
         }
 
         public void Play(object sender, OnPlaySoundArgs e)
         {
-            Location = e.Position;
-            if (!_playing)
+            if (_active)
             {
-                Bass.ChannelPlay(Handle);
-                _playing = true;
+                Location = e.Position;
+                if (!_playing)
+                {
+                    Bass.ChannelPlay(Handle);
+                    _playing = true;
+                }
             }
+
+            _active = false;
         }
     }
 }
