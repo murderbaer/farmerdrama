@@ -14,7 +14,6 @@ namespace FarmGame.Audio
 
         private bool _playing;
 
-        private bool _active;
 
         public AudioSource(int handle, float duration)
         {
@@ -35,13 +34,11 @@ namespace FarmGame.Audio
                 _pos = 0f;
                 _playing = false;
             }
-
-            _active = true;
         }
 
         public void Play(object sender, OnPlaySoundArgs e)
         {
-            if (_active)
+            if (Location != e.Position)
             {
                 Location = e.Position;
                 if (!_playing)
@@ -50,8 +47,6 @@ namespace FarmGame.Audio
                     _playing = true;
                 }
             }
-
-            _active = false;
         }
     }
 }
