@@ -92,7 +92,7 @@ namespace FarmGame.Model
             {
                 MovementVector = movement;
 
-                OnPlaySound?.Invoke(null, new OnPlaySoundArgs(goal, movement));
+                OnPlaySound?.Invoke(this, new OnPlaySoundArgs(Position, movement));
                 return;
             }
 

@@ -17,6 +17,12 @@
     <Content Include="libbass.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Sounds\step.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\pig-snort.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\global.png" />
@@ -27,7 +33,6 @@
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Heatmap.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Pigs.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Gui.png" />
-    <EmbeddedResource Include="Resources\Sounds\step.wav" />
     <EmbeddedResource Include="Resources\Graphics\Map.tmx" />
     <EmbeddedResource Include="Resources\Questions.xml" />
   </ItemGroup>

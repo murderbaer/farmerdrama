@@ -2,25 +2,29 @@ using FarmGame.Core;
 
 using ManagedBass;
 
+using OpenTK.Mathematics;
+
 namespace FarmGame.Audio
 {
     // TODO find out whz sometime two footseps are being played
-    public class AudioSource : IComponent, IUpdatable
+    public class AudioSource : IComponent, IUpdatable, IAudioSource
     {
-        private int _audioHandle;
-
-        // TODO find way to make it dynamic depending on file
-        private  float _length = 0.5f;
+        private float _length;
 
         private float _pos = 0f;
 
         private bool _playing;
 
-        public AudioSource(int handle)
+        public AudioSource(int handle, float duration)
         {
-            _audioHandle = handle;
+            Handle = handle;
+            _length = duration;
             _playing = true;
         }
+
+        public int Handle { get; private set; }
+
+        public Vector2 Location { get; private set; }
 
         public void Update(float elapsedTime)
         {
@@ -34,12 +38,10 @@ namespace FarmGame.Audio
 
         public void Play(object sender, OnPlaySoundArgs e)
         {
-            // var pos = new Vector3D(e.Position.X, e.Position.Y, 0);
-            // var speed = new Vector3D(e.Speed.X, e.Speed.Y, 0);
-            // Bass.ChannelSet3DPosition(_audioHandle, pos, null, speed);
+            Location = e.Position;
             if (!_playing)
             {
-                Bass.ChannelPlay(_audioHandle);
+                Bass.ChannelPlay(Handle);
                 _playing = true;
             }
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using FarmGame.Core;
@@ -24,6 +25,8 @@ namespace FarmGame.Visuals
             _camera = goCamera.GetComponent<Camera>();
         }
 
+        public event EventHandler<OnPlaySoundArgs> OnPlaySound;
+
         public bool FreeCamActive { get; set; }
 
         public float Speed { get; set; } = 10f;
@@ -45,6 +48,8 @@ namespace FarmGame.Visuals
             {
                 _smoothCamera.CameraFocus = _followPosition.Position;
             }
+
+            OnPlaySound?.Invoke(null, new OnPlaySoundArgs(_followPosition.Position, Focus));
         }
 
         public void FollowGameObject(GameObject go, bool setPosition = false)

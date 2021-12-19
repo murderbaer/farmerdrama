@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using FarmGame.Core;
 
+using ManagedBass;
+
 namespace FarmGame.Services
 {
     public class UpdateService : IService, IUpdatable

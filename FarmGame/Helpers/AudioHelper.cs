@@ -1,18 +1,15 @@
+using System.IO;
+
 using ManagedBass;
 
 namespace FarmGame.Helpers
 {
     public class AudioHelper
     {
-
         public static int GetStepsHanlde()
         {
-            return Bass.CreateStream("FarmGame/Resources/Sounds/step.wav");
-        }
-
-        public static void InitAudio()
-        {
-            Bass.Init(Bass.CurrentDevice);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "FarmGame/Resources/Sounds/step.wav");
+            return Bass.CreateStream(path);
         }
     }
 }

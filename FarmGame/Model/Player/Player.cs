@@ -64,7 +64,7 @@ namespace FarmGame.Model
                 return;
             }
 
-            OnPlaySound?.Invoke(null, new OnPlaySoundArgs(newPosition, moveDirection));
+            OnPlaySound?.Invoke(null, new OnPlaySoundArgs(Position, moveDirection));
             MovementVector = moveDirection.Normalized() * elapsedTime * MovementSpeed;
         }
     }

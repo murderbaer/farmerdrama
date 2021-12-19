@@ -1,4 +1,4 @@
-using FarmGame.Core;using FarmGame.Audio;
+using FarmGame.Core;
 
 namespace FarmGame.Visuals
 {
@@ -21,7 +21,6 @@ namespace FarmGame.Visuals
         private int _moveRight = 10;
 
         private int _noMove = 1;
-
 
         public PlayerAnimation(GameObject goPlayer)
         {

@@ -14,8 +14,6 @@ namespace FarmGame.Test
     [TestClass]
     public class CollisionHelperTest
     {
-        Scene scene = null;
-
         Box2 boxA = new Box2(0, 0, 1, 1);
         Box2 boxB = new Box2(1.5f, 1.5f, 3, 3);
         Box2 boxC = new Box2(0.5f, 0.5f, 2, 2);
