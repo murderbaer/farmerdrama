@@ -30,5 +30,18 @@ namespace FarmGame.Test
         {
             Assert.IsFalse(cell.InteractWithItem(ItemType.EMPTY));
         }
+
+
+        [TestMethod]
+        public void TestPoision()
+        {
+            var waterCell = new GridCellWater(1);
+
+            waterCell.PoisenCounter = 0;
+            Assert.AreEqual(ItemType.WATERBUCKET, waterCell.TakeItem());
+
+            waterCell.PoisenCounter = 1;
+            Assert.AreEqual(ItemType.EMPTY, waterCell.TakeItem());
+        }
     }
 }

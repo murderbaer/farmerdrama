@@ -49,7 +49,7 @@ namespace FarmGame.Visuals
                 _smoothCamera.CameraFocus = _followPosition.Position;
             }
 
-            OnPlaySound?.Invoke(null, new OnPlaySoundArgs(_followPosition.Position, Focus));
+            OnPlaySound?.Invoke(null, new OnPlaySoundArgs(_smoothCamera.CameraFocus, Focus));
         }
 
         public void FollowGameObject(GameObject go, bool setPosition = false)
