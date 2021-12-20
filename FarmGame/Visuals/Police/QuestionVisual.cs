@@ -1,5 +1,5 @@
 using FarmGame.Core;
-using FarmGame.Helpers;
+
 using FarmGame.Model;
 
 using ImageMagick;
@@ -22,8 +22,8 @@ namespace FarmGame.Visuals
         public QuestionVisual(GameObject goPolice)
         {
             _question = goPolice.GetComponent<QuestionComponent>();
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.QuestionBackground.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            _spriteSheet = SpriteRenderer.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.QuestionBackground.png");
+            _spriteHandle = SpriteRenderer.GenerateHandle(_spriteSheet);
             Sprite = new SpriteObject(_spriteSheet, 14, 1, isCentered: false);
         }
 

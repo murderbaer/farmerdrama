@@ -6,7 +6,7 @@ using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace FarmGame.Helpers
+namespace FarmGame.Visuals
 {
     public class TextHelper
     {
@@ -26,8 +26,8 @@ namespace FarmGame.Helpers
             }
 
             // sprite sheet found on https://stackoverflow.com/questions/43494615/use-a-font-sprite-sheet-as-font-in-sfml-2-4
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.Font.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            _spriteSheet = SpriteRenderer.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.Font.png");
+            _spriteHandle = SpriteRenderer.GenerateHandle(_spriteSheet);
         }
 
         public static TextHelper Instance
@@ -45,7 +45,7 @@ namespace FarmGame.Helpers
 
         public void DrawChar(char c, float x, float y, Color4 color, float size = 0.35f)
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(new SpriteObject(_spriteSheet, c - CHAROFFSET, 20, isCentered: false));
+            Box2 spritePos = SpriteRenderer.GetTexCoordFromSprite(new SpriteObject(_spriteSheet, c - CHAROFFSET, 20, isCentered: false));
 
             GL.BindTexture(TextureTarget.Texture2D, _spriteHandle);
             GL.Begin(PrimitiveType.Quads);

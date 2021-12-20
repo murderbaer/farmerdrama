@@ -1,5 +1,5 @@
 using FarmGame.Core;
-using FarmGame.Helpers;
+
 using FarmGame.Model;
 using FarmGame.Model.Grid;
 
@@ -23,8 +23,8 @@ namespace FarmGame.Visuals
         {
             _playerItem = playerItem;
             _position = goPlayer.GetComponent<IPosition>();
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            _spriteSheet = SpriteRenderer.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
+            _spriteHandle = SpriteRenderer.GenerateHandle(_spriteSheet);
             Sprite = new SpriteObject(_spriteSheet, (int)SpriteType.AIR, 16, isCentered: true);
         }
 

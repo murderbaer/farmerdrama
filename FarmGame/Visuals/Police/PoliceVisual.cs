@@ -1,5 +1,4 @@
 using FarmGame.Core;
-using FarmGame.Helpers;
 
 using ImageMagick;
 
@@ -19,8 +18,8 @@ namespace FarmGame.Visuals
         public PoliceVisual(GameObject goPolice)
         {
             _position = goPolice.GetComponent<IPosition>();
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.Police.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            _spriteSheet = SpriteRenderer.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.Police.png");
+            _spriteHandle = SpriteRenderer.GenerateHandle(_spriteSheet);
             Sprite = new SpriteObject(_spriteSheet, 1, 16, isCentered: true);
         }
 

@@ -1,4 +1,5 @@
 using FarmGame.Core;
+
 using FarmGame.Helpers;
 using FarmGame.Model.Grid;
 
@@ -20,8 +21,8 @@ namespace FarmGame.Visuals
 
         public LayeredSpriteGrid()
         {
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            _spriteSheet = SpriteRenderer.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.global.png");
+            _spriteHandle = SpriteRenderer.GenerateHandle(_spriteSheet);
 
             Column = _tileHandler.BoardX;
             Row = _tileHandler.BoardY;

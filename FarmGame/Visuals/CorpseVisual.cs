@@ -1,5 +1,4 @@
 using FarmGame.Core;
-using FarmGame.Helpers;
 
 using ImageMagick;
 using OpenTK.Graphics.OpenGL;
@@ -18,8 +17,8 @@ namespace FarmGame.Visuals
         public CorpseVisual(GameObject goCorpse)
         {
             _position = goCorpse.GetComponent<IPosition>();
-            _spriteSheet = SpriteHelper.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
-            _spriteHandle = SpriteHelper.GenerateHandle(_spriteSheet);
+            _spriteSheet = SpriteRenderer.LoadTexture("FarmGame.Resources.Graphics.SpriteSheets.FarmPerson.png");
+            _spriteHandle = SpriteRenderer.GenerateHandle(_spriteSheet);
             Sprite = new SpriteObject(_spriteSheet, 27, 16, isCentered: true);
         }
 

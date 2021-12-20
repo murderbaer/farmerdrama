@@ -70,7 +70,6 @@ namespace FarmGame.Audio
             string pathFolder = System.IO.Path.GetDirectoryName(path);
 
             AudioSource src = new AudioSource(Bass.CreateStream(pathFolder + "/Resources/Sounds/step.wav"), 0.5f);
-            Console.WriteLine(pathFolder + "/Resources/Sounds/step.wav");
             _playBuffer.Add(src);
             return src;
         }

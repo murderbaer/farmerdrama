@@ -9,7 +9,7 @@ using ImageMagick;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace FarmGame.Helpers
+namespace FarmGame.Visuals
 {
     public static class SpriteRenderer
     {
@@ -65,6 +65,22 @@ namespace FarmGame.Helpers
             return _spriteHandles[spriteName];
         }
 
+        public static Box2 GetTexCoordFromSprite(SpriteObject sprite)
+        {
+            int totalCol = sprite.SpriteSheet.Width / sprite.Size;
+            int totalRow = sprite.SpriteSheet.Height / sprite.Size;
+            int id = sprite.Gid - 1;
+            int row = id / totalCol;
+            int col = id % totalCol;
+
+            float x = col / (float)totalCol;
+            float y = row / (float)totalRow;
+            float width = 1f / totalCol;
+            float height = 1f / totalRow;
+
+            return new Box2(x, y, x + width, y + height);  // return new Box2(x, y, x + width, y + height);
+        }
+
         public static Box2 GetTexCoord(string spriteName, int size, int gid)
         {
             var sprite = GetSprite(spriteName);
@@ -84,7 +100,7 @@ namespace FarmGame.Helpers
 
         public static void DrawSprite(SpriteObject sprite, Vector2 position)
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(sprite);
+            Box2 spritePos = SpriteRenderer.GetTexCoordFromSprite(sprite);
             if (sprite.IsCentered)
             {
                 DrawPlayer(sprite, position);
@@ -134,7 +150,7 @@ namespace FarmGame.Helpers
 
         private static void DrawPlayer(SpriteObject sprite, Vector2 position)
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(sprite);
+            Box2 spritePos = SpriteRenderer.GetTexCoordFromSprite(sprite);
             GL.Color4(Color4.White);
 
             GL.Begin(PrimitiveType.Quads);
@@ -156,7 +172,7 @@ namespace FarmGame.Helpers
 
         private static void DrawRightDown(SpriteObject sprite, Vector2 position)
         {
-            Box2 spritePos = SpriteHelper.GetTexCoordFromSprite(sprite);
+            Box2 spritePos = SpriteRenderer.GetTexCoordFromSprite(sprite);
             GL.Color4(Color4.White);
 
             GL.Begin(PrimitiveType.Quads);
