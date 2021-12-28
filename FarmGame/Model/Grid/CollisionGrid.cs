@@ -15,7 +15,7 @@ namespace FarmGame.Model.Grid
             float[] hiddenFactorHeatmap = TiledHandler.Instance.HiddenFactorGrid;
             for (int i = 0; i < gridSize; i++)
             {
-                switch ((SpriteType)collisionGrid[i])
+                switch (collisionGrid[i])
                 {
                     case SpriteType.AIR:
                         CollidableGrid[i] = new GridCell(hiddenFactorHeatmap[i]);

@@ -34,6 +34,7 @@
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Pigs.png" />
     <EmbeddedResource Include="Resources\Graphics\SpriteSheets\Gui.png" />
     <EmbeddedResource Include="Resources\Graphics\Map.tmx" />
+    <EmbeddedResource Include="Resources\Graphics\NewMap.tmx" />
     <EmbeddedResource Include="Resources\Questions.xml" />
   </ItemGroup>
 </Project>

@@ -1,15 +1,31 @@
 namespace FarmGame.Model.Grid
 {
-    public enum SpriteType
+    public static class SpriteType
     {
-        FARM_LAND = 552,
-        WATER_LU = 2825,
-        WATER_RU = 2826,
-        WATER_LD = 2916,
-        WATER_RD = 2917,
-        SEEDS = 5051,
-        FEEDER = 5179,
-        COLLISION = -1,
-        AIR = 7643,
+        public const int FARMLAND = 568;
+
+        public const int SEEDS = 5051;
+
+        public const int FEEDER = 5179;
+
+        public const int COLLISION = -1;
+
+        public const int AIR = 7644;
+
+        public static int[] WATER = new int[]
+        {
+            1186,
+            1100,
+            1187,
+            1198,
+            1195,
+            1190,
+            1102,
+            1286,
+            1188,
+            1278,
+            1277,
+            1192,
+        };
     }
 }
