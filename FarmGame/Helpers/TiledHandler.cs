@@ -24,7 +24,7 @@ namespace FarmGame.Helpers
             }
 
             var assembly = Assembly.GetExecutingAssembly();
-            using (Stream stream = assembly.GetManifestResourceStream("FarmGame.Resources.Graphics.Map.tmx"))
+            using (Stream stream = assembly.GetManifestResourceStream("FarmGame.Resources.Graphics.NewMap.tmx"))
             {
                 _doc = new XmlDocument();
                 _doc.Load(stream);
@@ -103,7 +103,8 @@ namespace FarmGame.Helpers
                 {
                     offset_x = float.Parse(paths[i].Attributes["x"].Value);
                     offset_y = float.Parse(paths[i].Attributes["y"].Value);
-                    string polPath = paths[i].SelectNodes("polygon")[0].Attributes["points"].Value;
+                    var nodes = paths[i].SelectNodes("polyline");
+                    string polPath = nodes[0].Attributes["points"].Value;
                     List<Vector2> singelPath = new List<Vector2>();
                     string[] cords = polPath.Split(' ');
 
@@ -115,7 +116,6 @@ namespace FarmGame.Helpers
                         singelPath.Add(new Vector2(x, y));
                     }
 
-                    singelPath.Add(policePos);
                     vectorPath.Add(singelPath);
                 }
 
@@ -194,7 +194,7 @@ namespace FarmGame.Helpers
             HiddenFactorGrid = new float[gridSize];
             for (int i = 0; i < tiles.Count; i++)
             {
-                HiddenFactorGrid[i] = 1f / int.Parse(tiles[i].Attributes["gid"].Value);
+                HiddenFactorGrid[i] = 1f / (int.Parse(tiles[i].Attributes["gid"].Value) - 7644);
             }
         }
 

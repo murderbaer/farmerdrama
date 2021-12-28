@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using FarmGame.Core;
 using FarmGame.Helpers;
@@ -20,20 +21,15 @@ namespace FarmGame.Model.Grid
 
             _grid = new IGridCell[gridSize];
             float[] hiddenFactorHeatmap = TiledHandler.Instance.HiddenFactorGrid;
+            var layers = TiledHandler.Instance.SquashedLayers;
             for (int i = 0; i < gridSize; i++)
             {
-                switch ((SpriteType)TiledHandler.Instance.SquashedLayers[i])
+                switch (layers[i])
                 {
-                    case SpriteType.FARM_LAND:
+                    case SpriteType.FARMLAND:
                         _grid[i] = new GridCellFarmLand(FarmLandState.EMPTY, i, hiddenFactorHeatmap[i]);
                         GridCellFarmLand temp = (GridCellFarmLand)_grid[i];
                         temp.OnStateChange += stateChange;
-                        break;
-                    case SpriteType.WATER_LD:
-                    case SpriteType.WATER_LU:
-                    case SpriteType.WATER_RD:
-                    case SpriteType.WATER_RU:
-                        _grid[i] = new GridCellWater(hiddenFactorHeatmap[i]);
                         break;
                     case SpriteType.COLLISION:
                         _grid[i] = new GridCellCollision(hiddenFactorHeatmap[i]);
@@ -45,7 +41,15 @@ namespace FarmGame.Model.Grid
                         _grid[i] = new GridCellFeeder(hiddenFactorHeatmap[i]);
                         break;
                     default:
-                        _grid[i] = new GridCell(hiddenFactorHeatmap[i]);
+                        if (SpriteType.IsWater(layers[i]))
+                        {
+                            _grid[i] = new GridCellWater(hiddenFactorHeatmap[i]);
+                        }
+                        else
+                        {
+                            _grid[i] = new GridCell(hiddenFactorHeatmap[i]);
+                        }
+
                         break;
                 }
             }

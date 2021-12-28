@@ -88,7 +88,7 @@ namespace FarmGame.Visuals
             }
             else
             {
-                _spriteGrid[0][args.Position].Gid = (int)SpriteType.FARM_LAND;
+                _spriteGrid[0][args.Position].Gid = (int)SpriteType.FARMLAND;
             }
         }
 
