@@ -29,7 +29,6 @@ namespace FarmGame.Model
         {
             var suspicion = _suspicion.Value;
             var corpsePosition = _corpse.Position;
-            var policePosition = _police.Position;
             var hiddenFactor = _grid[(int)corpsePosition.X, (int)corpsePosition.Y].HiddenFactor;
             var holdFactor = _corpse.IsPlaced ? 1f : 1.3f;
 

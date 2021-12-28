@@ -194,7 +194,7 @@ namespace FarmGame.Helpers
             HiddenFactorGrid = new float[gridSize];
             for (int i = 0; i < tiles.Count; i++)
             {
-                HiddenFactorGrid[i] = 1f / int.Parse(tiles[i].Attributes["gid"].Value);
+                HiddenFactorGrid[i] = 1f / (int.Parse(tiles[i].Attributes["gid"].Value) - 7644);
             }
         }
 
