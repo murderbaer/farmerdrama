@@ -1,5 +1,6 @@
 using FarmGame.Core;
 using FarmGame.Model.Grid;
+using FarmGame.Services;
 
 using OpenTK.Mathematics;
 
@@ -13,6 +14,8 @@ namespace FarmGame.Model
 
         private Corpse _corpse;
 
+        private UpdateService _updateService;
+
         private DataGrid _grid;
 
         public SearchCorpse(GameObject goPolice, GameObject goSuspicion, GameObject goCorpse, GameObject goGrid)
@@ -21,6 +24,7 @@ namespace FarmGame.Model
             _suspicion = goSuspicion.GetComponent<Suspicion>();
             _corpse = goCorpse.GetComponent<Corpse>();
             _grid = goGrid.GetComponent<DataGrid>();
+            _updateService = goGrid.Scene.GetService<UpdateService>();
         }
 
         public bool IsFound { get; set; }
@@ -57,8 +61,8 @@ namespace FarmGame.Model
 
         public void FinishSearch()
         {
+            _updateService.IsPaused = true;
             _police.EndPath();
-            System.Console.WriteLine("Corpse found!");
         }
 
         public void Update(float elapsedTime)

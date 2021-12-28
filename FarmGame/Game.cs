@@ -58,6 +58,9 @@ namespace FarmGame
             SearchCorpse seachCorpse = new SearchCorpse(goPolice, goSuspicion, goCorpse, goGrid);
             goPolice.Components.Add(seachCorpse);
 
+            var goGameOver = scene.CreateGameObject("GameOver");
+            LoadGameOver(goGameOver, scene);
+            
             var cameraController = goCamera.GetComponent<CameraController>();
             cameraController.FollowGameObject(goPlayer, setPosition: true);
 
@@ -213,6 +216,15 @@ namespace FarmGame
             goPause.Components.Add(pause);
             var pauseVisual = new PauseVisual(goPause);
             goPause.Components.Add(pauseVisual);
+        }
+
+        private static void LoadGameOver(GameObject goGameOver, Scene scene)
+        {
+            var playTime = new GameTime();
+            goGameOver.Components.Add(playTime);
+            var goSearchCorpse = scene.GetGameObjects("Police").First();
+            var gameOver = new GameOverVisual(goGameOver, goSearchCorpse);
+            goGameOver.Components.Add(gameOver);
         }
     }
 }

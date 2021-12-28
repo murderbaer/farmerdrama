@@ -41,7 +41,7 @@ namespace FarmGame.Model.Grid
                         _grid[i] = new GridCellFeeder(hiddenFactorHeatmap[i]);
                         break;
                     default:
-                        if (SpriteType.WATER.Contains(layers[i]))
+                        if (SpriteType.IsWater(layers[i]))
                         {
                             _grid[i] = new GridCellWater(hiddenFactorHeatmap[i]);
                         }
@@ -49,6 +49,7 @@ namespace FarmGame.Model.Grid
                         {
                             _grid[i] = new GridCell(hiddenFactorHeatmap[i]);
                         }
+
                         break;
                 }
             }

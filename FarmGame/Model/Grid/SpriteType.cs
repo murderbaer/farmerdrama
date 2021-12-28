@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace FarmGame.Model.Grid
 {
     public static class SpriteType
@@ -12,7 +14,7 @@ namespace FarmGame.Model.Grid
 
         public const int AIR = 7644;
 
-        public static int[] WATER = new int[]
+        private static int[] water = new int[]
         {
             1186,
             1100,
@@ -27,5 +29,10 @@ namespace FarmGame.Model.Grid
             1277,
             1192,
         };
+
+        public static bool IsWater(int spriteType)
+        {
+            return water.Contains(spriteType);
+        }
     }
 }
