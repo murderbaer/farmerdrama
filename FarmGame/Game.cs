@@ -134,6 +134,9 @@ namespace FarmGame
 
             var palyerItemVisual = new CarryItemVisual(playerItemInteraction, goPlayer);
             goPlayer.Components.Add(palyerItemVisual);
+
+            var playerGamepad = new GamepadLinux(goPlayer);
+            goPlayer.Components.Add(playerGamepad);
         }
 
         private static void LoadGrid(GameObject goGrid)
