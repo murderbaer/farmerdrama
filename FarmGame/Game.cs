@@ -60,7 +60,7 @@ namespace FarmGame
 
             var goGameOver = scene.CreateGameObject("GameOver");
             LoadGameOver(goGameOver, scene);
-            
+
             var cameraController = goCamera.GetComponent<CameraController>();
             cameraController.FollowGameObject(goPlayer, setPosition: true);
 
