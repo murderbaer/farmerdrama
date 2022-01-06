@@ -61,7 +61,7 @@ namespace FarmGame.Model
 
         public void FinishSearch()
         {
-            _updateService.IsPaused = true;
+            _updateService.IsFinished = true;
             _police.EndPath();
         }
 

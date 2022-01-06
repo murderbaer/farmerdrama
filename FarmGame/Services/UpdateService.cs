@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using FarmGame.Core;
 
-using ManagedBass;
-
 namespace FarmGame.Services
 {
     public class UpdateService : IService, IUpdatable
@@ -11,6 +9,8 @@ namespace FarmGame.Services
 
         public bool IsPaused { get; set; }
 
+        public bool IsFinished { get; set; }
+
         public void AddUpdatable(IUpdatable updatable)
         {
             _updatables.Add(updatable);
@@ -18,7 +18,7 @@ namespace FarmGame.Services
 
         public void Update(float elapsedTime)
         {
-            if (IsPaused)
+            if (IsPaused || IsFinished)
             {
                 return;
             }
