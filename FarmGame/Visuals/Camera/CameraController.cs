@@ -65,7 +65,7 @@ namespace FarmGame.Visuals
 
         public void KeyDown(KeyboardKeyEventArgs args)
         {
-            if (args.Key == Keys.P)
+            if (args.Key == Keys.F3)
             {
                 Focus = _smoothCamera.CameraFocus;
                 FreeCamActive = !FreeCamActive;

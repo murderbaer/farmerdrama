@@ -128,6 +128,8 @@ namespace FarmGame.Model.Grid
                 ProgressState();
                 _farmStateProgress = 0;
             }
+
+            FarmLandGrowthRate = 1f;
         }
 
         private OnStateChangeArgs CreateStateEventArgs()
