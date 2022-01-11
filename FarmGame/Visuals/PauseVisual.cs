@@ -29,7 +29,7 @@ namespace FarmGame.Visuals
             SpriteRenderer.DrawSprite(_pauseBackground, new Box2(0, 0, 16, 9), spritePos);
 
             TextHelper.Instance.DrawText("Paused", 6, 3, Color4.BlueViolet, size: 1);
-            TextHelper.Instance.DrawText("Press O to resume", 5, 5, Color4.LimeGreen, size: 0.5f);
+            TextHelper.Instance.DrawText("Press Esc to resume", 5, 5, Color4.LimeGreen, size: 0.5f);
         }
     }
 }

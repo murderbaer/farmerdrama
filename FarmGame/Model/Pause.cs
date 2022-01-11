@@ -19,7 +19,7 @@ namespace FarmGame.Model
 
         public void KeyDown(KeyboardKeyEventArgs args)
         {
-            if (args.Key == Keys.O)
+            if (args.Key == Keys.Escape)
             {
                 _updateService.IsPaused = !_updateService.IsPaused;
                 IsPaused = _updateService.IsPaused;

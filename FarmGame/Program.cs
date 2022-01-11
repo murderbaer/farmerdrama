@@ -13,10 +13,10 @@ window.KeyDown += args =>
 {
     switch (args.Key)
     {
-        case Keys.Escape:
+        case Keys.F4:
             window.Close();
             break;
-        case Keys.F:
+        case Keys.F11:
             window.WindowState = window.WindowState == WindowState.Fullscreen ? WindowState.Normal : WindowState.Fullscreen;
             break;
     }

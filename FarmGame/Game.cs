@@ -58,6 +58,9 @@ namespace FarmGame
             SearchCorpse seachCorpse = new SearchCorpse(goPolice, goSuspicion, goCorpse, goGrid);
             goPolice.Components.Add(seachCorpse);
 
+            var goGameOver = scene.CreateGameObject("GameOver");
+            LoadGameOver(goGameOver, scene);
+
             var cameraController = goCamera.GetComponent<CameraController>();
             cameraController.FollowGameObject(goPlayer, setPosition: true);
 
@@ -152,10 +155,9 @@ namespace FarmGame
 
         private static void LoadCorpse(GameObject goCorpse, Scene scene)
         {
-            var player = scene.GetGameObjects("Player").First();
             var grid = scene.GetGameObjects("Grid").First();
             goCorpse.Components.Add(_dataGrid);
-            var corpse = new Corpse(player, goCorpse);
+            var corpse = new Corpse(goCorpse);
             goCorpse.Components.Add(corpse);
             var corpseWaterPoisening = new CorpseWaterPoisening(goCorpse, grid);
             goCorpse.Components.Add(corpseWaterPoisening);
@@ -216,6 +218,15 @@ namespace FarmGame
             goPause.Components.Add(pause);
             var pauseVisual = new PauseVisual(goPause);
             goPause.Components.Add(pauseVisual);
+        }
+
+        private static void LoadGameOver(GameObject goGameOver, Scene scene)
+        {
+            var playTime = new GameTime();
+            goGameOver.Components.Add(playTime);
+            var goSearchCorpse = scene.GetGameObjects("Police").First();
+            var gameOver = new GameOverVisual(goGameOver, goSearchCorpse);
+            goGameOver.Components.Add(gameOver);
         }
     }
 }
