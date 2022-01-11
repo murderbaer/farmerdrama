@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using FarmGame.Core;
 using FarmGame.Helpers;
+using FarmGame.Model.Input;
 
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -10,16 +11,17 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame.Model
 {
-    public class Player : IUpdatable, IPosition, IKeyDownListener, IKeyUpListener, IMoving, IChangeDirection, ICollidable
+    public class Player : IUpdatable, IPosition, IMoving, IChangeDirection, ICollidable
     {
         private TiledHandler _tiledHandler = TiledHandler.Instance;
 
-        private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
+        private IInput input;
 
-        public Player()
+        public Player(GameObject goPlayer)
         {
             // Set starting position
             Position = _tiledHandler.TiledPlayerPos;
+            input = goPlayer.GetComponent<IInput>();
         }
 
         public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
@@ -40,22 +42,10 @@ namespace FarmGame.Model
             Move(elapsedTime);
         }
 
-        public void KeyDown(KeyboardKeyEventArgs args)
-        {
-            _pressedKeys.Add(args.Key);
-        }
-
-        public void KeyUp(KeyboardKeyEventArgs args)
-        {
-            _pressedKeys.Remove(args.Key);
-        }
-
         private void Move(float elapsedTime)
         {
             Vector2 newPosition = new Vector2(Position.X, Position.Y);
-            Vector2 moveDirection = new ();
-            moveDirection.X = (_pressedKeys.Contains(Keys.Right) ? 1 : 0) - (_pressedKeys.Contains(Keys.Left) ? 1 : 0);
-            moveDirection.Y = (_pressedKeys.Contains(Keys.Down) ? 1 : 0) - (_pressedKeys.Contains(Keys.Up) ? 1 : 0);
+            Vector2 moveDirection = input.PlayerDirection;
 
             OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(moveDirection));
 

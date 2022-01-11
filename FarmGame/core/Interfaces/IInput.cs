@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using OpenTK.Mathematics;
 
 namespace FarmGame.Core
 {
     public interface IInput
     {
-        
+        Vector2 PlayerDirection { get; }
+
+        bool Close { get; }
     }
 }

@@ -22,9 +22,6 @@ window.KeyDown += args =>
     }
 };
 
-window.KeyDown += scene.KeyDown;
-window.KeyUp += scene.KeyUp;
-
 window.RenderFrame += _ => GL.Clear(ClearBufferMask.ColorBufferBit); // Clear frame
 window.RenderFrame += _ => scene.Draw(); // called once each frame; callback should contain drawing code
 window.RenderFrame += _ => window.SwapBuffers(); // buffer swap needed for double buffering
