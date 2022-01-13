@@ -42,7 +42,7 @@ namespace FarmGame.Visuals
                 Focus = _smoothCamera.CameraFocus;
                 FreeCamActive = !FreeCamActive;
             }
-            
+
             if (FreeCamActive)
             {
                 var cameraMovement = _input.CameraDirection;

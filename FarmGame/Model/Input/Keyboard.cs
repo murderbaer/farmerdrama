@@ -1,7 +1,8 @@
-using FarmGame.Core;
 using System.Collections.Generic;
+
+using FarmGame.Core;
+
 using OpenTK.Mathematics;
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
@@ -12,9 +13,9 @@ namespace FarmGame.Model.Input
         private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
 
         public Vector2 PlayerDirection
-        { 
+        {
             get
-            {        
+            {
                 Vector2 moveDirection = new ();
                 moveDirection.X = (_pressedKeys.Contains(Keys.Right) ? 1 : 0) - (_pressedKeys.Contains(Keys.Left) ? 1 : 0);
                 moveDirection.Y = (_pressedKeys.Contains(Keys.Down) ? 1 : 0) - (_pressedKeys.Contains(Keys.Up) ? 1 : 0);
@@ -23,9 +24,9 @@ namespace FarmGame.Model.Input
         }
 
         public Vector2 CameraDirection
-        { 
+        {
             get
-            {        
+            {
                 Vector2 moveDirection = new ();
                 moveDirection.X = (_pressedKeys.Contains(Keys.D) ? 1 : 0) - (_pressedKeys.Contains(Keys.A) ? 1 : 0);
                 moveDirection.Y = (_pressedKeys.Contains(Keys.S) ? 1 : 0) - (_pressedKeys.Contains(Keys.W) ? 1 : 0);
@@ -40,6 +41,7 @@ namespace FarmGame.Model.Input
                 return _pressedKeys.Contains(Keys.F10);
             }
         }
+
         public bool Pause
         {
             get
@@ -52,11 +54,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                if (_pressedKeys.Contains(Keys.Space))
-                {
-                    return true;
-                }
-                return false;
+                return _pressedKeys.Contains(Keys.Space);
             }
         }
 
@@ -75,7 +73,7 @@ namespace FarmGame.Model.Input
                 return _pressedKeys.Contains(Keys.Y);
             }
         }
-        
+
         public bool DetachCamera
         {
             get

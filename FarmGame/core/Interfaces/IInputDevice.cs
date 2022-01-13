@@ -5,7 +5,7 @@ namespace FarmGame.Core
     public interface IInputDevice
     {
         Vector2 PlayerDirection { get; }
-        
+
         Vector2 CameraDirection { get; }
 
         bool Close { get; }
@@ -13,7 +13,7 @@ namespace FarmGame.Core
         bool DetachCamera { get; }
 
         bool Pause { get; }
-        
+
         bool Interact { get; }
 
         bool XAnswer { get; }
