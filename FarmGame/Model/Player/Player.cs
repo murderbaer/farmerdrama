@@ -15,13 +15,12 @@ namespace FarmGame.Model
     {
         private TiledHandler _tiledHandler = TiledHandler.Instance;
 
-        private IInput input;
+        private IInput input = InputHandler.Instance;
 
-        public Player(GameObject goPlayer)
+        public Player()
         {
             // Set starting position
             Position = _tiledHandler.TiledPlayerPos;
-            input = goPlayer.GetComponent<IInput>();
         }
 
         public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;

@@ -22,11 +22,37 @@ namespace FarmGame.Model.Input
             }
         }
 
+        public Vector2 CameraDirection
+        { 
+            get
+            {        
+                Vector2 moveDirection = new ();
+                moveDirection.X = (_pressedKeys.Contains(Keys.D) ? 1 : 0) - (_pressedKeys.Contains(Keys.A) ? 1 : 0);
+                moveDirection.Y = (_pressedKeys.Contains(Keys.S) ? 1 : 0) - (_pressedKeys.Contains(Keys.W) ? 1 : 0);
+                return moveDirection;
+            }
+        }
+
         public bool Close
         {
             get
             {
                 return _pressedKeys.Contains(Keys.F10);
+            }
+        }
+         public bool Pause
+        {
+            get
+            {
+                return _pressedKeys.Contains(Keys.Escape);
+            }
+        }
+
+        public bool DetachCamera
+        {
+            get
+            {
+                return _pressedKeys.Contains(Keys.F3);
             }
         }
 

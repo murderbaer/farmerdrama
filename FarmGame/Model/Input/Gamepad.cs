@@ -13,7 +13,6 @@ namespace FarmGame.Model.Input
     {
         private JoystickState _jsStates;
 
-
         public Gamepad(JoystickState gw)
         {
             _jsStates = gw;
@@ -40,7 +39,36 @@ namespace FarmGame.Model.Input
             }
         }
 
+         public Vector2 CameraDirection
+        { 
+            get 
+            { 
+                Vector2 ret = new Vector2(0,0);
+                float xAxis = _jsStates.GetAxis(3);
+                if (xAxis < -0.1 || xAxis > 0.1) 
+                {
+                    ret.X = xAxis;
+                }
+
+                float yAxis = _jsStates.GetAxis(4);
+                if (yAxis < -0.1 || yAxis > 0.1) 
+                {
+                    ret.Y = yAxis;
+                }
+                System.Console.WriteLine(ret);
+                return ret; 
+            }
+        }
+
         public bool Close
+        {
+            get
+            {
+                return _jsStates.IsButtonDown(6);
+            }
+        }
+
+        public bool Pause
         {
             get
             {
@@ -48,8 +76,12 @@ namespace FarmGame.Model.Input
             }
         }
 
-        public void Update(float elapsedTime)
+        public bool DetachCamera
         {
+            get
+            {
+                return _jsStates.IsButtonDown(10);
+            }
         }
     }
 }

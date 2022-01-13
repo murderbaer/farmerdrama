@@ -29,7 +29,7 @@ namespace FarmGame
             var collisionService = new NudgingService();
             scene.AddService(collisionService);
 
-            var input = new InputHandler(window);
+            InputHandler.Init(window);
 
             var movementService = new MovementService();
             scene.AddService(movementService);
@@ -47,7 +47,7 @@ namespace FarmGame
             LoadSuspicion(goSuspicion);
 
             var goPlayer = scene.CreateGameObject("Player");
-            LoadPlayer(goPlayer, input);
+            LoadPlayer(goPlayer);
 
             var goCorpse = scene.CreateGameObject("Corpse");
             LoadCorpse(goCorpse, scene);
@@ -118,19 +118,15 @@ namespace FarmGame
             goSuspicion.Components.Add(suspicionBar);
         }
 
-        private static void LoadPlayer(GameObject goPlayer, InputHandler input)
+        private static void LoadPlayer(GameObject goPlayer)
         {
-            goPlayer.Components.Add(input);
-
-            var player = new Player(goPlayer);
+            var player = new Player();
             goPlayer.Components.Add(player);
 
             var playerVisual = new PlayerVisual(goPlayer);
             goPlayer.Components.Add(playerVisual);
             var playerAnimation = new PlayerAnimation(goPlayer);
             goPlayer.Components.Add(playerAnimation);
-
-            
 
             var playerSound = AudioMaster.Instance.GetStepsHanlde();
             goPlayer.Components.Add(playerSound);
