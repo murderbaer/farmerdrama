@@ -7,7 +7,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame.Model.Input
 {
-    public class Keyboard : IInput
+    public class Keyboard : IInputDevice
     {
         private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
 
@@ -40,7 +40,7 @@ namespace FarmGame.Model.Input
                 return _pressedKeys.Contains(Keys.F10);
             }
         }
-         public bool Pause
+        public bool Pause
         {
             get
             {
@@ -48,11 +48,47 @@ namespace FarmGame.Model.Input
             }
         }
 
+        public bool Interact
+        {
+            get
+            {
+                if (_pressedKeys.Contains(Keys.Space))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool XAnswer
+        {
+            get
+            {
+                return _pressedKeys.Contains(Keys.Z);
+            }
+        }
+
+        public bool YAnswer
+        {
+            get
+            {
+                return _pressedKeys.Contains(Keys.Y);
+            }
+        }
+        
         public bool DetachCamera
         {
             get
             {
                 return _pressedKeys.Contains(Keys.F3);
+            }
+        }
+
+        public bool Fullscreen
+        {
+            get
+            {
+                return _pressedKeys.Contains(Keys.F10);
             }
         }
 

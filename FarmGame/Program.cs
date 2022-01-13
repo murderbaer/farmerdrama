@@ -26,6 +26,9 @@ window.RenderFrame += _ => GL.Clear(ClearBufferMask.ColorBufferBit); // Clear fr
 window.RenderFrame += _ => scene.Draw(); // called once each frame; callback should contain drawing code
 window.RenderFrame += _ => window.SwapBuffers(); // buffer swap needed for double buffering
 
+window.KeyDown += scene.KeyDown;
+window.KeyUp += scene.KeyUp;
+
 window.Run();
 
 void Update(FrameEventArgs args)

@@ -29,7 +29,7 @@ namespace FarmGame
             var collisionService = new NudgingService();
             scene.AddService(collisionService);
 
-            InputHandler.Init(window);
+            InputHandler.RegisterGameWindow(window);
 
             var movementService = new MovementService();
             scene.AddService(movementService);

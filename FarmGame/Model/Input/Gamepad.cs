@@ -9,7 +9,7 @@ using FarmGame.Core;
 
 namespace FarmGame.Model.Input
 {
-    public class Gamepad: IComponent, IInput
+    public class Gamepad: IComponent, IInputDevice
     {
         private JoystickState _jsStates;
 
@@ -34,7 +34,6 @@ namespace FarmGame.Model.Input
                 {
                     ret.Y = yAxis;
                 }
-                System.Console.WriteLine(ret);
                 return ret; 
             }
         }
@@ -55,7 +54,6 @@ namespace FarmGame.Model.Input
                 {
                     ret.Y = yAxis;
                 }
-                System.Console.WriteLine(ret);
                 return ret; 
             }
         }
@@ -64,7 +62,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _jsStates.IsButtonDown(6);
+                return _jsStates.IsButtonDown(6) && !_jsStates.WasButtonDown(6);
             }
         }
 
@@ -72,15 +70,47 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _jsStates.IsButtonDown(7);
+                return _jsStates.IsButtonDown(7) && !_jsStates.WasButtonDown(7);
             }
         }
 
+        public bool Interact
+        {
+            get
+            {
+                return _jsStates.IsButtonDown(0) && !_jsStates.WasButtonDown(0);
+            }
+        }
+
+         public bool XAnswer
+        {
+            get
+            {
+                return _jsStates.IsButtonDown(2) && !_jsStates.WasButtonDown(2);
+            }
+        }
+
+        public bool YAnswer
+        {
+            get
+            {
+                return _jsStates.IsButtonDown(3) && !_jsStates.WasButtonDown(3);
+            }
+        }
+        
         public bool DetachCamera
         {
             get
             {
                 return _jsStates.IsButtonDown(10);
+            }
+        }
+
+        public bool Fullscreen
+        {
+            get
+            {
+                return _jsStates.IsButtonDown(8) && !_jsStates.WasButtonDown(8);
             }
         }
     }

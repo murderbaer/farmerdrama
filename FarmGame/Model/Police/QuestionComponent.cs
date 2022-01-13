@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Xml;
 
 using FarmGame.Core;
+using FarmGame.Model.Input;
 using FarmGame.Services;
 
 using OpenTK.Windowing.Common;
@@ -12,7 +13,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame.Model
 {
-    public class QuestionComponent : IUpdatable, IKeyDownListener
+    public class QuestionComponent : IUpdatable
     {
         private GameObject _police;
 
@@ -31,6 +32,8 @@ namespace FarmGame.Model
         private float _timeBetweenQuestions = 30;
 
         private float _timeSinceLastQuestion;
+
+        private InputHandler _input = InputHandler.Instance;
 
         public QuestionComponent(GameObject goPolice, GameObject goPlayer, GameObject goSuspicion)
         {
@@ -91,6 +94,25 @@ namespace FarmGame.Model
 
         public void Update(float elapsedTime)
         {
+            if (IsQuestioning && _selectedAnswer == -1)
+            {
+                // Keyboard Layout issues: Z and Y are flipped on german keyboard
+                if (_input.YAnswer)
+                {
+                    _selectedAnswer = 0;
+                    ApplySuspicion();
+                }
+                else if (_input.XAnswer)
+                {
+                    _selectedAnswer = 1;
+                    ApplySuspicion();
+                }
+            }
+            else if (IsQuestioning)
+            {
+                ResetQuestion();
+            }
+
             if (!IsQuestioning)
             {
                 _timeSinceLastQuestion += elapsedTime;
@@ -100,28 +122,6 @@ namespace FarmGame.Model
                     IsQuestioning = true;
                     GetRandomQuestion();
                 }
-            }
-        }
-
-        public void KeyDown(KeyboardKeyEventArgs args)
-        {
-            if (IsQuestioning && _selectedAnswer == -1)
-            {
-                // Keyboard Layout issues: Z and Y are flipped on german keyboard
-                if (GLFW.GetKeyName(args.Key, args.ScanCode) == "y")
-                {
-                    _selectedAnswer = 0;
-                    ApplySuspicion();
-                }
-                else if (args.Key == Keys.X)
-                {
-                    _selectedAnswer = 1;
-                    ApplySuspicion();
-                }
-            }
-            else if (IsQuestioning)
-            {
-                ResetQuestion();
             }
         }
 

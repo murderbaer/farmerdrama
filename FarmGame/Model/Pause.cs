@@ -1,6 +1,4 @@
 using FarmGame.Core;
-using FarmGame.Model.Input;
-
 using FarmGame.Services;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;

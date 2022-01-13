@@ -13,7 +13,7 @@ namespace FarmGame.Model.Input
         // TODO make static so no reference needd to be given 
         public static GameWindow _gameWindow { get; private set; } = null;
 
-        private Dictionary<int, IInput> _inputDevices = new Dictionary<int, IInput>();
+        private Dictionary<int, IInputDevice> _inputDevices = new Dictionary<int, IInputDevice>();
 
         public Vector2 PlayerDirection { get; private set; }
         
@@ -23,11 +23,19 @@ namespace FarmGame.Model.Input
 
         public bool Pause { get; private set; }
 
+        public bool Interact { get; private set; }
+
         public bool DetachCamera { get; private set; }
+        
+        public bool XAnswer { get; private set; }
+        
+        public bool YAnswer { get; private set; }
+
+        public bool Fullscreen { get; private set; }
 
         private static InputHandler _ih = null;
 
-        private  InputHandler()
+        private InputHandler()
         {
             if (_gameWindow == null)
             {
@@ -53,7 +61,7 @@ namespace FarmGame.Model.Input
             }
         }
 
-        public static void Init(GameWindow gw)
+        public static void RegisterGameWindow(GameWindow gw)
         {
             _gameWindow = gw;
         }
@@ -65,12 +73,20 @@ namespace FarmGame.Model.Input
                 PlayerDirection = device.Value.PlayerDirection;
                 CameraDirection = device.Value.CameraDirection;
                 Close = device.Value.Close;
-                Pause = device.Value.Pause;
                 DetachCamera = device.Value.DetachCamera;
+                Fullscreen = device.Value.Fullscreen;
+                Interact = device.Value.Interact;
+                XAnswer = device.Value.XAnswer;
+                YAnswer = device.Value.YAnswer;
+                Fullscreen = device.Value.Fullscreen;
             }
             if (Close)
             {
                 _gameWindow.Close();
+            }
+            if (Fullscreen)
+            {
+                _gameWindow.WindowState = _gameWindow.WindowState == WindowState.Fullscreen ? WindowState.Normal : WindowState.Fullscreen;
             }
         }
 

@@ -1,17 +1,20 @@
 using System;
 
 using FarmGame.Core;
+using FarmGame.Model.Input;
 
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame.Model
 {
-    public class PlayerItemInteraction : IKeyDownListener
+    public class PlayerItemInteraction : IUpdatable
     {
         private IPosition _position;
 
         private IReadOnlyGrid _grid;
+
+        private InputHandler _input = InputHandler.Instance;
 
         public PlayerItemInteraction(GameObject goPlayer, IReadOnlyGrid grid)
         {
@@ -22,9 +25,9 @@ namespace FarmGame.Model
 
         public ItemType ItemInHand { get; set; }
 
-        public void KeyDown(KeyboardKeyEventArgs args)
+        public void Update(float elapsedTime)
         {
-            if (args.Key == Keys.Space)
+            if (_input.Interact)
             {
                 Interact();
             }

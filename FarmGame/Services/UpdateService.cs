@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using FarmGame.Core;
 
 namespace FarmGame.Services
@@ -20,6 +21,7 @@ namespace FarmGame.Services
         {
             if (IsPaused || IsFinished)
             {
+                _updatables.OfType<IInput>().FirstOrDefault().Update(elapsedTime);
                 return;
             }
 
