@@ -6419,12 +6419,12 @@
   </data>
  </layer>
  <objectgroup id="6" name="playerPos">
-  <object id="2" name="player" x="203.705" y="418.273">
+  <object id="2" name="player" x="203" y="418">
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="8" name="policePos">
-  <object id="4" name="police" x="198.667" y="930">
+  <object id="4" name="police" x="198" y="930">
    <point/>
   </object>
  </objectgroup>

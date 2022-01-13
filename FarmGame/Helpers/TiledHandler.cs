@@ -63,6 +63,7 @@ namespace FarmGame.Helpers
                 var playerPos = _doc.DocumentElement.SelectSingleNode("objectgroup[@name='playerPos']").SelectNodes("object");
                 float posX = float.Parse(playerPos[0].Attributes["x"].Value);
                 float posY = float.Parse(playerPos[0].Attributes["y"].Value);
+                Console.WriteLine(posX + " " + posY);
                 return new Vector2(posX / TilePixelSize, posY / TilePixelSize);
             }
         }

@@ -62,7 +62,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _pressedKeys.Contains(Keys.Z);
+                return _pressedKeys.Contains(Keys.X);
             }
         }
 
