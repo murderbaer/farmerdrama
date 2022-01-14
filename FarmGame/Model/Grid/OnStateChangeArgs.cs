@@ -1,6 +1,6 @@
 using System;
 
-namespace FarmGame.Core
+namespace FarmGame.Model.Grid
 {
     public class OnStateChangeArgs : EventArgs
     {

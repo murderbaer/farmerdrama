@@ -5,7 +5,7 @@
     <TargetFramework>net5.0</TargetFramework>
  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="8.4.0" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="8.5.0" />
     <PackageReference Include="ManagedBass" Version="3.1.0" />
     <PackageReference Include="OpenTK" Version="4.6.7" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -40,6 +40,9 @@
     <EmbeddedResource Include="Resources\Graphics\Map.tmx" />
     <EmbeddedResource Include="Resources\Graphics\NewMap.tmx" />
     <EmbeddedResource Include="Resources\Questions.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="core\Events\" />
   </ItemGroup>
   <PropertyGroup Condition="'$(IsWindows)'=='true'">
     <DefineConstants>Windows</DefineConstants>
