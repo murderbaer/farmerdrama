@@ -23,7 +23,7 @@ namespace FarmGame.Visuals
             _spriteHandle = SpriteRenderer.GenerateHandle(_spriteSheet);
         }
 
-        public SpriteObject Sprite { get; private set; }
+        public ISpriteObject Sprite { get; private set; }
 
         public void Draw()
         {

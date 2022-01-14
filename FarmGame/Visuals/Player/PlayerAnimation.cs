@@ -4,7 +4,7 @@ namespace FarmGame.Visuals
 {
     public class PlayerAnimation : IUpdatable
     {
-        private SpriteObject _playerSprite;
+        private ISpriteObject _playerSprite;
 
         private float _animationDuration = 0.4f;
 

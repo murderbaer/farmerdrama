@@ -4,7 +4,7 @@ namespace FarmGame.Core
 {
     public interface IDraw : IComponent
     {
-        SpriteObject Sprite { get;  }
+        ISpriteObject Sprite { get; }
 
         void Draw();
     }

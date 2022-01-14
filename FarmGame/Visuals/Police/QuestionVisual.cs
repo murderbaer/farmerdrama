@@ -27,7 +27,7 @@ namespace FarmGame.Visuals
             Sprite = new SpriteObject(_spriteSheet, 14, 1, isCentered: false);
         }
 
-        public SpriteObject Sprite { get; }
+        public ISpriteObject Sprite { get; }
 
         public void DrawOverlay()
         {

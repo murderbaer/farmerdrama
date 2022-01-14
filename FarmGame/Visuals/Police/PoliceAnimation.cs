@@ -5,7 +5,7 @@ namespace FarmGame.Visuals
 {
     public class PoliceAnimation : IUpdatable
     {
-        private SpriteObject _playerSprite;
+        private ISpriteObject _playerSprite;
 
         private float _animationDuration = 0.4f;
 
@@ -49,6 +49,7 @@ namespace FarmGame.Visuals
 
                 _animationSwitchSprite = !_animationSwitchSprite;
             }
+
             Animate();
         }
 

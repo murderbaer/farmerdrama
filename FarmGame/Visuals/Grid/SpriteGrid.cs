@@ -1,10 +1,10 @@
-using FarmGame.Model;
+using FarmGame.Core;
 
 namespace FarmGame.Visuals
 {
     public class SpriteGrid
     {
-        private SpriteObject[] _spriteGrid;
+        private ISpriteObject[] _spriteGrid;
 
         public SpriteGrid(int size, int col, int row)
         {
@@ -17,13 +17,13 @@ namespace FarmGame.Visuals
 
         public int Row { get; private set; }
 
-        public SpriteObject this[int col, int row]
+        public ISpriteObject this[int col, int row]
         {
             get { return _spriteGrid[col + (Column * row)]; }
             set { _spriteGrid[col + (Column * row)] = value; }
         }
 
-        public SpriteObject this[int id]
+        public ISpriteObject this[int id]
         {
             get { return _spriteGrid[id]; }
             set { _spriteGrid[id] = value; }

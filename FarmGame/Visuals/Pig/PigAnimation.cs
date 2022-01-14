@@ -1,12 +1,10 @@
 using FarmGame.Core;
 
-using OpenTK.Mathematics;
-
 namespace FarmGame.Visuals
 {
     public class PigAnimation : IUpdatable
     {
-        private SpriteObject _pigSprite;
+        private ISpriteObject _pigSprite;
 
         private float _animationDuration = 0.4f;
 
