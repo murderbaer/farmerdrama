@@ -5,6 +5,7 @@ using FarmGame.Core;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame.Model.Input
 {
@@ -51,11 +52,10 @@ namespace FarmGame.Model.Input
         {
             GameWindow = gw;
 
-            var keyboard = new Keyboard();
+            var keyboard = new Keyboard(gw);
             _inputDevices.Add(-1, keyboard);
 
             GameWindow.JoystickConnected += GamePadConnection;
-
             GameWindow.KeyDown += keyboard.KeyDown;
             GameWindow.KeyUp += keyboard.KeyUp;
         }

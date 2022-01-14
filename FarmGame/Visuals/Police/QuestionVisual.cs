@@ -105,6 +105,7 @@ namespace FarmGame.Visuals
             }
 
             _textHelper.DrawText(response, 2f, 6f, Color4.LightBlue);
+            _textHelper.DrawText("Press INTERACT", 10f, 7f, Color4.LightGreen);
         }
     }
 }

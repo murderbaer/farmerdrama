@@ -8,9 +8,6 @@ using FarmGame.Core;
 using FarmGame.Model.Input;
 using FarmGame.Services;
 
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-
 namespace FarmGame.Model
 {
     public class QuestionComponent : IUpdatable
@@ -110,7 +107,10 @@ namespace FarmGame.Model
             }
             else if (IsQuestioning)
             {
-                ResetQuestion();
+                if (_input.Interact)
+                {
+                    ResetQuestion();
+                }
             }
 
             if (!IsQuestioning)

@@ -4,6 +4,7 @@ using FarmGame.Core;
 
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FarmGame.Model.Input
@@ -11,6 +12,13 @@ namespace FarmGame.Model.Input
     public class Keyboard : IInputDevice
     {
         private HashSet<Keys> _pressedKeys = new HashSet<Keys>();
+
+        private GameWindow _gameWindow;
+
+        public Keyboard(GameWindow gw)
+        {
+            _gameWindow = gw;
+        }
 
         public Vector2 PlayerDirection
         {
@@ -38,7 +46,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _pressedKeys.Contains(Keys.F10);
+                return _gameWindow.IsKeyPressed(Keys.F10);
             }
         }
 
@@ -46,7 +54,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _pressedKeys.Contains(Keys.Escape);
+                return _gameWindow.IsKeyPressed(Keys.Escape);
             }
         }
 
@@ -54,7 +62,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _pressedKeys.Contains(Keys.Space);
+                return _gameWindow.IsKeyPressed(Keys.Space);
             }
         }
 
@@ -62,7 +70,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _pressedKeys.Contains(Keys.X);
+                return _gameWindow.IsKeyPressed(Keys.X);
             }
         }
 
@@ -70,7 +78,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _pressedKeys.Contains(Keys.Y);
+                return _gameWindow.IsKeyPressed(Keys.Y);
             }
         }
 
@@ -78,7 +86,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _pressedKeys.Contains(Keys.F3);
+                return _gameWindow.IsKeyPressed(Keys.F3);
             }
         }
 
@@ -86,7 +94,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _pressedKeys.Contains(Keys.F10);
+                return _gameWindow.IsKeyPressed(Keys.F10);
             }
         }
 
