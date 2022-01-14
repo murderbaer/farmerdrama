@@ -23,10 +23,6 @@ namespace FarmGame.Model
             Position = _tiledHandler.TiledPlayerPos;
         }
 
-        public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
-
-        public event EventHandler<OnPlaySoundArgs> OnPlaySound;
-
         public Vector2 Position { get; set; }
 
         public Vector2 MovementVector { get; set; }
@@ -46,14 +42,11 @@ namespace FarmGame.Model
             Vector2 newPosition = new Vector2(Position.X, Position.Y);
             Vector2 moveDirection = input.PlayerDirection;
 
-            OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(moveDirection));
-
             if (moveDirection.X == 0 && moveDirection.Y == 0)
             {
                 return;
             }
 
-            OnPlaySound?.Invoke(null, new OnPlaySoundArgs(Position, moveDirection));
             MovementVector = moveDirection.Normalized() * elapsedTime * MovementSpeed;
         }
     }

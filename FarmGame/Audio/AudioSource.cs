@@ -35,17 +35,17 @@ namespace FarmGame.Audio
             }
         }
 
-        public void Play(object sender, OnPlaySoundArgs e)
-        {
-            if (Location != e.Position)
-            {
-                Location = e.Position;
-                if (!_playing)
-                {
-                    Bass.ChannelPlay(Handle);
-                    _playing = true;
-                }
-            }
-        }
+        // public void Play(object sender, OnPlaySoundArgs e)
+        // {
+        //     if (Location != e.Position)
+        //     {
+        //         Location = e.Position;
+        //         if (!_playing)
+        //         {
+        //             Bass.ChannelPlay(Handle);
+        //             _playing = true;
+        //         }
+        //     }
+        // }
     }
 }

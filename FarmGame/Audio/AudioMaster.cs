@@ -42,9 +42,9 @@ namespace FarmGame.Audio
             }
         }
 
-        public void Listen(object sender, OnPlaySoundArgs e)
+        public void Listen()
         {
-            var cameraPos = new Vector2(e.Position.X, e.Position.Y);
+            var cameraPos = new Vector2();
 
             foreach (AudioSource src in _playBuffer)
             {

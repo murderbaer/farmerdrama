@@ -26,10 +26,6 @@ namespace FarmGame.Model
             Paths = _tiledHandler.TiledPolicePaths;
         }
 
-        public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
-
-        public event EventHandler<OnPlaySoundArgs> OnPlaySound;
-
         public Vector2 Position { get; set; }
 
         public Vector2 MovementVector { get; set; }
@@ -87,12 +83,9 @@ namespace FarmGame.Model
             var goal = path[_currentPathPosition];
             var offset = goal - Position;
             var movement = offset.Normalized() * elapsedTime * MovementSpeed;
-            OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(movement));
             if (movement.Length < offset.Length)
             {
                 MovementVector = movement;
-
-                OnPlaySound?.Invoke(this, new OnPlaySoundArgs(Position, movement));
                 return;
             }
 

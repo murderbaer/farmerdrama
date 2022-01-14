@@ -1,8 +1,9 @@
 using FarmGame.Core;
+using OpenTK.Mathematics;
 
 namespace FarmGame.Visuals
 {
-    public class PoliceAnimation : IAnimate
+    public class PoliceAnimation : IUpdatable
     {
         private SpriteObject _playerSprite;
 
@@ -17,10 +18,12 @@ namespace FarmGame.Visuals
         private int _moveLeft = 20;
         private int _moveRight = 23;
         private int _noMove = 23;
+        private IMoving _direction;
 
         public PoliceAnimation(GameObject goPlayer)
         {
             _playerSprite = goPlayer.GetComponent<IDraw>().Sprite;
+            _direction = goPlayer.GetComponent<IMoving>();
         }
 
         public void Update(float elapsedTime)
@@ -46,27 +49,28 @@ namespace FarmGame.Visuals
 
                 _animationSwitchSprite = !_animationSwitchSprite;
             }
+            Animate();
         }
 
-        public void Animate(object sender, OnChangeDirectionArgs e)
+        private void Animate()
         {
             float tolerance = 0.01f;
-            if (e.Direction.X > tolerance)
+            if (_direction.MovementVector.X > tolerance)
             {
                 _playerSprite.Gid = _moveRight;
                 _noMove = 12;
             }
-            else if (e.Direction.X < -tolerance)
+            else if (_direction.MovementVector.X < -tolerance)
             {
                 _playerSprite.Gid = _moveLeft;
                 _noMove = 7;
             }
-            else if (e.Direction.Y < -tolerance)
+            else if (_direction.MovementVector.Y < -tolerance)
             {
                 _playerSprite.Gid = _moveUp;
                 _noMove = 1;
             }
-            else if (e.Direction.Y > tolerance)
+            else if (_direction.MovementVector.Y > tolerance)
             {
                 _playerSprite.Gid = _moveDown;
                 _noMove = 5;

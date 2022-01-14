@@ -106,8 +106,6 @@ namespace FarmGame
             goCamera.Components.Add(freeCamComponent);
 
             goCamera.Components.Add(AudioMaster.Instance);
-
-            freeCamComponent.OnPlaySound += AudioMaster.Instance.Listen;
         }
 
         private static void LoadSuspicion(GameObject goSuspicion)
@@ -130,10 +128,6 @@ namespace FarmGame
 
             var playerSound = AudioMaster.Instance.GetStepsHanlde();
             goPlayer.Components.Add(playerSound);
-
-            player.OnPlaySound += playerSound.Play;
-
-            player.OnChangeDirection += playerAnimation.Animate;
 
             var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);
             goPlayer.Components.Add(playerItemInteraction);
@@ -185,11 +179,6 @@ namespace FarmGame
 
             var playerSound = AudioMaster.Instance.GetStepsHanlde();
             goPlayer.Components.Add(playerSound);
-
-            police.OnPlaySound += playerSound.Play;
-
-            // add listener
-            police.OnChangeDirection += policeAnimation.Animate;
         }
 
         private static void LoadPig(GameObject goPig, GameObject goGrid)
@@ -207,9 +196,6 @@ namespace FarmGame
             goPig.Components.Add(pigAnimation);
             var pigSound = AudioMaster.Instance.GetPigSNortHanlde();
             goPig.Components.Add(pigSound);
-
-            moveRandom.OnChangeDirection += pigAnimation.Animate;
-            moveRandom.OnPlaySound += pigSound.Play;
         }
 
         private static void LoadPause(GameObject goPause)

@@ -1,8 +1,10 @@
+using OpenTK.Mathematics;
+
 using FarmGame.Core;
 
 namespace FarmGame.Visuals
 {
-    public class PlayerAnimation : IAnimate
+    public class PlayerAnimation : IUpdatable
     {
         private SpriteObject _playerSprite;
 
@@ -22,9 +24,12 @@ namespace FarmGame.Visuals
 
         private int _noMove = 1;
 
+        private IMoving _direction;
+
         public PlayerAnimation(GameObject goPlayer)
         {
             _playerSprite = goPlayer.GetComponent<IDraw>().Sprite;
+            _direction = goPlayer.GetComponent<IMoving>();
         }
 
         public void Update(float elapsedTime)
@@ -50,26 +55,27 @@ namespace FarmGame.Visuals
 
                 _animationSwitchSprite = !_animationSwitchSprite;
             }
+            Animate();
         }
 
-        public void Animate(object sender, OnChangeDirectionArgs e)
+        private void Animate()
         {
-            if (e.Direction.X > 0)
+            if (_direction.MovementVector.X > 0)
             {
                 _playerSprite.Gid = _moveRight;
                 _noMove = 16;
             }
-            else if (e.Direction.X < 0)
+            else if (_direction.MovementVector.X < 0)
             {
                 _playerSprite.Gid = _moveLeft;
                 _noMove = 7;
             }
-            else if (e.Direction.Y > 0)
+            else if (_direction.MovementVector.Y > 0)
             {
                 _playerSprite.Gid = _moveDown;
                 _noMove = 1;
             }
-            else if (e.Direction.Y < 0)
+            else if (_direction.MovementVector.Y < 0)
             {
                 _playerSprite.Gid = _moveUp;
                 _noMove = 5;
