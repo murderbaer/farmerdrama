@@ -75,12 +75,7 @@ namespace FarmGame.Model.Input
         }
 
         public bool YAnswer
-        {
-            get
-            {
-                return _gameWindow.IsKeyPressed(Keys.Y);
-            }
-        }
+        { get; private set; }
 
         public bool DetachCamera
         {
@@ -101,11 +96,19 @@ namespace FarmGame.Model.Input
         public void KeyDown(KeyboardKeyEventArgs args)
         {
             _pressedKeys.Add(args.Key);
+            if (GLFW.GetKeyName(args.Key, args.ScanCode) == "y")
+            {
+                YAnswer = true;
+            }
         }
 
         public void KeyUp(KeyboardKeyEventArgs args)
         {
             _pressedKeys.Remove(args.Key);
+            if (GLFW.GetKeyName(args.Key, args.ScanCode) == "y")
+            {
+                YAnswer = false;
+            }
         }
     }
 }
