@@ -60,7 +60,7 @@ namespace FarmGame.Visuals
             if (setPosition)
             {
                 _smoothCamera.CameraFocus = _followPosition.Position;
-                _camera.CameraPosition = _followPosition.Position;
+                _camera.Position = _followPosition.Position;
             }
         }
     }

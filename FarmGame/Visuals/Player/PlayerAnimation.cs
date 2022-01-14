@@ -1,5 +1,3 @@
-using OpenTK.Mathematics;
-
 using FarmGame.Core;
 
 namespace FarmGame.Visuals
@@ -55,6 +53,7 @@ namespace FarmGame.Visuals
 
                 _animationSwitchSprite = !_animationSwitchSprite;
             }
+
             Animate();
         }
 

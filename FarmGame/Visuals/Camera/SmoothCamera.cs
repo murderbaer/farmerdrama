@@ -11,16 +11,16 @@ namespace FarmGame.Visuals
         public SmoothCamera(GameObject goCamera)
         {
             _camera = goCamera.GetComponent<Camera>();
-            CameraFocus = _camera.CameraPosition;
+            CameraFocus = _camera.Position;
         }
 
         public Vector2 CameraFocus { get; set; }
 
         public void Update(float elapsedTime)
         {
-            Vector2 cameraOffset = CameraFocus - _camera.CameraPosition;
+            Vector2 cameraOffset = CameraFocus - _camera.Position;
             Vector2 cameraMovement = cameraOffset * 2f * elapsedTime;
-            _camera.CameraPosition += cameraMovement;
+            _camera.Position += cameraMovement;
         }
     }
 }
