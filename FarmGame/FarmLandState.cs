@@ -1,8 +1,11 @@
-public enum FarmLandState
+namespace FarmGame.Model.Grid
 {
-    EMPTY,
-    SEED,
-    HALFGROWN,
-    FULLGROWN,
-    OVERGROWN,
+    public enum FarmLandState
+    {
+        EMPTY,
+        SEED,
+        HALFGROWN,
+        FULLGROWN,
+        OVERGROWN,
+    }
 }

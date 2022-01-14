@@ -10,13 +10,17 @@ using OpenTK.Mathematics;
 
 namespace FarmGame.Audio
 {
-    public class AudioMaster : IComponent
+    public class AudioMaster : IComponent, IUpdatable
     {
         private static AudioMaster _instance = null;
+
+        private static GameObject _goAudio;
 
         private HashSet<AudioSource> _playBuffer;
 
         private float _cutoffDistance = 9f;
+
+        private IPosition _cameraPos;
 
         private AudioMaster()
         {
@@ -27,6 +31,7 @@ namespace FarmGame.Audio
 
             Bass.Init();
             _playBuffer = new HashSet<AudioSource>();
+            _cameraPos = _goAudio.GetComponent<IPosition>();
         }
 
         public static AudioMaster Instance
@@ -42,13 +47,21 @@ namespace FarmGame.Audio
             }
         }
 
-        public void Listen(object sender, OnPlaySoundArgs e)
+        public static void Init(GameObject go)
         {
-            var cameraPos = new Vector2(e.Position.X, e.Position.Y);
+            _goAudio = go;
+        }
 
+        public void Update(float elapsedTime)
+        {
+            Listen();
+        }
+
+        public void Listen()
+        {
             foreach (AudioSource src in _playBuffer)
             {
-                float distance = EukledDistance(cameraPos, src.Location);
+                float distance = EukledDistance(_cameraPos.Position, src.Location);
                 if (distance > _cutoffDistance || distance == 0f)
                 {
                     Bass.ChannelSetAttribute(src.Handle, ChannelAttribute.Volume, 0);
@@ -64,21 +77,21 @@ namespace FarmGame.Audio
             }
         }
 
-        public AudioSource GetStepsHanlde()
+        public AudioSource GetStepsHanlde(IMoving pos)
         {
             string path = System.Reflection.Assembly.GetEntryAssembly().Location;
             string pathFolder = System.IO.Path.GetDirectoryName(path);
 
-            AudioSource src = new AudioSource(Bass.CreateStream(pathFolder + "/Resources/Sounds/step.wav"), 0.5f);
+            AudioSource src = new AudioSource(Bass.CreateStream(pathFolder + "/Resources/Sounds/step.wav"), 0.5f, pos);
             _playBuffer.Add(src);
             return src;
         }
 
-        public AudioSource GetPigSNortHanlde()
+        public AudioSource GetPigSnortHanlde(IMoving pos)
         {
             string path = System.Reflection.Assembly.GetEntryAssembly().Location;
             string pathFolder = System.IO.Path.GetDirectoryName(path);
-            AudioSource src = new AudioSource(Bass.CreateStream(pathFolder + "/Resources/Sounds/pig-snort.wav"), 1.6f);
+            AudioSource src = new AudioSource(Bass.CreateStream(pathFolder + "/Resources/Sounds/pig-snort.wav"), 1.6f, pos);
             _playBuffer.Add(src);
             return src;
         }

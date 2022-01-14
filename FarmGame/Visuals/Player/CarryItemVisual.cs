@@ -28,7 +28,7 @@ namespace FarmGame.Visuals
             Sprite = new SpriteObject(_spriteSheet, (int)SpriteType.AIR, 16, isCentered: true);
         }
 
-        public SpriteObject Sprite { get; private set; }
+        public ISpriteObject Sprite { get; private set; }
 
         public void Draw()
         {

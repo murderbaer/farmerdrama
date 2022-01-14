@@ -1,8 +1,10 @@
+using FarmGame.Core;
+
 using ImageMagick;
 
 namespace FarmGame.Visuals
 {
-    public class SpriteObject
+    public class SpriteObject : ISpriteObject
     {
         public SpriteObject(MagickImage image, int gid, int size, bool isCentered)
         {

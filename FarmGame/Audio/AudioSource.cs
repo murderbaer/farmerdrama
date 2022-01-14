@@ -10,15 +10,18 @@ namespace FarmGame.Audio
     {
         private float _length;
 
-        private float _pos = 0f;
+        private float _trackPos = 0f;
 
         private bool _playing;
 
-        public AudioSource(int handle, float duration)
+        private IMoving _postion;
+
+        public AudioSource(int handle, float duration, IMoving pos)
         {
             Handle = handle;
             _length = duration;
             _playing = true;
+            _postion = pos;
         }
 
         public int Handle { get; private set; }
@@ -27,19 +30,21 @@ namespace FarmGame.Audio
 
         public void Update(float elapsedTime)
         {
-            _pos += elapsedTime;
-            if (_pos > _length)
+            _trackPos += elapsedTime;
+            if (_trackPos > _length)
             {
-                _pos = 0f;
+                _trackPos = 0f;
                 _playing = false;
             }
+
+            Play();
         }
 
-        public void Play(object sender, OnPlaySoundArgs e)
+        private void Play()
         {
-            if (Location != e.Position)
+            if (Location != _postion.Position)
             {
-                Location = e.Position;
+                Location = _postion.Position;
                 if (!_playing)
                 {
                     Bass.ChannelPlay(Handle);

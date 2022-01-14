@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-using FarmGame.Visuals;
+using FarmGame.Core;
 
 using ImageMagick;
 
@@ -65,7 +65,7 @@ namespace FarmGame.Visuals
             return _spriteHandles[spriteName];
         }
 
-        public static Box2 GetTexCoordFromSprite(SpriteObject sprite)
+        public static Box2 GetTexCoordFromSprite(ISpriteObject sprite)
         {
             int totalCol = sprite.SpriteSheet.Width / sprite.Size;
             int totalRow = sprite.SpriteSheet.Height / sprite.Size;
@@ -98,7 +98,7 @@ namespace FarmGame.Visuals
             return new Box2(x, y, x + width, y + height);
         }
 
-        public static void DrawSprite(SpriteObject sprite, Vector2 position)
+        public static void DrawSprite(ISpriteObject sprite, Vector2 position)
         {
             Box2 spritePos = SpriteRenderer.GetTexCoordFromSprite(sprite);
             if (sprite.IsCentered)
@@ -148,7 +148,7 @@ namespace FarmGame.Visuals
             DrawSprite(spriteName, bounds, texCoords, color);
         }
 
-        private static void DrawPlayer(SpriteObject sprite, Vector2 position)
+        private static void DrawPlayer(ISpriteObject sprite, Vector2 position)
         {
             Box2 spritePos = SpriteRenderer.GetTexCoordFromSprite(sprite);
             GL.Color4(Color4.White);
@@ -170,7 +170,7 @@ namespace FarmGame.Visuals
             GL.End();
         }
 
-        private static void DrawRightDown(SpriteObject sprite, Vector2 position)
+        private static void DrawRightDown(ISpriteObject sprite, Vector2 position)
         {
             Box2 spritePos = SpriteRenderer.GetTexCoordFromSprite(sprite);
             GL.Color4(Color4.White);

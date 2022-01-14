@@ -105,9 +105,8 @@ namespace FarmGame
             var freeCamComponent = new CameraController(goCamera);
             goCamera.Components.Add(freeCamComponent);
 
+            AudioMaster.Init(goCamera);
             goCamera.Components.Add(AudioMaster.Instance);
-
-            freeCamComponent.OnPlaySound += AudioMaster.Instance.Listen;
         }
 
         private static void LoadSuspicion(GameObject goSuspicion)
@@ -128,12 +127,8 @@ namespace FarmGame
             var playerAnimation = new PlayerAnimation(goPlayer);
             goPlayer.Components.Add(playerAnimation);
 
-            var playerSound = AudioMaster.Instance.GetStepsHanlde();
+            var playerSound = AudioMaster.Instance.GetStepsHanlde(goPlayer.GetComponent<IMoving>());
             goPlayer.Components.Add(playerSound);
-
-            player.OnPlaySound += playerSound.Play;
-
-            player.OnChangeDirection += playerAnimation.Animate;
 
             var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);
             goPlayer.Components.Add(playerItemInteraction);
@@ -183,13 +178,8 @@ namespace FarmGame
             var questionVisual = new QuestionVisual(goPolice);
             goPolice.Components.Add(questionVisual);
 
-            var playerSound = AudioMaster.Instance.GetStepsHanlde();
+            var playerSound = AudioMaster.Instance.GetStepsHanlde(goPolice.GetComponent<IMoving>());
             goPlayer.Components.Add(playerSound);
-
-            police.OnPlaySound += playerSound.Play;
-
-            // add listener
-            police.OnChangeDirection += policeAnimation.Animate;
         }
 
         private static void LoadPig(GameObject goPig, GameObject goGrid)
@@ -205,11 +195,8 @@ namespace FarmGame
             goPig.Components.Add(eating);
             var pigAnimation = new PigAnimation(goPig);
             goPig.Components.Add(pigAnimation);
-            var pigSound = AudioMaster.Instance.GetPigSNortHanlde();
+            var pigSound = AudioMaster.Instance.GetPigSnortHanlde(goPig.GetComponent<IMoving>());
             goPig.Components.Add(pigSound);
-
-            moveRandom.OnChangeDirection += pigAnimation.Animate;
-            moveRandom.OnPlaySound += pigSound.Play;
         }
 
         private static void LoadPause(GameObject goPause)

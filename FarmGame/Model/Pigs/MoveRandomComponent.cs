@@ -31,11 +31,6 @@ namespace FarmGame.Model
             Position = GetRandomPosition();
         }
 
-        // TODO put in Hunger so more noise when pigs are hungry
-        public event EventHandler<OnPlaySoundArgs> OnPlaySound;
-
-        public event EventHandler<OnChangeDirectionArgs> OnChangeDirection;
-
         public Vector2 Position { get; set; }
 
         public Vector2 MovementVector { get; set; }
@@ -67,8 +62,6 @@ namespace FarmGame.Model
             if (distance < 0.05f)
             {
                 _moveGoal = new Vector2(0, 0);
-
-                OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(_moveGoal));
                 return false;
             }
 
@@ -81,7 +74,6 @@ namespace FarmGame.Model
             }
 
             MovementVector = direction * moveAmount;
-            OnChangeDirection?.Invoke(null, new OnChangeDirectionArgs(MovementVector));
 
             return true;
         }
@@ -106,8 +98,6 @@ namespace FarmGame.Model
                     _timeToWait = 1 + (float)(_random.NextDouble() * 10 / MovementSpeed);
                     _timeTicker = 0;
                 }
-
-                OnPlaySound?.Invoke(null, new OnPlaySoundArgs(Position, Position));
             }
         }
     }

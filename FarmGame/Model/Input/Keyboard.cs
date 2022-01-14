@@ -74,8 +74,7 @@ namespace FarmGame.Model.Input
             }
         }
 
-        public bool YAnswer
-        { get; private set; }
+        public bool YAnswer { get; private set; }
 
         public bool DetachCamera
         {
@@ -89,7 +88,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _gameWindow.IsKeyPressed(Keys.F10);
+                return _gameWindow.IsKeyPressed(Keys.F9);
             }
         }
 

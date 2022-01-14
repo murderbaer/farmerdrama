@@ -2,6 +2,7 @@ using FarmGame.Core;
 
 using FarmGame.Helpers;
 using FarmGame.Model.Grid;
+using FarmGame.Model;
 
 using ImageMagick;
 using OpenTK.Graphics.OpenGL;
@@ -50,7 +51,7 @@ namespace FarmGame.Visuals
             {
                 for (int column = 0; column < Column; ++column)
                 {
-                    SpriteObject toDraw = _spriteGrid[layer][column, row];
+                    ISpriteObject toDraw = _spriteGrid[layer][column, row];
                     if (toDraw.Gid != (int)SpriteType.AIR)
                     {
                         SpriteRenderer.DrawSprite(toDraw, new Vector2(column, row));
