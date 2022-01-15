@@ -46,7 +46,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _gameWindow.IsKeyPressed(Keys.F10);
+                return _gameWindow.IsKeyPressed(Keys.F4);
             }
         }
 
@@ -88,7 +88,7 @@ namespace FarmGame.Model.Input
         {
             get
             {
-                return _gameWindow.IsKeyPressed(Keys.F9);
+                return _gameWindow.IsKeyPressed(Keys.F10);
             }
         }
 
