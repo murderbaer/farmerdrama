@@ -17,6 +17,8 @@ namespace FarmGame.Model.Grid
         private static int[] water = new int[]
         {
             1187,
+            1186,
+            1099,
             1101,
             1187,
             1199,
