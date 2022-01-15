@@ -70,13 +70,13 @@ namespace FarmGame.Visuals
                     _spriteGrid[1][args.Position].Gid = (int)SpriteType.AIR;
                     break;
                 case FarmLandState.FULLGROWN:
-                    _spriteGrid[1][args.Position].Gid = 5903;
+                    _spriteGrid[1][args.Position].Gid = 5905;
                     break;
                 case FarmLandState.HALFGROWN:
                     _spriteGrid[1][args.Position].Gid = 5902;
                     break;
                 case FarmLandState.OVERGROWN:
-                    _spriteGrid[1][args.Position].Gid = 5905;
+                    _spriteGrid[1][args.Position].Gid = 5456;
                     break;
                 case FarmLandState.SEED:
                     _spriteGrid[1][args.Position].Gid = 5900;

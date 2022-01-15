@@ -16,18 +16,21 @@ namespace FarmGame.Model.Grid
 
         private static int[] water = new int[]
         {
-            1186,
-            1100,
             1187,
-            1198,
-            1195,
-            1190,
-            1102,
-            1286,
-            1188,
-            1278,
-            1277,
-            1192,
+            1101,
+            1187,
+            1199,
+            1196,
+            1191,
+            1103,
+            1287,
+            1189,
+            1279,
+            1279,
+            1193,
+            1096,
+            125,
+            216,
         };
 
         public static bool IsWater(int spriteType)
