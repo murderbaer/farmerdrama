@@ -40,6 +40,9 @@
     <EmbeddedResource Include="Resources\Graphics\Map.tmx" />
     <EmbeddedResource Include="Resources\Graphics\NewMap.tmx" />
     <EmbeddedResource Include="Resources\Questions.xml" />
+    <EmbeddedResource Include="Resources\Intro\Intro1.png" />
+    <EmbeddedResource Include="Resources\Intro\Intro2.png" />
+    <EmbeddedResource Include="Resources\Intro\Intro3.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="core\Events\" />
