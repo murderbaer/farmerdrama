@@ -29,7 +29,10 @@ namespace FarmGame.Services
         {
             if (FrozenCounter != 0)
             {
-                return;
+                foreach (var movable in _movables)
+                {
+                    movable.MovementVector = Vector2.Zero;
+                }
             }
 
             foreach (var movable in _movables)
