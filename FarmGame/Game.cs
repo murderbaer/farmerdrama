@@ -23,16 +23,9 @@ namespace FarmGame
         {
             var scene = new Scene();
 
-            var updateService = new UpdateService();
-            scene.AddService(updateService);
-
-            var collisionService = new NudgingService();
-            scene.AddService(collisionService);
+            ServiceLoader.LoadServices(scene);
 
             InputHandler.RegisterGameWindow(window);
-
-            var movementService = new MovementService();
-            scene.AddService(movementService);
 
             var goCamera = scene.CreateGameObject("Camera");
             LoadCamera(goCamera);
@@ -77,25 +70,7 @@ namespace FarmGame
                 LoadPig(goPig, goGrid);
             }
 
-            foreach (var go in scene.GameObjects)
-            {
-                foreach (var component in go.Components.OfType<IUpdatable>())
-                {
-                    updateService.AddUpdatable(component);
-                }
-
-                foreach (var component in go.Components.OfType<ICollidable>())
-                {
-                    collisionService.AddCollidable(component);
-                }
-
-                foreach (var component in go.Components.OfType<IMoving>())
-                {
-                    movementService.AddMovable(component);
-                }
-            }
-
-            movementService.SetCollisionGrid(_colGrid);
+            ServiceLoader.InitializeServices(scene, _colGrid);
             return scene;
         }
 
@@ -130,7 +105,7 @@ namespace FarmGame
             var playerAnimation = new PlayerAnimation(goPlayer);
             goPlayer.Components.Add(playerAnimation);
 
-            var playerSound = AudioMaster.Instance.GetStepsHanlde(goPlayer.GetComponent<IMoving>());
+            var playerSound = AudioMaster.Instance.GetStepsHandle(goPlayer.GetComponent<IMoving>());
             goPlayer.Components.Add(playerSound);
 
             var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);
@@ -181,7 +156,7 @@ namespace FarmGame
             var questionVisual = new QuestionVisual(goPolice);
             goPolice.Components.Add(questionVisual);
 
-            var playerSound = AudioMaster.Instance.GetStepsHanlde(goPolice.GetComponent<IMoving>());
+            var playerSound = AudioMaster.Instance.GetStepsHandle(goPolice.GetComponent<IMoving>());
             goPlayer.Components.Add(playerSound);
         }
 
@@ -198,7 +173,7 @@ namespace FarmGame
             goPig.Components.Add(eating);
             var pigAnimation = new PigAnimation(goPig);
             goPig.Components.Add(pigAnimation);
-            var pigSound = AudioMaster.Instance.GetPigSnortHanlde(goPig.GetComponent<IMoving>());
+            var pigSound = AudioMaster.Instance.GetPigSnortHandle(goPig.GetComponent<IMoving>());
             goPig.Components.Add(pigSound);
         }
 

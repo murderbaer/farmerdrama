@@ -77,7 +77,7 @@ namespace FarmGame.Audio
             }
         }
 
-        public AudioSource GetStepsHanlde(IMoving pos)
+        public AudioSource GetStepsHandle(IMoving pos)
         {
             string path = System.Reflection.Assembly.GetEntryAssembly().Location;
             string pathFolder = System.IO.Path.GetDirectoryName(path);
@@ -87,7 +87,7 @@ namespace FarmGame.Audio
             return src;
         }
 
-        public AudioSource GetPigSnortHanlde(IMoving pos)
+        public AudioSource GetPigSnortHandle(IMoving pos)
         {
             string path = System.Reflection.Assembly.GetEntryAssembly().Location;
             string pathFolder = System.IO.Path.GetDirectoryName(path);
