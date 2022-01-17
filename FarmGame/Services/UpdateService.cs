@@ -10,6 +10,8 @@ namespace FarmGame.Services
 
         public bool IsPaused { get; set; }
 
+        public bool IsIntro { get; set; }
+
         public bool IsFinished { get; set; }
 
         public void AddUpdatable(IUpdatable updatable)
@@ -19,7 +21,7 @@ namespace FarmGame.Services
 
         public void Update(float elapsedTime)
         {
-            if (IsPaused || IsFinished)
+            if (IsPaused || IsIntro || IsFinished)
             {
                 _updatables.OfType<IInput>().FirstOrDefault().Update(elapsedTime);
                 return;
