@@ -50,11 +50,6 @@ namespace FarmGame.Model
             Particles.Add(p);
         }
 
-        public void AddParticle(Particle particle)
-        {
-            Particles.Add(particle);
-        }
-
         public bool IsDone()
         {
             return Particles.Count == 0;
