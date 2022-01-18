@@ -1,20 +1,30 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Farmerdrama
+![](FarmGame/Resources/Intro/Intro1.png)
+## Story
+Nicht schon wieder diese verdammten Waschbären vor dem Haus. Ich will doch nur in Ruhe Frühstücken bevor ich arbeiten gehen. Mir reicht es, ich mache jetzt kurzen Prozess.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+*boom*
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Oh, nein. Musste sie gerade in dem Moment vorbeilaufen.
+Ich hab sie nicht gesehen...
+Es war ein Unfall...
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Naja, der Knall war ziemlich laut, die Polizei kommt wahrscheinlich bald, besser ich versteck sie, bis ich weiß was ich mache.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Spielbeschreibung
+In dem Spiel geht es darum, dass ein Farmer seine Frau umgebracht hat, und den Körper vor der immer wiederkehrenden Polizei verstecken muss.
+Zusätzlich muss er sich noch um die Farm kümmern und Weizen anpflanzen, um damit die Schweine zu füttern.
+
+## Build and Test
+Das Programm lässt sich mit dotnet bauen und ausführen. Alle Dependencies werden mit eingebunden und müssen nicht separat installiert werden.
+
+`dotnet restore` - Stelle alle dotnet dependencies wieder her.
+
+`dotnet build` - Kompilieren
+
+`dotnet run --project FarmGame` - Führe das Spiel aus
+
+`dotnet test` - Software-Tests ausführen.
+
+## Platform
+Das Spiel wurde mit dotnet unter Linux entwickelt. Es sollte auch auf Windows funktionieren, konnte dort aber nicht so ausführlich getestet werden.
