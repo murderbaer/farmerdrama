@@ -6,7 +6,6 @@ using FarmGame.Helpers;
 using FarmGame.Model;
 using FarmGame.Model.Grid;
 using FarmGame.Model.Input;
-using FarmGame.Services;
 using FarmGame.Visuals;
 
 using OpenTK.Windowing.Desktop;
@@ -33,6 +32,9 @@ namespace FarmGame
             var goBackground = scene.CreateGameObject("Background");
             goBackground.Components.Add(new Background());
 
+            var goParticle = scene.CreateGameObject("Particle");
+            LoadParticles(goParticle);
+
             var goGrid = scene.CreateGameObject("Grid");
             LoadGrid(goGrid);
 
@@ -40,7 +42,7 @@ namespace FarmGame
             LoadSuspicion(goSuspicion);
 
             var goPlayer = scene.CreateGameObject("Player");
-            LoadPlayer(goPlayer);
+            LoadPlayer(goPlayer, scene);
 
             var goCorpse = scene.CreateGameObject("Corpse");
             LoadCorpse(goCorpse, scene);
@@ -87,6 +89,14 @@ namespace FarmGame
             goCamera.Components.Add(AudioMaster.Instance);
         }
 
+        private static void LoadParticles(GameObject goParticle)
+        {
+            var particleSystem = new ParticleSystem();
+            goParticle.Components.Add(particleSystem);
+            var particleVisual = new ParticleVisual(goParticle);
+            goParticle.Components.Add(particleVisual);
+        }
+
         private static void LoadSuspicion(GameObject goSuspicion)
         {
             var suspicion = new Suspicion(30);
@@ -95,7 +105,7 @@ namespace FarmGame
             goSuspicion.Components.Add(suspicionBar);
         }
 
-        private static void LoadPlayer(GameObject goPlayer)
+        private static void LoadPlayer(GameObject goPlayer, Scene scene)
         {
             var player = new Player();
             goPlayer.Components.Add(player);
@@ -108,7 +118,9 @@ namespace FarmGame
             var playerSound = AudioMaster.Instance.GetStepsHandle(goPlayer.GetComponent<IMoving>());
             goPlayer.Components.Add(playerSound);
 
-            var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid);
+            GameObject particleSystem = scene.GetGameObjects("Particle").First();
+
+            var playerItemInteraction = new PlayerItemInteraction(goPlayer, _dataGrid, particleSystem);
             goPlayer.Components.Add(playerItemInteraction);
 
             var palyerItemVisual = new CarryItemVisual(playerItemInteraction, goPlayer);

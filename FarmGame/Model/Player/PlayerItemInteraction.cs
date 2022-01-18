@@ -3,8 +3,7 @@ using System;
 using FarmGame.Core;
 using FarmGame.Model.Input;
 
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
+using OpenTK.Mathematics;
 
 namespace FarmGame.Model
 {
@@ -16,10 +15,13 @@ namespace FarmGame.Model
 
         private InputHandler _input = InputHandler.Instance;
 
-        public PlayerItemInteraction(GameObject goPlayer, IReadOnlyGrid grid)
+        private ParticleSystem _particleSystem;
+
+        public PlayerItemInteraction(GameObject goPlayer, IReadOnlyGrid grid, GameObject particle)
         {
             _position = goPlayer.GetComponent<IPosition>();
             _grid = grid;
+            _particleSystem = particle.GetComponent<ParticleSystem>();
             ItemInHand = ItemType.EMPTY;
         }
 
@@ -44,6 +46,11 @@ namespace FarmGame.Model
                 var success = cell.InteractWithItem(ItemInHand);
                 if (success)
                 {
+                    if (ItemInHand == ItemType.WATERBUCKET)
+                    {
+                        _particleSystem.SpawnParticles(_position.Position, Color4.Aqua);
+                    }
+
                     ItemInHand = ItemType.EMPTY;
                     return;
                 }

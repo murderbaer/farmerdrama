@@ -15,6 +15,7 @@ namespace FarmGame.Test
         Scene scene = null;
         GameObject goPlayer;
         GameObject goCorpse;
+        GameObject goParticle;
         Player player = new Player();
 
         DataGrid grid = new DataGrid();
@@ -24,9 +25,11 @@ namespace FarmGame.Test
         {
             goPlayer = new GameObject(scene);
             goCorpse = new GameObject(scene);
+            goParticle = new GameObject(scene);
             goPlayer.Components.Add(player);
             goPlayer.Components.Add(playerItemInteraction);
-            playerItemInteraction = new PlayerItemInteraction(goPlayer, grid);
+            goParticle.Components.Add(new ParticleSystem());
+            playerItemInteraction = new PlayerItemInteraction(goPlayer, grid, goParticle);
             goCorpse.Components.Add(grid);
         }
 
