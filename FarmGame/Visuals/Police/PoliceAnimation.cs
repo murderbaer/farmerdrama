@@ -55,7 +55,7 @@ namespace FarmGame.Visuals
 
         private void Animate()
         {
-            float tolerance = 0.01f;
+            float tolerance = 0.001f;
             if (_direction.MovementVector.X > tolerance)
             {
                 _playerSprite.Gid = _moveRight;
