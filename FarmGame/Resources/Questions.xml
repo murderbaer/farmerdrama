@@ -16,4 +16,68 @@
             <answerResult text="Der Nachbar hat sie vor 2 Wochen aber noch gesehen.\nHaben sie etwas zu verbergen?" changeSuspicion="20"/>
         </answer>
     </question>
+    <question id="3" text="Der Nachbar hat einen Schuss gehoert.\nHaben Sie den auch gehoert?" minSuspicion="0" maxSuspicion="40">
+        <answer id="1" text="Ach, das war ich. Ich wollte die Waschbaeren \nvon meinem Muelleimer verscheuchen.">
+            <answerResult text="Das schau ich mir mal an." changeSuspicion="-5"/>
+        </answer>
+        <answer id="2" text="Schuss, welcher Schuss? Ich habe nichts gehoert.">
+            <answerResult text="Hmmm, interessant. Ich wuerde micht hier \ngerne umschauen." changeSuspicion="15"/>
+        </answer>
+    </question>
+    <question id="4" text="Richen Sie auch den verwesenden Geruch?" minSuspicion="70" maxSuspicion="100">
+        <answer id="1" text="Unsere Katze schleppt gerne mal Tiere \maus dem Wald an">
+            <answerResult text="Wo ist hier ein Wald?" changeSuspicion="20"/>
+        </answer>
+        <answer id="2" text="Das ist nur die Landluft.">
+            <answerResult text="Sicher doch." changeSuspicion="10"/>
+        </answer>
+    </question>
+    <question id="5" text="Hatten Sie letztens Streit mit ihrer Frau?" minSuspicion="30" maxSuspicion="60">
+        <answer id="1" text="Andauernd, aber welches Ehepaar streite sich nicht?">
+            <answerResult text="Andauernd also, interessant!" changeSuspicion="20"/>
+        </answer>
+        <answer id="2" text="Gelegentlich, aber nie etwas Ernstes.">
+            <answerResult text="Schoen zu hoeren." changeSuspicion="-5"/>
+        </answer>
+    </question>
+    <question id="6" text="Sagen Sie mir wo ihre Frau ist!" minSuspicion="90" maxSuspicion="100">
+        <answer id="1" text="Soll ich jetzt ihren Job machen?">
+            <answerResult text="Mir reicht's, ich nehme Sie fest!" changeSuspicion="10"/>
+        </answer>
+        <answer id="2" text="Woher soll ich es denn wissen.\nIch habe schon ueberall gesucht.">
+            <answerResult text="Dann such ich mal weiter." changeSuspicion="-10"/>
+        </answer>
+    </question>
+    <question id="7" text="Was macht ihre Frau beruflich!" minSuspicion="20" maxSuspicion="60">
+        <answer id="7" text="Sie hilft mir auf der Farm.">
+            <answerResult text="Da hat der Nachbar etwas Anderes gesagt!" changeSuspicion="10"/>
+        </answer>
+        <answer id="2" text="Sie verkaueft die Waren auf dem Markt.">
+            <answerResult text="Dann schau ich dort nachher vorbei." changeSuspicion="-10"/>
+        </answer>
+    </question>
+     <question id="8" text="Was hatte ihre Frau als letztes an?" minSuspicion="20" maxSuspicion="60">
+        <answer id="1" text="Blaue Latzhose und braune Schuhe.">
+            <answerResult text="Sie klingen etwas unsicher." changeSuspicion="10"/>
+        </answer>
+        <answer id="2" text="Blaue Latzhose und schwarze Schuhe.">
+            <answerResult text="Ich gebe das meinen Kollegen weiter." changeSuspicion="-10"/>
+        </answer>
+    </question>
+    <question id="9" text="Darf ich mich auf der Farm etwas umschauen?" minSuspicion="0" maxSuspicion="30">
+        <answer id="1" text="Lieber nicht, die Tiere werden sonst unruhig.">
+            <answerResult text="Ich mache es kurz." changeSuspicion="10"/>
+        </answer>
+        <answer id="2" text="Warum nicht, haha.">
+            <answerResult text="Genau, haha." changeSuspicion="-5"/>
+        </answer>
+    </question>
+    <question id="10" text="Haben Sie mir etwas zu sagen?" minSuspicion="10" maxSuspicion="90">
+        <answer id="1" text="Ehm, nein. Nicht wirklich...\nWarum fragen sie?">
+            <answerResult text="Intuition." changeSuspicion="10"/>
+        </answer>
+        <answer id="2" text="Ich habe meine letzten Strafzettel\nnicht bezahlt.">
+            <answerResult text="Deswegen bin ich nicht hier." changeSuspicion="5"/>
+        </answer>
+    </question>
 </questions>
