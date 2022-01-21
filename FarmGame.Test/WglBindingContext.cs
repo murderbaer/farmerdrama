@@ -5,9 +5,11 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using Microsoft.Win32.SafeHandles;
 using OpenTK;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FarmGame.Test
 {
+    [ExcludeFromCodeCoverageAttribute]
     public class WglBindingsContext : IBindingsContext
     {
         [DllImport("opengl32.dll", CharSet = CharSet.Ansi)]
