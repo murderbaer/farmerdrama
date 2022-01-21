@@ -150,7 +150,7 @@ namespace FarmGame
 
         private static void LoadPolice(GameObject goPolice, Scene scene)
         {
-            var police = new Police();
+            var police = new Police(scene.GetGameObjects("Suspicion").First());
             goPolice.Components.Add(police);
             var policeVisual = new PoliceVisual(goPolice);
             goPolice.Components.Add(policeVisual);

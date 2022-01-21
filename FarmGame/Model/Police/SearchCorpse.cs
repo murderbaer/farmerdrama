@@ -35,7 +35,7 @@ namespace FarmGame.Model
             var corpsePosition = _corpse.Position;
             var hiddenFactor = _grid[(int)corpsePosition.X, (int)corpsePosition.Y].HiddenFactor;
 
-            return 4 * (1 + (suspicion / 100)) * hiddenFactor;
+            return 6 * (1 + (suspicion / 100)) * hiddenFactor;
         }
 
         public bool Search()

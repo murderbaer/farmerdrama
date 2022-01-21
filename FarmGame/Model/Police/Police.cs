@@ -18,12 +18,16 @@ namespace FarmGame.Model
 
         private TiledHandler _tiledHandler = TiledHandler.Instance;
 
-        public Police()
+        private Suspicion _suspicion;
+
+        public Police(GameObject goSuspicion)
         {
             // sets position to be a bit outside of the fence
             Position = _tiledHandler.TiledPolicePos;
 
             Paths = _tiledHandler.TiledPolicePaths;
+
+            _suspicion = goSuspicion.GetComponent<Suspicion>();
         }
 
         public Vector2 Position { get; set; }
@@ -52,6 +56,7 @@ namespace FarmGame.Model
         {
             _currentPath = _random.Next(0, Paths.Count);
             _currentPathPosition = 0;
+            _suspicion.Value += 10;
         }
 
         public void EndPath()
