@@ -20,6 +20,8 @@ namespace FarmGame.Audio
 
         private float _cutoffDistance = 9f;
 
+        private int _backgroundMusic;
+
         private IPosition _cameraPos;
 
         private AudioMaster()
@@ -32,6 +34,7 @@ namespace FarmGame.Audio
             Bass.Init();
             _playBuffer = new HashSet<AudioSource>();
             _cameraPos = _goAudio.GetComponent<IPosition>();
+            GetBackgroundHandle();
         }
 
         public static AudioMaster Instance
@@ -75,6 +78,7 @@ namespace FarmGame.Audio
                     Bass.ChannelSetAttribute(src.Handle, ChannelAttribute.Volume, 1f - (distance / _cutoffDistance));
                 }
             }
+            Bass.ChannelSetAttribute(_backgroundMusic, ChannelAttribute.Volume, 1);
         }
 
         public AudioSource GetStepsHandle(IMoving pos)
@@ -94,6 +98,16 @@ namespace FarmGame.Audio
             AudioSource src = new AudioSource(Bass.CreateStream(pathFolder + "/Resources/Sounds/pig-snort.wav"), 1.6f, pos);
             _playBuffer.Add(src);
             return src;
+        }
+
+        private void GetBackgroundHandle()
+        {
+            string path = System.Reflection.Assembly.GetEntryAssembly().Location;
+            string pathFolder = System.IO.Path.GetDirectoryName(path);
+            _backgroundMusic = Bass.CreateStream(pathFolder + "/Resources/Sounds/background.wav");
+            Bass.ChannelSetAttribute(_backgroundMusic, ChannelAttribute.Volume, 0.8f);
+            Bass.ChannelAddFlag(_backgroundMusic, BassFlags.Loop);
+            Bass.ChannelPlay(_backgroundMusic);
         }
 
         private float EukledDistance(Vector2 a, Vector2 b)

@@ -14,9 +14,9 @@ namespace FarmGame.Audio
 
         private bool _playing;
 
-        private IMoving _postion;
+        private IPosition _postion;
 
-        public AudioSource(int handle, float duration, IMoving pos)
+        public AudioSource(int handle, float duration, IPosition pos)
         {
             Handle = handle;
             _length = duration;
