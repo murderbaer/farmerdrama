@@ -8,18 +8,9 @@ using FarmGame.Model;
 using FarmGame.Services;
 
 using OpenTK.Graphics.OpenGL;
-using System;
-using System.Runtime.InteropServices;
-using OpenTK;
+
 namespace FarmGame.Test
 {
-    public class GlxBindingsContext : IBindingsContext
-    {
-        public IntPtr GetProcAddress(string procName) => glXGetProcAddress(procName);
-        [DllImport("libGL")]
-        private static extern IntPtr glXGetProcAddress(string procName);
-    }
-
     [ExcludeFromCodeCoverageAttribute]
     [TestClass]
     public class SceneTest
@@ -28,7 +19,7 @@ namespace FarmGame.Test
 
         public SceneTest()
         {
-            GL.LoadBindings(new GlxBindingsContext());
+            GL.LoadBindings(new WglBindingsContext());
             scene = Game.LoadScene();
         }
 
