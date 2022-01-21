@@ -1,3 +1,4 @@
+#if Windows
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
@@ -43,3 +44,4 @@ namespace FarmGame.Test
         }
     }
 }
+#endif
