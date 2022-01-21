@@ -1,4 +1,5 @@
 ﻿using FarmGame;
+using FarmGame.Model.Input;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -13,7 +14,8 @@ namespace FarmGame
         {
             var window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings { Profile = ContextProfile.Compatability }); // window with immediate mode rendering enabled
 
-            _scene = Game.LoadScene(window);
+            InputHandler.RegisterGameWindow(window);
+            _scene = Game.LoadScene();
             AddListeners(window, _scene);
 
             window.Run();

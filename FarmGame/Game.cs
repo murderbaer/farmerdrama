@@ -18,13 +18,11 @@ namespace FarmGame
 
         private static DataGrid _dataGrid;
 
-        public static Scene LoadScene(GameWindow window)
+        public static Scene LoadScene()
         {
             var scene = new Scene();
 
             ServiceLoader.LoadServices(scene);
-
-            InputHandler.RegisterGameWindow(window);
 
             var goCamera = scene.CreateGameObject("Camera");
             LoadCamera(goCamera);
