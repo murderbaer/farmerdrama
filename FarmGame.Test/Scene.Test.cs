@@ -16,7 +16,7 @@ namespace FarmGame.Test
     public class GlxBindingsContext : IBindingsContext
     {
         public IntPtr GetProcAddress(string procName) => glXGetProcAddress(procName);
-        [DllImport("libGL", CharSet = CharSet.Ansi)]
+        [DllImport("libGL")]
         private static extern IntPtr glXGetProcAddress(string procName);
     }
 
