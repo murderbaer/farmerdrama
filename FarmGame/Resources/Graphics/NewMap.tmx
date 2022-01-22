@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="12">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="14">
  <tileset firstgid="1" source="global.tsx"/>
  <tileset firstgid="7645" source="Heatmap.tsx"/>
  <layer id="11" name="suspicionHeatmap" width="40" height="40">
@@ -6447,7 +6447,10 @@
    <polyline points="0,0 0,-128 128,-128 128,-112 224,-112 224,-160 256,-160 256,-224 272,-224 272,-272 256,-272 256,-320 272,-320 272,-352 224,-352 224,-304 112,-304 112,-208 80,-208 80,-128 0,-128 0,0"/>
   </object>
   <object id="11" name="pathFive" x="192" y="560">
-   <polyline points="0,0 0,-128 80,-128 80,-208 112,-208 112,-256 48,-256 112,-256 112,-208 80,-208 80,-128 0,-128 0,0"/>
+   <polyline points="0,0 0,-128 80,-128 80,-208 112,-208 112,-256 16,-256 16,-288 48,-288 48,-256 112,-256 112,-208 80,-208 80,-128 0,-128 0,0"/>
+  </object>
+  <object id="13" name="pathSix" x="192" y="560">
+   <polyline points="0,0 0,-128 128,-128 128,-112 192,-112 192,-192 80,-192 80,-128 0,-128 0,0"/>
   </object>
  </objectgroup>
  <objectgroup id="5" name="PigPen">
