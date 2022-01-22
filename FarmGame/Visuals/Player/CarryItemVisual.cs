@@ -38,7 +38,7 @@ namespace FarmGame.Visuals
                     Sprite.Gid = (int)SpriteType.AIR;
                     return;
                 case ItemType.SEED:
-                    Sprite.Gid = 5899;
+                    Sprite.Gid = 5900;
                     break;
                 case ItemType.WATERBUCKET:
                     Sprite.Gid = 1038;
