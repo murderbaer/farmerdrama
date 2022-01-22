@@ -78,6 +78,7 @@ namespace FarmGame.Audio
                     Bass.ChannelSetAttribute(src.Handle, ChannelAttribute.Volume, 1f - (distance / _cutoffDistance));
                 }
             }
+
             Bass.ChannelSetAttribute(_backgroundMusic, ChannelAttribute.Volume, 1);
         }
 
