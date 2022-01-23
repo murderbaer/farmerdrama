@@ -25,7 +25,7 @@
         </answer>
     </question>
     <question id="4" text="Richen Sie auch den verwesenden Geruch?" minSuspicion="70" maxSuspicion="100">
-        <answer id="1" text="Unsere Katze schleppt gerne mal Tiere \maus dem Wald an">
+        <answer id="1" text="Unsere Katze schleppt gerne mal Tiere \naus dem Wald an">
             <answerResult text="Wo ist hier ein Wald?" changeSuspicion="20"/>
         </answer>
         <answer id="2" text="Das ist nur die Landluft.">
